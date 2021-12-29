@@ -1,7 +1,5 @@
 { pkgs, ... }:
 
 {
-    environment.systemPackages = with pkgs; [
-        vscode
-    ];
+  environment.systemPackages = with pkgs; [ vscode ];
 }

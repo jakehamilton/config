@@ -1,8 +1,5 @@
 { ... }:
 
 {
-    imports = [
-        ../modules/networkmanager.nix
-        ../modules/printing.nix
-    ];
+  imports = [ ../modules/networkmanager.nix ../modules/printing.nix ];
 }

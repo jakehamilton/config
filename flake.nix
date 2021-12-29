@@ -25,13 +25,19 @@
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, utils
     , nixos-hardware, darwin, ... }:
     let lib = import ./lib inputs;
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          allowUnfree = true;
+        };
     in utils.lib.mkFlake {
       inherit self inputs lib;
 
       channelsConfig = { allowUnfree = true; };
 
+      channels.nixpkgs.overlaysBuilder = lib.mkOverlays [
+        "steam"
+      ];
+
       hosts = lib.mkHosts { src = ./machines; };
-      # hosts.jasper.modules = builtins.trace (lib.getFiles ./machines)
-      # (lib.getFiles ./machines);
     };
 }

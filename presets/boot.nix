@@ -1,7 +1,5 @@
 { ... }:
 
 {
-    imports = [
-        ../modules/systemd-boot.nix
-    ];
+  imports = [ ../modules/systemd-boot.nix ];
 }

@@ -29,4 +29,11 @@ rec {
   # The inverse of `call`. Given an argument, call the next
   # function provided with it.
   apply = flip2 call;
+
+  # Map from builtins provided for ease of use with map'.
+  map = builtins.map;
+
+  # The inverse of `map`. Given a list, map it with the next
+  # function provided.
+  map' = flip2 map;
 }

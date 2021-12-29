@@ -1,7 +1,5 @@
 { ... }:
 
 {
-    imports = [
-        ../modules/pulseaudio.nix
-    ];
+  imports = [ ../modules/pulseaudio.nix ];
 }

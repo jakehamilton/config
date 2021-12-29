@@ -1,8 +1,5 @@
 { ... }:
 
 {
-    imports = [
-        ../modules/gnome.nix
-        ../modules/xkb.nix
-    ];
+  imports = [ ../modules/gnome.nix ../modules/xkb.nix ];
 }

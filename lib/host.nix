@@ -20,9 +20,9 @@ rec {
     };
 
   mkHost = { system, path, name ? lib.getFileName (builtins.baseNameOf path)
-    , modules ? [ ], specialArgs ? { } }: {
+    , modules ? [ ], specialArgs ? { }, channelName ? "nixpkgs" }: {
       "${name}" = withDynamicConfig system {
-        inherit system;
+        inherit system channelName;
         modules = [ path ] ++ modules;
         specialArgs = mkSpecialArgs specialArgs;
       };

@@ -1,8 +1,5 @@
 { ... }:
 
 {
-    imports = [
-        ../modules/locale.nix
-        ../modules/timezone.nix
-    ];
+  imports = [ ../modules/locale.nix ../modules/timezone.nix ];
 }

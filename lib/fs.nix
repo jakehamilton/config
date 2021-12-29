@@ -48,4 +48,17 @@ in rec {
   getModuleFilesWithoutDefault = path:
     builtins.filter (file: lib.not "default.nix" (builtins.baseNameOf file))
     (getModuleFiles path);
+
+  getPathFromRoot = path:
+    ../. + (if lib.hasPrefix "/" path then path else "/${path}");
+
+  getSuitePath = name: getPathFromRoot "/suites/${name}.nix";
+
+  getPresetPath = name: getPathFromRoot "/presets/${name}.nix";
+
+  getModulePath = name: getPathFromRoot "/modules/${name}.nix";
+
+  getUserPath = name: getPathFromRoot "/users/${name}";
+
+  getOverlayPath = name: getPathFromRoot "/overlays/${name}.nix";
 }
