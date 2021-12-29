@@ -25,10 +25,6 @@
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, utils
     , nixos-hardware, darwin, ... }:
     let lib = import ./lib inputs;
-        pkgs = import nixpkgs {
-          system = "x86_64-linux";
-          allowUnfree = true;
-        };
     in utils.lib.mkFlake {
       inherit self inputs lib;
 
