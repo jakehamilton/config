@@ -1,7 +1,7 @@
-inputs@{lib, pkgs, config, ...}:
+inputs@{ lib, pkgs, config, ... }:
 
 {
-# configuring sway itself (assmung a display manager starts it)
+  # configuring sway itself (assmung a display manager starts it)
   systemd.user.targets.sway-session = {
     description = "Sway compositor session";
     documentation = [ "man:systemd.special(7)" ];
@@ -11,7 +11,8 @@ inputs@{lib, pkgs, config, ...}:
   };
 
   environment.systemPackages = with pkgs; [
-    i3pystatus (python38.withPackages(ps: with ps; [ i3pystatus keyring ]))
+    i3pystatus
+    (python38.withPackages (ps: with ps; [ i3pystatus keyring ]))
   ];
 
   programs.sway = {
@@ -27,7 +28,7 @@ inputs@{lib, pkgs, config, ...}:
       slurp
       wl-clipboard
       wf-recorder
-      (python38.withPackages(ps: with ps; [ i3pystatus keyring ]))
+      (python38.withPackages (ps: with ps; [ i3pystatus keyring ]))
     ];
     extraSessionCommands = ''
       export SDL_VIDEODRIVER=wayland
@@ -43,12 +44,12 @@ inputs@{lib, pkgs, config, ...}:
     description = "Kanshi output autoconfig ";
     wantedBy = [ "graphical-session.target" ];
     partOf = [ "graphical-session.target" ];
-    environment = { XDG_CONFIG_HOME="/home/mschwaig/.config"; };
+    environment = { XDG_CONFIG_HOME = "/home/mschwaig/.config"; };
     serviceConfig = {
       # kanshi doesn't have an option to specifiy config file yet, so it looks
       # at .config/kanshi/config
       ExecStart = ''
-      ${pkgs.kanshi}/bin/kanshi
+        ${pkgs.kanshi}/bin/kanshi
       '';
       RestartSec = 5;
       Restart = "always";

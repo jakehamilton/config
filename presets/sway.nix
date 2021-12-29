@@ -1,7 +1,5 @@
-inputs@{lib, pkgs, ...}:
+inputs@{ lib, pkgs, ... }:
 
 {
-    imports = [
-        ../modules/sway.nix
-    ];
+  imports = [ ../modules/sway.nix ];
 }

@@ -1,13 +1,7 @@
 inputs@{ pkgs, lib, ... }:
 
 let
-    presets = lib.map lib.getPresetPath [
-        "gnome"
-    ];
+  presets = lib.map lib.getPresetPath [ "gnome" ];
 
-    modules = lib.map lib.getModulePath [
-    ];
-in
-{
-    imports = presets ++ modules;
-}
+  modules = lib.map lib.getModulePath [ ];
+in { imports = presets ++ modules; }

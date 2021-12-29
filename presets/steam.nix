@@ -1,7 +1,5 @@
-inputs@{lib, ... }:
+inputs@{ lib, ... }:
 
 {
-    imports = [
-        ../modules/steam.nix
-    ];
+  imports = [ ../modules/steam.nix ];
 }

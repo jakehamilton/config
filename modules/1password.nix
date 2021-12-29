@@ -1,8 +1,5 @@
-inputs@{pkgs, ... }:
+inputs@{ pkgs, ... }:
 
 {
-    environment.systemPackages = with pkgs; [
-        _1password
-        _1password-gui
-    ];
+  environment.systemPackages = with pkgs; [ _1password _1password-gui ];
 }

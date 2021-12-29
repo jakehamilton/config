@@ -1,7 +1,5 @@
 { ... }:
 
 {
-  imports = [
-    ../modules/nix-flakes.nix
-  ];
+  imports = [ ../modules/nix-flakes.nix ];
 }

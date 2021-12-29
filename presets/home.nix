@@ -1,7 +1,5 @@
 { ... }:
 
 {
-    imports = [
-        ../modules/home-manager.nix
-    ];
+  imports = [ ../modules/home-manager.nix ];
 }
