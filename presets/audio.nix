@@ -1,5 +1,0 @@
-{ ... }:
-
-{
-  imports = [ ../modules/pulseaudio.nix ];
-}

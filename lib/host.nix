@@ -15,16 +15,20 @@ rec {
   # Pass through all inputs except `self` and `utils` due to them breaking
   # the module system or causing recursion.
   mkSpecialArgs = args:
-    (builtins.removeAttrs inputs [ "self" "utils" ]) // {
+    (builtins.removeAttrs inputs [ "self" "utils" ])
+    // {
       inherit lib;
-    };
+    }
+    // args;
 
   mkHost = { system, path, name ? lib.getFileName (builtins.baseNameOf path)
     , modules ? [ ], specialArgs ? { }, channelName ? "nixpkgs" }: {
       "${name}" = withDynamicConfig system {
         inherit system channelName;
-        modules = [ path ] ++ modules;
-        specialArgs = mkSpecialArgs specialArgs;
+        modules =
+          (lib.getModuleFilesWithoutDefaultRec (lib.getPathFromRoot "/modules"))
+          ++ [ path ] ++ modules;
+        specialArgs = mkSpecialArgs (specialArgs // { inherit system name; });
       };
     };
 

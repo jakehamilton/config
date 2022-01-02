@@ -40,4 +40,7 @@
       libvdpau-va-gl
     ];
   };
+
+  # Enable DHCP on the wireless link
+  networking.interfaces.wlp0s20f3.useDHCP = true;
 }
