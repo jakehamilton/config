@@ -13,6 +13,7 @@ in
       kanshi = enabled;
       waybar = enabled;
       rofi = enabled;
+      electron-support = enabled;
     };
 
     ultra.home.configFile."sway/config".source = ./config;

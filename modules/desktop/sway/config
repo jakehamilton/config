@@ -28,7 +28,7 @@ set $right l
 set $term env kitty
 
 # Swaylock
-set $swaylock swaylock-fancy -f "Hack-Regular-Nerd-Font-Complete"
+set $swaylock swaylock-fancy -f "Hack-Regular-Nerd-Font-Complete" -p
 
 # Menu
 set $menu-run rofi -show run
@@ -192,6 +192,24 @@ mode "resize" {
 
 # Enter resize mode
 bindsym $mod+r mode "resize"
+
+######################
+#░░░░░░░░░░░░░░░░░░░░#
+#░▀█▀░█▀█░█▀█░█░█░▀█▀#
+#░░█░░█░█░█▀▀░█░█░░█░#
+#░▀▀▀░▀░▀░▀░░░▀▀▀░░▀░#
+#░░░░░░░░░░░░░░░░░░░░#
+######################
+
+input type:keyboard {
+	xkb_options caps:swapescape
+}
+
+input type:touchpad {
+	natural_scroll enabled
+	tap enabled
+	tap_button_map lrm
+}
 
 #################
 #░░░░░░░░░░░░░░░#
