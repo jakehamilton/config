@@ -20,7 +20,8 @@ with lib;
     };
 
     desktop = {
-      gnome = enabled;
+      gnome = disabled;
+      sway = enabled;
     };
 
     tools = {

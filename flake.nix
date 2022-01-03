@@ -30,10 +30,6 @@
 
       channelsConfig = { allowUnfree = true; };
 
-      channels.nixpkgs.overlaysBuilder = lib.mkOverlays [
-        "steam"
-      ];
-
       hosts = lib.mkHosts { src = ./machines; };
     };
 }

@@ -10,6 +10,7 @@ in
         fullName = mkOpt str "Jake Hamilton" "The full name of the user.";
         email = mkOpt str "jake.hamilton@hey.com" "The email of the user.";
         initialPassword = mkOpt str "password" "The initial password to use when the user is first created.";
+        extraGroups = mkOpt (listOf str) [] "Groups for the user to be assigned.";
         extraOptions = mkOpt attrs {} "Extra options passed to <option>users.users.<name></option>.";
     };
 
@@ -28,7 +29,7 @@ in
             # system to select).
             uid = 1000;
 
-            extraGroups = [ "wheel" ];
+            extraGroups = [ "wheel" ] ++ cfg.extraGroups;
         } // cfg.extraOptions;
     };
 }

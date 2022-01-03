@@ -3,6 +3,14 @@
 with lib;
 let
   cfg = config.ultra.desktop.gnome;
+  drv = pkgs.stdenv.mkDerivation {
+    name = "hello";
+    src = ./.;
+    installPhase = ''
+      mkdir $out
+      echo "hello" > $out/message.txt
+    '';
+  };
 in
 {
   options.ultra.desktop.gnome = with types; {
@@ -19,6 +27,8 @@ in
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
     };
+
+    ultra.home.file."hello-world".source = "${drv}/message.txt";
   };
 
 }

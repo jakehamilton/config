@@ -10,6 +10,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ wget curl nixfmt ];
+    environment.systemPackages = with pkgs; [ wget curl file nixfmt ];
   };
 }
