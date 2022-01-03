@@ -9,6 +9,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    # Desktop additions
     ultra.desktop.addons = {
       kanshi = enabled;
       waybar = enabled;

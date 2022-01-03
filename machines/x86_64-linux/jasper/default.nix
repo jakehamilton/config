@@ -41,6 +41,7 @@ with lib;
 
     security = {
       doas = enabled;
+      keyring = enabled;
     };
 
     system = {
