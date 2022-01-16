@@ -1,10 +1,8 @@
 { options, config, pkgs, lib, ... }:
 
 with lib;
-let
-  cfg = config.ultra.hardware.networking;
-in
-{
+let cfg = config.ultra.hardware.networking;
+in {
   options.ultra.hardware.networking = with types; {
     enable = mkBoolOpt true "Whether or not to enable networking support.";
   };

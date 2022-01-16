@@ -1,9 +1,11 @@
 { lib, ... }:
 
 rec {
-  fileWithText = file: text:
-    "${builtins.readFile file}\n${text}";
+  fileWithText = file: text: ''
+    ${builtins.readFile file}
+    ${text}'';
 
-  fileWithText' = file: text:
-    "${text}\n${builtins.readFile file}";
+  fileWithText' = file: text: ''
+    ${text}
+    ${builtins.readFile file}'';
 }

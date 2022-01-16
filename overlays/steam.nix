@@ -9,6 +9,4 @@ let
     '';
   });
 
-in {
-  steamPackages = prev.steamPackages // { inherit steam; };
-}
+in { steamPackages = prev.steamPackages // { inherit steam; }; }

@@ -39,15 +39,14 @@ rec {
 
   # Map a Set's attributes and return a list of the results.
   mapAttrsToList = f: attrs:
-    let names = builtins.attrNames attrs; in
-    map' names (name: f name attrs.${name});
+    let names = builtins.attrNames attrs;
+    in map' names (name: f name attrs.${name});
 
   # The inverse of mapAttrsToList
   mapAttrsToList' = flip2 mapAttrsToList;
 
   # Map a Set's attributes and return a flattened list of the results.
-  mapConcatAttrsToList = f: attrs:
-    lib.flatten (mapAttrsToList f attrs);
+  mapConcatAttrsToList = f: attrs: lib.flatten (mapAttrsToList f attrs);
 
   # The inverse of `mapConcatAttrsToList`.
   mapConcatAttrsToList' = flip2 mapConcatAttrsToList;

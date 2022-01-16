@@ -13,8 +13,7 @@ let
       cp ${builtins.baseNameOf cfg.wallpaper} $out
     '';
   };
-in
-{
+in {
   options.ultra.desktop.sway = with types; {
     enable = mkBoolOpt false "Whether or not to enable Sway.";
     wallpaper = mkOpt path (./background.png) "The wallpaper to display";
@@ -78,9 +77,9 @@ in
       '';
     };
 
-    environment.systemPackages = with pkgs; [
-      (
-        pkgs.writeTextFile {
+    environment.systemPackages = with pkgs;
+      [
+        (pkgs.writeTextFile {
           name = "startsway";
           destination = "/bin/startsway";
           executable = true;
@@ -93,9 +92,8 @@ in
             # Start Sway
             exec systemctl --user start sway.service
           '';
-        }
-      )
-    ];
+        })
+      ];
 
     # configuring sway itself (assmung a display manager starts it)
     systemd.user.targets.sway-session = {

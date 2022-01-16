@@ -1,10 +1,8 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let
-  cfg = config.ultra.apps.steam;
-in
-{
+let cfg = config.ultra.apps.steam;
+in {
   options.ultra.apps.steam = with types; {
     enable = mkBoolOpt false "Whether or not to enable support for Steam.";
   };

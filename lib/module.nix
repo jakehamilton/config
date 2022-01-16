@@ -1,20 +1,16 @@
 { lib, ... }:
 
-with lib;
-rec {
-    mkOpt = type: default: description:
-        mkOption {
-            inherit type default description;
-        };
+with lib; rec {
+  mkOpt = type: default: description:
+    mkOption { inherit type default description; };
 
-    mkOpt' = type: default:
-        mkOpt type default null;
+  mkOpt' = type: default: mkOpt type default null;
 
-    mkBoolOpt = mkOpt types.bool;
+  mkBoolOpt = mkOpt types.bool;
 
-    mkBoolOpt' = mkOpt' types.bool;
+  mkBoolOpt' = mkOpt' types.bool;
 
-    enabled = { enable = true; };
+  enabled = { enable = true; };
 
-    disabled = { enable = false; };
+  disabled = { enable = false; };
 }

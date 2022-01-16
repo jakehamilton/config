@@ -90,15 +90,11 @@ tooltip label {
 	margin-right: 6px;
 }
 
-#workspaces button.focused {
-	/* color: #9aedfe; */
-}
-
 #workspaces button:hover {
 	transition: none;
 	box-shadow: inherit;
 	text-shadow: inherit;
-	color: #ff79c6;
+	color: #88c0d0;
 }
 
 #mpd {
@@ -116,8 +112,6 @@ tooltip label {
 
 #mpd.disconnected,
 #mpd.stopped {
-	/* color: #f8f8f2; */
-	/* background: #282a36; */
 	color: #2e3440;
 	background: #d8dee9;
 }

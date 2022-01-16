@@ -45,14 +45,12 @@ in rec {
   getFilesRec = path:
     let
       entries = builtins.readDir path;
-      filteredEntries = lib.filterAttrs (lib.only (lib.or' isFileKind isDirectoryKind)) entries;
-      files = lib.mapConcatAttrsToList' filteredEntries (name: kind: 
-        let path' = "${path}/${name}"; in
-        if isFileKind kind then path'
-        else getFilesRec path'
-      );
-    in
-      files;
+      filteredEntries =
+        lib.filterAttrs (lib.only (lib.or' isFileKind isDirectoryKind)) entries;
+      files = lib.mapConcatAttrsToList' filteredEntries (name: kind:
+        let path' = "${path}/${name}";
+        in if isFileKind kind then path' else getFilesRec path');
+    in files;
 
   # Get a list of *.nix files in a directory.
   getModuleFiles = path: builtins.filter (isNixFile) (getFiles path);

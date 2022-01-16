@@ -11,10 +11,10 @@ let
       echo "hello" > $out/message.txt
     '';
   };
-in
-{
+in {
   options.ultra.desktop.gnome = with types; {
-    enable = mkBoolOpt false "Whether or not to use Gnome as the desktop environment.";
+    enable =
+      mkBoolOpt false "Whether or not to use Gnome as the desktop environment.";
   };
 
   config = mkIf cfg.enable {

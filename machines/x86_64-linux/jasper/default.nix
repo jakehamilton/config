@@ -1,7 +1,6 @@
 { pkgs, lib, ... }:
 
-with lib;
-{
+with lib; {
   imports = [ ./hardware.nix ];
 
   ultra = {
@@ -15,9 +14,7 @@ with lib;
       vscode = enabled;
     };
 
-    cli-apps = {
-      neovim = enabled;
-    };
+    cli-apps = { neovim = enabled; };
 
     desktop = {
       gnome = disabled;
@@ -35,9 +32,7 @@ with lib;
       fingerprint = enabled;
     };
 
-    services = {
-      printing = enabled;
-    };
+    services = { printing = enabled; };
 
     security = {
       doas = enabled;
