@@ -12,6 +12,8 @@ in
     };
 
     config = mkIf cfg.enable {
+        ultra.home.configFile."kanshi/config".source = ./config;
+
         environment.systemPackages = with pkgs; [
             kanshi
         ];
@@ -23,11 +25,14 @@ in
             partOf = [ "graphical-session.target" ];
             environment = { XDG_CONFIG_HOME = "${home}/.config"; };
             serviceConfig = {
-                # kanshi doesn't have an option to specifiy config file yet, so it looks
-                # at .config/kanshi/config
+                ExecCondition = ''
+                ${pkgs.bash}/bin/bash -c '[ -n "$WAYLAND_DISPLAY" ]'
+                '';
+
                 ExecStart = ''
                 ${pkgs.kanshi}/bin/kanshi
                 '';
+
                 RestartSec = 5;
                 Restart = "always";
             };

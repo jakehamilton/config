@@ -1,7 +1,8 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-  let cfg = config.ultra.desktop.sway;
+let
+  cfg = config.ultra.desktop.sway;
 in
 {
   options.ultra.desktop.sway = with types; {
@@ -11,13 +12,25 @@ in
   config = mkIf cfg.enable {
     # Desktop additions
     ultra.desktop.addons = {
+      mako = enabled;
+      rofi = enabled;
       kanshi = enabled;
       waybar = enabled;
-      rofi = enabled;
       electron-support = enabled;
     };
 
-    ultra.home.configFile."sway/config".source = ./config;
+    ultra.home.configFile."sway/config".text = fileWithText ./config ''
+      #############################
+      #░░░░░░░░░░░░░░░░░░░░░░░░░░░#
+      #░░█▀▀░█░█░█▀▀░▀█▀░█▀▀░█▄█░░#
+      #░░▀▀█░░█░░▀▀█░░█░░█▀▀░█░█░░#
+      #░░▀▀▀░░▀░░▀▀▀░░▀░░▀▀▀░▀░▀░░#
+      #░░░░░░░░░░░░░░░░░░░░░░░░░░░#
+      #############################
+
+      # Launch services waiting for the systemd target sway-session.target
+      exec "systemctl --user import-environment; systemctl --user start sway-session.target"
+    '';
 
     programs.sway = {
       enable = true;
@@ -26,13 +39,15 @@ in
         swaylock
         swayidle
         xwayland
-        mako
         kitty
-        grim
-        slurp
+        sway-contrib.grimshot
         swaylock-fancy
         wl-clipboard
         wf-recorder
+        libinput
+        swappy
+        playerctl
+        brightnessctl
         (python38.withPackages (ps: with ps; [ keyring ]))
       ];
 
@@ -48,6 +63,25 @@ in
       '';
     };
 
+    environment.systemPackages = with pkgs; [
+      (
+        pkgs.writeTextFile {
+          name = "startsway";
+          destination = "/bin/startsway";
+          executable = true;
+          text = ''
+            #! ${pkgs.bash}/bin/bash
+
+            # Import environment variables from the login manager
+            systemctl --user import-environment
+
+            # Start Sway
+            exec systemctl --user start sway.service
+          '';
+        }
+      )
+    ];
+
     # configuring sway itself (assmung a display manager starts it)
     systemd.user.targets.sway-session = {
       description = "Sway compositor session";
@@ -57,9 +91,30 @@ in
       after = [ "graphical-session-pre.target" ];
     };
 
+    systemd.user.services.sway = {
+      description = "Sway - Wayland window manager";
+      documentation = [ "man:sway(5)" ];
+      bindsTo = [ "graphical-session.target" ];
+      wants = [ "graphical-session-pre.target" ];
+      after = [ "graphical-session-pre.target" ];
+      # We explicitly unset PATH here, as we want it to be set by
+      # systemctl --user import-environment in startsway
+      environment.PATH = lib.mkForce null;
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = ''
+          ${pkgs.dbus}/bin/dbus-run-session ${pkgs.sway}/bin/sway --debug
+        '';
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+
     services.xserver.enable = true;
     services.xserver.displayManager.defaultSession = "sway";
     services.xserver.displayManager.gdm.enable = true;
+    services.xserver.displayManager.gdm.wayland = true;
     services.xserver.libinput.enable = true;
   };
 }

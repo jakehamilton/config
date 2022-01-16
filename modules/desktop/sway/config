@@ -28,7 +28,7 @@ set $right l
 set $term env kitty
 
 # Swaylock
-set $swaylock swaylock-fancy -f "Hack-Regular-Nerd-Font-Complete" -p
+set $swaylock swaylock-fancy -f "Hack-Regular-Nerd-Font-Complete"
 
 # Menu
 set $menu-run rofi -show run
@@ -170,6 +170,26 @@ bindsym $mod+Shift+7 move container to workspace $workspace7
 bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
+
+# Brightness
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+
+# Sound
+bindsym XF86AudioMute exec pulsemixer --toggle-mute
+bindsym XF86AudioRaiseVolume exec pulsemixer --change-volume +10
+bindsym XF86AudioLowerVolume exec pulsemixer --change-volume -10
+
+# Media
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+
+# Print screen
+# bindsym Print exec
+
+# Airplane mode
+# bindsym XF86RFKill exec nmcli radio all $(test $(nmcli -g wifi radio all) == "enabled" && "off" || echo "on")
 
 # Resize mode
 mode "resize" {
