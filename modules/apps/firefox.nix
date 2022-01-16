@@ -10,6 +10,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ firefox ];
+    environment.systemPackages = with pkgs; [ firefox-wayland ];
   };
 }
