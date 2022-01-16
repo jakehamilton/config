@@ -187,7 +187,12 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 
 # Print screen
-# bindsym Print exec
+bindsym Print exec grimshot --notify save screen - | swappy -f -
+bindsym Shift+Print exec grimshot --notify save area - | swappy -f -
+bindsym Control+Print exec grimshot --notify save window - | swappy -f -
+bindsym $mod+Print exec grimshot --notify copy screen
+bindsym $mod+Shift+Print exec grimshot --notify copy area
+bindsym $mod+Control+Print exec grimshot --notify copy window
 
 # Airplane mode
 # bindsym XF86RFKill exec nmcli radio all $(test $(nmcli -g wifi radio all) == "enabled" && "off" || echo "on")
