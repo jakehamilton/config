@@ -3,10 +3,21 @@
 with lib;
 let
   cfg = config.ultra.desktop.sway;
+  wallpaper = pkgs.stdenv.mkDerivation {
+    name = "sway-wallpaper";
+    src = builtins.dirOf cfg.wallpaper;
+    doCheck = false;
+    doInstallCheck = false;
+
+    installPhase = ''
+      cp ${builtins.baseNameOf cfg.wallpaper} $out
+    '';
+  };
 in
 {
   options.ultra.desktop.sway = with types; {
     enable = mkBoolOpt false "Whether or not to enable Sway.";
+    wallpaper = mkOpt path (./background.png) "The wallpaper to display";
   };
 
   config = mkIf cfg.enable {
@@ -30,6 +41,10 @@ in
 
       # Launch services waiting for the systemd target sway-session.target
       exec "systemctl --user import-environment; systemctl --user start sway-session.target"
+
+      output * {
+        bg ${wallpaper} fill
+      }
     '';
 
     programs.sway = {

@@ -35,8 +35,9 @@ set $menu-run rofi -show run
 set $menu-window rofi -show window
 
 # Output names
-set $monitor-left HDMI-A-1
-set $monitor-center HDMI-A-2
+set $laptop-screen eDP-1
+# set $monitor-left HDMI-A-1
+# set $monitor-center HDMI-A-2
 
 # Workspace names
 set $workspace1 1

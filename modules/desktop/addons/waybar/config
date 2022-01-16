@@ -2,7 +2,7 @@
 	"layer": "top",
 	"modules-left": ["sway/workspaces", "mpd", "sway/mode"],
 	"modules-center": [],
-	"modules-right": ["network", "pulseaudio", "temperature", "cpu", "memory", "clock"],
+	"modules-right": ["network", "pulseaudio", "temperature", "cpu", "memory", "clock#date", "clock#time"],
 	"mpd": {
 		"tooltip": false,
 		"format": "{stateIcon} {artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
@@ -14,24 +14,49 @@
         }
 	},
 	"pulseaudio": {
-		"tooltip": false,
+		"tooltip": true,
+		"tooltip-format": "{volume}%",
 		"scroll-step": 5,
-		"format": "{icon} {volume}%",
+		"format": "{icon}",
+		"format-muted": "婢",
 		"format-icons": {
 			"default": ["奄", "奔", "墳"]
 		}
 	},
 	"network": {
-		"tooltip": false,
-		"format-wifi": "  {essid} {ipaddr}",
-		"format-ethernet": " {ipaddr}"
+		"tooltip": true,
+		"format-wifi": " ",
+		"tooltip-format-wifi": "{essid} @ {signalStrength}%",
+		"format-ethernet": ""
+	},
+	"temperature": {
+		"tooltip": true,
+		"tooltip-format": "{temperatureC} 糖",
+		"critical-threshold": 70,
+		"format-icons": ["", "", ""],
+		"format": "{icon}"
 	},
 	"cpu": {
-		"tooltip": false,
-		"format": " {}%"
+		"tooltip": true,
+		"format": "",
+		"states": {
+			"heavy": 70,
+			"full": 90
+		}
 	},
 	"memory": {
-		"tooltip": false,
-		"format": " {}%"
+		"tooltip": true,
+		"tooltip-format": "{used:0.1f}G/{total:0.1f}G",
+		"format": "",
+		"states": {
+			"heavy": 70,
+			"full": 90
+		}
+	},
+	"clock#date": {
+		"format": "{:%a, %b %d}"
+	},
+	"clock#time": {
+		"format": "{:%I:%M %p}"
 	}
 }
