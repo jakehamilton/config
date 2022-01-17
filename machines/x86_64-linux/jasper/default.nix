@@ -9,9 +9,11 @@ with lib; {
     apps = {
       _1password = enabled;
       discord = enabled;
+      element = enabled;
       firefox = enabled;
       steam = enabled;
       vscode = enabled;
+      obs = enabled;
     };
 
     cli-apps = { neovim = enabled; };

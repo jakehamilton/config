@@ -41,6 +41,10 @@ in {
       # Launch services waiting for the systemd target sway-session.target
       exec "systemctl --user import-environment; systemctl --user start sway-session.target"
 
+      output eDP-1 {
+        scale 2 scale_filter nearest
+      }
+
       output * {
         bg ${wallpaper} fill
       }
