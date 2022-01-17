@@ -12,10 +12,11 @@ with lib;
       discord = enabled;
       element = enabled;
       firefox = enabled;
-      steam = enabled;
+      logseq = enabled;
       vscode = enabled;
-      obs = enabled;
       pitivi = enabled;
+      steam = enabled;
+      obs = enabled;
     };
 
     cli-apps = {

@@ -1,22 +1,22 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.ultra.apps.discord;
+let cfg = config.ultra.apps.logseq;
 in {
-  options.ultra.apps.discord = with types; {
-    enable = mkBoolOpt true "Whether or not to enable Discord.";
+  options.ultra.apps.logseq = with types; {
+    enable = mkBoolOpt true "Whether or not to enable logseq.";
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-        # @NOTE(jakehamilton): Code doesn't render properly
+        # @NOTE(jakehamilton): Logseq doesn't render properly
         # on Wayland by default. We need to pass two params
         # to make it render correctly.
-        (discord.overrideAttrs (oldAttrs: {
+        (logseq.overrideAttrs (oldAttrs: {
           buildInputs = oldAttrs.buildInputs or [ ] ++ [ pkgs.makeWrapper ];
 
-          installPhase = oldAttrs.installPhase or "" + ''
-            wrapProgram $out/bin/discord \
+          postFixup = oldAttrs.postFixup or "" + ''
+            wrapProgram $out/bin/logseq \
               --add-flags "--enable-features=UseOzonePlatform" \
               --add-flags "--ozone-platform=wayland"
           '';

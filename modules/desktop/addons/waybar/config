@@ -2,7 +2,7 @@
 	"layer": "top",
 	"modules-left": ["sway/workspaces", "mpd", "sway/mode"],
 	"modules-center": [],
-	"modules-right": ["network", "pulseaudio", "temperature", "cpu", "memory", "clock#date", "clock#time"],
+	"modules-right": ["network", "pulseaudio", "temperature", "cpu", "tray", "clock#date", "clock#time"],
 	"mpd": {
 		"tooltip": false,
 		"format": "{stateIcon} {artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
@@ -54,6 +54,10 @@
 			"heavy": 70,
 			"full": 90
 		}
+	},
+	"tray": {
+		"icon-size": 16,
+		"spacing": 10
 	},
 	"clock#date": {
 		"format": "{:%a, %b %d}"

@@ -60,6 +60,7 @@ tooltip label {
 #temperature,
 #cpu,
 #memory,
+#tray,
 #clock {
 	color: #2e3440;
 	background: #eceff4;
@@ -230,6 +231,17 @@ tooltip label {
 #memory.full {
 	color: #d8dee9;
 	background: #bf616a;
+}
+
+#tray {
+	margin-top: 8px;
+	margin-left: 8px;
+	padding-left: 16px;
+	padding-right: 16px;
+	margin-bottom: 0;
+	border-radius: 8px;
+	transition: none;
+	font-size: 20px;
 }
 
 #clock {
