@@ -30,6 +30,8 @@
 
       channelsConfig = { allowUnfree = true; };
 
+      channels.nixpkgs.overlaysBuilder = lib.mkOverlays { src = ./overlays; };
+
       hosts = lib.mkHosts { src = ./machines; };
     };
 }

@@ -1,6 +1,7 @@
 { pkgs, lib, ... }:
 
-with lib; {
+with lib;
+{
   imports = [ ./hardware.nix ];
 
   ultra = {
@@ -19,8 +20,10 @@ with lib; {
     cli-apps = { neovim = enabled; };
 
     desktop = {
-      gnome = disabled;
-      sway = enabled;
+      sway = {
+        enable = true;
+        wallpaper = pkgs.ultra.wallpapers.atmosphere;
+      };
     };
 
     tools = {

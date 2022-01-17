@@ -19,6 +19,9 @@ in rec {
       "File name must match file regex.";
     match;
 
+  getParentDir = file:
+    builtins.baseNameOf (builtins.dirOf file);
+
   getFileName = file:
     if hasFileExtension file then
       builtins.concatStringsSep "" (lib.init (splitFileExtension file))
@@ -58,10 +61,20 @@ in rec {
   # Get a list of *.nix files in a directory recursively.
   getModuleFilesRec = path: builtins.filter (isNixFile) (getFilesRec path);
 
+  # Get a list of *.nix files in a directory matching "default.nix".
+  getModuleFilesDefault = path:
+    builtins.filter (file: lib.is "default.nix" (builtins.baseNameOf file))
+    (getModuleFiles path);
+
   # Get a list of *.nix files in a directory *excluding* "default.nix".
   getModuleFilesWithoutDefault = path:
     builtins.filter (file: lib.not "default.nix" (builtins.baseNameOf file))
     (getModuleFiles path);
+
+  # Get a list of *.nix files in a directory recursively matching "default.nix".
+  getModuleFilesDefaultRec = path:
+    builtins.filter (file: lib.is "default.nix" (builtins.baseNameOf file))
+    (getModuleFilesRec path);
 
   # Get a list of *.nix files in a directory recursively *excluding* "default.nix".
   getModuleFilesWithoutDefaultRec = path:
@@ -80,4 +93,6 @@ in rec {
   getUserPath = name: getPathFromRoot "/users/${name}";
 
   getOverlayPath = name: getPathFromRoot "/overlays/${name}.nix";
+
+  getPackagePath = name: getPathFromRoot "/packages/${name}";
 }
