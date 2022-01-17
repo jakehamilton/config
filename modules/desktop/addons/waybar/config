@@ -1,26 +1,54 @@
 {
 	"layer": "top",
-	"modules-left": ["sway/workspaces", "mpd", "sway/mode"],
+	"modules-left": [
+		"sway/workspaces",
+		"custom/media",
+		"sway/mode"
+	],
 	"modules-center": [],
-	"modules-right": ["network", "pulseaudio", "temperature", "cpu", "tray", "clock#date", "clock#time"],
+	"modules-right": [
+		"network",
+		"pulseaudio",
+		"temperature",
+		"cpu",
+		"tray",
+		"clock#date",
+		"clock#time"
+	],
+	"custom/media": {
+		"format": "{icon}",
+		"return-type": "json",
+		"format-icons": {
+			"Playing": "",
+			"Paused": "ﳌ"
+		},
+		"max-length": 70,
+		"exec": "playerctl -a metadata --format '{\"text\": \"{{playerName}}\", \"tooltip\": \"{{playerName}}: {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+		"on-click": "playerctl play-pause"
+	},
 	"mpd": {
 		"tooltip": false,
 		"format": "{stateIcon} {artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
 		"format-disconnected": "ﳌ",
 		"format-stopped": "",
-        "state-icons": {
-            "playing": "",
-            "paused": ""
-        }
+		"state-icons": {
+			"playing": "",
+			"paused": ""
+		}
 	},
 	"pulseaudio": {
 		"tooltip": true,
 		"tooltip-format": "{volume}%",
 		"scroll-step": 5,
 		"format": "{icon}",
+		"format-bluetooth": "",
 		"format-muted": "婢",
 		"format-icons": {
-			"default": ["奄", "奔", "墳"]
+			"default": [
+				"奄",
+				"奔",
+				"墳"
+			]
 		},
 		"on-click": "gnome-control-center sound"
 	},
@@ -35,7 +63,11 @@
 		"tooltip": true,
 		"tooltip-format": "{temperatureC} 糖",
 		"critical-threshold": 70,
-		"format-icons": ["", "", ""],
+		"format-icons": [
+			"",
+			"",
+			""
+		],
 		"format": "{icon}"
 	},
 	"cpu": {

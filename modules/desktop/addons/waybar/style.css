@@ -55,6 +55,7 @@ tooltip label {
 
 #workspaces button,
 #mpd,
+#custom-media,
 #network,
 #pulseaudio,
 #temperature,
@@ -73,6 +74,8 @@ tooltip label {
 	border-radius: 8px;
 	/* background: #282a36; */
 	transition: none;
+	/* background: #eceff4; */
+	background: #d8dee9;
 }
 
 #workspaces button {
@@ -81,21 +84,49 @@ tooltip label {
 	border-radius: 8px;
 	padding: 4px 8px;
 	font-weight: bold;
+	background: #d8dee9;
 }
 
 #workspaces button.visible {
-	color: #81a1c1;
+	color: #88c0d0;
+	background: #eceff4;
+}
+
+#workspaces button.visible:hover {
+	color: #88c0d0;
+	background: #eceff4;
 }
 
 #workspaces button:not(:last-child) {
-	margin-right: 6px;
+	/* margin-right: 6px; */
 }
 
 #workspaces button:hover {
 	transition: none;
 	box-shadow: inherit;
 	text-shadow: inherit;
-	color: #88c0d0;
+	color: #81a1c1;
+}
+
+#custom-media {
+	margin-top: 8px;
+	margin-left: 8px;
+	padding-left: 16px;
+	padding-right: 16px;
+	margin-bottom: 0;
+	border-radius: 8px;
+	transition: none;
+	font-weight: bold;
+}
+
+#custom-media.Paused {
+	color: #4c566a;
+	background: #d8dee9;
+}
+
+#custom-media.Playing {
+	color: #eceff4;
+	background: #8fbcbb;
 }
 
 #mpd {
@@ -149,6 +180,11 @@ tooltip label {
 	transition: none;
 	font-size: 18px;
 	/* background: #9aedfe; */
+}
+
+#pulseaudio.bluetooth {
+	color: #d8dee9;
+	background: #81a1c1;
 }
 
 #pulseaudio.muted {

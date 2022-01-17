@@ -41,6 +41,9 @@
     ];
   };
 
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+
   # Enable DHCP on the wireless link
   networking.interfaces.wlp0s20f3.useDHCP = true;
 }
