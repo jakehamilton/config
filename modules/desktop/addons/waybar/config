@@ -21,13 +21,15 @@
 		"format-muted": "婢",
 		"format-icons": {
 			"default": ["奄", "奔", "墳"]
-		}
+		},
+		"on-click": "gnome-control-center sound"
 	},
 	"network": {
 		"tooltip": true,
 		"format-wifi": " ",
 		"tooltip-format-wifi": "{essid} @ {signalStrength}%",
-		"format-ethernet": ""
+		"format-ethernet": "",
+		"on-click": "gnome-control-center wifi"
 	},
 	"temperature": {
 		"tooltip": true,

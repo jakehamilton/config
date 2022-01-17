@@ -18,12 +18,28 @@ in {
   config = {
     ultra.home.file.".face/${builtins.baseNameOf cfg.icon}".source = cfg.icon;
 
+    environment.systemPackages = with pkgs; [
+      starship
+    ];
+
+    programs.zsh = {
+      enable = true;
+      autosuggestions.enable = true;
+      histFile = "$XDG_CACHE_HOME/zsh.history";
+      promptInit = ''
+        eval $(starship init zsh)
+      '';
+    };
+
+
     users.users.${cfg.name} = {
       isNormalUser = true;
 
       name = cfg.name;
       home = "/home/${cfg.name}";
       group = "users";
+
+      shell = pkgs.zsh;
 
       # Arbitrary user ID to use for the user. Since I only
       # have a single user on my machines this won't ever collide.
