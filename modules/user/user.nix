@@ -31,6 +31,7 @@ in {
       '';
     };
 
+    ultra.home.configFile."starship.toml".source = ./starship.toml;
 
     users.users.${cfg.name} = {
       isNormalUser = true;
