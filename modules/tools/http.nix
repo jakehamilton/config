@@ -8,6 +8,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ wget curl httpie ];
+    environment.systemPackages = with pkgs; [ wget curl ];
   };
 }
