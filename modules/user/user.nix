@@ -26,12 +26,43 @@ in {
       enable = true;
       autosuggestions.enable = true;
       histFile = "$XDG_CACHE_HOME/zsh.history";
-      promptInit = ''
-        eval $(starship init zsh)
-      '';
+
+      # @NOTE(jakehamilton): This may be useful if we want to
+      # support multiple users with the exact same shell config.
+      # However, right now this is a single user system so instead
+      # of configuring this system-wide, we can just do so with
+      # homemanager.
+
+      # promptInit = ''
+      #   eval $(starship init zsh)
+      # '';
     };
 
     ultra.home.configFile."starship.toml".source = ./starship.toml;
+
+    ultra.home.extraOptions.programs.zsh = {
+      enable = true;
+      enableCompletion = true;
+      enableAutosuggestions = true;
+      enableSyntaxHighlighting = true;
+
+      initExtra = builtins.concatStringsSep "\n" [
+        "eval $(starship init zsh)"
+      ];
+
+      plugins = [
+        {
+          name = "zsh-nix-shell";
+          file = "nix-shell.plugin.zsh";
+          src = pkgs.fetchFromGitHub {
+            owner = "chisui";
+            repo = "zsh-nix-shell";
+            rev = "v0.4.0";
+            sha256 = "037wz9fqmx0ngcwl9az55fgkipb745rymznxnssr3rx9irb6apzg";
+          };
+        }
+      ];
+    };
 
     users.users.${cfg.name} = {
       isNormalUser = true;
