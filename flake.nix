@@ -33,5 +33,13 @@
       channels.nixpkgs.overlaysBuilder = lib.mkOverlays { src = ./overlays; };
 
       hosts = lib.mkHosts { src = ./machines; };
+
+      overlays = utils.lib.exportOverlays {
+        inherit (self) pkgs inputs;
+      };
+
+      outputsBuilder = channels: {
+        packages = utils.lib.exportPackages self.overlays channels;
+      };
     };
 }
