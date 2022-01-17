@@ -34,6 +34,7 @@ with lib;
     tools = {
       git = enabled;
       node = enabled;
+      http = enabled;
       misc = enabled;
     };
 

@@ -8,6 +8,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ wget curl file nixfmt jq ];
+    environment.systemPackages = with pkgs; [ file nixfmt jq ];
   };
 }
