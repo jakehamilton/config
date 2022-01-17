@@ -46,6 +46,11 @@ in {
       }
     '';
 
+
+    programs.dconf.enable = true;
+    security.polkit.enable = true;
+    services.gnome.gnome-keyring.enable = true;
+
     programs.sway = {
       enable = true;
       extraPackages = with pkgs; [
@@ -62,6 +67,11 @@ in {
         swappy
         playerctl
         brightnessctl
+        glib # for gsettings
+        gtk3.out # for gtk-launch
+        gnome.nautilus
+        gnome.seahorse
+        gnome.gnome-control-center
         (python38.withPackages (ps: with ps; [ keyring ]))
       ];
 

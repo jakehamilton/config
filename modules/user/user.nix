@@ -9,12 +9,15 @@ in {
     email = mkOpt str "jake.hamilton@hey.com" "The email of the user.";
     initialPassword = mkOpt str "password"
       "The initial password to use when the user is first created.";
+    icon = mkOpt path ./profile.jpg "The profile picture to use for the user.";
     extraGroups = mkOpt (listOf str) [ ] "Groups for the user to be assigned.";
     extraOptions = mkOpt attrs { }
       "Extra options passed to <option>users.users.<name></option>.";
   };
 
   config = {
+    ultra.home.file.".face/${builtins.baseNameOf cfg.icon}".source = cfg.icon;
+
     users.users.${cfg.name} = {
       isNormalUser = true;
 
