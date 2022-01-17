@@ -1,0 +1,8 @@
+font=Hack Nerd Font Mono 10
+border-radius=8
+text-color=#2e3440ff
+background-color=#eceff4ff
+border-size=0
+margin=12,12,0
+padding=8,12
+default-timeout=5000

@@ -3,15 +3,10 @@
 with lib;
 let
   cfg = config.ultra.desktop.sway;
-  defaultWallpaper = pkgs.stdenv.mkDerivation {
-    name = "default-sway-wallpaper";
-    src = ../wallpapers/atmosphere.png;
-    doCheck = false;
-    doInstallCheck = false;
-
-    installPhase = ''
-      cp $src $out
-    '';
+  term = config.ultra.desktop.addons.term;
+  substitutedConfig = pkgs.substituteAll {
+    src = ./config;
+    term = term.pkg.pname or term.pkg.name;
   };
 in {
   options.ultra.desktop.sway = with types; {
@@ -23,14 +18,18 @@ in {
   config = mkIf cfg.enable {
     # Desktop additions
     ultra.desktop.addons = {
+      foot = enabled;
       mako = enabled;
       rofi = enabled;
+      wofi = enabled;
       kanshi = enabled;
       waybar = enabled;
+      keyring = enabled;
+      nautilus = enabled;
       electron-support = enabled;
     };
 
-    ultra.home.configFile."sway/config".text = fileWithText ./config ''
+    ultra.home.configFile."sway/config".text = fileWithText substitutedConfig ''
       #############################
       #░░░░░░░░░░░░░░░░░░░░░░░░░░░#
       #░░█▀▀░█░█░█▀▀░▀█▀░█▀▀░█▄█░░#
@@ -42,6 +41,10 @@ in {
       # Launch services waiting for the systemd target sway-session.target
       exec "systemctl --user import-environment; systemctl --user start sway-session.target"
 
+      # Start a user session dbus (required for things like starting
+      # applications through wofi).
+      exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
+
       ${optionalString (lib.not null cfg.wallpaper) ''
         output * {
           bg ${cfg.wallpaper} fill
@@ -51,10 +54,6 @@ in {
       ${cfg.extraConfig}
     '';
 
-
-    programs.dconf.enable = true;
-    security.polkit.enable = true;
-    services.gnome.gnome-keyring.enable = true;
 
     programs.sway = {
       enable = true;
@@ -74,10 +73,7 @@ in {
         brightnessctl
         glib # for gsettings
         gtk3.out # for gtk-launch
-        gnome.nautilus
-        gnome.seahorse
         gnome.gnome-control-center
-        (python38.withPackages (ps: with ps; [ keyring ]))
       ];
 
       extraSessionCommands = ''

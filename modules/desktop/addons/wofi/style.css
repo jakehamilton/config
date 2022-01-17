@@ -1,0 +1,92 @@
+window {
+  font-family: "Hack Nerd Font";/*, "Noto Color Emoji";*/
+  background: transparent;
+}
+
+#outer-box {
+  padding: 10px;
+  border-radius: 8px;
+  background: #2e3440;
+}
+
+#input {
+  color: #e5e9f0;
+  caret-color: #e5e9f0;
+  background: #3b4252;
+  border-top-color: #3b4252;
+  border-left-color: #3b4252;
+  border-right-color: #3b4252;
+  border-bottom-color: #3b4252;
+  box-shadow: 0 0 0 1px transparent inset;
+  outline-color: transparent !important;
+}
+
+#input:focus {
+  background: #3b4252;
+  border-color: #3b4252 !important;
+  box-shadow: 0 0 0 1px transparent inset;
+  border-top-color: #3b4252 !important;
+  border-left-color: #3b4252 !important;
+  border-right-color: #3b4252 !important;
+  border-bottom-color: #3b4252 !important;
+  box-shadow: none !important;
+  outline-color: transparent !important;
+}
+
+#input image.left {
+  color: #d8dee9;
+}
+
+#input:focus image.left {
+  color: #e5e9f0;
+}
+
+#input image.right {
+  color: #d8dee9;
+}
+
+#input:focus image.right {
+  color: #e5e9f0;
+}
+
+#scroll {
+  padding-top: 6px;
+}
+
+#entry {
+  color: #4c566a;
+  padding: 8px 8px;
+  border-radius: 4px;
+  background: transparent;
+}
+
+#entry:selected {
+  color: #eceff4;
+  background: #8fbcbb;
+  font-weight: bold;
+}
+
+expander list {
+  margin-top: 8px;
+  background: #8fbcbb;
+  padding-left: 16px;
+}
+
+expander list #entry {
+  transition: none;
+}
+
+expander list #entry:hover,
+expander list #entry:active {
+  color: #8fbcbb;
+  background: #e5e9f0;
+}
+
+expander list #entry:hover label,
+expander list #entry:active label {
+  color: #8fbcbb;
+}
+
+expander list label {
+  color: #e5e9f0;
+}

@@ -12,6 +12,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       mako
+      libnotify
     ];
 
     systemd.user.services.mako = {
@@ -40,5 +41,7 @@ in
         TimeoutStopSec = 10;
       };
     };
+
+    ultra.home.configFile."mako/config".source = ./config;
   };
 }

@@ -15,9 +15,13 @@ with lib;
       steam = enabled;
       vscode = enabled;
       obs = enabled;
+      pitivi = enabled;
     };
 
-    cli-apps = { neovim = enabled; };
+    cli-apps = {
+      neovim = enabled;
+      wshowkeys = enabled;
+    };
 
     desktop = {
       sway = {

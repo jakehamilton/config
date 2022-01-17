@@ -25,14 +25,13 @@ set $up k
 set $right l
 
 # Terminal
-set $term env kitty
+set $term env @term@
 
 # Swaylock
 set $swaylock swaylock-fancy -f "Hack-Regular-Nerd-Font-Complete"
 
 # Menu
-set $menu-run rofi -show run
-set $menu-window rofi -show window
+set $menu-run wofi --show drun --prompt search
 
 # Output names
 set $laptop-screen eDP-1
@@ -92,9 +91,6 @@ bindsym $mod+Control+l exec $swaylock
 
 # Open run menu
 bindsym $mod+d exec $menu-run
-
-# Open window menu
-bindsym $mod+Shift+d exec $menu-window
 
 # Drag floating windows while holding down modifier key
 floating_modifier $mod normal
@@ -205,11 +201,11 @@ mode "resize" {
 	# Grow the width
 	bindsym $right resize grow width 10px
 
-	# Shrink the height
-	bindsym $up resize shrink height 10px
-
 	# Grow the height
-	bindsym $down resize grow height 10px
+	bindsym $up resize grow height 10px
+
+	# Shrink the height
+	bindsym $down resize shrink height 10px
 
 	# Return to default mode
 	bindsym Return mode "default"
@@ -259,7 +255,16 @@ bar {
 #########################
 
 # Remove title bars
-default_border none
+default_border pixel 1
+default_floating_border pixel 1
+
+client.focused #8fbcbb #8fbcbb #eceff4 #eceff4
+client.focused_inactive #2E3440 #2E3440 #e5e9f0 #5e81ac
+client.unfocused #3b4252 #3b4252 #4c566a #5e81ac
+client.urgent #d08770 #d08770 #eceff4 #bf616a
+
+for_window [app_id="wofi"] border none
+# for_window [app_id="firefox"] border none
 
 # Don't focus moused over windows
 focus_follows_mouse no

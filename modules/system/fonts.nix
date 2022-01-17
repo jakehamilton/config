@@ -9,11 +9,15 @@ in {
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      font-manager
+    ];
+
     fonts.fonts = with pkgs;
       [
         noto-fonts
         noto-fonts-emoji
-        (nerdfonts.override { fonts = [ "Hack" "DroidSansMono" ]; })
+        (nerdfonts.override { fonts = [ "Hack" ]; })
       ] ++ cfg.fonts;
   };
 }
