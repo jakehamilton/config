@@ -33,6 +33,7 @@ with lib;
 
     tools = {
       git = enabled;
+      node = enabled;
       misc = enabled;
     };
 
