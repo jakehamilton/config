@@ -17,6 +17,13 @@ in {
       '';
       trustedUsers = users;
       allowedUsers = users;
+
+      autoOptimiseStore = true;
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 30d";
+      };
     };
   };
 }
