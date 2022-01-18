@@ -7,6 +7,12 @@ in {
     enable = mkBoolOpt false "Whether or not to enable neovim.";
   };
 
-  config =
-    mkIf cfg.enable { environment.systemPackages = with pkgs; [ neovim ]; };
+  config = mkIf cfg.enable {
+    programs.neovim = {
+      enable = true;
+      viAlias = true;
+      vimAlias = true;
+      defaultEditor = true;
+    };
+  };
 }
