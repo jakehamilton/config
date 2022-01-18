@@ -4,7 +4,7 @@ with lib;
 let cfg = config.plusultra.apps.pitivi;
 in {
   options.plusultra.apps.pitivi = with types; {
-    enable = mkBoolOpt true "Whether or not to enable Pitivi.";
+    enable = mkBoolOpt false "Whether or not to enable Pitivi.";
   };
 
   config =

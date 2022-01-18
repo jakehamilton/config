@@ -4,7 +4,7 @@ with lib;
 let cfg = config.plusultra.system.xkb;
 in {
   options.plusultra.system.xkb = with types; {
-    enable = mkBoolOpt true "Whether or not to configure xkb.";
+    enable = mkBoolOpt false "Whether or not to configure xkb.";
   };
 
   config = mkIf cfg.enable {

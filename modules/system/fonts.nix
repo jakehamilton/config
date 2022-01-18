@@ -4,7 +4,7 @@ with lib;
 let cfg = config.plusultra.system.fonts;
 in {
   options.plusultra.system.fonts = with types; {
-    enable = mkBoolOpt true "Whether or not to manage fonts.";
+    enable = mkBoolOpt false "Whether or not to manage fonts.";
     fonts = mkOpt (listOf package) [ ] "Custom font packages to install.";
   };
 

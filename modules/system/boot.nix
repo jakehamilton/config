@@ -4,7 +4,7 @@ with lib;
 let cfg = config.plusultra.system.boot;
 in {
   options.plusultra.system.boot = with types; {
-    enable = mkBoolOpt true "Whether or not to enable booting.";
+    enable = mkBoolOpt false "Whether or not to enable booting.";
   };
 
   config = mkIf cfg.enable {

@@ -4,7 +4,7 @@ with lib;
 let cfg = config.plusultra.cli-apps.wshowkeys;
 in {
   options.plusultra.cli-apps.wshowkeys = with types; {
-    enable = mkBoolOpt true "Whether or not to enable wshowkeys.";
+    enable = mkBoolOpt false "Whether or not to enable wshowkeys.";
   };
 
   config =

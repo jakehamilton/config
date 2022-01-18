@@ -4,7 +4,7 @@ with lib;
 let cfg = config.plusultra.hardware.audio;
 in {
   options.plusultra.hardware.audio = with types; {
-    enable = mkBoolOpt true "Whether or not to enable audio support.";
+    enable = mkBoolOpt false "Whether or not to enable audio support.";
   };
 
   config = mkIf cfg.enable {

@@ -4,7 +4,7 @@ with lib;
 let cfg = config.plusultra.cli-apps.neovim;
 in {
   options.plusultra.cli-apps.neovim = with types; {
-    enable = mkBoolOpt true "Whether or not to enable neovim.";
+    enable = mkBoolOpt false "Whether or not to enable neovim.";
   };
 
   config =

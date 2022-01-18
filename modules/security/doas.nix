@@ -4,7 +4,7 @@ with lib;
 let cfg = config.plusultra.security.doas;
 in {
   options.plusultra.security.doas = {
-    enable = mkBoolOpt true "Whether or not to replace sudo with doas.";
+    enable = mkBoolOpt false "Whether or not to replace sudo with doas.";
   };
 
   config = mkIf cfg.enable {

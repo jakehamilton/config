@@ -4,7 +4,7 @@ with lib;
 let cfg = config.plusultra.system.locale;
 in {
   options.plusultra.system.locale = with types; {
-    enable = mkBoolOpt true "Whether or not to manage locale settings.";
+    enable = mkBoolOpt false "Whether or not to manage locale settings.";
   };
 
   config = mkIf cfg.enable {

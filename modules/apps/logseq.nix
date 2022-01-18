@@ -4,7 +4,7 @@ with lib;
 let cfg = config.plusultra.apps.logseq;
 in {
   options.plusultra.apps.logseq = with types; {
-    enable = mkBoolOpt true "Whether or not to enable logseq.";
+    enable = mkBoolOpt false "Whether or not to enable logseq.";
   };
 
   config = mkIf cfg.enable {

@@ -4,7 +4,7 @@ with lib;
 let cfg = config.plusultra.tools.http;
 in {
   options.plusultra.tools.http = with types; {
-    enable = mkBoolOpt true "Whether or not to enable common http utilities.";
+    enable = mkBoolOpt false "Whether or not to enable common http utilities.";
   };
 
   config = mkIf cfg.enable {

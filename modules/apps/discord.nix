@@ -4,7 +4,7 @@ with lib;
 let cfg = config.plusultra.apps.discord;
 in {
   options.plusultra.apps.discord = with types; {
-    enable = mkBoolOpt true "Whether or not to enable Discord.";
+    enable = mkBoolOpt false "Whether or not to enable Discord.";
   };
 
   config = mkIf cfg.enable {
