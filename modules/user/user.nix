@@ -3,14 +3,16 @@
 with lib;
 let
   cfg = config.plusultra.user;
-  wallpapers = lib.foldl
+  wallpapers = (builtins.trace (builtins.attrNames pkgs.plusultra.wallpapers)) lib.foldl
     (acc: name:
-      let wallpaper = pkgs.plusultra.wallpapers.${name};
+      let
+        wallpaper = pkgs.plusultra.wallpapers.${name};
+        fileName = (builtins.trace wallpaper.fileName) wallpaper.fileName;
       in
       acc // {
-        "Pictures/wallpapers/${wallpaper.fileName}".source = wallpaper;
+        "Pictures/wallpapers/${fileName}".source = wallpaper;
       }
-    ) {} (builtins.attrNames pkgs.plusultra.wallpapers);
+    ) {} (pkgs.plusultra.wallpapers.names);
 in {
   options.plusultra.user = with types; {
     name = mkOpt str "short" "The name to use for the user account.";

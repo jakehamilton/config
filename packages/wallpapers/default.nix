@@ -2,7 +2,7 @@
 
 let
   # images = [ /nix/store/hash-wallpapers/<name>.<ext> ... ]
-  images = lib.getFilesRec ./wallpapers;
+  images = builtins.attrNames (builtins.readDir ./wallpapers);
   mkWallpaper = name: src:
     let
       fileName = builtins.baseNameOf src;
@@ -21,13 +21,15 @@ let
       };
     in pkg;
 
-in lib.foldl (acc: image:
+in {
+  names = lib.map (lib.getFileName) images;
+} // lib.foldl (acc: image:
   let
-    fileName = builtins.baseNameOf image;
+    # fileName = builtins.baseNameOf image;
     # lib.getFileName is a helper to get the basename of
     # the file and then take the name before the file extension.
     # eg. mywallpaper.png -> mywallpaper
-    name = "${lib.getFileName fileName}";
+    name = lib.getFileName image;
   in acc // {
-    "${name}" = mkWallpaper name image;
+    "${name}" = mkWallpaper name (./wallpapers + "/${image}");
   }) { } images
