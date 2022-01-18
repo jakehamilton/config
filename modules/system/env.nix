@@ -1,9 +1,9 @@
 { options, config, pkgs, lib, ... }:
 
 with lib;
-let cfg = config.ultra.system.env;
+let cfg = config.plusultra.system.env;
 in {
-  options.ultra.system.env = with types;
+  options.plusultra.system.env = with types;
     mkOption {
       type = attrsOf (oneOf [ str path (listOf (either str path)) ]);
       apply = mapAttrs (n: v:

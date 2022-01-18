@@ -1,11 +1,11 @@
 { options, config, pkgs, lib, home-manager, ... }:
 
 with lib;
-let cfg = config.ultra.home;
+let cfg = config.plusultra.home;
 in {
   imports = [ home-manager.nixosModules.home-manager ];
 
-  options.ultra.home = with types; {
+  options.plusultra.home = with types; {
     file = mkOpt attrs { }
       "A set of files to be managed by home-manager's <option>home.file</option>.";
     configFile = mkOpt attrs { }
@@ -14,18 +14,18 @@ in {
   };
 
   config = {
-    ultra.home.extraOptions = {
+    plusultra.home.extraOptions = {
       home.stateVersion = config.system.stateVersion;
-      home.file = mkAliasDefinitions options.ultra.home.file;
+      home.file = mkAliasDefinitions options.plusultra.home.file;
       xdg.enable = true;
-      xdg.configFile = mkAliasDefinitions options.ultra.home.configFile;
+      xdg.configFile = mkAliasDefinitions options.plusultra.home.configFile;
     };
 
     home-manager = {
       useUserPackages = true;
 
-      users.${config.ultra.user.name} =
-        mkAliasDefinitions options.ultra.home.extraOptions;
+      users.${config.plusultra.user.name} =
+        mkAliasDefinitions options.plusultra.home.extraOptions;
     };
   };
 }

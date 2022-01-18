@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.ultra.desktop.addons.mako;
+  cfg = config.plusultra.desktop.addons.mako;
 in
 {
-  options.ultra.desktop.addons.mako = with types; {
+  options.plusultra.desktop.addons.mako = with types; {
     enable = mkBoolOpt false "Whether to enable Mako in Sway.";
   };
 
@@ -42,6 +42,6 @@ in
       };
     };
 
-    ultra.home.configFile."mako/config".source = ./config;
+    plusultra.home.configFile."mako/config".source = ./config;
   };
 }

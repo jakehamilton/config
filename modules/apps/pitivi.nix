@@ -1,9 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.ultra.apps.pitivi;
+let cfg = config.plusultra.apps.pitivi;
 in {
-  options.ultra.apps.pitivi = with types; {
+  options.plusultra.apps.pitivi = with types; {
     enable = mkBoolOpt true "Whether or not to enable Pitivi.";
   };
 

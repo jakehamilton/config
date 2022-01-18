@@ -2,14 +2,14 @@
 
 with lib;
 let
-  cfg = config.ultra.desktop.sway;
-  term = config.ultra.desktop.addons.term;
+  cfg = config.plusultra.desktop.sway;
+  term = config.plusultra.desktop.addons.term;
   substitutedConfig = pkgs.substituteAll {
     src = ./config;
     term = term.pkg.pname or term.pkg.name;
   };
 in {
-  options.ultra.desktop.sway = with types; {
+  options.plusultra.desktop.sway = with types; {
     enable = mkBoolOpt false "Whether or not to enable Sway.";
     wallpaper = mkOpt (nullOr path) null "The wallpaper to display.";
     extraConfig = mkOpt str "" "Additional configuration for the Sway config file.";
@@ -17,7 +17,7 @@ in {
 
   config = mkIf cfg.enable {
     # Desktop additions
-    ultra.desktop.addons = {
+    plusultra.desktop.addons = {
       foot = enabled;
       mako = enabled;
       rofi = enabled;
@@ -29,7 +29,7 @@ in {
       electron-support = enabled;
     };
 
-    ultra.home.configFile."sway/config".text = fileWithText substitutedConfig ''
+    plusultra.home.configFile."sway/config".text = fileWithText substitutedConfig ''
       #############################
       #░░░░░░░░░░░░░░░░░░░░░░░░░░░#
       #░░█▀▀░█░█░█▀▀░▀█▀░█▀▀░█▄█░░#

@@ -1,9 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.ultra.apps.firefox;
+let cfg = config.plusultra.apps.firefox;
 in {
-  options.ultra.apps.firefox = with types; {
+  options.plusultra.apps.firefox = with types; {
     enable = mkBoolOpt true "Whether or not to enable Firefox.";
   };
 

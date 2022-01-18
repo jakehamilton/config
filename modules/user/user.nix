@@ -1,9 +1,9 @@
 { options, config, pkgs, lib, ... }:
 
 with lib;
-let cfg = config.ultra.user;
+let cfg = config.plusultra.user;
 in {
-  options.ultra.user = with types; {
+  options.plusultra.user = with types; {
     name = mkOpt str "short" "The name to use for the user account.";
     fullName = mkOpt str "Jake Hamilton" "The full name of the user.";
     email = mkOpt str "jake.hamilton@hey.com" "The email of the user.";
@@ -16,7 +16,7 @@ in {
   };
 
   config = {
-    ultra.home.file.".face/${builtins.baseNameOf cfg.icon}".source = cfg.icon;
+    plusultra.home.file.".face/${builtins.baseNameOf cfg.icon}".source = cfg.icon;
 
     environment.systemPackages = with pkgs; [
       starship
@@ -38,9 +38,9 @@ in {
       # '';
     };
 
-    ultra.home.configFile."starship.toml".source = ./starship.toml;
+    plusultra.home.configFile."starship.toml".source = ./starship.toml;
 
-    ultra.home.extraOptions.programs.zsh = {
+    plusultra.home.extraOptions.programs.zsh = {
       enable = true;
       enableCompletion = true;
       enableAutosuggestions = true;

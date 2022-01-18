@@ -2,10 +2,10 @@
 
 with lib;
 let
-    cfg = config.ultra.desktop.addons.waybar;
+    cfg = config.plusultra.desktop.addons.waybar;
 in
 {
-    options.ultra.desktop.addons.waybar = with types; {
+    options.plusultra.desktop.addons.waybar = with types; {
         enable = mkBoolOpt false "Whether to enable Waybar in the desktop environment.";
     };
 
@@ -14,7 +14,7 @@ in
             waybar
         ];
 
-        ultra.home.configFile."waybar/config".source = ./config;
-        ultra.home.configFile."waybar/style.css".source = ./style.css;
+        plusultra.home.configFile."waybar/config".source = ./config;
+        plusultra.home.configFile."waybar/style.css".source = ./style.css;
     };
 }

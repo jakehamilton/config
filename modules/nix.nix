@@ -1,15 +1,15 @@
 { options, config, pkgs, lib, ... }:
 
 with lib;
-let cfg = config.ultra.nix;
+let cfg = config.plusultra.nix;
 in {
-  options.ultra.nix = with types; {
+  options.plusultra.nix = with types; {
     enable = mkBoolOpt true "Whether or not to manage nix configuration.";
     package = mkOpt package pkgs.nixFlakes "Which nix package to use.";
   };
 
   config = mkIf cfg.enable {
-    nix = let users = [ "root" config.ultra.user.name ];
+    nix = let users = [ "root" config.plusultra.user.name ];
     in {
       package = cfg.package;
       extraOptions = ''

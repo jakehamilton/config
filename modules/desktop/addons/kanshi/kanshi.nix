@@ -2,17 +2,17 @@
 
 with lib;
 let
-    cfg = config.ultra.desktop.addons.kanshi;
-    user = config.ultra.user;
+    cfg = config.plusultra.desktop.addons.kanshi;
+    user = config.plusultra.user;
     home = config.users.users.${user.name}.home;
 in
 {
-    options.ultra.desktop.addons.kanshi = with types; {
+    options.plusultra.desktop.addons.kanshi = with types; {
         enable = mkBoolOpt false "Whether to enable Kanshi in the desktop environment.";
     };
 
     config = mkIf cfg.enable {
-        ultra.home.configFile."kanshi/config".source = ./config;
+        plusultra.home.configFile."kanshi/config".source = ./config;
 
         environment.systemPackages = with pkgs; [
             kanshi

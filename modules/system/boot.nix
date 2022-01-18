@@ -1,9 +1,9 @@
 { options, config, pkgs, lib, ... }:
 
 with lib;
-let cfg = config.ultra.system.boot;
+let cfg = config.plusultra.system.boot;
 in {
-  options.ultra.system.boot = with types; {
+  options.plusultra.system.boot = with types; {
     enable = mkBoolOpt true "Whether or not to enable booting.";
   };
 

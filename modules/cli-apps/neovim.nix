@@ -1,9 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.ultra.cli-apps.neovim;
+let cfg = config.plusultra.cli-apps.neovim;
 in {
-  options.ultra.cli-apps.neovim = with types; {
+  options.plusultra.cli-apps.neovim = with types; {
     enable = mkBoolOpt true "Whether or not to enable neovim.";
   };
 

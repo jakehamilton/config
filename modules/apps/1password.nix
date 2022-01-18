@@ -1,9 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.ultra.apps._1password;
+let cfg = config.plusultra.apps._1password;
 in {
-  options.ultra.apps._1password = with types; {
+  options.plusultra.apps._1password = with types; {
     enable = mkBoolOpt true "Whether or not to enable 1password.";
   };
 

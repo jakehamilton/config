@@ -2,10 +2,10 @@
 
 with lib;
 let
-    cfg = config.ultra.desktop.addons.nautilus;
+    cfg = config.plusultra.desktop.addons.nautilus;
 in
 {
-    options.ultra.desktop.addons.nautilus = with types; {
+    options.plusultra.desktop.addons.nautilus = with types; {
         enable = mkBoolOpt false "Whether to enable the gnome file manager.";
     };
 

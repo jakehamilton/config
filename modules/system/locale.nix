@@ -1,9 +1,9 @@
 { options, config, pkgs, lib, ... }:
 
 with lib;
-let cfg = config.ultra.system.locale;
+let cfg = config.plusultra.system.locale;
 in {
-  options.ultra.system.locale = with types; {
+  options.plusultra.system.locale = with types; {
     enable = mkBoolOpt true "Whether or not to manage locale settings.";
   };
 

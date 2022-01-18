@@ -2,10 +2,10 @@
 
 with lib;
 let
-    cfg = config.ultra.desktop.addons.wofi;
+    cfg = config.plusultra.desktop.addons.wofi;
 in
 {
-    options.ultra.desktop.addons.wofi = with types; {
+    options.plusultra.desktop.addons.wofi = with types; {
         enable = mkBoolOpt false "Whether to enable the Wofi in the desktop environment.";
     };
 
@@ -18,8 +18,8 @@ in
       # config -> .config/wofi/config
       # css -> .config/wofi/style.css
       # colors -> $XDG_CACHE_HOME/wal/colors
-      # ultra.home.configFile."foot/foot.ini".source = ./foot.ini;
-      ultra.home.configFile."wofi/config".source = ./config;
-      ultra.home.configFile."wofi/style.css".source = ./style.css;
+      # plusultra.home.configFile."foot/foot.ini".source = ./foot.ini;
+      plusultra.home.configFile."wofi/config".source = ./config;
+      plusultra.home.configFile."wofi/style.css".source = ./style.css;
     };
 }

@@ -1,9 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.ultra.apps.logseq;
+let cfg = config.plusultra.apps.logseq;
 in {
-  options.ultra.apps.logseq = with types; {
+  options.plusultra.apps.logseq = with types; {
     enable = mkBoolOpt true "Whether or not to enable logseq.";
   };
 

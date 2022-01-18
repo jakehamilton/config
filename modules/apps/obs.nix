@@ -1,9 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.ultra.apps.obs;
+let cfg = config.plusultra.apps.obs;
 in {
-  options.ultra.apps.obs = with types; {
+  options.plusultra.apps.obs = with types; {
     enable = mkBoolOpt false "Whether or not to enable support for OBS.";
   };
 

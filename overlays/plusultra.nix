@@ -5,7 +5,7 @@ let
   wallpapers = prev.callPackage (lib.getPackagePath "/wallpapers") inputs;
 in
 {
-  ultra = {
+  plusultra = {
     inherit wallpapers;
   };
 }

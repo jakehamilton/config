@@ -1,9 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.ultra.tools.misc;
+let cfg = config.plusultra.tools.misc;
 in {
-  options.ultra.tools.misc = with types; {
+  options.plusultra.tools.misc = with types; {
     enable = mkBoolOpt true "Whether or not to enable common utilities.";
   };
 

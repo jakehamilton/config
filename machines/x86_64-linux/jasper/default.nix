@@ -4,7 +4,7 @@ with lib;
 {
   imports = [ ./hardware.nix ];
 
-  ultra = {
+  plusultra = {
     nix = enabled;
 
     apps = {
@@ -27,7 +27,7 @@ with lib;
     desktop = {
       sway = {
         enable = true;
-        wallpaper = pkgs.ultra.wallpapers.atmosphere;
+        wallpaper = pkgs.plusultra.wallpapers.atmosphere;
       };
     };
 

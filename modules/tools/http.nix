@@ -1,9 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.ultra.tools.http;
+let cfg = config.plusultra.tools.http;
 in {
-  options.ultra.tools.http = with types; {
+  options.plusultra.tools.http = with types; {
     enable = mkBoolOpt true "Whether or not to enable common http utilities.";
   };
 

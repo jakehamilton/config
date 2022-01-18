@@ -2,10 +2,10 @@
 
 with lib;
 let
-    cfg = config.ultra.desktop.addons.rofi;
+    cfg = config.plusultra.desktop.addons.rofi;
 in
 {
-    options.ultra.desktop.addons.rofi = with types; {
+    options.plusultra.desktop.addons.rofi = with types; {
         enable = mkBoolOpt false "Whether to enable Rofi in the desktop environment.";
     };
 
@@ -14,6 +14,6 @@ in
             rofi
         ];
 
-        ultra.home.configFile."rofi/config.rasi".source = ./config.rasi;
+        plusultra.home.configFile."rofi/config.rasi".source = ./config.rasi;
     };
 }

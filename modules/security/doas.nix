@@ -1,9 +1,9 @@
 { options, config, pkgs, lib, ... }:
 
 with lib;
-let cfg = config.ultra.security.doas;
+let cfg = config.plusultra.security.doas;
 in {
-  options.ultra.security.doas = {
+  options.plusultra.security.doas = {
     enable = mkBoolOpt true "Whether or not to replace sudo with doas.";
   };
 
@@ -15,7 +15,7 @@ in {
     security.doas = {
       enable = true;
       extraRules = [{
-        users = [ config.ultra.user.name ];
+        users = [ config.plusultra.user.name ];
         noPass = true;
         keepEnv = true;
       }];

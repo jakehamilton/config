@@ -1,9 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.ultra.apps.element;
+let cfg = config.plusultra.apps.element;
 in {
-  options.ultra.apps.element = with types; {
+  options.plusultra.apps.element = with types; {
     enable = mkBoolOpt true "Whether or not to enable Element.";
   };
 

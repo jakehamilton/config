@@ -1,9 +1,9 @@
 { options, config, pkgs, lib, ... }:
 
 with lib;
-let cfg = config.ultra.hardware.audio;
+let cfg = config.plusultra.hardware.audio;
 in {
-  options.ultra.hardware.audio = with types; {
+  options.plusultra.hardware.audio = with types; {
     enable = mkBoolOpt true "Whether or not to enable audio support.";
   };
 
@@ -17,7 +17,7 @@ in {
 
     environment.systemPackages = with pkgs; [ pulsemixer ];
 
-    ultra.home.extraOptions = {
+    plusultra.home.extraOptions = {
       systemd.user.services.mpris-proxy = {
         Unit.Description = "Mpris proxy";
         Unit.After = [ "network.target" "sound.target" ];
