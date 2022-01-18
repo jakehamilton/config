@@ -12,7 +12,8 @@ in {
   options.plusultra.desktop.sway = with types; {
     enable = mkBoolOpt false "Whether or not to enable Sway.";
     wallpaper = mkOpt (nullOr path) null "The wallpaper to display.";
-    extraConfig = mkOpt str "" "Additional configuration for the Sway config file.";
+    extraConfig =
+      mkOpt str "" "Additional configuration for the Sway config file.";
   };
 
   config = mkIf cfg.enable {
@@ -29,31 +30,31 @@ in {
       electron-support = enabled;
     };
 
-    plusultra.home.configFile."sway/config".text = fileWithText substitutedConfig ''
-      #############################
-      #░░░░░░░░░░░░░░░░░░░░░░░░░░░#
-      #░░█▀▀░█░█░█▀▀░▀█▀░█▀▀░█▄█░░#
-      #░░▀▀█░░█░░▀▀█░░█░░█▀▀░█░█░░#
-      #░░▀▀▀░░▀░░▀▀▀░░▀░░▀▀▀░▀░▀░░#
-      #░░░░░░░░░░░░░░░░░░░░░░░░░░░#
-      #############################
+    plusultra.home.configFile."sway/config".text =
+      fileWithText substitutedConfig ''
+        #############################
+        #░░░░░░░░░░░░░░░░░░░░░░░░░░░#
+        #░░█▀▀░█░█░█▀▀░▀█▀░█▀▀░█▄█░░#
+        #░░▀▀█░░█░░▀▀█░░█░░█▀▀░█░█░░#
+        #░░▀▀▀░░▀░░▀▀▀░░▀░░▀▀▀░▀░▀░░#
+        #░░░░░░░░░░░░░░░░░░░░░░░░░░░#
+        #############################
 
-      # Launch services waiting for the systemd target sway-session.target
-      exec "systemctl --user import-environment; systemctl --user start sway-session.target"
+        # Launch services waiting for the systemd target sway-session.target
+        exec "systemctl --user import-environment; systemctl --user start sway-session.target"
 
-      # Start a user session dbus (required for things like starting
-      # applications through wofi).
-      exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
+        # Start a user session dbus (required for things like starting
+        # applications through wofi).
+        exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
 
-      ${optionalString (lib.not null cfg.wallpaper) ''
-        output * {
-          bg ${cfg.wallpaper} fill
-        }
-      ''}
+        ${optionalString (lib.not null cfg.wallpaper) ''
+          output * {
+            bg ${cfg.wallpaper} fill
+          }
+        ''}
 
-      ${cfg.extraConfig}
-    '';
-
+        ${cfg.extraConfig}
+      '';
 
     programs.sway = {
       enable = true;

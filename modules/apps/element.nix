@@ -7,6 +7,7 @@ in {
     enable = mkBoolOpt false "Whether or not to enable Element.";
   };
 
-  config =
-    mkIf cfg.enable { environment.systemPackages = with pkgs; [ element-desktop-wayland ]; };
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [ element-desktop-wayland ];
+  };
 }

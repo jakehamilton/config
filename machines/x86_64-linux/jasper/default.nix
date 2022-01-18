@@ -1,7 +1,6 @@
 { pkgs, lib, ... }:
 
-with lib;
-{
+with lib; {
   imports = [ ./hardware.nix ];
 
   plusultra = {

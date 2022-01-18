@@ -19,8 +19,7 @@ in rec {
       "File name must match file regex.";
     match;
 
-  getParentDir = file:
-    builtins.baseNameOf (builtins.dirOf file);
+  getParentDir = file: builtins.baseNameOf (builtins.dirOf file);
 
   getFileName = file:
     if hasFileExtension file then

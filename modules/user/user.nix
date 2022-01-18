@@ -16,11 +16,10 @@ in {
   };
 
   config = {
-    plusultra.home.file.".face/${builtins.baseNameOf cfg.icon}".source = cfg.icon;
+    plusultra.home.file.".face/${builtins.baseNameOf cfg.icon}".source =
+      cfg.icon;
 
-    environment.systemPackages = with pkgs; [
-      starship
-    ];
+    environment.systemPackages = with pkgs; [ starship ];
 
     programs.zsh = {
       enable = true;
@@ -46,22 +45,19 @@ in {
       enableAutosuggestions = true;
       enableSyntaxHighlighting = true;
 
-      initExtra = builtins.concatStringsSep "\n" [
-        "eval $(starship init zsh)"
-      ];
+      initExtra =
+        builtins.concatStringsSep "\n" [ "eval $(starship init zsh)" ];
 
-      plugins = [
-        {
-          name = "zsh-nix-shell";
-          file = "nix-shell.plugin.zsh";
-          src = pkgs.fetchFromGitHub {
-            owner = "chisui";
-            repo = "zsh-nix-shell";
-            rev = "v0.4.0";
-            sha256 = "037wz9fqmx0ngcwl9az55fgkipb745rymznxnssr3rx9irb6apzg";
-          };
-        }
-      ];
+      plugins = [{
+        name = "zsh-nix-shell";
+        file = "nix-shell.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "chisui";
+          repo = "zsh-nix-shell";
+          rev = "v0.4.0";
+          sha256 = "037wz9fqmx0ngcwl9az55fgkipb745rymznxnssr3rx9irb6apzg";
+        };
+      }];
     };
 
     users.users.${cfg.name} = {

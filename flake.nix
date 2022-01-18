@@ -34,9 +34,7 @@
 
       hosts = lib.mkHosts { src = ./machines; };
 
-      overlays = utils.lib.exportOverlays {
-        inherit (self) pkgs inputs;
-      };
+      overlays = utils.lib.exportOverlays { inherit (self) pkgs inputs; };
 
       outputsBuilder = channels: {
         packages = utils.lib.exportPackages self.overlays channels;

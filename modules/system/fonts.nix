@@ -9,9 +9,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      font-manager
-    ];
+    environment.systemPackages = with pkgs; [ font-manager ];
 
     fonts.fonts = with pkgs;
       [

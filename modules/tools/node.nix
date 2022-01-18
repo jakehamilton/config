@@ -8,13 +8,13 @@ in {
     pkg = mkOpt package pkgs.nodejs-17_x "The NodeJS package to use.";
     prettier = {
       enable = mkBoolOpt true "Whether or not to install Prettier.";
-      pkg = mkOpt package pkgs.nodePackages.prettier "The NodeJS package to use.";
+      pkg =
+        mkOpt package pkgs.nodePackages.prettier "The NodeJS package to use.";
     };
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs;[
-      cfg.pkg
-    ] ++ (lib.optional cfg.prettier.enable cfg.prettier.pkg);
+    environment.systemPackages = with pkgs;
+      [ cfg.pkg ] ++ (lib.optional cfg.prettier.enable cfg.prettier.pkg);
   };
 }

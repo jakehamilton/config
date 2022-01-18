@@ -1,19 +1,14 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let
-  cfg = config.plusultra.desktop.addons.mako;
-in
-{
+let cfg = config.plusultra.desktop.addons.mako;
+in {
   options.plusultra.desktop.addons.mako = with types; {
     enable = mkBoolOpt false "Whether to enable Mako in Sway.";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      mako
-      libnotify
-    ];
+    environment.systemPackages = with pkgs; [ mako libnotify ];
 
     systemd.user.services.mako = {
       description = "Mako notification daemon";
@@ -25,15 +20,15 @@ in
         BusName = "org.freedesktop.Notifications";
 
         ExecCondition = ''
-        ${pkgs.bash}/bin/bash -c '[ -n "$WAYLAND_DISPLAY" ]'
+          ${pkgs.bash}/bin/bash -c '[ -n "$WAYLAND_DISPLAY" ]'
         '';
 
         ExecStart = ''
-        ${pkgs.mako}/bin/mako
+          ${pkgs.mako}/bin/mako
         '';
 
         ExecReload = ''
-        ${pkgs.mako}/bin/makoctl reload
+          ${pkgs.mako}/bin/makoctl reload
         '';
 
         Restart = "on-failure";

@@ -7,9 +7,8 @@ in {
     enable = mkBoolOpt false "Whether or not to enable wshowkeys.";
   };
 
-  config =
-    mkIf cfg.enable {
-      plusultra.user.extraGroups = [ "input" ];
-      environment.systemPackages = with pkgs; [ wshowkeys ];
-    };
+  config = mkIf cfg.enable {
+    plusultra.user.extraGroups = [ "input" ];
+    environment.systemPackages = with pkgs; [ wshowkeys ];
+  };
 }
