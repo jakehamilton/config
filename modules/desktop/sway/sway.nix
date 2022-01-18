@@ -23,6 +23,7 @@ in {
       mako = enabled;
       rofi = enabled;
       wofi = enabled;
+      swappy = enabled;
       kanshi = enabled;
       waybar = enabled;
       keyring = enabled;
@@ -69,7 +70,6 @@ in {
         wl-clipboard
         wf-recorder
         libinput
-        swappy
         playerctl
         brightnessctl
         glib # for gsettings

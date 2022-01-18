@@ -1,7 +1,8 @@
 { options, config, pkgs, lib, ... }:
 
 with lib;
-let cfg = config.plusultra.user;
+let
+  cfg = config.plusultra.user;
 in {
   options.plusultra.user = with types; {
     name = mkOpt str "short" "The name to use for the user account.";
@@ -16,8 +17,18 @@ in {
   };
 
   config = {
-    plusultra.home.file.".face/${builtins.baseNameOf cfg.icon}".source =
-      cfg.icon;
+    plusultra.home.file = {
+      "Desktop/.keep".text = "";
+      "Documents/.keep".text = "";
+      "Downloads/.keep".text = "";
+      "Music/.keep".text = "";
+      "Pictures/.keep".text = "";
+      "Videos/.keep".text = "";
+      "work/.keep".text = "";
+      ".face".source = cfg.icon;
+      "Pictures/${builtins.baseNameOf cfg.icon}".source = cfg.icon;
+    };
+
 
     environment.systemPackages = with pkgs; [ starship ];
 
