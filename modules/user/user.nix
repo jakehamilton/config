@@ -3,6 +3,14 @@
 with lib;
 let
   cfg = config.plusultra.user;
+  wallpapers = lib.foldl
+    (acc: name:
+      let wallpaper = pkgs.plusultra.wallpapers.${name};
+      in
+      acc // {
+        "Pictures/wallpapers/${wallpaper.fileName}".source = wallpaper;
+      }
+    ) {} (builtins.attrNames pkgs.plusultra.wallpapers);
 in {
   options.plusultra.user = with types; {
     name = mkOpt str "short" "The name to use for the user account.";
@@ -27,7 +35,8 @@ in {
       "work/.keep".text = "";
       ".face".source = cfg.icon;
       "Pictures/${builtins.baseNameOf cfg.icon}".source = cfg.icon;
-    };
+      "Pictures/wallpapers/.keep".text = "";
+    } // (builtins.trace wallpapers) wallpapers;
 
 
     environment.systemPackages = with pkgs; [ starship ];

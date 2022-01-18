@@ -11,7 +11,7 @@ let
 in {
   options.plusultra.desktop.sway = with types; {
     enable = mkBoolOpt false "Whether or not to enable Sway.";
-    wallpaper = mkOpt (nullOr path) null "The wallpaper to display.";
+    wallpaper = mkOpt (nullOr package) null "The wallpaper to display.";
     extraConfig =
       mkOpt str "" "Additional configuration for the Sway config file.";
   };
@@ -50,7 +50,7 @@ in {
 
         ${optionalString (lib.not null cfg.wallpaper) ''
           output * {
-            bg ${cfg.wallpaper} fill
+            bg ${cfg.wallpaper.gnomeFilePath or cfg.wallpaper} fill
           }
         ''}
 
