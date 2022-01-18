@@ -1,7 +1,6 @@
 { pkgs, lib, ... }:
 
 let
-  # images = [ /nix/store/hash-wallpapers/<name>.<ext> ... ]
   images = builtins.attrNames (builtins.readDir ./wallpapers);
   mkWallpaper = name: src:
     let
