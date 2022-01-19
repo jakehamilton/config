@@ -247,7 +247,7 @@ other channels or flake inputs.
 inputs@{ lib, pkgs, channels, ... }:
 
 final: prev: {
-  my-package = pkgs.runCommand {} "my-package" ''
+  my-package = pkgs.runCommand "my-package" {} ''
     echo "my cool package" > $out
   '';
 }
