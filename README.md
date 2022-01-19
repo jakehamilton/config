@@ -85,7 +85,7 @@ Next, configure your channels and overlays.
 
         # If you have a directory of overlays.
         # See the "Overlays" section for more information.
-        ++ (plusultra.lib.mkOverlays { src = ./overlays } channels);
+        ++ (plusultra.lib.mkOverlays { src = ./overlays; } channels);
     };
 }
 ```
@@ -229,7 +229,7 @@ provide the folder to the `mkOverlays` helper.
         # To add your own overlays, pass the directory
         # where your overlays are. All `*.nix` that are **not**
         # named `default.nix` will be imported.
-        ++ (plusultra.lib.mkOverlays { src = ./overlays } channels);
+        ++ (plusultra.lib.mkOverlays { src = ./overlays; } channels);
     };
 }
 ```
