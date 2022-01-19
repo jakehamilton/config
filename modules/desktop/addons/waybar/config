@@ -9,8 +9,8 @@
 	"modules-right": [
 		"network",
 		"pulseaudio",
-		"temperature",
 		"cpu",
+		"battery",
 		"tray",
 		"clock#date",
 		"clock#time"
@@ -85,6 +85,21 @@
 		"states": {
 			"heavy": 70,
 			"full": 90
+		}
+	},
+	"battery": {
+    "bat": "BAT1",
+    "interval": 60,
+    "states": {
+			"warning": 30,
+			"critical": 15
+    },
+    "format": "{icon}",
+		"format-critical": "",
+    "format-icons": {
+			"default": ["", "", "", "", "", "", "", "", "", ""],
+			"charging": ["", "", "", "", "", "", ""],
+			"plugged": ""
 		}
 	},
 	"tray": {

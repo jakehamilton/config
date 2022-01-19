@@ -16,11 +16,13 @@ with lib; {
       pitivi = enabled;
       steam = enabled;
       obs = enabled;
+      yubikey = enabled;
     };
 
     cli-apps = {
       neovim = enabled;
       wshowkeys = enabled;
+      yubikey = enabled;
     };
 
     desktop = {

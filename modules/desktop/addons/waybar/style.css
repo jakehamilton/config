@@ -13,7 +13,6 @@
 	border-radius: 0;
 	font-family: Nerd Font Hack;
 	font-size: 14px;
-	/* min-height: 24px; */
 }
 
 window#waybar {
@@ -62,7 +61,8 @@ tooltip label {
 #cpu,
 #memory,
 #tray,
-#clock {
+#clock,
+#battery {
 	color: #2e3440;
 	background: #eceff4;
 }
@@ -166,7 +166,26 @@ tooltip label {
 	background: #bf616a;
 }
 
+#battery {
+	margin-top: 8px;
+	margin-left: 8px;
+	padding-left: 16px;
+	padding-right: 16px;
+	margin-bottom: 0;
+	border-radius: 8px;
+	transition: none;
+	font-size: 18px;
+}
 
+#battery.warning {
+	color: #eceff4;
+	background: #d08770;
+}
+
+#battery.critical {
+	color: #eceff4;
+	background: #bf616a;
+}
 
 #temperature {
 	margin-top: 8px;
