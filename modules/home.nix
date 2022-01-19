@@ -1,10 +1,8 @@
-{ options, config, pkgs, lib, home-manager, ... }:
+inputs@{ options, config, pkgs, lib, home-manager, ... }:
 
 with lib;
 let cfg = config.plusultra.home;
 in {
-  imports = [ home-manager.nixosModules.home-manager ];
-
   options.plusultra.home = with types; {
     file = mkOpt attrs { }
       "A set of files to be managed by home-manager's <option>home.file</option>.";

@@ -15,6 +15,7 @@ in {
       nix-prefetch-git
       jq
       clac
+      fup-repl
     ];
   };
 }

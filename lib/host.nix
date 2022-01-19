@@ -1,14 +1,20 @@
-inputs@{ lib, darwin, ... }:
+inputs@{ lib, darwin, nixpkgs, home-manager, ... }:
 
 rec {
   isDarwin = lib.hasInfix "darwin";
 
   getDynamicConfig = system:
-    (lib.optionalAttrs (lib.isDarwin system) {
+    if lib.isDarwin system then {
       output = "darwinConfigurations";
       builder = args:
         darwin.lib.darwinSystem (builtins.removeAttrs args [ "system" ]);
-    });
+    } else {
+      builder = args:
+        nixpkgs.lib.nixosSystem (args // {
+          modules = args.modules
+            ++ [{ imports = [ home-manager.nixosModules.home-manager ]; }];
+        });
+    };
 
   withDynamicConfig = lib.composeAll [ lib.merge getDynamicConfig ];
 

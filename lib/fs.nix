@@ -55,10 +55,10 @@ in rec {
     in files;
 
   # Get a list of *.nix files in a directory.
-  getModuleFiles = path: builtins.filter (isNixFile) (getFiles path);
+  getModuleFiles = path: builtins.filter isNixFile (getFiles path);
 
   # Get a list of *.nix files in a directory recursively.
-  getModuleFilesRec = path: builtins.filter (isNixFile) (getFilesRec path);
+  getModuleFilesRec = path: builtins.filter isNixFile (getFilesRec path);
 
   # Get a list of *.nix files in a directory matching "default.nix".
   getModuleFilesDefault = path:
