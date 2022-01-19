@@ -78,15 +78,14 @@ Next, configure your channels and overlays.
         plusultra.overlays."nixpkgs/plusultra"
         plusultra.overlays."nixpkgs/kubecolor"
         plusultra.overlays."nixpkgs/discord-chromium"
-
+      ]
         # If you want all overlays from Plus Ultra
         # replace the above lines with this one.
-        (plusultra.lib.mkOverlays {} channels)
+        ++ (plusultra.lib.mkOverlays {} channels)
 
         # If you have a directory of overlays.
         # See the "Overlays" section for more information.
-        (plusultra.lib.mkOverlays { src = ./overlays } channels)
-      ];
+        ++ (plusultra.lib.mkOverlays { src = ./overlays } channels);
     };
 }
 ```
@@ -223,15 +222,14 @@ provide the folder to the `mkOverlays` helper.
         plusultra.overlays."nixpkgs/plusultra"
         plusultra.overlays."nixpkgs/kubecolor"
         plusultra.overlays."nixpkgs/discord-chromium"
-
+      ]
         # To apply all overlays from Plus Ultra.
-        (plusultra.lib.mkOverlays {} channels)
+        ++ (plusultra.lib.mkOverlays {} channels)
 
         # To add your own overlays, pass the directory
         # where your overlays are. All `*.nix` that are **not**
         # named `default.nix` will be imported.
-        (plusultra.lib.mkOverlays { src = ./overlays } channels)
-      ];
+        ++ (plusultra.lib.mkOverlays { src = ./overlays } channels);
     };
 }
 ```
