@@ -10,7 +10,9 @@ in {
   config = mkIf cfg.enable {
     services.pipewire = {
       enable = true;
+      alsa.enable = true;
       pulse.enable = true;
+      jack.enable = true;
     };
 
     hardware.pulseaudio.enable = mkForce false;
