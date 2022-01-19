@@ -8,6 +8,7 @@ in {
   };
 
   config = mkIf cfg.enable {
+    services.yubikey-agent.enable = true;
     environment.systemPackages = with pkgs; [ yubikey-manager ];
   };
 }

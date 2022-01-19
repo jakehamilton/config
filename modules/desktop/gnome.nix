@@ -19,6 +19,10 @@ in {
 
   config = mkIf cfg.enable {
     plusultra.system.xkb.enable = true;
+    plusultra.desktop.addons = {
+      gtk = enabled;
+      wallpapers = enabled;
+    };
 
     services.xserver = {
       enable = true;

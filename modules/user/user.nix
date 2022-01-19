@@ -3,16 +3,19 @@
 with lib;
 let
   cfg = config.plusultra.user;
-  wallpapers = (builtins.trace (builtins.attrNames pkgs.plusultra.wallpapers)) lib.foldl
-    (acc: name:
-      let
-        wallpaper = pkgs.plusultra.wallpapers.${name};
-        fileName = (builtins.trace wallpaper.fileName) wallpaper.fileName;
-      in
-      acc // {
-        "Pictures/wallpapers/${fileName}".source = wallpaper;
-      }
-    ) {} (pkgs.plusultra.wallpapers.names);
+  defaultIconFileName = "profile.jpg";
+  defaultIcon = pkgs.stdenvNoCC.mkDerivation {
+    name = "default-icon";
+    src = ./. + "/${defaultIconFileName}";
+
+    dontUnpack = true;
+
+    installPhase = ''
+      cp $src $out
+    '';
+
+    passthru = { fileName = defaultIconFileName; };
+  };
 in {
   options.plusultra.user = with types; {
     name = mkOpt str "short" "The name to use for the user account.";
@@ -20,7 +23,8 @@ in {
     email = mkOpt str "jake.hamilton@hey.com" "The email of the user.";
     initialPassword = mkOpt str "password"
       "The initial password to use when the user is first created.";
-    icon = mkOpt path ./profile.jpg "The profile picture to use for the user.";
+    icon = mkOpt (nullOr package) defaultIcon
+      "The profile picture to use for the user.";
     extraGroups = mkOpt (listOf str) [ ] "Groups for the user to be assigned.";
     extraOptions = mkOpt attrs { }
       "Extra options passed to <option>users.users.<name></option>.";
@@ -36,10 +40,9 @@ in {
       "Videos/.keep".text = "";
       "work/.keep".text = "";
       ".face".source = cfg.icon;
-      "Pictures/${builtins.baseNameOf cfg.icon}".source = cfg.icon;
-      "Pictures/wallpapers/.keep".text = "";
-    } // (builtins.trace wallpapers) wallpapers;
-
+      "Pictures/${cfg.icon.fileName or (builtins.baseNameOf cfg.icon)}".source =
+        cfg.icon;
+    };
 
     environment.systemPackages = with pkgs; [ starship ];
 

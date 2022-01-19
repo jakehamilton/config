@@ -19,6 +19,7 @@ in {
   config = mkIf cfg.enable {
     # Desktop additions
     plusultra.desktop.addons = {
+      gtk = enabled;
       foot = enabled;
       mako = enabled;
       rofi = enabled;
