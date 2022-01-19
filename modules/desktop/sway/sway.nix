@@ -29,6 +29,7 @@ in {
       waybar = enabled;
       keyring = enabled;
       nautilus = enabled;
+      xdg-portal = enabled;
       electron-support = enabled;
     };
 

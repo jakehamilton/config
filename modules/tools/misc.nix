@@ -8,6 +8,13 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ killall file nixfmt jq ];
+    environment.systemPackages = with pkgs; [
+      killall
+      file
+      nixfmt
+      nix-prefetch-git
+      jq
+      clac
+    ];
   };
 }
