@@ -1,6 +1,6 @@
 # Plus Ultra
 
-> ✨ To go even farther beyond.
+> ✨ Go even farther beyond.
 
 - [Screenshots](#screenshots)
 - [Installation](#installation)
