@@ -7,8 +7,6 @@ in {
     enable = mkBoolOpt false "Whether or not to enable logseq.";
   };
 
-  config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs;
-      (builtins.trace logseq.version) [ logseq ];
-  };
+  config =
+    mkIf cfg.enable { environment.systemPackages = with pkgs; [ logseq ]; };
 }
