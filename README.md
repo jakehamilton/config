@@ -207,7 +207,7 @@ Overlays can be created with the `mkOverlays` helper.
 Place overlays in a directory such as `./overlays` and
 provide the folder to the `mkOverlays` helper.
 
-**NOTE**: All `*.nix` files within `src` that are **not** named
+**NOTE**: All `*.nix` files within `src` named
 `default.nix` will be imported.
 
 ```nix
