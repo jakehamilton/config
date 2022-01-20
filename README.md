@@ -76,6 +76,7 @@ Next, configure your channels and overlays.
       channels.nixpkgs.overlaysBuilder = channels: [
         # Add packages from Plus Ultra.
         plusultra.overlays."nixpkgs/plusultra"
+        plusultra.overlays."nixpkgs/logseq"
         plusultra.overlays."nixpkgs/kubecolor"
         plusultra.overlays."nixpkgs/discord-chromium"
       ]
@@ -220,6 +221,7 @@ provide the folder to the `mkOverlays` helper.
         # Individual overlays can be accessed from
         # `plusultra.overlays.<name>`.
         plusultra.overlays."nixpkgs/plusultra"
+        plusultra.overlays."nixpkgs/logseq"
         plusultra.overlays."nixpkgs/kubecolor"
         plusultra.overlays."nixpkgs/discord-chromium"
       ]
