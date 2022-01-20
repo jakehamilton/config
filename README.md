@@ -193,8 +193,9 @@ The overall structure may look like the following.
 |
 |-- machines/
 |   |-- x86_64-linux/ (or the name of your arch)
-|       |-- default.nix
-|       |-- hardware.nix (this, and all files other than default.nix, are optional)
+|       |-- jasper/ (or the name of your system)
+|           |-- default.nix
+|           |-- hardware.nix (this, and all files other than default.nix, are optional)
 ```
 
 The `default.nix` file is a standard NixOS
