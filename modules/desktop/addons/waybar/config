@@ -15,6 +15,9 @@
 		"clock#date",
 		"clock#time"
 	],
+	"sway/mode": {
+		"format": "{}"
+	},
 	"custom/media": {
 		"format": "{icon}",
 		"return-type": "json",

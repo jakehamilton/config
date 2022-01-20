@@ -8,6 +8,7 @@ with lib; {
 
     apps = {
       _1password = enabled;
+      cadence = enabled;
       discord = enabled;
       element = enabled;
       firefox = enabled;

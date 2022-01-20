@@ -49,10 +49,11 @@ tooltip {
 tooltip label {
 	color: #2e3440;
 	text-shadow: none;
-	padding: 0 4px;;
+	padding: 0 4px;
 }
 
 #workspaces button,
+#mode,
 #mpd,
 #custom-media,
 #network,
@@ -269,6 +270,20 @@ tooltip label {
 	border-radius: 8px;
 	transition: none;
 	font-size: 20px;
+}
+
+#mode {
+	margin-top: 8px;
+	margin-left: 8px;
+	padding-left: 16px;
+	padding-right: 16px;
+	margin-bottom: 0;
+	border-radius: 8px;
+	transition: none;
+	/* font-size: 20px; */
+	color: #eceff4;
+	background: #d08770;
+	font-weight: bold;
 }
 
 #clock {
