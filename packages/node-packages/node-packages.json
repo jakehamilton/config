@@ -1,0 +1,4 @@
+[
+	{ "@jakehamilton/titan": "5.5.4" },
+	{ "node2nix": "git://github.com/svanderburg/node2nix.git" }
+]
