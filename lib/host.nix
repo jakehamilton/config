@@ -8,8 +8,8 @@ rec {
     "do"
     "gce"
     "hyperv"
-    "install-iso"
     "install-iso-hyperv"
+    "install-iso"
     "iso"
     "kexec"
     "kexec-bundle"
@@ -21,14 +21,14 @@ rec {
     "qcow"
     "raw"
     "raw-efi"
-    "sd-aarch64"
     "sd-aarch64-installer"
+    "sd-aarch64"
     "vagrant-virtualbox"
     "virtualbox"
-    "vm"
     "vm-bootloader"
     "vm-nogui"
     "vmware"
+    "vm"
   ];
 
   isDarwin = lib.hasInfix "darwin";
