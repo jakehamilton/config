@@ -1,8 +1,11 @@
 inputs@{ lib, ... }:
 
-{
+rec {
   # Merge two sets.
   merge = x: y: x // y;
+
+  # The inverse of `merge`.
+  merge' = lib.flip2 merge;
 
   # This comes directly from `builtins` to make it easier to refer to.
   getAttr = builtins.getAttr;

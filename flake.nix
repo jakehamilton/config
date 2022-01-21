@@ -24,10 +24,14 @@
     # NMD
     nmd.url = "gitlab:rycee/nmd";
     nmd.flake = false;
+
+    # Generate System Images
+    nixos-generators.url = "github:nix-community/nixos-generators";
+    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, utils
-    , nixos-hardware, darwin, nmd, ... }:
+    , nixos-hardware, darwin, nmd, nixos-generators, ... }:
     let lib = import ./lib inputs;
     in utils.lib.mkFlake {
       inherit self inputs lib;

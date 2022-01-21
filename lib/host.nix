@@ -1,10 +1,27 @@
-inputs@{ lib, darwin, nixpkgs, home-manager, ... }:
+inputs@{ lib, darwin, nixpkgs, home-manager, nixos-generators, ... }:
 
 rec {
   isDarwin = lib.hasInfix "darwin";
+  isVirtual = lib.hasInfix "virtual";
 
   getDynamicConfig = system:
-    if lib.isDarwin system then {
+    if lib.isVirtual system then
+      let system' = builtins.replaceStrings [ "virtual" ] [ "linux" ] system;
+      in {
+        output = "virtualConfigurations";
+        system = system';
+        builder = args:
+          let
+            formatModule =
+              builtins.getAttr "virtualbox" nixos-generators.nixosModules;
+            image = nixpkgs.lib.nixosSystem (args // {
+              modules = [ formatModule home-manager.nixosModules.home-manager ]
+                ++ (args.modules);
+              inherit (args) specialArgs;
+            });
+          in image.config.system.build.${image.config.formatAttr};
+      }
+    else if lib.isDarwin system then {
       output = "darwinConfigurations";
       builder = args:
         darwin.lib.darwinSystem (builtins.removeAttrs args [ "system" ]);
@@ -16,7 +33,7 @@ rec {
         });
     };
 
-  withDynamicConfig = lib.composeAll [ lib.merge getDynamicConfig ];
+  withDynamicConfig = lib.composeAll [ lib.merge' getDynamicConfig ];
 
   # Pass through all inputs except `self` and `utils` due to them breaking
   # the module system or causing recursion.

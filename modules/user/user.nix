@@ -88,7 +88,8 @@ in {
     users.users.${cfg.name} = {
       isNormalUser = true;
 
-      name = cfg.name;
+      inherit (cfg) name initialPassword;
+
       home = "/home/${cfg.name}";
       group = "users";
 

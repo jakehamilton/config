@@ -1,7 +1,13 @@
 { pkgs, lib, ... }:
 
 with lib; {
-  imports = [ ./hardware.nix ];
+  virtualisation.virtualbox.guest.enable = true;
+
+  boot.loader.grub.enable = true;
+
+  programs.sway.extraSessionCommands = ''
+    WLR_NO_HARDWARE_CURSORS=1
+  '';
 
   plusultra = {
     nix = enabled;
@@ -18,7 +24,6 @@ with lib; {
       steam = enabled;
       obs = enabled;
       yubikey = enabled;
-      virtualbox = enabled;
     };
 
     cli-apps = {
@@ -28,9 +33,9 @@ with lib; {
     };
 
     desktop = {
-      sway = {
+      gnome = {
         enable = true;
-        wallpaper = pkgs.plusultra.wallpapers.atmosphere;
+        wallpaper = pkgs.plusultra.wallpapers.atmosphere.fileName;
       };
 
       addons = {
@@ -63,7 +68,6 @@ with lib; {
     };
 
     system = {
-      boot = enabled;
       fonts = enabled;
       locale = enabled;
       time = enabled;
