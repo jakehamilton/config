@@ -14,6 +14,9 @@ in {
       package = cfg.package;
       extraOptions = ''
         experimental-features = nix-command flakes
+        http-connections = 50
+        warn-dirty = false
+        log-lines = 50
       '';
       trustedUsers = users;
       allowedUsers = users;
@@ -24,6 +27,11 @@ in {
         dates = "weekly";
         options = "--delete-older-than 30d";
       };
+
+      # flake-utils-plus
+      generateRegistryFromInputs = true;
+      generateNixPathFromInputs = true;
+      linkInputs = true;
     };
   };
 }
