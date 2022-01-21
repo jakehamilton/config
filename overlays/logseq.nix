@@ -51,15 +51,9 @@ final: prev:
 
         # By default Logseq has issues running Git. It looks for it in the
         # `dugite` module, but since Nix doesn't link things there it won't find it.
-        # So instead we remove what was there before and add a wrapper to the
-        # real git binary.
-        rm $out/share/logseq/resources/app/node_modules/dugite/git/bin/git
-
-        # Make a wrapper for the git binary that Logseq will run.
-        makeWrapper ${prev.git}/bin/git $out/share/logseq/resources/app/node_modules/dugite/git/bin/git
-
-        # Make sure the git wrapper is executable.
-        chmod u+x $out/share/logseq/resources/app/node_modules/dugite/git/bin/git
+        # So instead we link the package ourselves.
+        rm -r $out/share/logseq/resources/app/node_modules/dugite/git
+        ln -s ${prev.git} $out/share/logseq/resources/app/node_modules/dugite/git
       '';
     });
 }
