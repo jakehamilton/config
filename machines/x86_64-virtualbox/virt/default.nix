@@ -14,23 +14,12 @@ with lib; {
 
     apps = {
       _1password = enabled;
-      cadence = enabled;
-      discord = enabled;
-      element = enabled;
       firefox = enabled;
       logseq = enabled;
       vscode = enabled;
-      pitivi = enabled;
-      steam = enabled;
-      obs = enabled;
-      yubikey = enabled;
     };
 
-    cli-apps = {
-      neovim = enabled;
-      wshowkeys = enabled;
-      yubikey = enabled;
-    };
+    cli-apps = { neovim = enabled; };
 
     desktop = {
       gnome = {
@@ -57,7 +46,6 @@ with lib; {
     hardware = {
       audio = enabled;
       networking = enabled;
-      fingerprint = enabled;
     };
 
     services = { printing = enabled; };
