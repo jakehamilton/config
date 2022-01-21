@@ -217,6 +217,18 @@ build artifact for the target.
 For example, to build a Virtualbox ova file, create the
 the path `machines/x86_64-virtualbox/<name>/default.nix`.
 
+Then build the system.
+
+```shell
+nix build .#virtualboxConfigurations.<name>
+```
+
+All alternate host targets are added to the flake at:
+`<format>Configurations.<name>` where `<format>` is the
+system type (eg. `virtualbox`) and `<name>` is the name
+of the folder your configuration lives in (eg.
+`machines/x86_64-iso/my-name`).
+
 #### Supported Targets
 
 | format               | description                                                                              |
