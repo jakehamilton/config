@@ -1,19 +1,63 @@
 inputs@{ lib, darwin, nixpkgs, home-manager, nixos-generators, ... }:
 
 rec {
+  virtualSystems = [
+    "amazon"
+    "azure"
+    "cloudstack"
+    "do"
+    "gce"
+    "hyperv"
+    "install-iso"
+    "install-iso-hyperv"
+    "iso"
+    "kexec"
+    "kexec-bundle"
+    "kubevirt"
+    "lxc"
+    "lxc-metadata"
+    "openstack"
+    "proxmox"
+    "qcow"
+    "raw"
+    "raw-efi"
+    "sd-aarch64"
+    "sd-aarch64-installer"
+    "vagrant-virtualbox"
+    "virtualbox"
+    "vm"
+    "vm-bootloader"
+    "vm-nogui"
+    "vmware"
+  ];
+
   isDarwin = lib.hasInfix "darwin";
-  isVirtual = lib.hasInfix "virtual";
+  isVirtual = system:
+    lib.foldl
+    (exists: virtualSystem: exists || lib.hasInfix virtualSystem system) false
+    virtualSystems;
+
+  getVirtual = system:
+    lib.foldl (result: virtualSystem:
+      if lib.not null result then
+        result
+      else if lib.hasInfix virtualSystem system then
+        virtualSystem
+      else
+        null) null virtualSystems;
 
   getDynamicConfig = system:
     if lib.isVirtual system then
-      let system' = builtins.replaceStrings [ "virtual" ] [ "linux" ] system;
+      let
+        format = getVirtual system;
+        system' = builtins.replaceStrings [ format ] [ "linux" ] system;
       in {
-        output = "virtualConfigurations";
+        output = "${format}Configurations";
         system = system';
         builder = args:
           let
             formatModule =
-              builtins.getAttr "virtualbox" nixos-generators.nixosModules;
+              builtins.getAttr format nixos-generators.nixosModules;
             image = nixpkgs.lib.nixosSystem (args // {
               modules = [ formatModule home-manager.nixosModules.home-manager ]
                 ++ (args.modules);
