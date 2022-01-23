@@ -349,9 +349,7 @@ with Pipewire support enabled.
 ### `logseq`
 
 An updated version of Logseq that fixes wayland
-and Git support. Note that Git still fails when
-trying to push, but will now successfully make
-commits to save notes.
+and Git support.
 
 ### `kubecolor`
 
