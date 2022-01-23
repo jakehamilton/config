@@ -8,7 +8,10 @@ with lib; {
 
     apps = {
       _1password = enabled;
-      discord = enabled;
+      discord = {
+        enable = true;
+        chromium = enabled;
+      };
       element = enabled;
       firefox = enabled;
       logseq = enabled;
