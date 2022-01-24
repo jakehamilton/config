@@ -61,7 +61,7 @@ Then create your flake output.
 
   outputs = inputs@{ self, nixpkgs, utils, plusultra }:
     utils.lib.mkFlake {
-      inherit self inputs lib;
+      inherit self inputs;
     };
 }
 ```
