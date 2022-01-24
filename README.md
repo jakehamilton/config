@@ -181,7 +181,7 @@ configuration using the above structure.
         # If your folder structure is `machines/<arch>/<name>`
         # then the `src` here is `./machines`.
         src = ./machines;
-      }
+      };
     };
 }
 ```
