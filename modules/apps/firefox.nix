@@ -22,7 +22,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # environment.systemPackages = with pkgs; [ firefox-wayland ];
     plusultra.desktop.addons.firefox-nordic-theme = enabled;
 
     plusultra.home.extraOptions = {

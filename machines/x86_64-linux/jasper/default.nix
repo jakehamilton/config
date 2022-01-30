@@ -12,6 +12,7 @@ with lib; {
         enable = true;
         chromium = enabled;
       };
+      etcher = enabled;
       element = enabled;
       firefox = enabled;
       logseq = enabled;

@@ -11,16 +11,16 @@ with lib; {
     apps = {
       _1password = enabled;
       firefox = enabled;
-      logseq = enabled;
       vscode = enabled;
+      gparted = enabled;
     };
 
     cli-apps = { neovim = enabled; };
 
     desktop = {
-      sway = {
+      gnome = {
         enable = true;
-        wallpaper = pkgs.plusultra.wallpapers.atmosphere;
+        wallpaper = pkgs.plusultra.wallpapers.atmosphere.fileName;
       };
 
       addons = {
