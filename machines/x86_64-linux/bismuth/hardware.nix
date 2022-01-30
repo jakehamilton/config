@@ -22,6 +22,12 @@
     fsType = "vfat";
   };
 
+  fileSystems."/mnt/data" = {
+    device = "/dev/sda1";
+    fsType = "auto";
+    options = [ "rw" ];
+  };
+
   swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
 
   networking.interfaces.enp39s0.useDHCP = true;

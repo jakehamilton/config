@@ -13,6 +13,7 @@ with lib; {
         chromium = enabled;
       };
       element = enabled;
+      gparted = enabled;
       firefox = enabled;
       logseq = enabled;
       vscode = enabled;
@@ -72,7 +73,6 @@ with lib; {
       xkb = enabled;
     };
   };
-
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
