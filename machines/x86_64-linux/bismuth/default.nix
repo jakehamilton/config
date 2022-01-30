@@ -55,7 +55,7 @@ with lib; {
     hardware = {
       audio = enabled;
       networking = enabled;
-      fingerprint = enabled;
+      storage = enabled;
     };
 
     services = { printing = enabled; };
