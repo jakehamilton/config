@@ -66,7 +66,6 @@ in {
         swaylock
         swayidle
         xwayland
-        kitty
         sway-contrib.grimshot
         swaylock-fancy
         wl-clipboard
