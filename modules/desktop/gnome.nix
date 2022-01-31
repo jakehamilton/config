@@ -27,7 +27,19 @@ in {
       foot = enabled;
     };
 
-    environment.systemPackages = with pkgs; [ wl-clipboard ];
+    environment.systemPackages = with pkgs; [
+      wl-clipboard
+      gnomeExtensions.appindicator
+      gnomeExtensions.big-avatar
+      gnomeExtensions.no-overview
+      gnomeExtensions.wireless-hid
+      gnomeExtensions.emoji-selector
+      gnomeExtensions.clear-top-bar
+      gnomeExtensions.transparent-top-bar
+    ];
+
+    # Required for app indicators
+    services.udev.packages = with pkgs; [ gnome3.gnome-settings-daemon ];
 
     services.xserver = {
       enable = true;

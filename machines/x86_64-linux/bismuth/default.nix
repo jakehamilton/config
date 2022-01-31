@@ -12,6 +12,7 @@ with lib; {
         enable = true;
         chromium = enabled;
       };
+      cadence = enabled;
       element = enabled;
       gparted = enabled;
       firefox = enabled;
