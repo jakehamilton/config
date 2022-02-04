@@ -10,6 +10,7 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       killall
+      unzip
       file
       nixfmt
       nix-prefetch-git

@@ -13,13 +13,13 @@ let
         sha512 = "KuGDAaKCi18wT1PESoBMon3nJlnnVREBqLrTxdWbAKb/IXVAbGyB3Ie3Tg9e69xab43SWtn+f2XgBCsE5MbCoA==";
       };
     };
-    "@littlethings/log-2.5.0" = {
+    "@littlethings/log-2.6.0" = {
       name = "_at_littlethings_slash_log";
       packageName = "@littlethings/log";
-      version = "2.5.0";
+      version = "2.6.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@littlethings/log/-/log-2.5.0.tgz";
-        sha512 = "duEzVtthpLBdzSY3gvH6jaX3RpDSHkPrju9Nr4oL3I+zwn9O9UZ2xwqoXyPuHiHA4ib9Em1USMamlCPHe3NP6Q==";
+        url = "https://registry.npmjs.org/@littlethings/log/-/log-2.6.0.tgz";
+        sha512 = "+WysBCZfSRlRFMOmgVDstyuZE/QjOAgyRGEcaJNnoF2AqRUyYnQb/USw6GD58vtf2xyPR9BF/vPUdPqn9vidJg==";
       };
     };
     "@littlethings/test-1.2.1" = {
@@ -1156,13 +1156,13 @@ let
         sha512 = "MsvtOrfG9ZcrOwAW+Qi+F6HbD0CWXEh9ou77uOb7FM2WPhwT7smM833PzanhJLsgXjN89Ir6V2PczXNnMpwKhw==";
       };
     };
-    "resolve-1.21.0" = {
+    "resolve-1.22.0" = {
       name = "resolve";
       packageName = "resolve";
-      version = "1.21.0";
+      version = "1.22.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/resolve/-/resolve-1.21.0.tgz";
-        sha512 = "3wCbTpk5WJlyE4mSOtDLhqQmGFi0/TD9VPwmiolnk8U0wRgMEktqCXd3vy5buTO3tljvalNvKrjHEfrd2WpEKA==";
+        url = "https://registry.npmjs.org/resolve/-/resolve-1.22.0.tgz";
+        sha512 = "Hhtrw0nLeSrFQ7phPp4OOcVjLPIeMnRlr5mcnVuMe7M/7eBn98A3hmFRLoFo3DLZkivSYwhRUJTyPyWAk56WLw==";
       };
     };
     "retry-0.10.1" = {
@@ -1264,13 +1264,13 @@ let
         sha1 = "045f9782d011ae9a6803ddd382b24392b3d890f7";
       };
     };
-    "signal-exit-3.0.6" = {
+    "signal-exit-3.0.7" = {
       name = "signal-exit";
       packageName = "signal-exit";
-      version = "3.0.6";
+      version = "3.0.7";
       src = fetchurl {
-        url = "https://registry.npmjs.org/signal-exit/-/signal-exit-3.0.6.tgz";
-        sha512 = "sDl4qMFpijcGw22U5w63KmD3cZJfBuFlVNbVMKje2keoKML7X2UzWbc4XrmEbDwg0NXJc3yv4/ox7b+JWb57kQ==";
+        url = "https://registry.npmjs.org/signal-exit/-/signal-exit-3.0.7.tgz";
+        sha512 = "wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==";
       };
     };
     "slasp-0.0.4" = {
@@ -1555,16 +1555,16 @@ let
   };
 in
 {
-  "@jakehamilton/titan-5.5.4" = nodeEnv.buildNodePackage {
+  "@jakehamilton/titan-5.5.5" = nodeEnv.buildNodePackage {
     name = "_at_jakehamilton_slash_titan";
     packageName = "@jakehamilton/titan";
-    version = "5.5.4";
+    version = "5.5.5";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@jakehamilton/titan/-/titan-5.5.4.tgz";
-      sha512 = "EI9WqHrAEXtypClPsCcNx+9dcQVhpDk3uH3clUMN4oj0+e5QgKHOfudARj+CqNUXzOtiTMjys++IMy56gdyOWw==";
+      url = "https://registry.npmjs.org/@jakehamilton/titan/-/titan-5.5.5.tgz";
+      sha512 = "PexExpcSfKM8ASF6D+VevE8ez4WQPRiRUUvFeRvQgRSNeyFSFLyuajeG9zYSVkUYppu8741W7NXtOFDjRtJI6Q==";
     };
     dependencies = [
-      sources."@littlethings/log-2.5.0"
+      sources."@littlethings/log-2.6.0"
       (sources."@littlethings/test-1.2.1" // {
         dependencies = [
           sources."@littlethings/log-1.4.0"
@@ -1756,14 +1756,14 @@ in
         ];
       })
       sources."request-2.88.2"
-      sources."resolve-1.21.0"
+      sources."resolve-1.22.0"
       sources."retry-0.10.1"
       sources."rimraf-2.2.8"
       sources."safe-buffer-5.2.1"
       sources."safer-buffer-2.1.2"
       sources."semver-7.3.5"
       sources."set-blocking-2.0.0"
-      sources."signal-exit-3.0.6"
+      sources."signal-exit-3.0.7"
       sources."slasp-0.0.4"
       sources."slide-1.1.6"
       sources."spdx-correct-3.1.1"
