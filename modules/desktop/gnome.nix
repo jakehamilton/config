@@ -1,16 +1,7 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let
-  cfg = config.plusultra.desktop.gnome;
-  drv = pkgs.stdenv.mkDerivation {
-    name = "hello";
-    src = ./.;
-    installPhase = ''
-      mkdir $out
-      echo "hello" > $out/message.txt
-    '';
-  };
+let cfg = config.plusultra.desktop.gnome;
 in {
   options.plusultra.desktop.gnome = with types; {
     enable =
@@ -50,8 +41,6 @@ in {
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
     };
-
-    plusultra.home.file."hello-world".source = "${drv}/message.txt";
 
     plusultra.home.extraOptions = mkIf (lib.not null cfg.wallpaper) {
       dconf.settings = let
