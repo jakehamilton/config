@@ -8,9 +8,12 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs.gnome; [
-      gnome-keyring
-      libgnome-keyring
+    environment.systemPackages = with pkgs; [
+      gnome.gnome-keyring
+      gnome.libgnome-keyring
+
+      # provides a default authentification client for policykit
+      # lxqt.lxqt-policykit
     ];
   };
 }
