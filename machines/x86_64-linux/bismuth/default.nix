@@ -3,6 +3,24 @@
 with lib; {
   imports = [ ./hardware.nix ];
 
+  environment.systemPackages = with pkgs; [ helvum easyeffects carla ];
+
+  services.samba = {
+    enable = true;
+    openFirewall = true;
+    shares = {
+      public = {
+        path = "/mnt/data";
+        comment = "Public files.";
+        browseable = "yes";
+        "guest ok" = "yes";
+        "read only" = true;
+      };
+    };
+  };
+
+  services.samba-wsdd = { enable = true; };
+
   plusultra = {
     nix = enabled;
 
