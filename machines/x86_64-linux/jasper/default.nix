@@ -12,7 +12,6 @@ with lib; {
         enable = true;
         chromium = enabled;
       };
-      etcher = enabled;
       element = enabled;
       firefox = enabled;
       logseq = enabled;
@@ -32,10 +31,14 @@ with lib; {
     };
 
     desktop = {
-      sway = {
+      gnome = {
         enable = true;
-        wallpaper = pkgs.plusultra.wallpapers.atmosphere;
+        wallpaper = pkgs.plusultra.wallpapers.atmosphere.fileName;
       };
+      # sway = {
+      #   enable = true;
+      #   wallpaper = pkgs.plusultra.wallpapers.atmosphere;
+      # };
 
       addons = {
         # I like to have a convenient place to share wallpapers from

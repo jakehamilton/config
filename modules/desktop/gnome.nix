@@ -29,6 +29,7 @@ in {
 
     environment.systemPackages = with pkgs; [
       wl-clipboard
+      gnome.nautilus-python
       gnomeExtensions.appindicator
       gnomeExtensions.big-avatar
       gnomeExtensions.no-overview
@@ -36,6 +37,7 @@ in {
       gnomeExtensions.emoji-selector
       gnomeExtensions.clear-top-bar
       gnomeExtensions.transparent-top-bar
+      gnomeExtensions.gsconnect
     ];
 
     # Required for app indicators
@@ -60,6 +62,15 @@ in {
         "org/gnome/desktop/screensaver" = { "picture-uri" = wallpaper; };
       };
     };
+
+    programs.kdeconnect = {
+      enable = true;
+      package = pkgs.gnomeExtensions.gsconnect;
+    };
+
+    # Open firewall for samba connections to work.
+    networking.firewall.extraCommands =
+      "iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns";
   };
 
 }
