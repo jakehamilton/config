@@ -3,7 +3,14 @@
 with lib; {
   imports = [ ./hardware.nix ];
 
-  environment.systemPackages = with pkgs; [ helvum easyeffects carla ];
+  environment.systemPackages = with pkgs; [
+    helvum
+    easyeffects
+    carla
+    qjackctl
+    vlc
+    pavucontrol
+  ];
 
   services.samba = {
     enable = true;

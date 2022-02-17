@@ -7,6 +7,7 @@ in {
     enable =
       mkBoolOpt false "Whether or not to use Gnome as the desktop environment.";
     wallpaper = mkOpt (nullOr string) null "The wallpaper to display.";
+    wayland = mkBoolOpt true "Whether or not to use Wayland.";
   };
 
   config = mkIf cfg.enable {
@@ -38,7 +39,10 @@ in {
       enable = true;
 
       libinput.enable = true;
-      displayManager.gdm.enable = true;
+      displayManager.gdm = {
+        enable = true;
+        wayland = cfg.wayland;
+      };
       desktopManager.gnome.enable = true;
     };
 
