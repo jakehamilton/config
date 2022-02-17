@@ -8,7 +8,6 @@ with lib; {
     easyeffects
     carla
     qjackctl
-    vlc
     pavucontrol
   ];
 
@@ -48,6 +47,7 @@ with lib; {
       obs = enabled;
       yubikey = enabled;
       virtualbox = enabled;
+      vlc = enabled;
     };
 
     cli-apps = {
