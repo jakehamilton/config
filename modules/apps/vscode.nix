@@ -14,13 +14,13 @@ in {
         # on Wayland by default. We need to pass two params
         # to make it render correctly.
         (vscode.overrideAttrs (oldAttrs: {
-          buildInputs = oldAttrs.buildInputs or [ ] ++ [ pkgs.makeWrapper ];
-
-          postInstall = oldAttrs.postInstall or "" + ''
-            wrapProgram $out/bin/code \
-              --add-flags "--enable-features=UseOzonePlatform" \
-              --add-flags "--ozone-platform=wayland"
-          '';
+#          buildInputs = oldAttrs.buildInputs or [ ] ++ [ pkgs.makeWrapper ];
+#
+#          postInstall = oldAttrs.postInstall or "" + ''
+#            wrapProgram $out/bin/code \
+#              --add-flags "--enable-features=UseOzonePlatform" \
+#              --add-flags "--ozone-platform=wayland"
+#          '';
         }))
       ];
   };

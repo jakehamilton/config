@@ -8,12 +8,12 @@ final: prev:
   # inherit (channels.nixpkgs-unstable) logseq;
   logseq = prev.logseq.overrideAttrs (oldAttrs:
     let
-      version = "0.5.8";
+      version = "0.5.9";
       inherit (oldAttrs) pname;
       src = prev.fetchurl {
         url =
           "https://github.com/logseq/logseq/releases/download/${version}/Logseq-linux-x64-${version}.AppImage";
-        sha256 = "1vblav210gf55vim3ani4aqdiss6i9lbrl4690914mlb58l731ss";
+        sha256 = "12bkc54wbk9lcfxss94pp4c7ynxrx5hlj8jyc9i4kda0v6yalyp4";
         name = "${pname}-${version}";
       };
       appimageContents = prev.appimageTools.extract {

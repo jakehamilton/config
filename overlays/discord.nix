@@ -1,6 +1,7 @@
-{ ... }:
+{ channels, ... }:
 
 final: prev: {
+  discord = channels.nixpkgs-unstable.discord;
   discord-chromium = with prev;
     makeDesktopItem {
       name = "Discord";
