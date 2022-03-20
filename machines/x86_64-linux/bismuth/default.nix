@@ -128,6 +128,11 @@ with lib; {
               "alsa_output.usb-Blue_Microphones_Yeti_Stereo_Microphone_797_2020_06_11_32800-00.analog-stereo";
             description = "Blue Yeti";
           })
+          (mkAlsaRename {
+            name =
+              "alsa_input.usb-Blue_Microphones_Yeti_Stereo_Microphone_797_2020_06_11_32800-00.analog-stereo";
+            description = "Blue Yeti";
+          })
         ];
 
         nodes = [
