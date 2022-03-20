@@ -2028,13 +2028,13 @@ in
     bypassCache = true;
     reconstructLock = true;
   };
-  "@suchipi/at-js-0.1.1" = nodeEnv.buildNodePackage {
+  "@suchipi/at-js-0.1.2" = nodeEnv.buildNodePackage {
     name = "_at_suchipi_slash_at-js";
     packageName = "@suchipi/at-js";
-    version = "0.1.1";
+    version = "0.1.2";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@suchipi/at-js/-/at-js-0.1.1.tgz";
-      sha512 = "8o4etmLSdMjb25YCKTVUsnWFHk/txf2mwqNgd3+1gU+CdpRaRCh+h1lVyCRjqWp87OT+3aHeljM2UsmoPsO20Q==";
+      url = "https://registry.npmjs.org/@suchipi/at-js/-/at-js-0.1.2.tgz";
+      sha512 = "S2T01H65pgrxo9JrPQ8ecu9oCb8osr242HkzFZq8F3mScsC73eI7kGlJ7Umh+neHrvAKb8aNB1fv2AEtAlPzfw==";
     };
     dependencies = [
       sources."balanced-match-1.0.2"

@@ -15,6 +15,7 @@ in {
           obs-websocket
           obs-multi-rtmp
           obs-move-transition
+          looking-glass-obs
         ];
       })
     ];

@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, config, lib, ... }:
 
 # @TODO(jakehamilton): Move this to my Logseq notes.
 # Wine Shenanigans (to run Cave Story):
@@ -27,10 +27,7 @@ with lib; {
     ardour
   ];
 
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-  };
+  services.samba-wsdd = enabled;
 
   services.samba = {
     enable = true;
@@ -59,8 +56,6 @@ with lib; {
       };
     };
   };
-
-  services.samba-wsdd = { enable = true; };
 
   plusultra = {
     nix = enabled;
@@ -118,6 +113,19 @@ with lib; {
       audio = enabled;
       networking = enabled;
       storage = enabled;
+    };
+
+    virtualisation = {
+      podman = enabled;
+      kvm = {
+        enable = true;
+        platform = "amd";
+        # RX480 when in the bottom slot:
+        # IOMMU Group 23 23:00.0 VGA compatible controller [0300]: Advanced Micro Devices, Inc. [AMD/ATI] Ellesmere [Radeon RX 470/480/570/570X/580/580X/590] [1002:67df] (rev c7)
+        # IOMMU Group 23 23:00.1 Audio device [0403]: Advanced Micro Devices, Inc. [AMD/ATI] Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] [1002:aaf0]
+        vfioIds = [ "1002:67df" "1002:aaf0" ];
+        machineUnits = [ "machine-qemu\\x2d2\\x2dwin10.scope" ];
+      };
     };
 
     services = { printing = enabled; };
