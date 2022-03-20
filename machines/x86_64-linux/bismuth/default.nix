@@ -110,7 +110,64 @@ with lib; {
     };
 
     hardware = {
-      audio = enabled;
+      audio = {
+        enable = true;
+
+        alsa-monitor.rules = [
+          (mkAlsaRename {
+            name = "alsa_output.pci-0000_31_00.4.analog-stereo";
+            description = "Speakers";
+          })
+          (mkAlsaRename {
+            name =
+              "alsa_input.usb-Valve_Corporation_Valve_VR_Radio___HMD_Mic_426C59CC3D-LYM-01.mono-fallback";
+            description = "Valve Index";
+          })
+          (mkAlsaRename {
+            name =
+              "alsa_output.usb-Blue_Microphones_Yeti_Stereo_Microphone_797_2020_06_11_32800-00.analog-stereo";
+            description = "Blue Yeti";
+          })
+        ];
+
+        nodes = [
+          (mkVirtualAudioNode { name = "Desktop"; })
+          (mkVirtualAudioNode { name = "Discord"; })
+          (mkVirtualAudioNode {
+            name = "Headphones";
+            class = "Audio/Sink";
+          })
+          (mkVirtualAudioNode {
+            name = "Speakers";
+            class = "Audio/Sink";
+          })
+        ];
+
+        modules = [
+          (mkBridgeAudioModule {
+            name = "speakers";
+            from = "virtual-speakers-audio";
+            to = "alsa_output.pci-0000_31_00.4.analog-stereo";
+          })
+          (mkBridgeAudioModule {
+            name = "headphones";
+            from = "virtual-headphones-audio";
+            to =
+              "alsa_output.usb-Blue_Microphones_Yeti_Stereo_Microphone_797_2020_06_11_32800-00.analog-stereo";
+          })
+          (mkBridgeAudioModule {
+            name = "speakers-to-desktop";
+            from = "virtual-speakers-audio";
+            to = "virtual-desktop-audio";
+          })
+          (mkBridgeAudioModule {
+            name = "headphones-to-desktop";
+            from = "virtual-headphones-audio";
+            to = "virtual-desktop-audio";
+          })
+        ];
+      };
+
       networking = enabled;
       storage = enabled;
     };
