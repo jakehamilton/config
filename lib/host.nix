@@ -72,8 +72,14 @@ rec {
     } else {
       builder = args:
         nixpkgs.lib.nixosSystem (args // {
-          modules = args.modules
-            ++ [{ imports = [ home-manager.nixosModules.home-manager ]; }];
+          modules = args.modules ++ [
+            # ({ config, ... }: {
+            #   system.configurationRevision = sourceInfo.rev;
+            #   services.getty.greetingLine =
+            #     "<<< Welcome to NixOS ${config.system.nixos.label} @ ${sourceInfo.rev} - \\l >>>";
+            # })
+            { imports = [ home-manager.nixosModules.home-manager ]; }
+          ];
         });
     };
 

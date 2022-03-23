@@ -40,7 +40,9 @@
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, utils
     , nixos-hardware, darwin, nmd, nixos-generators, ... }:
-    let lib = import ./lib inputs;
+    let
+      lib = import ./lib inputs;
+      inherit (self.sourceInfo) rev;
     in utils.lib.mkFlake {
       inherit self inputs lib;
 
@@ -48,7 +50,21 @@
 
       channels.nixpkgs.overlaysBuilder = lib.mkOverlays { src = ./overlays; };
 
-      hosts = lib.mkHosts { src = ./machines; };
+      hosts = lib.mkHosts {
+        src = ./machines;
+        hostOptions = {
+          bismuth = {
+            modules = [
+              ({ config, ... }:
+                builtins.trace self.sourceInfo {
+                  system.configurationRevision = self.sourceInfo.rev;
+                  services.getty.greetingLine =
+                    "<<< Welcome to NixOS ${config.system.nixos.label} @ ${self.sourceInfo.rev} - \\l >>>";
+                })
+            ];
+          };
+        };
+      };
 
       overlays = utils.lib.exportOverlays { inherit (self) pkgs inputs; };
 
