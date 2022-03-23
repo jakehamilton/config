@@ -79,7 +79,7 @@ in {
       initExtra = builtins.concatStringsSep "\n" [
         "eval $(starship init zsh)"
         ''
-          echo "$(fortune -s)\n\t\n\tNixOS ${config.system.nixos.label} @ ${config.system.configurationRevision}" | cowsay | lolcat''
+          echo "$(fortune -s)\n\t\n\tNixOS ${config.system.nixos.label} @ $(echo ${config.system.configurationRevision} | head -c 32)" | cowsay | lolcat''
       ];
 
       plugins = [{
