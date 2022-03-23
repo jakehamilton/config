@@ -88,7 +88,7 @@ rec {
       inherit lib;
     } // args;
 
-  mkHost = { self, system, path
+  mkHost = { self ? { }, system, path
     , name ? lib.getFileName (builtins.baseNameOf path), modules ? [ ]
     , specialArgs ? { }, channelName ? "nixpkgs" }: {
       "${name}" = withDynamicConfig system {
@@ -97,8 +97,10 @@ rec {
           (lib.getModuleFilesWithoutDefaultRec (lib.getPathFromRoot "/modules"))
           ++ [
             ({ config, ... }:
-              let revision = self.sourceInfo.rev or "ephemeral";
+              let revision = self.sourceInfo.rev or "unknown";
               in {
+                # Thanks to Xe for this.
+                # https://tulpa.dev/cadey/nixos-configs/src/commit/f53891121ce4204f57409cbe9e6fcee3b030a350/flake.nix#L50
                 system.configurationRevision = revision;
                 services.getty.greetingLine =
                   "<<< Welcome to NixOS ${config.system.nixos.label} @ ${revision} - \\l >>>";
@@ -108,7 +110,7 @@ rec {
       };
     };
 
-  mkHosts = { self, src, hostOptions ? { } }:
+  mkHosts = { self ? { }, src, hostOptions ? { } }:
     let
       systems = lib.getDirs src;
       hosts = builtins.concatMap (systemPath:
