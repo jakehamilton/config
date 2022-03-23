@@ -1,0 +1,26 @@
+{ options, config, lib, pkgs, ... }:
+with lib;
+let cfg = config.plusultra.suites.desktop;
+in {
+  options.plusultra.suites.desktop = with types; {
+    enable =
+      mkBoolOpt false "Whether or not to enable common desktop configuration.";
+  };
+
+  config = mkIf cfg.enable {
+    plusultra = {
+      desktop = {
+        gnome = enabled;
+
+        addons = { wallpapers = enabled; };
+      };
+
+      apps = {
+        _1password = enabled;
+        firefox = enabled;
+        vlc = enabled;
+        logseq = enabled;
+      };
+    };
+  };
+}

@@ -52,6 +52,7 @@ with lib; {
     };
 
     system = {
+      boot = enabled;
       fonts = enabled;
       locale = enabled;
       time = enabled;

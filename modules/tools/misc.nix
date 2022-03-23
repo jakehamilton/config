@@ -8,6 +8,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    plusultra.home.configFile."wgetrc".text = "";
+
     environment.systemPackages = with pkgs; [
       killall
       unzip
@@ -17,6 +19,7 @@ in {
       jq
       clac
       fup-repl
+      wget
     ];
   };
 }

@@ -1,12 +1,17 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.plusultra.desktop.gnome;
+let
+  cfg = config.plusultra.desktop.gnome;
+  gdmHome = config.users.users.gdm.home;
 in {
   options.plusultra.desktop.gnome = with types; {
     enable =
       mkBoolOpt false "Whether or not to use Gnome as the desktop environment.";
     wallpaper = mkOpt (nullOr string) null "The wallpaper to display.";
+    wayland = mkBoolOpt true "Whether or not to use Wayland.";
+    suspend =
+      mkBoolOpt true "Whether or not to suspend the machine after inactivity.";
   };
 
   config = mkIf cfg.enable {
@@ -31,6 +36,13 @@ in {
       gnomeExtensions.gsconnect
     ];
 
+    systemd.tmpfiles.rules = [
+      "d ${gdmHome}/.config 0711 gdm gdm"
+      # "./monitors.xml" comes from ~/.config/monitors.xml when GNOME
+      # display information is updated.
+      "L+ ${gdmHome}/.config/monitors.xml - - - - ${./monitors.xml}"
+    ];
+
     # Required for app indicators
     services.udev.packages = with pkgs; [ gnome3.gnome-settings-daemon ];
 
@@ -38,7 +50,11 @@ in {
       enable = true;
 
       libinput.enable = true;
-      displayManager.gdm.enable = true;
+      displayManager.gdm = {
+        enable = true;
+        wayland = cfg.wayland;
+        autoSuspend = cfg.suspend;
+      };
       desktopManager.gnome.enable = true;
     };
 
