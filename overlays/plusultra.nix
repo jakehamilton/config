@@ -9,4 +9,9 @@ let
     pkgs = prev;
     nodejs = prev.nodejs-17_x;
   };
-in { plusultra = { inherit wallpapers firefox-nordic-theme nodePackages; }; }
+  cowsay-plus = prev.callPackage (lib.getPackagePath "/cowsay-plus") inputs;
+in {
+  plusultra = {
+    inherit wallpapers firefox-nordic-theme nodePackages cowsay-plus;
+  };
+}

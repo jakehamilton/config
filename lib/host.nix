@@ -103,7 +103,7 @@ rec {
                 # https://tulpa.dev/cadey/nixos-configs/src/commit/f53891121ce4204f57409cbe9e6fcee3b030a350/flake.nix#L50
                 system.configurationRevision = revision;
                 services.getty.greetingLine =
-                  "<<< Welcome to NixOS ${config.system.nixos.label} @ ${revision} - \\l >>>";
+                  "<<< Welcome to NixOS ${config.system.nixos.label} @ ${revision} >>>";
               })
           ] ++ [ path ] ++ modules;
         specialArgs = mkSpecialArgs (specialArgs // { inherit system name; });

@@ -44,7 +44,13 @@ in {
         cfg.icon;
     };
 
-    environment.systemPackages = with pkgs; [ starship ];
+    environment.systemPackages = with pkgs; [
+      starship
+      cowsay
+      fortune
+      lolcat
+      plusultra.cowsay-plus
+    ];
 
     programs.zsh = {
       enable = true;
@@ -70,8 +76,11 @@ in {
       enableAutosuggestions = true;
       enableSyntaxHighlighting = true;
 
-      initExtra =
-        builtins.concatStringsSep "\n" [ "eval $(starship init zsh)" ];
+      initExtra = builtins.concatStringsSep "\n" [
+        "eval $(starship init zsh)"
+        ''
+          echo "$(fortune -s)\n\t\n\tNixOS ${config.system.nixos.label} @ ${config.system.configurationRevision}" | cowsay | lolcat''
+      ];
 
       plugins = [{
         name = "zsh-nix-shell";
