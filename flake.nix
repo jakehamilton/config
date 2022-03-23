@@ -51,16 +51,17 @@
       channels.nixpkgs.overlaysBuilder = lib.mkOverlays { src = ./overlays; };
 
       hosts = lib.mkHosts {
+        inherit self;
         src = ./machines;
         hostOptions = {
           bismuth = {
             modules = [
-              ({ config, ... }:
-                builtins.trace self.sourceInfo {
-                  system.configurationRevision = self.sourceInfo.rev;
-                  services.getty.greetingLine =
-                    "<<< Welcome to NixOS ${config.system.nixos.label} @ ${self.sourceInfo.rev} - \\l >>>";
-                })
+              # ({ config, ... }:
+              #   builtins.trace self.sourceInfo {
+              #     system.configurationRevision = self.sourceInfo.rev;
+              #     services.getty.greetingLine =
+              #       "<<< Welcome to NixOS ${config.system.nixos.label} @ ${self.sourceInfo.rev} - \\l >>>";
+              #   })
             ];
           };
         };

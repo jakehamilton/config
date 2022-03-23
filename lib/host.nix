@@ -73,11 +73,7 @@ rec {
       builder = args:
         nixpkgs.lib.nixosSystem (args // {
           modules = args.modules ++ [
-            # ({ config, ... }: {
-            #   system.configurationRevision = sourceInfo.rev;
-            #   services.getty.greetingLine =
-            #     "<<< Welcome to NixOS ${config.system.nixos.label} @ ${sourceInfo.rev} - \\l >>>";
-            # })
+
             { imports = [ home-manager.nixosModules.home-manager ]; }
           ];
         });
@@ -92,18 +88,27 @@ rec {
       inherit lib;
     } // args;
 
-  mkHost = { system, path, name ? lib.getFileName (builtins.baseNameOf path)
-    , modules ? [ ], specialArgs ? { }, channelName ? "nixpkgs" }: {
+  mkHost = { self, system, path
+    , name ? lib.getFileName (builtins.baseNameOf path), modules ? [ ]
+    , specialArgs ? { }, channelName ? "nixpkgs" }: {
       "${name}" = withDynamicConfig system {
         inherit system channelName;
         modules =
           (lib.getModuleFilesWithoutDefaultRec (lib.getPathFromRoot "/modules"))
-          ++ [ path ] ++ modules;
+          ++ [
+            ({ config, ... }:
+              let revision = self.sourceInfo.rev or "ephemeral";
+              in {
+                system.configurationRevision = revision;
+                services.getty.greetingLine =
+                  "<<< Welcome to NixOS ${config.system.nixos.label} @ ${revision} - \\l >>>";
+              })
+          ] ++ [ path ] ++ modules;
         specialArgs = mkSpecialArgs (specialArgs // { inherit system name; });
       };
     };
 
-  mkHosts = { src, hostOptions ? { } }:
+  mkHosts = { self, src, hostOptions ? { } }:
     let
       systems = lib.getDirs src;
       hosts = builtins.concatMap (systemPath:
@@ -115,7 +120,7 @@ rec {
             name = lib.getFileName (builtins.baseNameOf path);
             options = lib.optionalAttrs (builtins.hasAttr name hostOptions)
               hostOptions.${name};
-            host = mkHost ({ inherit system path name; } // options);
+            host = mkHost ({ inherit self system path name; } // options);
           in host) modules) systems;
     in lib.foldl lib.merge { } hosts;
 }
