@@ -109,6 +109,7 @@ Finally, add your hosts.
 
       # See the "Hosts" section for more information.
       hosts = plusultra.lib.mkHosts {
+        inherit self;
         src = ./machines;
 
         # Optionally add extra configuration based on machine name.
@@ -177,6 +178,14 @@ configuration using the above structure.
       # The output of `mkHosts` is set directly on
       # the `hosts` attribute.
       hosts = plusultra.lib.mkHosts {
+        # (optional) You can include `self` here. This
+        # enables setting `configurationRevision` to the
+        # Git commit your flake is on. After building, see
+        # the output of `nixos-version --json` or run the
+        # following command to get the commit hash.
+        # `nixos-version --json | nix run nixpkgs#jq -- -r .configurationRevision`
+        inherit self;
+
         # The `src` directory is your machines directory.
         # If your folder structure is `machines/<arch>/<name>`
         # then the `src` here is `./machines`.
