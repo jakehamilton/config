@@ -10,8 +10,11 @@ let
     nodejs = prev.nodejs-17_x;
   };
   cowsay-plus = prev.callPackage (lib.getPackagePath "/cowsay-plus") inputs;
+  nixos-revision =
+    prev.callPackage (lib.getPackagePath "/nixos-revision") inputs;
 in {
   plusultra = {
-    inherit wallpapers firefox-nordic-theme nodePackages cowsay-plus;
+    inherit wallpapers firefox-nordic-theme nodePackages cowsay-plus
+      nixos-revision;
   };
 }
