@@ -1,5 +1,1 @@
-[
-	{ "@jakehamilton/titan": "5.5.5" },
-	{ "node2nix": "git://github.com/svanderburg/node2nix.git" },
-	{ "@suchipi/at-js": "0.1.2" }
-]
+[{ "@jakehamilton/titan": "5.6.0" }, { "@suchipi/at-js": "0.4.0" }]
