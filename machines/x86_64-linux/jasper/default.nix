@@ -1,82 +1,15 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, nixos-hardware, ... }:
 
 with lib; {
-  imports = [ ./hardware.nix ];
+  imports = [ ./hardware.nix nixos-hardware.nixosModules.framework ];
 
   plusultra = {
-    nix = enabled;
-
-    apps = {
-      _1password = enabled;
-      discord = {
-        enable = true;
-        chromium = enabled;
-      };
-      element = enabled;
-      firefox = enabled;
-      logseq = enabled;
-      vscode = enabled;
-      pitivi = enabled;
-      steam = enabled;
-      obs = enabled;
-      yubikey = enabled;
-      virtualbox = enabled;
-      vlc = enabled;
+    archetypes = {
+      workstation = enabled;
+      gaming = enabled;
     };
 
-    cli-apps = {
-      neovim = enabled;
-      wshowkeys = enabled;
-      yubikey = enabled;
-    };
-
-    desktop = {
-      gnome = {
-        enable = true;
-        wallpaper = pkgs.plusultra.wallpapers.atmosphere.fileName;
-      };
-      # sway = {
-      #   enable = true;
-      #   wallpaper = pkgs.plusultra.wallpapers.atmosphere;
-      # };
-
-      addons = {
-        # I like to have a convenient place to share wallpapers from
-        # even if they're not currently being used.
-        wallpapers = enabled;
-      };
-    };
-
-    tools = {
-      k8s = enabled;
-      git = enabled;
-      node = enabled;
-      http = enabled;
-      misc = enabled;
-      titan = enabled;
-    };
-
-    hardware = {
-      audio = enabled;
-      networking = enabled;
-      fingerprint = enabled;
-      storage = enabled;
-    };
-
-    services = { printing = enabled; };
-
-    security = {
-      doas = enabled;
-      keyring = enabled;
-    };
-
-    system = {
-      boot = enabled;
-      fonts = enabled;
-      locale = enabled;
-      time = enabled;
-      xkb = enabled;
-    };
+    desktop.gnome.wallpaper = pkgs.plusultra.wallpapers.atmosphere.fileName;
   };
 
   # This value determines the NixOS release from which the default

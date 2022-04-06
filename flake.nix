@@ -23,9 +23,9 @@
     utils.url =
       "github:gytis-ivaskevicius/flake-utils-plus?rev=be1be083af014720c14f3b574f57b6173b4915d0";
 
-    # Extras
+    # Hardware Configuration
     nixos-hardware.url =
-      "github:nixos/nixos-hardware?rev=87a35a0d58f546dc23f37b4f6af575d0e4be6a7a";
+      "github:nixos/nixos-hardware?rev=feceb4d24f582817d8f6e737cd40af9e162dee05";
     nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
 
     # NMD

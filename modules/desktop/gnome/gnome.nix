@@ -36,6 +36,11 @@ in {
       gnomeExtensions.gsconnect
     ];
 
+    environment.gnome.excludePackages = with pkgs.gnome; [
+      pkgs.gnome-tour
+      epiphany
+    ];
+
     systemd.tmpfiles.rules = [
       "d ${gdmHome}/.config 0711 gdm gdm"
       # "./monitors.xml" comes from ~/.config/monitors.xml when GNOME
