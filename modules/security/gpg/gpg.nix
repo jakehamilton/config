@@ -42,6 +42,7 @@ let
     desktopName = "Yubikey Guide";
     genericName = "View Yubikey Guide in a web browser";
     exec = "${pkgs.xdg-utils}/bin/xdg-open ${guideHTML}";
+    icon = ./yubico-icon.svg;
     categories = "System";
   };
   reload-yubikey = pkgs.writeShellScriptBin "reload-yubikey" ''
