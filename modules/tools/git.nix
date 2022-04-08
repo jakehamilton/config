@@ -17,10 +17,15 @@ in {
 
     plusultra.home.extraOptions = {
       programs.git = {
+        enable = true;
         inherit (cfg) userName userEmail;
         lfs = enabled;
-        signing.signByDefault = mkIf gpg.enable true;
+        signing = {
+          key = null;
+          signByDefault = mkIf gpg.enable true;
+        };
         extraConfig = {
+          pull = { rebase = true; };
           core = { whitespace = "trailing-space,space-before-tab"; };
         };
       };
