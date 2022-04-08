@@ -6,6 +6,9 @@ let
     url = "https://raw.githubusercontent.com/drduh/config/master/gpg.conf";
     sha256 = "0va62sgnah8rjgp4m6zygs4z9gbpmqvq9m3x4byywk1dha6nvvaj";
   };
+  gpgAgentConf = ''
+    pinentry-program /run/current-system/sw/bin/pinentry-curses
+  '';
   guide = pkgs.fetchurl {
     url =
       "https://raw.githubusercontent.com/drduh/YubiKey-Guide/master/README.md";
@@ -35,6 +38,7 @@ in {
   services.udev.packages = with pkgs; [ yubikey-personalization ];
 
   environment.systemPackages = with pkgs; [
+    cryptsetup
     gnupg
     pinentry-curses
     pinentry-qt
@@ -75,9 +79,13 @@ in {
       git = enabled;
     };
 
-    home.file."gpg.conf".source = gpgConf;
     home.file."guide.md".source = guide;
     home.file."guide.html".source = guideHTML;
+    home.file."gpg.conf".source = gpgConf;
+    home.file."gpg-agent.conf".text = gpgAgentConf;
+
+    home.file.".gnupg/gpg.conf".source = gpgConf;
+    home.file.".gnupg/gpg-agent.conf".text = gpgAgentConf;
 
     hardware = {
       networking = {

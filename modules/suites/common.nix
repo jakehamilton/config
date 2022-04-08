@@ -24,6 +24,7 @@ in {
       services = { printing = enabled; };
 
       security = {
+        gpg = enabled;
         doas = enabled;
         keyring = enabled;
       };
