@@ -31,21 +31,7 @@ in {
   };
 
   config = {
-    plusultra.home.file = {
-      "Desktop/.keep".text = "";
-      "Documents/.keep".text = "";
-      "Downloads/.keep".text = "";
-      "Music/.keep".text = "";
-      "Pictures/.keep".text = "";
-      "Videos/.keep".text = "";
-      "work/.keep".text = "";
-      ".face".source = cfg.icon;
-      "Pictures/${cfg.icon.fileName or (builtins.baseNameOf cfg.icon)}".source =
-        cfg.icon;
-    };
-
     environment.systemPackages = with pkgs; [
-      starship
       cowsay
       fortune
       lolcat
@@ -56,42 +42,69 @@ in {
       enable = true;
       autosuggestions.enable = true;
       histFile = "$XDG_CACHE_HOME/zsh.history";
-
-      # @NOTE(jakehamilton): This may be useful if we want to
-      # support multiple users with the exact same shell config.
-      # However, right now this is a single user system so instead
-      # of configuring this system-wide, we can just do so with
-      # homemanager.
-
-      # promptInit = ''
-      #   eval $(starship init zsh)
-      # '';
     };
 
-    plusultra.home.configFile."starship.toml".source = ./starship.toml;
+    plusultra.home = {
+      file = {
+        "Desktop/.keep".text = "";
+        "Documents/.keep".text = "";
+        "Downloads/.keep".text = "";
+        "Music/.keep".text = "";
+        "Pictures/.keep".text = "";
+        "Videos/.keep".text = "";
+        "work/.keep".text = "";
+        ".face".source = cfg.icon;
+        "Pictures/${
+          cfg.icon.fileName or (builtins.baseNameOf cfg.icon)
+        }".source = cfg.icon;
+      };
 
-    plusultra.home.extraOptions.programs.zsh = {
-      enable = true;
-      enableCompletion = true;
-      enableAutosuggestions = true;
-      enableSyntaxHighlighting = true;
-
-      initExtra = builtins.concatStringsSep "\n" [
-        "export KEYTIMEOUT=1"
-        "eval $(starship init zsh)"
-        "fortune -s | cowsay | lolcat"
-      ];
-
-      plugins = [{
-        name = "zsh-nix-shell";
-        file = "nix-shell.plugin.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "chisui";
-          repo = "zsh-nix-shell";
-          rev = "v0.4.0";
-          sha256 = "037wz9fqmx0ngcwl9az55fgkipb745rymznxnssr3rx9irb6apzg";
+      extraOptions = {
+        home.shellAliases = {
+          lc = "${pkgs.colorls}/bin/colorls --sd";
+          lcg = "lc --gs";
+          lcu = "${pkgs.colorls}/bin/colorls -U";
+          lcl = "lc -1";
+          lclg = "lc -1 --gs";
+          lclu = "${pkgs.colorls}/bin/colorls -U -1";
         };
-      }];
+
+        programs = {
+          starship = {
+            enable = true;
+            settings = {
+              character = {
+                success_symbol = "[➜](bold green)";
+                error_symbol = "[✗](bold red) ";
+                vicmd_symbol = "[🔍](bold blue) ";
+              };
+            };
+          };
+
+          zsh = {
+            enable = true;
+            enableCompletion = true;
+            enableAutosuggestions = true;
+            enableSyntaxHighlighting = true;
+
+            initExtra = builtins.concatStringsSep "\n" [
+              "export KEYTIMEOUT=1"
+              "fortune -s | cowsay | lolcat"
+            ];
+
+            plugins = [{
+              name = "zsh-nix-shell";
+              file = "nix-shell.plugin.zsh";
+              src = pkgs.fetchFromGitHub {
+                owner = "chisui";
+                repo = "zsh-nix-shell";
+                rev = "v0.4.0";
+                sha256 = "037wz9fqmx0ngcwl9az55fgkipb745rymznxnssr3rx9irb6apzg";
+              };
+            }];
+          };
+        };
+      };
     };
 
     users.users.${cfg.name} = {
