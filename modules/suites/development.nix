@@ -7,6 +7,7 @@ let
     yubikey = enabled;
   };
   cli-apps = {
+    tmux = enabled;
     neovim = enabled;
     yubikey = enabled;
   };

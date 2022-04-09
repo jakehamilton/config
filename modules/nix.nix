@@ -9,6 +9,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [ plusultra.nixos-revision ];
+
     nix = let users = [ "root" config.plusultra.user.name ];
     in {
       package = cfg.package;

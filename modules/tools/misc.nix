@@ -11,6 +11,7 @@ in {
     plusultra.home.configFile."wgetrc".text = "";
 
     environment.systemPackages = with pkgs; [
+      fzf
       killall
       unzip
       file
