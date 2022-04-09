@@ -77,6 +77,7 @@ in {
       enableSyntaxHighlighting = true;
 
       initExtra = builtins.concatStringsSep "\n" [
+        "export KEYTIMEOUT=1"
         "eval $(starship init zsh)"
         "fortune -s | cowsay | lolcat"
       ];

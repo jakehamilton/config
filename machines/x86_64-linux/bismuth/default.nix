@@ -14,6 +14,14 @@
 with lib; {
   imports = [ ./hardware.nix ];
 
+  networking.firewall.allowedTCPPorts = [ 12345 ];
+
+  environment.systemPackages = with pkgs; [
+    chromium
+    kalidoface-2d
+    kalidoface-3d
+  ];
+
   services.samba-wsdd = enabled;
 
   services.samba = {

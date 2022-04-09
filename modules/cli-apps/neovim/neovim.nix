@@ -3,19 +3,20 @@
 with lib;
 let
   cfg = config.plusultra.cli-apps.neovim;
-  vimlFiles = [ ./init.vim ];
-  luaFiles = [ ./lua/theme.lua ./lua/lualine.lua ./lua/twilight.lua ];
+  vimFiles = getFilesRec ./vim;
+  luaFiles = getFilesRec ./lua;
 in {
   options.plusultra.cli-apps.neovim = with types; {
     enable = mkBoolOpt false "Whether or not to enable neovim.";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ page ];
+    environment.systemPackages = with pkgs; [ page nodePackages.eslint ];
     environment.variables = {
       PAGER = "page";
       MANPAGER =
         "page -C -e 'au User PageDisconnect sleep 100m|%y p|enew! |bd! #|pu p|set ft=man'";
+      NPM_CONFIG_PREFIX = "$HOME/.npm-global";
     };
 
     programs.neovim = {
@@ -25,9 +26,16 @@ in {
       vimAlias = true;
     };
 
+    plusultra.home.file.".npm-global/bin/eslint".source =
+      "${pkgs.nodePackages.eslint}/bin/eslint";
+    plusultra.home.file.".npm-global/lib/node_modules/eslint".source =
+      "${pkgs.nodePackages.eslint}/lib/node_modules/eslint";
+
     plusultra.home.extraOptions = {
       programs.neovim = {
         enable = true;
+        package = pkgs.neovim-unwrapped;
+
         viAlias = true;
         vimAlias = true;
         vimdiffAlias = true;
@@ -40,15 +48,24 @@ in {
           nodePackages.typescript
           nodePackages.typescript-language-server
           nodePackages.pyright
+          nodePackages.vscode-langservers-extracted
+          nodePackages.eslint
           gopls
           rust-analyzer
           nixfmt
+          sumneko-lua-language-server
+          lua5_2
+          ripgrep
         ];
 
         plugins = with pkgs.vimPlugins; [
+          direnv-vim
+          editorconfig-nvim
           vim-polyglot
           nvim-lspconfig
-          nvim-treesitter
+          lsp-colors-nvim
+          vim-illuminate
+          (nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
 
           telescope-nvim
           telescope-symbols-nvim
@@ -56,7 +73,7 @@ in {
 
           # nerdtree
           nvim-tree-lua
-          vim-devicons
+          nvim-web-devicons
           vim-nerdtree-syntax-highlight
 
           nord-nvim
@@ -66,7 +83,7 @@ in {
 
           delimitMate
           nvim-ts-rainbow
-          nvim-whichkey-setup-lua
+          which-key-nvim
 
           vim-nix
 
@@ -78,14 +95,23 @@ in {
           git-messenger-vim
           gitsigns-nvim
 
+          todo-comments-nvim
+
           vim-easymotion
           vim-surround
+          vim-commentary
+
+          nvim-jdtls
+
+          vim-markdown
+          markdown-preview-nvim
+          vim-markdown-toc
         ];
 
         extraConfig = let
-          vimlConfig = builtins.map lib.strings.fileContents vimlFiles;
+          vimConfig = builtins.map lib.strings.fileContents vimFiles;
           luaConfig = builtins.map lib.strings.fileContents luaFiles;
-          viml = builtins.concatStringsSep "\n" vimlConfig;
+          vim = builtins.concatStringsSep "\n" vimConfig;
           lua = ''
             lua << EOF
             ${builtins.concatStringsSep "\n" luaConfig}
@@ -93,7 +119,7 @@ in {
           '';
         in ''
           " Custom VIML Config.
-          ${viml}
+          ${vim}
 
           " Custom Lua Config.
           ${lua}

@@ -3,7 +3,7 @@
 with lib;
 let
   cfg = config.plusultra.cli-apps.tmux;
-  configFiles = [ ./config/continuum.tmux ./config/nord.tmux ];
+  configFiles = getFilesRec ./config;
 in {
   options.plusultra.cli-apps.tmux = with types; {
     enable = mkBoolOpt false "Whether or not to enable tmux.";
