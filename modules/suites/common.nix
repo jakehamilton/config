@@ -21,7 +21,10 @@ in {
         networking = enabled;
       };
 
-      services = { printing = enabled; };
+      services = {
+        printing = enabled;
+        openssh = enabled;
+      };
 
       security = {
         gpg = enabled;
