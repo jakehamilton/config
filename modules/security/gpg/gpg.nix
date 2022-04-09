@@ -57,11 +57,11 @@ in {
     services.pcscd.enable = true;
     services.udev.packages = with pkgs; [ yubikey-personalization ];
 
-    environment.shellInit = ''
-      export GPG_TTY="$(tty)"
-      export SSH_AUTH_SOCK=$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)
-      ${pkgs.gnupg}/bin/gpgconf --launch gpg-agent
-    '';
+    # environment.shellInit = ''
+    #   export GPG_TTY="$(tty)"
+    #   export SSH_AUTH_SOCK=$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)
+    #   ${pkgs.gnupg}/bin/gpgconf --launch gpg-agent
+    # '';
 
     environment.systemPackages = with pkgs; [
       cryptsetup

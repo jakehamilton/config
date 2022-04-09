@@ -1,9 +1,12 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{ config, lib, pkgs, modulesPath, nixos-hardware, ... }:
 
 # TODO(jakehamilton): Phase most of this out when nixos-hardware
 # is updated with Framework support.
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports = with nixos-hardware.nixosModules; [
+    (modulesPath + "/installer/scan/not-detected.nix")
+    framework
+  ];
 
   boot.initrd.availableKernelModules =
     [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];

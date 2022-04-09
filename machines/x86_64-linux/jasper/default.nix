@@ -1,7 +1,7 @@
 { pkgs, lib, nixos-hardware, ... }:
 
 with lib; {
-  imports = [ ./hardware.nix nixos-hardware.nixosModules.framework ];
+  imports = [ ./hardware.nix ];
 
   plusultra = {
     archetypes = {

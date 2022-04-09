@@ -10,6 +10,8 @@ in {
     enable = mkBoolOpt false "Whether or not to install and configure git.";
     userName = mkOpt types.str user.fullName "The name to configure git with.";
     userEmail = mkOpt types.str user.email "The email to configure git with.";
+    signingKey =
+      mkOpt types.str "9762169A1B35EA68" "The key ID to sign commits with.";
   };
 
   config = mkIf cfg.enable {
@@ -21,7 +23,7 @@ in {
         inherit (cfg) userName userEmail;
         lfs = enabled;
         signing = {
-          key = null;
+          key = cfg.signingKey;
           signByDefault = mkIf gpg.enable true;
         };
         extraConfig = {
