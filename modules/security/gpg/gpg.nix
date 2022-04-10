@@ -67,6 +67,7 @@ in {
 
     environment.systemPackages = with pkgs; [
       cryptsetup
+      paperkey
       gnupg
       pinentry-curses
       pinentry-qt
