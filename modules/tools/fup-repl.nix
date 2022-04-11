@@ -4,7 +4,7 @@ with lib;
 let
   cfg = config.plusultra.tools.fup-repl;
   fup-repl = pkgs.writeShellScriptBin "fup-repl" ''
-    ${pkgs.fup-repl}/bin/repl
+    ${pkgs.fup-repl}/bin/repl ''${@}
   '';
 in {
   options.plusultra.tools.fup-repl = with types; {

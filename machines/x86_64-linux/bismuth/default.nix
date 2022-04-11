@@ -58,7 +58,8 @@ with lib; {
       workstation = enabled;
     };
 
-    desktop.gnome.wallpaper = pkgs.plusultra.wallpapers.atmosphere.fileName;
+    desktop.gnome.wallpaper =
+      pkgs.plusultra.wallpapers.pink-and-blue-ultrawide.fileName;
 
     virtualisation.kvm = {
       enable = true;
