@@ -98,6 +98,7 @@
               scrubbedPkgsModule
               ({ ... }: {
                 _module.args = {
+                  check = false;
                   pkgs = lib.mkDefault pkgs;
                   pkgsPath = lib.mkDefault pkgs.path;
                   baseModules = modules;
@@ -119,7 +120,12 @@
             }) visibleDocList;
           docList = targetedDocList;
         in {
-          packages = (utils.lib.exportPackages self.overlays channels) // {
+          packages = let
+            pkgsFromOverlays =
+              (utils.lib.exportPackages self.overlays channels);
+          in pkgsFromOverlays // {
+            wallpapers = pkgs.callPackage (lib.getPackagePath "/wallpapers")
+              (inputs // { inherit pkgs lib; });
             docs = {
               json = pkgs.stdenvNoCC.mkDerivation {
                 name = "plusultra-docs-json";

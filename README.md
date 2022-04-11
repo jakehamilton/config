@@ -294,6 +294,23 @@ provide the folder to the `mkOverlays` helper.
         plusultra.overlays."nixpkgs/logseq"
         plusultra.overlays."nixpkgs/kubecolor"
         plusultra.overlays."nixpkgs/discord-chromium"
+        plusultra.overlays."nixpkgs/discord"
+        plusultra.overlays."nixpkgs/chromium"
+        plusultra.overlays."nixpkgs/gpls"
+        plusultra.overlays."nixpkgs/kalidoface-2d"
+        plusultra.overlays."nixpkgs/kalidoface-3d"
+        plusultra.overlays."nixpkgs/neovim"
+        plusultra.overlays."nixpkgs/neovim-unwrapped"
+        plusultra.overlays."nixpkgs/neovim-remote"
+        plusultra.overlays."nixpkgs/nodePackages"
+        plusultra.overlays."nixpkgs/obs-studio"
+        plusultra.overlays."nixpkgs/obs-studio-plugins"
+        plusultra.overlays."nixpkgs/polymc"
+        plusultra.overlays."nixpkgs/rust-analyzer"
+        plusultra.overlays."nixpkgs/sumneko-lua-language-server"
+        plusultra.overlays."nixpkgs/tree-sitter"
+        plusultra.overlays."nixpkgs/vimPlugins"
+        plusultra.overlays."nixpkgs/wrapOBS"
       ]
         # To apply all overlays from Plus Ultra.
         ++ (plusultra.lib.mkOverlays {} channels)
@@ -360,9 +377,30 @@ with Pipewire support enabled.
 An updated version of Logseq that fixes wayland
 and Git support.
 
-### `kubecolor`
+### `kalidoface-2d`
 
-Pulls in `kubecolor` from the unstable channel.
+Runs [Kalidoface](https://kalidoface.com/) in chromium.
+
+### `kalidoface-3d`
+
+Runs [Kalidoface 3D](https://3d.kalidoface.com/) in chromium.
+
+### Unstable
+
+The following packages are pulled in from the unstable channel and
+passed through.
+
+- `chromium`
+- `discord`
+- `gopls`
+- `kubecolor`
+- `neovim-remote`
+- `neovim-unwrapped`
+- `obs-studio`
+- `polymc`
+- `rust-analyzer`
+- `sumneko-lua-language-server`
+- `tree-sitter`
 
 ## Options
 
