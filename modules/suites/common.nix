@@ -13,6 +13,7 @@ in {
       tools = {
         git = enabled;
         misc = enabled;
+        fup-repl = enabled;
       };
 
       hardware = {
