@@ -36,10 +36,15 @@
     nixos-generators.url =
       "github:nix-community/nixos-generators?rev=296067b9c7a172d294831dec89d86847f30a7cfc";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Powercord (modded Discord)
+    powercord-overlay.url =
+      "github:LavaDesu/powercord-overlay?rev=cea1348777740f02ba58e8712ca6aaf8f295b469";
+    powercord-overlay.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, utils
-    , nixos-hardware, darwin, nmd, nixos-generators, ... }:
+    , nixos-hardware, darwin, nmd, nixos-generators, powercord-overlay, ... }:
     let
       lib = import ./lib inputs;
       inherit (self.sourceInfo) rev;

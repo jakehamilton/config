@@ -24,6 +24,7 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
+      (hiPrio plusultra.xdg-open-with-portal)
       wl-clipboard
       gnome.nautilus-python
       gnomeExtensions.appindicator

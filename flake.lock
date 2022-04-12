@@ -158,6 +158,44 @@
         "type": "gitlab"
       }
     },
+    "powercord": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1649687982,
+        "narHash": "sha256-DmcxRoNUplHybjzkfpaksO4fUygzjiDPssdae2RPQ/o=",
+        "owner": "powercord-org",
+        "repo": "powercord",
+        "rev": "17b66335e85a613ca0ea66dcb95d2c676b0e2f03",
+        "type": "github"
+      },
+      "original": {
+        "owner": "powercord-org",
+        "repo": "powercord",
+        "type": "github"
+      }
+    },
+    "powercord-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
+        "powercord": "powercord"
+      },
+      "locked": {
+        "lastModified": 1649724773,
+        "narHash": "sha256-IY8fVk6/RDM0VzZsprPziwl1kqg3LgD7v3+uXtjR6/k=",
+        "owner": "LavaDesu",
+        "repo": "powercord-overlay",
+        "rev": "cea1348777740f02ba58e8712ca6aaf8f295b469",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LavaDesu",
+        "repo": "powercord-overlay",
+        "rev": "cea1348777740f02ba58e8712ca6aaf8f295b469",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "darwin": "darwin",
@@ -167,6 +205,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nmd": "nmd",
+        "powercord-overlay": "powercord-overlay",
         "utils": "utils"
       }
     },
