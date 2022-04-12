@@ -34,6 +34,7 @@ in {
       gnomeExtensions.clear-top-bar
       gnomeExtensions.transparent-top-bar
       gnomeExtensions.gsconnect
+      gnomeExtensions.gtile
     ];
 
     environment.gnome.excludePackages = with pkgs.gnome; [

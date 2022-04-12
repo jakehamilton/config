@@ -7,7 +7,7 @@
       "github:nixos/nixpkgs?rev=2fcd36b9c96f7fe38fd6c66e874a62570c45cd15";
 
     # NixPkgs Unstable (nixos-unstable)
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs";
 
     # Home Manager (release-21.11)
     home-manager.url =
