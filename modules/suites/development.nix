@@ -10,6 +10,7 @@ let
     tmux = enabled;
     neovim = enabled;
     yubikey = enabled;
+    prisma = enabled;
   };
 in {
   options.plusultra.suites.development = with types; {
