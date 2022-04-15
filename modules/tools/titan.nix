@@ -6,7 +6,7 @@ let
   pkg = if lib.not null config.plusultra.tools.titan.pkg then
     config.plusultra.tools.titan.pkg
   else
-    (pkgs.plusultra.nodePackages."@jakehamilton/titan-5.6.0".override {
+    (pkgs.plusultra.nodePackages."@jakehamilton/titan-5.8.0".override {
       dontNpmInstall = true;
     });
 in {

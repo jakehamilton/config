@@ -21,6 +21,7 @@ in {
       clac
       fup-repl
       wget
+      appimage-run
     ];
   };
 }

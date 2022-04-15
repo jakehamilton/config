@@ -97,7 +97,7 @@ rec {
           (lib.getModuleFilesWithoutDefaultRec (lib.getPathFromRoot "/modules"))
           ++ [
             ({ config, ... }:
-              let revision = self.sourceInfo.rev or "unknown";
+              let revision = self.sourceInfo.rev or "dirty";
               in {
                 # Thanks to Xe for this.
                 # https://tulpa.dev/cadey/nixos-configs/src/commit/f53891121ce4204f57409cbe9e6fcee3b030a350/flake.nix#L50
