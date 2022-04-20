@@ -328,6 +328,15 @@ let
         sha512 = "yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==";
       };
     };
+    "giturl-1.0.1" = {
+      name = "giturl";
+      packageName = "giturl";
+      version = "1.0.1";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/giturl/-/giturl-1.0.1.tgz";
+        sha512 = "wQourBdI13n8tbjcZTDl6k+ZrCRMU6p9vfp9jknZq+zfWc8xXNztpZFM4XkPHVzHcMSUZxEMYYKZjIGkPlei6Q==";
+      };
+    };
     "glob-7.2.0" = {
       name = "glob";
       packageName = "glob";
@@ -400,13 +409,13 @@ let
         sha512 = "agE4QfB2Lkp9uICn7BAqoscw4SZP9kTE2hxiFI3jBPmXJfdqiahTbUuKGsMoN2GtqL9AxhYioAcVvgsb1HvRbA==";
       };
     };
-    "is-core-module-2.8.1" = {
+    "is-core-module-2.9.0" = {
       name = "is-core-module";
       packageName = "is-core-module";
-      version = "2.8.1";
+      version = "2.9.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/is-core-module/-/is-core-module-2.8.1.tgz";
-        sha512 = "SdNCUs284hr40hFTFP6l0IfZ/RSrMXF3qgoRHd3/79unUTvrFO/JoXwkGm+5J/Oe3E/b5GsnG330uUNgRpu1PA==";
+        url = "https://registry.npmjs.org/is-core-module/-/is-core-module-2.9.0.tgz";
+        sha512 = "+5FPy5PnwmO3lvfMb0AsoPaBG+5KHUI0wYFXOtYPnVVVspTFUuMZNfNaNVRt3FZadstu2c8x23vykRW/NBoU6A==";
       };
     };
     "is-url-1.2.4" = {
@@ -754,13 +763,13 @@ let
   };
 in
 {
-  "@jakehamilton/titan-5.8.0" = nodeEnv.buildNodePackage {
+  "@jakehamilton/titan-5.11.1" = nodeEnv.buildNodePackage {
     name = "_at_jakehamilton_slash_titan";
     packageName = "@jakehamilton/titan";
-    version = "5.8.0";
+    version = "5.11.1";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@jakehamilton/titan/-/titan-5.8.0.tgz";
-      sha512 = "TmNntAJzuc183ct45Uc2EqpZ4Xs3x/wlCtkSRD6QcYTfllW5s2+UuCQ9jn3jIl5eJ15aUZju7z3evnNjYezHuw==";
+      url = "https://registry.npmjs.org/@jakehamilton/titan/-/titan-5.11.1.tgz";
+      sha512 = "sTrCJod1HJJevZvwJqWZIcb+ZqQbpDCC0LGobUMj+ohQPpFHnvja42v7YvWTB8DiaGOOy5JSF2ybUTFgXKjx0A==";
     };
     dependencies = [
       sources."@littlethings/log-3.0.1"
@@ -791,6 +800,7 @@ in
       sources."enquirer-2.3.6"
       sources."event-target-shim-5.0.1"
       sources."fs.realpath-1.0.0"
+      sources."giturl-1.0.1"
       sources."glob-7.2.0"
       sources."has-flag-4.0.0"
       sources."inflight-1.0.6"
@@ -815,7 +825,7 @@ in
     ];
     buildInputs = globalBuildInputs;
     meta = {
-      description = "A simple, opinionated monorepo management tool.";
+      description = "A little tool for big (monorepo) projects.";
       homepage = "https://github.com/jakehamilton/packages";
       license = "Apache-2.0";
     };
@@ -858,7 +868,7 @@ in
       sources."inflight-1.0.6"
       sources."inherits-2.0.4"
       sources."interpret-1.4.0"
-      sources."is-core-module-2.8.1"
+      sources."is-core-module-2.9.0"
       sources."js-tokens-4.0.0"
       sources."json5-2.2.1"
       sources."kleur-4.1.4"
