@@ -15,6 +15,7 @@ in {
       art = enabled;
       video = enabled;
       social = enabled;
+      media = enabled;
     };
   };
 }

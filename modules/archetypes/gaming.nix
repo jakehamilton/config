@@ -13,6 +13,7 @@ in {
       games = enabled;
       emulation = enabled;
       social = enabled;
+      media = enabled;
     };
   };
 }
