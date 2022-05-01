@@ -14,7 +14,7 @@
 with lib; {
   imports = [ ./hardware.nix ];
 
-  networking.firewall.allowedTCPPorts = [ 12345 ];
+  networking.firewall.allowedTCPPorts = [ 12345 3000 3001 8080 8081 ];
 
   environment.systemPackages = with pkgs; [
     chromium
