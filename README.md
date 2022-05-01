@@ -13,7 +13,10 @@
 - [Packages](#packages)
   - [`discord-chromium`](#discord-chromium)
   - [`logseq`](#logseq)
+  - [`kalidoface-2d`](#kalidoface-2d)
+  - [`kalidoface-3d`](#kalidoface-3d)
   - [`kubecolor`](#kubecolor)
+  - [`frappe-books`](#frappe-books)
 - [Options](#options)
 
 ## Screenshots
@@ -384,6 +387,10 @@ Runs [Kalidoface](https://kalidoface.com/) in chromium.
 ### `kalidoface-3d`
 
 Runs [Kalidoface 3D](https://3d.kalidoface.com/) in chromium.
+
+### `frappe-books`
+
+The AppImage build of [Frappe Books](https://frappebooks.com).
 
 ### Unstable
 
