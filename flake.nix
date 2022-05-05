@@ -41,6 +41,11 @@
     powercord-overlay.url =
       "github:LavaDesu/powercord-overlay?rev=cea1348777740f02ba58e8712ca6aaf8f295b469";
     powercord-overlay.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
+    # Comma
+    comma.url =
+      "github:nix-community/comma?rev=034a9ca440370fc1eccbed43ff345fb6ea1f0d27";
+    comma.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, utils

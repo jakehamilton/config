@@ -25,6 +25,7 @@ in {
       electron = pkgs.electron_15;
       inherit (pkgs.discord-canary) src version meta;
     });
-    frappe-books = mkPackage "/frappe-books";
+    frappe-books = mkPackage "frappe-books";
+    update-nix-index = mkPackage "update-nix-index";
   };
 }
