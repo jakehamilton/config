@@ -2,9 +2,9 @@
   description = "Plus Ultra";
 
   inputs = {
-    # NixPkgs (release-21.11)
+    # NixPkgs (nixos-21.11)
     nixpkgs.url =
-      "github:nixos/nixpkgs?rev=2fcd36b9c96f7fe38fd6c66e874a62570c45cd15";
+      "github:nixos/nixpkgs?rev=aa2f845096f72dde4ad0c168eeec387cbd2eae04";
 
     # NixPkgs Unstable (nixos-unstable)
     nixpkgs-unstable.url = "github:nixos/nixpkgs";

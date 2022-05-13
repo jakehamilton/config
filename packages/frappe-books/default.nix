@@ -7,7 +7,7 @@ let
 
   src = pkgs.fetchurl {
     url =
-      "https://github.com/frappebooks/releases/download/v${version}/Frappe-Books-${version}.AppImage";
+      "https://github.com/frappe/books/releases/download/v${version}/Frappe-Books-${version}.AppImage";
     sha256 = "03c8xxlzdiy7jinijds6mxyar6xr29zvf2kqanz9l24wc3pj28yj";
   };
 
