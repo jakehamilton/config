@@ -27,8 +27,12 @@ in {
           signByDefault = mkIf gpg.enable true;
         };
         extraConfig = {
+          init = { defaultBranch = "main"; };
           pull = { rebase = true; };
           core = { whitespace = "trailing-space,space-before-tab"; };
+          safe = {
+            directory = "${config.users.users.${user.name}.home}/work/config";
+          };
         };
       };
     };
