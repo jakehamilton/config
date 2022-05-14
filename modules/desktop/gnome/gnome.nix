@@ -36,6 +36,7 @@ in {
       gnomeExtensions.transparent-top-bar
       gnomeExtensions.gsconnect
       gnomeExtensions.gtile
+      gnomeExtensions.audio-output-switcher
     ];
 
     environment.gnome.excludePackages = with pkgs.gnome; [
