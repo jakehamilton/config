@@ -23,6 +23,7 @@ in {
       inherit apps cli-apps;
 
       tools = {
+        direnv = enabled;
         k8s = enabled;
         node = enabled;
         http = enabled;

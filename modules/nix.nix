@@ -14,12 +14,18 @@ in {
     nix = let users = [ "root" config.plusultra.user.name ];
     in {
       package = cfg.package;
-      extraOptions = ''
-        experimental-features = nix-command flakes
-        http-connections = 50
-        warn-dirty = false
-        log-lines = 50
-      '';
+      extraOptions = lib.concatStringsSep "\n" [
+        ''
+          experimental-features = nix-command flakes
+          http-connections = 50
+          warn-dirty = false
+          log-lines = 50
+        ''
+        (lib.optionalString (config.plusultra.tools.direnv.enable) ''
+          keep-outputs = true
+          keep-derivations = true
+        '')
+      ];
       trustedUsers = users;
       allowedUsers = users;
 
