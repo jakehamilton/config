@@ -140,7 +140,8 @@
               packages = overlay pkgs pkgs;
             in packages;
 
-          in pkgsFromOverlays // plusultraPackages // {
+          in pkgsFromOverlays // plusultraPackages
+          // plusultraPackages.plusultra // {
             wallpapers = pkgs.callPackage (lib.getPackagePath "/wallpapers")
               (inputs // { inherit pkgs lib; });
             docs = {
