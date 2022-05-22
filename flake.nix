@@ -70,6 +70,7 @@
       outputsBuilder = channels:
         let
           pkgs = channels.nixpkgs;
+          system = pkgs.system;
           nmd' = import nmd { inherit lib pkgs; };
           modules = lib.getModuleFilesWithoutDefaultRec
             (lib.getPathFromRoot "/modules");
@@ -133,7 +134,13 @@
           packages = let
             pkgsFromOverlays =
               (utils.lib.exportPackages self.overlays channels);
-          in pkgsFromOverlays // {
+            plusultraPackages = let
+              fn = import (lib.getOverlayPath "plusultra");
+              overlay = fn (inputs // { inherit lib; });
+              packages = overlay pkgs pkgs;
+            in packages;
+
+          in pkgsFromOverlays // plusultraPackages // {
             wallpapers = pkgs.callPackage (lib.getPackagePath "/wallpapers")
               (inputs // { inherit pkgs lib; });
             docs = {
