@@ -8,6 +8,12 @@ in {
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [ podman-compose ];
+
+    plusultra.home.extraOptions = {
+      home.shellAliases = { "docker-compose" = "podman-compose"; };
+    };
+
     virtualisation = {
       podman = {
         enable = cfg.enable;
