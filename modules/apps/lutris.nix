@@ -7,6 +7,12 @@ in {
     enable = mkBoolOpt false "Whether or not to enable Lutris.";
   };
 
-  config =
-    mkIf cfg.enable { environment.systemPackages = with pkgs; [ lutris ]; };
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      lutris
+      # Needed for some installers like League of Legends
+      openssl
+      gnome.zenity
+    ];
+  };
 }
