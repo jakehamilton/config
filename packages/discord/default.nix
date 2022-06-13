@@ -67,8 +67,8 @@ let
     icon = pname;
     inherit desktopName;
     genericName = meta.description;
-    categories = "Network;InstantMessaging;";
-    mimeType = "x-scheme-handler/discord;";
+    categories = [ "Network" "InstantMessaging" ];
+    mimeType = [ "x-scheme-handler/discord" ];
   };
 in stdenv.mkDerivation {
   inherit pname version src;

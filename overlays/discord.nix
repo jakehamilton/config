@@ -11,8 +11,8 @@ final: prev: {
         ${chromium}/bin/chromium --app="https://discord.com/channels/@me" --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland'';
       icon = "discord";
       type = "Application";
-      categories = "Network;InstantMessaging;";
-      terminal = "false";
-      mimeType = "x-scheme-handler/discord";
+      categories = [ "Network" "InstantMessaging" ];
+      terminal = false;
+      mimeTypes = [ "x-scheme-handler/discord" ];
     };
 }

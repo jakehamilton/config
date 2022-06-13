@@ -18,11 +18,6 @@ in {
         "127.0.0.1" = [ "local.test" ] ++ (cfg.hosts."127.0.0.1" or [ ]);
       } // cfg.hosts;
 
-      # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-      # Per-interface useDHCP will be mandatory in the future, so this generated config
-      # replicates the default behaviour.
-      useDHCP = false;
-
       networkmanager = enabled;
     };
   };

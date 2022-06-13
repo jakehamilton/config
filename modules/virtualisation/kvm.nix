@@ -77,7 +77,7 @@ in {
               "pipewire-pulse.service"
               "pipewire.service"
               "sound.target"
-            ];
+            ] ++ cfg.machineUnits;
             Service.ExecStart =
               "${pkgs.scream}/bin/scream -n scream -o pulse -m /dev/shm/scream";
             Service.Restart = "always";

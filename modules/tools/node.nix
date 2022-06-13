@@ -5,7 +5,7 @@ let cfg = config.plusultra.tools.node;
 in {
   options.plusultra.tools.node = with types; {
     enable = mkBoolOpt false "Whether or not to install and configure git";
-    pkg = mkOpt package pkgs.nodejs-17_x "The NodeJS package to use";
+    pkg = mkOpt package pkgs.nodejs-18_x "The NodeJS package to use";
     prettier = {
       enable = mkBoolOpt true "Whether or not to install Prettier";
       pkg =

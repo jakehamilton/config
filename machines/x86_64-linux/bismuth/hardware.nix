@@ -10,7 +10,7 @@
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_5_15;
 
     initrd = {
       kernelModules = [ "amdgpu" ];
@@ -40,10 +40,6 @@
 
   networking.interfaces.enp39s0.useDHCP = true;
   networking.interfaces.wlp41s0.useDHCP = true;
-
-  hardware.opengl.driSupport = true;
-  # 32 bit support?
-  # hardware.opengl.driSupport32Bit = true;
 
   hardware.enableRedistributableFirmware = true;
 

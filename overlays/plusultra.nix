@@ -11,7 +11,7 @@ in {
       prev.callPackage (lib.getPackagePath "/firefox-nordic-theme") inputs;
     nodePackages = prev.callPackage (lib.getPackagePath "/node-packages") {
       pkgs = prev;
-      nodejs = prev.nodejs-17_x;
+      nodejs = prev.nodejs-18_x;
     };
     cowsay-plus = prev.callPackage (lib.getPackagePath "/cowsay-plus") inputs;
     nixos-revision =

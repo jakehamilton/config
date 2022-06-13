@@ -9,7 +9,7 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      wineUnstable
+      winePackages.unstable
       winetricks
       wine64Packages.unstable
     ];

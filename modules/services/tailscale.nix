@@ -12,10 +12,16 @@ in {
 
     services.tailscale = enabled;
 
-    networking.firewall = {
-      trustedInterfaces = [ config.services.tailscale.interfaceName ];
+    networking = {
+      firewall = {
+        trustedInterfaces = [ config.services.tailscale.interfaceName ];
 
-      allowedUDPPorts = [ config.services.tailscale.port ];
+        allowedUDPPorts = [ config.services.tailscale.port ];
+
+        # Strict reverse path filtering breaks Tailscale exit node use and some subnet routing setups.
+        checkReversePath = "loose";
+      };
     };
+
   };
 }

@@ -43,7 +43,7 @@ let
     genericName = "View Yubikey Guide in a web browser";
     exec = "${pkgs.xdg-utils}/bin/xdg-open ${guideHTML}";
     icon = ./yubico-icon.svg;
-    categories = "System";
+    categories = [ "System" ];
   };
   reload-yubikey = pkgs.writeShellScriptBin "reload-yubikey" ''
     ${pkgs.gnupg}/bin/gpg-connect-agent "scd serialno" "learn --force" /bye

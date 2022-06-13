@@ -11,5 +11,7 @@ in {
   config = mkIf cfg.enable {
     plusultra.home.configFile."electron-flags.conf".source =
       ./electron-flags.conf;
+
+    environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
   };
 }

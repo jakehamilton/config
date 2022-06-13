@@ -8,8 +8,8 @@ final: prev: {
     exec = ''${final.chromium}/bin/chromium --app="https://kalidoface.com/"'';
     icon = ./icon-2d.svg;
     type = "Application";
-    categories = "Network;";
-    terminal = "false";
+    categories = [ "Network" ];
+    terminal = false;
   };
   kalidoface-3d = prev.makeDesktopItem {
     name = "Kalidoface 3D";
@@ -20,7 +20,7 @@ final: prev: {
       ''${final.chromium}/bin/chromium --app="https://3d.kalidoface.com/"'';
     icon = ./icon-3d.svg;
     type = "Application";
-    categories = "Network;";
-    terminal = "false";
+    categories = [ "Network" ];
+    terminal = false;
   };
 }

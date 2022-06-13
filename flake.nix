@@ -2,16 +2,16 @@
   description = "Plus Ultra";
 
   inputs = {
-    # NixPkgs (nixos-21.11)
+    # NixPkgs (nixos-22.05)
     nixpkgs.url =
-      "github:nixos/nixpkgs?rev=aa2f845096f72dde4ad0c168eeec387cbd2eae04";
+      "github:nixos/nixpkgs?rev=1f8d88087a3753e55a29b5207f7f0997f7c813fa";
 
     # NixPkgs Unstable (nixos-unstable)
     nixpkgs-unstable.url = "github:nixos/nixpkgs";
 
-    # Home Manager (release-21.11)
+    # Home Manager (release-22.05)
     home-manager.url =
-      "github:nix-community/home-manager?rev=697cc8c68ed6a606296efbbe9614c32537078756";
+      "github:nix-community/home-manager?rev=ac2287df5a2d6f0a44bbcbd11701dbbf6ec43675";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # macOS Support (master)
@@ -21,11 +21,11 @@
 
     # Utils
     utils.url =
-      "github:gytis-ivaskevicius/flake-utils-plus?rev=be1be083af014720c14f3b574f57b6173b4915d0";
+      "github:gytis-ivaskevicius/flake-utils-plus?rev=f8d6d1f87b6177e3bc674c29f247bdbf897ba274";
 
     # Hardware Configuration
     nixos-hardware.url =
-      "github:nixos/nixos-hardware?rev=feceb4d24f582817d8f6e737cd40af9e162dee05";
+      "github:nixos/nixos-hardware?rev=0cab18a48de7914ef8cad35dca0bb36868f3e1af";
     nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
 
     # NMD
@@ -34,7 +34,7 @@
 
     # Generate System Images
     nixos-generators.url =
-      "github:nix-community/nixos-generators?rev=296067b9c7a172d294831dec89d86847f30a7cfc";
+      "github:nix-community/nixos-generators?rev=fb3ee0f618b8c80dea1239691b15dfeb4bb46331";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
     # Powercord (modded Discord)
