@@ -21,6 +21,9 @@ in {
       pulse.enable = true;
       jack.enable = true;
 
+      wireplumber.enable = false;
+
+      media-session.enable = true;
       media-session.config.alsa-monitor =
         mkAliasDefinitions options.plusultra.hardware.audio.alsa-monitor;
 
