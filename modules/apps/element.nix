@@ -8,6 +8,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ element-desktop-wayland ];
+    environment.systemPackages = with pkgs; [ element-desktop ];
   };
 }
