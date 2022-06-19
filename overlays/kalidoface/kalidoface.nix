@@ -5,7 +5,8 @@ final: prev: {
     name = "Kalidoface 2D";
     desktopName = "Kalidoface 2D";
     genericName = "Animate Live2D characters using just your browser webcam!";
-    exec = ''${final.chromium}/bin/chromium --app="https://kalidoface.com/"'';
+    exec = ''
+      ${final.firefox}/bin/firefox "https://kalidoface.com/?plusultra.app=true"'';
     icon = ./icon-2d.svg;
     type = "Application";
     categories = [ "Network" ];
@@ -16,8 +17,8 @@ final: prev: {
     desktopName = "Kalidoface 3D";
     genericName =
       "Animate character faces, poses and fingers in 3D using just your browser webcam!";
-    exec =
-      ''${final.chromium}/bin/chromium --app="https://3d.kalidoface.com/"'';
+    exec = ''
+      ${final.firefox}/bin/firefox "https://3d.kalidoface.com/?plusultra.app=true"'';
     icon = ./icon-3d.svg;
     type = "Application";
     categories = [ "Network" ];

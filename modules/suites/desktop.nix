@@ -20,6 +20,10 @@ in {
         firefox = enabled;
         vlc = enabled;
         logseq = enabled;
+        hey = enabled;
+        pocketcasts = enabled;
+        yt-music = enabled;
+        twitter = enabled;
       };
     };
   };

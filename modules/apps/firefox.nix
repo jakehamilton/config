@@ -10,6 +10,7 @@ let
     "browser.urlbar.suggest.quicksuggest.sponsored" = false;
     "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
     "browser.aboutConfig.showWarning" = false;
+    "browser.ssb.enabled" = true;
   };
 in {
   options.plusultra.apps.firefox = with types; {
