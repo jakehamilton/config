@@ -68,7 +68,7 @@ with lib; {
       # IOMMU Group 23 23:00.0 VGA compatible controller [0300]: Advanced Micro Devices, Inc. [AMD/ATI] Ellesmere [Radeon RX 470/480/570/570X/580/580X/590] [1002:67df] (rev c7)
       # IOMMU Group 23 23:00.1 Audio device [0403]: Advanced Micro Devices, Inc. [AMD/ATI] Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] [1002:aaf0]
       vfioIds = [ "1002:67df" "1002:aaf0" ];
-      machineUnits = [ "machine-qemu\\x2d2\\x2dwin10.scope" ];
+      machineUnits = [ "machine-qemu\\x2d1\\x2dwin10.scope" ];
     };
 
     hardware.audio = {

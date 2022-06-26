@@ -19,6 +19,11 @@ in {
       permitRootLogin = "no";
     };
 
+    programs.ssh.extraConfig = ''
+      Host *
+        HostKeyAlgorithms +ssh-rsa
+    '';
+
     plusultra.user.extraOptions.openssh.authorizedKeys.keys =
       cfg.authorizedKeys;
   };
