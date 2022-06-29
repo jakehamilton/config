@@ -8,6 +8,7 @@ let
     lutris = enabled;
     winetricks = enabled;
     protontricks = enabled;
+    doukutsu-rs = enabled;
   };
   cli-apps = {
     wine = enabled;

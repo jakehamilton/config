@@ -27,5 +27,6 @@ in {
     });
     frappe-books = mkPackage "frappe-books";
     update-nix-index = mkPackage "update-nix-index";
+    doukutsu-rs = mkPackage "doukutsu-rs";
   };
 }

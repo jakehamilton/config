@@ -15,11 +15,16 @@ in {
       enable = mkBoolOpt true "Whether or not to install Yarn";
       pkg = mkOpt package pkgs.nodePackages.yarn "The NodeJS package to use";
     };
+    flyctl = {
+      enable = mkBoolOpt true "Whether or not to install flyctl";
+      pkg = mkOpt package pkgs.flyctl "The flyctl package to use";
+    };
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;
       [ cfg.pkg ] ++ (lib.optional cfg.prettier.enable cfg.prettier.pkg)
-      ++ (lib.optional cfg.yarn.enable cfg.yarn.pkg);
+      ++ (lib.optional cfg.yarn.enable cfg.yarn.pkg)
+      ++ (lib.optional cfg.flyctl.enable cfg.flyctl.pkg);
   };
 }

@@ -11,6 +11,7 @@
     - [Supported Targets](#supported-targets)
 - [Overlays](#overlays)
 - [Packages](#packages)
+  - [`doukutsu-rs`](#doukutsu-rs)
   - [`discord-chromium`](#discord-chromium)
   - [`logseq`](#logseq)
   - [`kalidoface-2d`](#kalidoface-2d)
@@ -369,6 +370,10 @@ Packages can be used directly from the flake.
     };
 }
 ```
+
+### [`doukutsu-rs`](https://github.com/doukutsu-rs/doukutsu-rs)
+
+A fully playable re-implementation of Cave Story (Doukutsu Monogatari) engine written in Rust.
 
 ### `discord-chromium`
 
