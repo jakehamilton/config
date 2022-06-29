@@ -8,6 +8,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ inkscape-with-extensions ];
+    environment.systemPackages = with pkgs; [ inkscape-with-extensions google-fonts ];
   };
 }
