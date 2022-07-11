@@ -4,11 +4,11 @@
   inputs = {
     # NixPkgs (nixos-22.05)
     nixpkgs.url =
-      "github:nixos/nixpkgs?rev=1f8d88087a3753e55a29b5207f7f0997f7c813fa";
+      "github:nixos/nixpkgs?rev=71d7a4c037dc4f3e98d5c4a81b941933cf5bf675";
 
     # NixPkgs Unstable (nixos-unstable)
     nixpkgs-unstable.url =
-      "github:nixos/nixpkgs?rev=6616de389ed55fba6eeba60377fc04732d5a207c";
+      "github:nixos/nixpkgs?rev=b39924fc7764c08ae3b51beef9a3518c414cdb7d";
 
     # Home Manager (release-22.05)
     home-manager.url =
