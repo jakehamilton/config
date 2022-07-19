@@ -20,6 +20,7 @@ with lib; {
     chromium
     kalidoface-2d
     kalidoface-3d
+    gparted
   ];
 
   services.samba-wsdd = enabled;

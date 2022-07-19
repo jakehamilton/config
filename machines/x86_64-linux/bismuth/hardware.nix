@@ -38,6 +38,9 @@
 
   swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
 
+  networking.networkmanager.enable = true;
+  networking.networkmanager.dhcp = "dhcpcd";
+
   networking.interfaces.enp39s0.useDHCP = true;
   networking.interfaces.wlp41s0.useDHCP = true;
 
