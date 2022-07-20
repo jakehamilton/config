@@ -21,6 +21,8 @@ in {
         # Strict reverse path filtering breaks Tailscale exit node use and some subnet routing setups.
         checkReversePath = "loose";
       };
+
+      networkmanager.unmanaged = [ "tailscale0" ];
     };
 
   };
