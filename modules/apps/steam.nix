@@ -12,5 +12,8 @@ in {
     programs.steam.remotePlay.openFirewall = true;
 
     hardware.steam-hardware.enable = true;
+
+    # Enable GameCube controller support.
+    services.udev.packages = [ pkgs.dolphinEmu ];
   };
 }

@@ -9,5 +9,8 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ dolphin-emu ];
+
+    # Enable GameCube controller support.
+    services.udev.packages = [ pkgs.dolphinEmu ];
   };
 }
