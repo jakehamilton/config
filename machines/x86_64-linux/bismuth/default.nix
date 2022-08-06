@@ -21,6 +21,7 @@ with lib; {
     kalidoface-2d
     kalidoface-3d
     gparted
+    weather
   ];
 
   services.samba-wsdd = enabled;
@@ -133,6 +134,10 @@ with lib; {
       ];
     };
   };
+
+  # WiFi is typically unused on the desktop. Enable this service
+  # if it's no longer only using a wired connection.
+  systemd.services.network-addresses-wlp41s0.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
