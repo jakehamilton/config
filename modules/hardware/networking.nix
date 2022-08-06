@@ -10,7 +10,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-
     plusultra.user.extraGroups = [ "networkmanager" ];
 
     networking = {
@@ -20,5 +19,9 @@ in {
 
       networkmanager = enabled;
     };
+
+    # Fixes an issue that normally causes nixos-rebuild to fail.
+    # https://github.com/NixOS/nixpkgs/issues/180175
+    systemd.services.NetworkManager-wait-online.enable = false;
   };
 }

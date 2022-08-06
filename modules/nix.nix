@@ -12,6 +12,7 @@ in {
     environment.systemPackages = with pkgs; [
       plusultra.nixos-revision
       nix-index
+      deploy-rs
     ];
 
     nix = let users = [ "root" config.plusultra.user.name ];

@@ -4,11 +4,11 @@
   inputs = {
     # NixPkgs (nixos-22.05)
     nixpkgs.url =
-      "github:nixos/nixpkgs?rev=71d7a4c037dc4f3e98d5c4a81b941933cf5bf675";
+      "github:nixos/nixpkgs?rev=478f3cbc8448b5852539d785fbfe9a53304133be";
 
     # NixPkgs Unstable (nixos-unstable)
     nixpkgs-unstable.url =
-      "github:nixos/nixpkgs?rev=b39924fc7764c08ae3b51beef9a3518c414cdb7d";
+      "github:nixos/nixpkgs?rev=168d1c578909dc143ba52dbed661c36e76b12b36";
 
     # Home Manager (release-22.05)
     home-manager.url =
@@ -47,26 +47,35 @@
     comma.url =
       "github:nix-community/comma?rev=034a9ca440370fc1eccbed43ff345fb6ea1f0d27";
     comma.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
+    # System Deployment
+    deploy-rs.url =
+      "github:serokell/deploy-rs?rev=41f15759dd8b638e7b4f299730d94d5aa46ab7eb";
+    deploy-rs.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, utils
-    , nixos-hardware, darwin, nmd, nixos-generators, powercord-overlay, ... }:
+    , nixos-hardware, darwin, nmd, nixos-generators, powercord-overlay
+    , deploy-rs, ... }:
     let
       lib = import ./lib inputs;
-      inherit (self.sourceInfo) rev;
+      hosts = lib.mkHosts {
+        inherit self;
+        src = ./machines;
+      };
     in utils.lib.mkFlake {
-      inherit self inputs lib;
+      inherit self inputs lib hosts;
 
       channelsConfig = { allowUnfree = true; };
 
       channels.nixpkgs.overlaysBuilder = lib.mkOverlays { src = ./overlays; };
 
-      hosts = lib.mkHosts {
-        inherit self;
-        src = ./machines;
-      };
-
       overlays = utils.lib.exportOverlays { inherit (self) pkgs inputs; };
+
+      deploy = lib.mkDeploy { inherit self; };
+
+      checks = builtins.mapAttrs
+        (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
       outputsBuilder = channels:
         let
@@ -77,6 +86,7 @@
             (lib.getPathFromRoot "/modules");
           mockNixos = with lib; {
             options = {
+              assertions = mkSinkUndeclaredOptions { };
               environment = mkSinkUndeclaredOptions { };
               systemd = mkSinkUndeclaredOptions { };
               system = mkSinkUndeclaredOptions { };
@@ -93,6 +103,7 @@
               security = mkSinkUndeclaredOptions { };
               services = mkSinkUndeclaredOptions { };
               time = mkSinkUndeclaredOptions { };
+              virtualisation = mkSinkUndeclaredOptions { };
               xdg = mkSinkUndeclaredOptions { };
             };
           };
@@ -141,21 +152,19 @@
               packages = overlay pkgs pkgs;
             in packages;
 
-          in pkgsFromOverlays // plusultraPackages
-          // plusultraPackages.plusultra // {
+          in pkgsFromOverlays // plusultraPackages.plusultra // {
             wallpapers = pkgs.callPackage (lib.getPackagePath "/wallpapers")
               (inputs // { inherit pkgs lib; });
-            docs = {
-              json = pkgs.stdenvNoCC.mkDerivation {
-                name = "plusultra-docs-json";
-                src = builtins.toFile "docs.json" (builtins.toJSON docList);
 
-                dontUnpack = true;
+            jsonDocs = pkgs.stdenvNoCC.mkDerivation {
+              name = "plusultra-docs-json";
+              src = builtins.toFile "docs.json" (builtins.toJSON docList);
 
-                installPhase = ''
-                  cp $src $out
-                '';
-              };
+              dontUnpack = true;
+
+              installPhase = ''
+                cp $src $out
+              '';
             };
           };
         };

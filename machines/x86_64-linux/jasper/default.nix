@@ -3,6 +3,8 @@
 with lib; {
   imports = [ ./hardware.nix ];
 
+  environment.systemPackages = with pkgs; [ weather ];
+
   plusultra = {
     archetypes = {
       workstation = enabled;
