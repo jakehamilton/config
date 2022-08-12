@@ -12,5 +12,7 @@ in {
       comma
       plusultra.update-nix-index
     ];
+
+    plusultra.home.extraOptions = { programs.nix-index.enable = true; };
   };
 }

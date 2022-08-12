@@ -1,4 +1,4 @@
-inputs@{ lib, darwin, nixpkgs, home-manager, nixos-generators, ... }:
+inputs@{ lib, darwin, nixpkgs, home-manager, nixos-generators, nix-ld, ... }:
 
 rec {
   virtualSystems = [
@@ -59,8 +59,11 @@ rec {
             formatModule =
               builtins.getAttr format nixos-generators.nixosModules;
             image = nixpkgs.lib.nixosSystem (args // {
-              modules = [ formatModule home-manager.nixosModules.home-manager ]
-                ++ (args.modules);
+              modules = [
+                formatModule
+                home-manager.nixosModules.home-manager
+                nix-ld.nixosModules.nix-ld
+              ] ++ (args.modules);
               inherit (args) specialArgs;
             });
           in image.config.system.build.${image.config.formatAttr};
@@ -72,10 +75,12 @@ rec {
     } else {
       builder = args:
         nixpkgs.lib.nixosSystem (args // {
-          modules = args.modules ++ [
-
-            { imports = [ home-manager.nixosModules.home-manager ]; }
-          ];
+          modules = args.modules ++ [{
+            imports = [
+              home-manager.nixosModules.home-manager
+              nix-ld.nixosModules.nix-ld
+            ];
+          }];
         });
     };
 

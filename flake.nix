@@ -52,11 +52,17 @@
     deploy-rs.url =
       "github:serokell/deploy-rs?rev=41f15759dd8b638e7b4f299730d94d5aa46ab7eb";
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
+    # Run unpatched dynamically compiled binaries
+    nix-ld.url = "github:Mic92/nix-ld";
+    nix-ld.inputs.nixpkgs.follows = "nixpkgs";
+    nix-alien.url = "github:thiagokokada/nix-alien";
+    nix-alien.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, utils
     , nixos-hardware, darwin, nmd, nixos-generators, powercord-overlay
-    , deploy-rs, ... }:
+    , deploy-rs, nix-ld, nix-alien, ... }:
     let
       lib = import ./lib inputs;
       hosts = lib.mkHosts {
