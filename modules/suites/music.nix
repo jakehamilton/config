@@ -6,5 +6,12 @@ in {
     enable = mkBoolOpt false "Whether or not to enable music configuration.";
   };
 
-  config = mkIf cfg.enable { plusultra = { apps = { ardour = enabled; }; }; };
+  config = mkIf cfg.enable {
+    plusultra = {
+      apps = {
+        ardour = enabled;
+        bottles = enabled;
+      };
+    };
+  };
 }

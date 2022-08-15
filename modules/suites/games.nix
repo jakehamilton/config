@@ -9,6 +9,7 @@ let
     winetricks = enabled;
     protontricks = enabled;
     doukutsu-rs = enabled;
+    bottles = enabled;
   };
   cli-apps = {
     wine = enabled;
