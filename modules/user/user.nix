@@ -3,7 +3,7 @@
 with lib;
 let
   cfg = config.plusultra.user;
-  defaultIconFileName = "profile.jpg";
+  defaultIconFileName = "profile.png";
   defaultIcon = pkgs.stdenvNoCC.mkDerivation {
     name = "default-icon";
     src = ./. + "/${defaultIconFileName}";
