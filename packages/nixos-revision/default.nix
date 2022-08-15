@@ -1,4 +1,5 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, gitHostCommitUrl ? "https://github.com/jakehamilton/config/commit"
+, ... }:
 
 pkgs.writeShellScriptBin "nixos-revision" ''
   HAS_HELP=false
@@ -48,7 +49,7 @@ pkgs.writeShellScriptBin "nixos-revision" ''
   REVISION=$(nixos-version --json | ${pkgs.jq}/bin/jq -r .configurationRevision)
 
   if [ $HAS_OPEN == true ]; then
-    GITHUB_URL="https://github.com/jakehamilton/config/commit/$REVISION"
+    GITHUB_URL="${gitHostCommitUrl}/$REVISION"
     echo "Opening URL: $GITHUB_URL"
     ${pkgs.xdg-utils}/bin/xdg-open $GITHUB_URL
   else
