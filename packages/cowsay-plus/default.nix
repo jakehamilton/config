@@ -14,5 +14,5 @@ in pkgs.writeShellScriptBin "cowsay-plus" ''
 
   RAND_COW=$(($RANDOM % $TOTAL_COWS))
 
-  cowsay -f ''${COWS[$RAND_COW]} $@
+  ${pkgs.cowsay}/bin/cowsay -f ''${COWS[$RAND_COW]} $@
 ''
