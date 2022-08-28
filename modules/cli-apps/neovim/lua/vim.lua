@@ -10,3 +10,12 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.number = true
 vim.opt.relativenumber = true
+
+-- Enable spell checking.
+vim.api.nvim_create_autocmd(
+	{ "BufRead", "BufNewFile" },
+	{
+		pattern = { "*.txt", "*.md", "*.tex" },
+		command = "setlocal spell",
+	}
+)
