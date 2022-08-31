@@ -29,3 +29,9 @@ set -g window-status-separator " "
 
 # Center the window list (yes, this value has to be written as "centre").
 set -g status-justify centre
+
+#+----------------+
+#+    Windows     +
+#+----------------+
+#+--- Bars ---+
+set -g pane-active-border-style "bg=default fg=blue"

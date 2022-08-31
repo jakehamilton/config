@@ -5,15 +5,21 @@ let
   cfg = config.plusultra.cli-apps.neovim;
   vimFiles = getFilesRec ./vim;
   luaFiles = getFilesRec ./lua;
-in {
+in
+{
   options.plusultra.cli-apps.neovim = with types; {
     enable = mkBoolOpt false "Whether or not to enable neovim.";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ page nodePackages.eslint ];
+    environment.systemPackages = with pkgs; [
+      # Page is removed currently due to conflicts with toggleterm.
+      page
+      nodePackages.eslint
+    ];
     environment.variables = {
       PAGER = "page";
+      # MANPAGER = "page -t man";
       MANPAGER =
         "page -C -e 'au User PageDisconnect sleep 100m|%y p|enew! |bd! #|pu p|set ft=man'";
       NPM_CONFIG_PREFIX = "$HOME/.npm-global";
@@ -59,9 +65,13 @@ in {
             sumneko-lua-language-server
             nixfmt
             ripgrep
-            lua5_2
-            lua52Packages.plenary-nvim
+            lua5_1
             rnix-lsp
+          ];
+
+          extraLuaPackages = with pkgs.lua51Packages; [
+            plenary-nvim
+            gitsigns-nvim
           ];
 
           plugins = with pkgs.vimPlugins; [
@@ -80,10 +90,8 @@ in {
             telescope-symbols-nvim
             telescope-project-nvim
 
-            # nerdtree
             nvim-tree-lua
             nvim-web-devicons
-            # vim-nerdtree-syntax-highlight
 
             nord-nvim
             lualine-nvim
@@ -99,9 +107,9 @@ in {
             twilight-nvim
             trouble-nvim
 
-            vim-gitgutter
-            vim-fugitive
-            git-messenger-vim
+            # vim-gitgutter
+            # vim-fugitive
+            # git-messenger-vim
             gitsigns-nvim
 
             todo-comments-nvim
@@ -123,21 +131,31 @@ in {
             lua-dev-nvim
 
             dashboard-nvim
+            vim-tmux-navigator
           ];
 
-          extraConfig = let
-            vimConfig = builtins.map lib.strings.fileContents vimFiles;
-            luaConfig = builtins.map lib.strings.fileContents luaFiles;
-            vim = builtins.concatStringsSep "\n" vimConfig;
-            luaImports = builtins.map (file: "luafile ${file}") luaFiles;
-            lua = builtins.concatStringsSep "\n" luaImports;
-          in ''
-            " Custom VIML Config.
-            ${vim}
+          extraConfig =
+            let
+              vimImports = builtins.map (file: "source ${file}") vimFiles;
+              vim = builtins.concatStringsSep "\n" vimImports;
+              luaImports = builtins.map (file: "luafile ${file}") luaFiles;
+              lua = builtins.concatStringsSep "\n" luaImports;
+            in
+            ''
+              lua <<EOF
+                -- Allow imports from common locations for some packages.
+                -- This is required for things like sumneko_lua to work.
+                local runtime_path = vim.split(package.path, ";")
+                table.insert(runtime_path, "lua/?.lua")
+                table.insert(runtime_path, "lua/?/init.lua")
+              EOF
 
-            " Custom Lua Config.
-            ${lua}
-          '';
+              " Custom VIML Config.
+              ${vim}
+
+              " Custom Lua Config.
+              ${lua}
+            '';
         };
       };
     };

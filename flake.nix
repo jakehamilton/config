@@ -8,11 +8,11 @@
 
     # NixPkgs Unstable (nixos-unstable)
     nixpkgs-unstable.url =
-      "github:nixos/nixpkgs?rev=168d1c578909dc143ba52dbed661c36e76b12b36";
+      "github:nixos/nixpkgs?rev=a63021a330d8d33d862a8e29924b42d73037dd37";
 
     # Home Manager (release-22.05)
     home-manager.url =
-      "github:nix-community/home-manager?rev=ac2287df5a2d6f0a44bbcbd11701dbbf6ec43675";
+      "github:nix-community/home-manager?rev=4a3d01fb53f52ac83194081272795aa4612c2381";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # macOS Support (master)
@@ -60,16 +60,30 @@
     nix-alien.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, utils
-    , nixos-hardware, darwin, nmd, nixos-generators, powercord-overlay
-    , deploy-rs, nix-ld, nix-alien, ... }:
+  outputs =
+    inputs@{ self
+    , nixpkgs
+    , nixpkgs-unstable
+    , home-manager
+    , utils
+    , nixos-hardware
+    , darwin
+    , nmd
+    , nixos-generators
+    , powercord-overlay
+    , deploy-rs
+    , nix-ld
+    , nix-alien
+    , ...
+    }:
     let
       lib = import ./lib inputs;
       hosts = lib.mkHosts {
         inherit self;
         src = ./machines;
       };
-    in utils.lib.mkFlake {
+    in
+    utils.lib.mkFlake {
       inherit self inputs lib hosts;
 
       channelsConfig = { allowUnfree = true; };
@@ -81,7 +95,8 @@
       deploy = lib.mkDeploy { inherit self; };
 
       checks = builtins.mapAttrs
-        (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+        (system: deployLib: deployLib.deployChecks self.deploy)
+        deploy-rs.lib;
 
       outputsBuilder = channels:
         let
@@ -138,41 +153,49 @@
           fullDocList = lib.optionAttrSetToDocList evaluatedModules.options;
           visibleDocList =
             lib.filter (opt: opt.visible && !opt.internal) fullDocList;
-          targetedDocList = lib.map (doc:
-            doc // {
-              declarations = lib.map' doc.declarations (path:
-                let parts = builtins.split "/nix/store/[^/]+" path;
-                in if (builtins.length parts) == 3 then
-                  builtins.elemAt parts 2
-                else
-                  path);
-            }) visibleDocList;
+          targetedDocList = lib.map
+            (doc:
+              doc // {
+                declarations = lib.map' doc.declarations (path:
+                  let parts = builtins.split "/nix/store/[^/]+" path;
+                  in
+                  if (builtins.length parts) == 3 then
+                    builtins.elemAt parts 2
+                  else
+                    path);
+              })
+            visibleDocList;
           docList = targetedDocList;
-        in {
-          packages = let
-            pkgsFromOverlays =
-              (utils.lib.exportPackages self.overlays channels);
-            plusultraPackages = let
-              fn = import (lib.getOverlayPath "plusultra");
-              overlay = fn (inputs // { inherit lib; });
-              packages = overlay pkgs pkgs;
-            in packages;
+        in
+        {
+          packages =
+            let
+              pkgsFromOverlays =
+                (utils.lib.exportPackages self.overlays channels);
+              plusultraPackages =
+                let
+                  fn = import (lib.getOverlayPath "plusultra");
+                  overlay = fn (inputs // { inherit lib; });
+                  packages = overlay pkgs pkgs;
+                in
+                packages;
 
-          in pkgsFromOverlays // plusultraPackages.plusultra // {
-            wallpapers = pkgs.callPackage (lib.getPackagePath "/wallpapers")
-              (inputs // { inherit pkgs lib; });
+            in
+            pkgsFromOverlays // plusultraPackages.plusultra // {
+              wallpapers = pkgs.callPackage (lib.getPackagePath "/wallpapers")
+                (inputs // { inherit pkgs lib; });
 
-            jsonDocs = pkgs.stdenvNoCC.mkDerivation {
-              name = "plusultra-docs-json";
-              src = builtins.toFile "docs.json" (builtins.toJSON docList);
+              jsonDocs = pkgs.stdenvNoCC.mkDerivation {
+                name = "plusultra-docs-json";
+                src = builtins.toFile "docs.json" (builtins.toJSON docList);
 
-              dontUnpack = true;
+                dontUnpack = true;
 
-              installPhase = ''
-                cp $src $out
-              '';
+                installPhase = ''
+                  cp $src $out
+                '';
+              };
             };
-          };
         };
     };
 }
