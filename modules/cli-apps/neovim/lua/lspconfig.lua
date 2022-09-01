@@ -68,9 +68,9 @@ local on_attach = function(client, buffer)
 end
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-lsp.gopls.setup {}
-lsp.tsserver.setup {}
-lsp.rust_analyzer.setup {}
+-- lsp.gopls.setup {}
+-- lsp.tsserver.setup {}
+-- lsp.rust_analyzer.setup {}
 
 -- @TODO(jakehamilton): Add support for tailwind. Requires
 -- 	adding @tailwindcss/language-server.
@@ -82,35 +82,34 @@ lsp.rust_analyzer.setup {}
 
 -- @TODO(jakehamilton): Add support for vim. Requires
 -- 	adding vim-language-server.
--- lsp.cssmodules_ls.setup {}
+-- lsp.vim.setup {}
 
 -- @TODO(jakehamilton): Add support for bash. Requires
 -- 	adding bash-language-server.
 -- lsp.bashls.setup {}
 
 -- sumneko-lua-language-server.
-local runtime_path = vim.split(package.path, ";")
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
-lsp.sumneko_lua.setup {
-	on_attach = on_attach,
-	cmd = { "lua-language-server" },
-	settings = {
-		Lua = {
-			telemetry = {
-				enable = false
-			},
-			format = {
-				enable = true,
-				defaultConfig = {
-					indent_style = "space",
-					indent_size = "2"
-				}
-			}
-		}
-	}
-}
+-- local runtime_path = vim.split(package.path, ";")
+-- table.insert(runtime_path, "lua/?.lua")
+-- table.insert(runtime_path, "lua/?/init.lua")
+-- lsp.sumneko_lua.setup {
+-- 	on_attach = on_attach,
+-- 	cmd = { "lua-language-server" },
+-- 	settings = {
+-- 		Lua = {
+-- 			telemetry = {
+-- 				enable = false
+-- 			},
+-- 			format = {
+-- 				enable = true,
+-- 				defaultConfig = {
+-- 					indent_style = "space",
+-- 					indent_size = "2"
+-- 				}
+-- 			}
+-- 		}
+-- 	}
+-- }
 
 -- vscode-langservers-extracted
 -- lsp.html.setup {}
@@ -169,7 +168,13 @@ vim.api.nvim_create_autocmd(
 	{
 		pattern = { "*" },
 		callback = function()
+			---@diagnostic disable-next-line: missing-parameter
 			vim.lsp.buf.formatting_sync()
 		end,
 	}
 )
+
+-- Disable the preview window for omnifunc use.
+vim.cmd [[
+	set completeopt=menu
+]]

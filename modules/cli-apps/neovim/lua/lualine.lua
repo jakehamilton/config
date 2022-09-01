@@ -12,6 +12,7 @@ theme.normal.b.fg = colors.white
 
 -- Color the center area of the status line.
 theme.normal.c.bg = colors.black
+theme.inactive.c.bg = colors.black
 
 -- This is a workaround for coloring not working on the ends of
 -- the status line. Without this, the background of the first and

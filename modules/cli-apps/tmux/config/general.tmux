@@ -27,3 +27,16 @@ set-option -ga terminal-overrides ",xterm-256color:Tc"
 
 # Expand the left status to accomodate longer session names.
 set-option -g status-left-length 20
+
+# One of the plugins binds C-l, make sure we have accces to it.
+unbind C-l
+bind -n C-l send-keys C-l
+
+# Don't require a prompt to detach from the current session.
+unbind -n M-E
+bind -n M-E detach-client
+
+# Reload tmux configuration from ~/.config/tmux/tmux.conf instead
+# of Tilish's default of ~/.tmux.conf.
+unbind -n M-C
+bind -n M-C source-file "~/.config/tmux/tmux.conf"

@@ -1,4 +1,5 @@
 local tree = require("nvim-tree")
+local which_key = require("which-key")
 
 local function reload_tree()
 	tree.api.reload()
@@ -30,4 +31,11 @@ local function map(mode, lhs, rhs, opts)
 end
 
 -- Toggle the file tree.
-map("n", "<C-n>", ":NvimTreeToggle<CR>", { silent = true })
+map("n", "<C-n>", ":NvimTreeToggle<cr>", { silent = true })
+
+which_key.register({
+	g = {
+		name = "Go",
+		f = { "<cmd>:NvimTreeFindFile<cr>", "Current File" },
+	},
+}, { mode = "n", prefix = "<leader>", silent = true })

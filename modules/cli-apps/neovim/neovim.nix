@@ -13,13 +13,11 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      # Page is removed currently due to conflicts with toggleterm.
       page
-      nodePackages.eslint
     ];
+
     environment.variables = {
       PAGER = "page";
-      # MANPAGER = "page -t man";
       MANPAGER =
         "page -C -e 'au User PageDisconnect sleep 100m|%y p|enew! |bd! #|pu p|set ft=man'";
       NPM_CONFIG_PREFIX = "$HOME/.npm-global";
@@ -34,10 +32,19 @@ in
 
     plusultra.home = {
       file = {
+        # ESLint
         ".npm-global/bin/eslint".source =
           "${pkgs.nodePackages.eslint}/bin/eslint";
         ".npm-global/lib/node_modules/eslint".source =
           "${pkgs.nodePackages.eslint}/lib/node_modules/eslint";
+
+        # TypeScript
+        ".npm-global/lib/node_modules/typescript".source =
+          "${pkgs.nodePackages.typescript}/lib/node_modules/typescript";
+        ".npm-global/bin/tsc".source =
+          "${pkgs.nodePackages.typescript}/bin/tsc";
+        ".npm-global/bin/tsserver".source =
+          "${pkgs.nodePackages.typescript}/bin/tsserver";
       };
 
       extraOptions = {
@@ -45,28 +52,44 @@ in
           enable = true;
           package = pkgs.neovim-unwrapped;
 
+          # Use Neovim as a replacement for Vi, Vim, and Vimdiff.
           viAlias = true;
           vimAlias = true;
           vimdiffAlias = true;
+
+          # Enable ecosystem plugins.
           withNodeJs = true;
           withPython3 = true;
           withRuby = true;
 
           extraPackages = with pkgs; [
+            # Grammar
             tree-sitter
-            nodePackages.typescript
-            nodePackages.typescript-language-server
-            nodePackages.pyright
-            nodePackages.vscode-langservers-extracted
-            nodePackages.eslint
-            nodePackages.tailwindcss
+
+            # Language Servers
             gopls
+            rnix-lsp
             rust-analyzer
             sumneko-lua-language-server
+            nodePackages.vscode-langservers-extracted
+            nodePackages.typescript-language-server
+
+            # Language Server Dependencies
+            nodePackages.eslint
+            nodePackages.pyright
+            nodePackages.typescript
+            nodePackages.tailwindcss
+
+            # Formatters
             nixfmt
+            rustfmt
+            nodePackages.prettier
+
+            # Utility
             ripgrep
+
+            # Misc
             lua5_1
-            rnix-lsp
           ];
 
           extraLuaPackages = with pkgs.lua51Packages; [
@@ -75,62 +98,85 @@ in
           ];
 
           plugins = with pkgs.vimPlugins; [
-            plenary-nvim
+            # Icons
+            nvim-web-devicons
 
-            direnv-vim
-            editorconfig-nvim
-            vim-polyglot
-            nvim-lspconfig
-            lsp-colors-nvim
-            vim-illuminate
+            # Syntax
+            # vim-polyglot
+            vim-nix
+            nvim-ts-rainbow
             (nvim-treesitter.withPlugins
               (plugins: pkgs.tree-sitter.allGrammars))
 
+            # Utility
+            plenary-nvim
+            vim-bufkill
+            lua-dev-nvim
+
+            # Telescope
             telescope-nvim
             telescope-symbols-nvim
             telescope-project-nvim
 
-            nvim-tree-lua
-            nvim-web-devicons
-
-            nord-nvim
-            lualine-nvim
-            lualine-lsp-progress
-            bufferline-nvim
-
-            delimitMate
-            nvim-ts-rainbow
-            which-key-nvim
-
-            vim-nix
-
-            twilight-nvim
+            # Language Server
+            nvim-lspconfig
+            lsp-colors-nvim
+            nvim-jdtls
             trouble-nvim
 
-            # vim-gitgutter
-            # vim-fugitive
-            # git-messenger-vim
-            gitsigns-nvim
+            # Direnv
+            direnv-vim
 
-            todo-comments-nvim
-
-            hop-nvim
+            # Text Manipulation
             vim-repeat
             vim-surround
             vim-commentary
 
-            nvim-jdtls
+            # Movement
+            hop-nvim
+            neoscroll-nvim
 
-            vim-markdown
-            markdown-preview-nvim
-            vim-markdown-toc
+            # File Browser
+            nvim-tree-lua
 
-            vim-bufkill
+            # Editor Configuration
+            editorconfig-nvim
+
+            # Highlighting & View Augmentation
+            vim-illuminate
+            todo-comments-nvim
+            delimitMate
+            twilight-nvim
+
+            # Theme
+            nord-nvim
+
+            # Status Line & Buffer Line
+            lualine-nvim
+            lualine-lsp-progress
+            bufferline-nvim
+
+            # Termianl
             toggleterm-nvim
 
-            lua-dev-nvim
+            # Git
+            gitsigns-nvim
+            # vim-gitgutter
+            # vim-fugitive
+            # git-messenger-vim
 
+            # Which Key
+            which-key-nvim
+
+            # Dashboard
             dashboard-nvim
+
+            # Markdown
+            markdown-preview-nvim
+            vim-markdown
+            vim-markdown-toc
+
+            # Tmux
             vim-tmux-navigator
           ];
 
