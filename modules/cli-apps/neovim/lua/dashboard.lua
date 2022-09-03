@@ -11,14 +11,14 @@ db.custom_center = {
 	{
 		icon = "  ",
 		desc = "Recent Files                         ",
-		shortcut = "SPC f h",
-		action = "DashboardFindHistory",
+		shortcut = "SPC f r",
+		action = "Telescope oldfiles",
 	},
 	{
 		icon = "  ",
 		desc = "Open File                            ",
-		shortcut = "SPC f b",
-		action = "Telescope file_browser",
+		shortcut = "SPC f f",
+		action = "Telescope find_files",
 	},
 	{
 		icon = "  ",

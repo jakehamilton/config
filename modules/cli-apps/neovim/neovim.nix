@@ -1,10 +1,10 @@
-{ options, config, lib, pkgs, ... }:
+inputs@{ options, config, lib, pkgs, ... }:
 
 with lib;
 let
   cfg = config.plusultra.cli-apps.neovim;
-  vimFiles = getFilesRec ./vim;
-  luaFiles = getFilesRec ./lua;
+  vimConfig = import ./vim inputs;
+  luaConfig = import ./lua inputs;
 in
 {
   options.plusultra.cli-apps.neovim = with types; {
@@ -31,22 +31,6 @@ in
     };
 
     plusultra.home = {
-      file = {
-        # ESLint
-        ".npm-global/bin/eslint".source =
-          "${pkgs.nodePackages.eslint}/bin/eslint";
-        ".npm-global/lib/node_modules/eslint".source =
-          "${pkgs.nodePackages.eslint}/lib/node_modules/eslint";
-
-        # TypeScript
-        ".npm-global/lib/node_modules/typescript".source =
-          "${pkgs.nodePackages.typescript}/lib/node_modules/typescript";
-        ".npm-global/bin/tsc".source =
-          "${pkgs.nodePackages.typescript}/bin/tsc";
-        ".npm-global/bin/tsserver".source =
-          "${pkgs.nodePackages.typescript}/bin/tsserver";
-      };
-
       extraOptions = {
         programs.neovim = {
           enable = true;
@@ -67,17 +51,14 @@ in
             tree-sitter
 
             # Language Servers
+            sqls
             gopls
             rnix-lsp
             rust-analyzer
             sumneko-lua-language-server
-            nodePackages.vscode-langservers-extracted
-            nodePackages.typescript-language-server
 
             # Language Server Dependencies
-            nodePackages.eslint
             nodePackages.pyright
-            nodePackages.typescript
             nodePackages.tailwindcss
 
             # Formatters
@@ -102,7 +83,6 @@ in
             nvim-web-devicons
 
             # Syntax
-            # vim-polyglot
             vim-nix
             nvim-ts-rainbow
             (nvim-treesitter.withPlugins
@@ -181,12 +161,6 @@ in
           ];
 
           extraConfig =
-            let
-              vimImports = builtins.map (file: "source ${file}") vimFiles;
-              vim = builtins.concatStringsSep "\n" vimImports;
-              luaImports = builtins.map (file: "luafile ${file}") luaFiles;
-              lua = builtins.concatStringsSep "\n" luaImports;
-            in
             ''
               lua <<EOF
                 -- Allow imports from common locations for some packages.
@@ -197,10 +171,10 @@ in
               EOF
 
               " Custom VIML Config.
-              ${vim}
+              ${vimConfig}
 
               " Custom Lua Config.
-              ${lua}
+              ${luaConfig}
             '';
         };
       };

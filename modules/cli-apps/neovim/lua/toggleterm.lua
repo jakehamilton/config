@@ -1,34 +1,6 @@
 local colors = require("nord.named_colors")
 local Terminal = require("toggleterm.terminal").Terminal
 
-_G.log = ""
-
-local function log(msg)
-	if _G.log == "" then
-		_G.log = msg
-	else
-		_G.log = _G.log .. " | " .. msg
-	end
-end
-
-local function bool_to_string(bool)
-	if bool then
-		return "true"
-	else
-		return "false"
-	end
-end
-
-local function map(mode, lhs, rhs, opts)
-	local options = { noremap = true }
-
-	if opts then
-		options = vim.tbl_extend("force", options, opts)
-	end
-
-	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
 local is_floating_terminal_mapped = false
 
 local term = Terminal:new {
@@ -54,23 +26,8 @@ local term = Terminal:new {
 	end
 }
 
--- vim.api.nvim_buf_set_keymap(term.bufnr, "t", [[<C-\>]], "", {
--- 	noremap = true,
--- 	callback = function()
--- 		term:toggle()
--- 	end,
--- })
-
--- vim.api.nvim_buf_get_option(_G.some_buf.id, "filetype")
-
 local function handle_buffer_enter(event)
 	local filetype = vim.api.nvim_buf_get_option(event.buf, "filetype")
-	-- local is_loaded = vim.api.nvim_buf_is_loaded(event.buf)
-	-- local name = vim.api.nvim_buf_get_name(event.buf)
-
-	-- log("name=" .. name)
-	-- log("filetype=" .. filetype)
-	-- log("is_loaded=" .. bool_to_string(is_loaded))
 
 	if filetype ~= "pager" and filetype ~= "man" then
 		vim.api.nvim_buf_set_keymap(event.buf, "n", [[<C-\>]], "", {
