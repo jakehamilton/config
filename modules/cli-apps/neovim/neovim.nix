@@ -31,6 +31,10 @@ in
     };
 
     plusultra.home = {
+      configFile = {
+        "dashboard-nvim/.keep".text = "";
+      };
+
       extraOptions = {
         programs.neovim = {
           enable = true;

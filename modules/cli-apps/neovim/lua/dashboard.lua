@@ -1,6 +1,8 @@
 local home = os.getenv("HOME")
 local db = require("dashboard")
 
+db.session_directory = home .. "/.config/dashboard-nvim/";
+
 db.custom_center = {
 	{
 		icon = "  ",
