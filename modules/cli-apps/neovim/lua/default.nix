@@ -51,6 +51,7 @@ let
 in
 mkLuaConfigs [
   ./bufferline.lua
+  ./cmp.lua
   ./dashboard.lua
   ./fzf.lua
   ./git.lua

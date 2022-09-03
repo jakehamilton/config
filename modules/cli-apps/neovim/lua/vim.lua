@@ -21,7 +21,8 @@ vim.api.nvim_create_autocmd(
 )
 
 -- Use <C-Space> to open up autocompletion.
-vim.api.nvim_set_keymap("i", "<C-Space>", "<C-x><C-o>", {
-	silent = true,
-	noremap = true,
-})
+-- @NOTE(jakehamilton): This is now handled by cmp-nvim.
+-- vim.api.nvim_set_keymap("i", "<C-Space>", "<C-x><C-o>", {
+-- 	silent = true,
+-- 	noremap = true,
+-- })

@@ -104,6 +104,14 @@ in
             nvim-jdtls
             trouble-nvim
 
+            # Autocomplete
+            nvim-cmp
+            cmp-nvim-lsp
+
+            # Snippets
+            luasnip
+            cmp_luasnip
+
             # Direnv
             direnv-vim
 

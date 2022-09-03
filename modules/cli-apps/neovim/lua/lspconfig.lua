@@ -67,6 +67,9 @@ end
 -- 	adding yaml-language-server.
 -- lsp.yamlls.setup {}
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+
 -- Configure servers with common settings.
 local servers = {
 	'rnix',
@@ -78,6 +81,7 @@ local servers = {
 for _, name in pairs(servers) do
 	lsp[name].setup {
 		on_attach = on_attach,
+		capabilities = capabilities,
 	}
 end
 
@@ -85,36 +89,42 @@ end
 lsp.tsserver.setup {
 	on_attach = on_attach,
 	cmd = { "@typescriptLanguageServer@", "--stdio", "--tsserver-path", "@typescript@" },
+	capabilities = capabilities,
 }
 
 -- ESLint
 lsp.eslint.setup {
 	on_attach = on_attach,
 	cmd = { "@eslintLanguageServer@", "--stdio" },
+	capabilities = capabilities,
 }
 
 -- JSON
 lsp.jsonls.setup {
 	on_attach = on_attach,
 	cmd = { "@jsonLanguageServer@", "--stdio" },
+	capabilities = capabilities,
 }
 
 -- HTML
 lsp.html.setup {
 	on_attach = on_attach,
 	cmd = { "@htmlLanguageServer@", "--stdio" },
+	capabilities = capabilities,
 }
 
 -- CSS
 lsp.cssls.setup {
 	on_attach = on_attach,
-	cmd = { "@cssLanguageServer@", "--stdio" }
+	cmd = { "@cssLanguageServer@", "--stdio" },
+	capabilities = capabilities,
 }
 
 -- Docker
 lsp.dockerls.setup {
 	on_attach = on_attach,
-	cmd = { "@dockerLanguageServer@", "--stdio" }
+	cmd = { "@dockerLanguageServer@", "--stdio" },
+	capabilities = capabilities,
 }
 
 -- Lua
@@ -132,6 +142,7 @@ local luadev = require("lua-dev").setup {
 				}
 			},
 		},
+		capabilities = capabilities,
 	},
 }
 
