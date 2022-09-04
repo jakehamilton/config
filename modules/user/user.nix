@@ -16,7 +16,8 @@ let
 
     passthru = { fileName = defaultIconFileName; };
   };
-in {
+in
+{
   options.plusultra.user = with types; {
     name = mkOpt str "short" "The name to use for the user account.";
     fullName = mkOpt str "Jake Hamilton" "The full name of the user.";
@@ -76,7 +77,7 @@ in {
               character = {
                 success_symbol = "[➜](bold green)";
                 error_symbol = "[✗](bold red) ";
-                vicmd_symbol = "[🔍](bold blue) ";
+                vicmd_symbol = "[](bold blue) ";
               };
             };
           };

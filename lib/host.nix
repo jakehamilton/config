@@ -34,24 +34,29 @@ rec {
   isDarwin = lib.hasInfix "darwin";
   isVirtual = system:
     lib.foldl
-    (exists: virtualSystem: exists || lib.hasInfix virtualSystem system) false
-    virtualSystems;
+      (exists: virtualSystem: exists || lib.hasInfix virtualSystem system)
+      false
+      virtualSystems;
 
   getVirtual = system:
-    lib.foldl (result: virtualSystem:
-      if lib.not null result then
-        result
-      else if lib.hasInfix virtualSystem system then
-        virtualSystem
-      else
-        null) null virtualSystems;
+    lib.foldl
+      (result: virtualSystem:
+        if lib.not null result then
+          result
+        else if lib.hasInfix virtualSystem system then
+          virtualSystem
+        else
+          null)
+      null
+      virtualSystems;
 
   getDynamicConfig = system:
     if lib.isVirtual system then
       let
         format = getVirtual system;
         system' = builtins.replaceStrings [ format ] [ "linux" ] system;
-      in {
+      in
+      {
         output = "${format}Configurations";
         system = system';
         builder = args:
@@ -66,7 +71,8 @@ rec {
               ] ++ (args.modules);
               inherit (args) specialArgs;
             });
-          in image.config.system.build.${image.config.formatAttr};
+          in
+          image.config.system.build.${image.config.formatAttr};
       }
     else if lib.isDarwin system then {
       output = "darwinConfigurations";
@@ -93,9 +99,15 @@ rec {
       inherit lib;
     } // args;
 
-  mkHost = { self ? { }, system, path
-    , name ? lib.getFileName (builtins.baseNameOf path), modules ? [ ]
-    , specialArgs ? { }, channelName ? "nixpkgs" }: {
+  mkHost =
+    { self ? { }
+    , system
+    , path
+    , name ? lib.getFileName (builtins.baseNameOf path)
+    , modules ? [ ]
+    , specialArgs ? { }
+    , channelName ? "nixpkgs"
+    }: {
       "${name}" = withDynamicConfig system {
         inherit system channelName;
         modules =
@@ -103,7 +115,8 @@ rec {
           ++ [
             ({ config, ... }:
               let revision = self.sourceInfo.rev or "dirty";
-              in {
+              in
+              {
                 # Thanks to Xe for this.
                 # https://tulpa.dev/cadey/nixos-configs/src/commit/f53891121ce4204f57409cbe9e6fcee3b030a350/flake.nix#L50
                 system.configurationRevision = revision;
@@ -111,23 +124,30 @@ rec {
                   "<<< Welcome to NixOS ${config.system.nixos.label} @ ${revision} >>>";
               })
           ] ++ [ path ] ++ modules;
-        specialArgs = mkSpecialArgs (specialArgs // { inherit system name; });
+        specialArgs = mkSpecialArgs (specialArgs // { inherit system name; hosts = self.nixosConfigurations; });
       };
     };
 
   mkHosts = { self ? { }, src, hostOptions ? { } }:
     let
       systems = lib.getDirs src;
-      hosts = builtins.concatMap (systemPath:
-        let
-          system = builtins.baseNameOf systemPath;
-          modules = lib.getDirs systemPath;
-        in builtins.map (path:
+      hosts = builtins.concatMap
+        (systemPath:
           let
-            name = lib.getFileName (builtins.baseNameOf path);
-            options = lib.optionalAttrs (builtins.hasAttr name hostOptions)
-              hostOptions.${name};
-            host = mkHost ({ inherit self system path name; } // options);
-          in host) modules) systems;
-    in lib.foldl lib.merge { } hosts;
+            system = builtins.baseNameOf systemPath;
+            modules = lib.getDirs systemPath;
+          in
+          builtins.map
+            (path:
+              let
+                name = lib.getFileName (builtins.baseNameOf path);
+                options = lib.optionalAttrs (builtins.hasAttr name hostOptions)
+                  hostOptions.${name};
+                host = mkHost ({ inherit self system path name; } // options);
+              in
+              host)
+            modules)
+        systems;
+    in
+    lib.foldl lib.merge { } hosts;
 }

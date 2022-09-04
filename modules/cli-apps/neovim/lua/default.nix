@@ -57,6 +57,7 @@ mkLuaConfigs [
   ./git.lua
   ./gitsigns.lua
   ./hop.lua
+  ./icon-picker.lua
   ./keys.lua
   {
     file = ./lspconfig.lua;
