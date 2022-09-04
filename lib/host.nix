@@ -62,6 +62,10 @@ rec {
         builder = args:
           nixos-generators.nixosGenerate (args // {
             inherit format;
+            # pkgs = args.specialArgs.channel;
+            specialArgs = args.specialArgs // {
+              inherit format;
+            };
             modules = args.modules ++ [{
               imports = [
                 home-manager.nixosModules.home-manager
@@ -73,10 +77,17 @@ rec {
     else if lib.isDarwin system then {
       output = "darwinConfigurations";
       builder = args:
-        darwin.lib.darwinSystem (builtins.removeAttrs args [ "system" ]);
+        darwin.lib.darwinSystem ((builtins.removeAttrs args [ "system" ]) // {
+          specialArgs = args.specialArgs // {
+            format = "darwin";
+          };
+        });
     } else {
       builder = args:
         nixpkgs.lib.nixosSystem (args // {
+          specialArgs = args.specialArgs // {
+            format = "linux";
+          };
           modules = args.modules ++ [{
             imports = [
               home-manager.nixosModules.home-manager

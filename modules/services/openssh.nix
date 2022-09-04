@@ -1,4 +1,4 @@
-{ options, config, pkgs, lib, hosts, name, ... }:
+{ options, config, pkgs, lib, hosts, name, format, ... }:
 
 with lib;
 let
@@ -28,7 +28,7 @@ in
     services.openssh = {
       enable = true;
       passwordAuthentication = false;
-      permitRootLogin = "no";
+      permitRootLogin = if format == "install-iso" then "yes" else "no";
     };
 
     programs.ssh.extraConfig = ''
