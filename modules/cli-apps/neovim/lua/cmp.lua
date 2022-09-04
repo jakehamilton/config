@@ -24,7 +24,7 @@ cmp.setup {
 				fallback()
 			end
 		end, { "i", "s" }),
-		["<Tab>"] = cmp.mapping(function(fallback)
+		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
 			elseif luasnip.expand_or_jumpable() then
