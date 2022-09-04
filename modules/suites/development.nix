@@ -12,13 +12,22 @@ let
     yubikey = enabled;
     prisma = enabled;
   };
-in {
+in
+{
   options.plusultra.suites.development = with types; {
     enable = mkBoolOpt false
       "Whether or not to enable common development configuration.";
   };
 
   config = mkIf cfg.enable {
+    networking.firewall.allowedTCPPorts = [
+      12345
+      3000
+      3001
+      8080
+      8081
+    ];
+
     plusultra = {
       inherit apps cli-apps;
 
