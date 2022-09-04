@@ -15,7 +15,10 @@ with lib; {
       gparted = enabled;
     };
 
-    cli-apps = { neovim = enabled; };
+    cli-apps = {
+      neovim = enabled;
+      tmux = enabled;
+    };
 
     desktop = {
       gnome = {
@@ -44,7 +47,10 @@ with lib; {
       networking = enabled;
     };
 
-    services = { printing = enabled; };
+    services = {
+      openssh = enabled;
+      printing = enabled;
+    };
 
     security = {
       doas = enabled;

@@ -60,19 +60,15 @@ rec {
         output = "${format}Configurations";
         system = system';
         builder = args:
-          let
-            formatModule =
-              builtins.getAttr format nixos-generators.nixosModules;
-            image = nixpkgs.lib.nixosSystem (args // {
-              modules = [
-                formatModule
+          nixos-generators.nixosGenerate (args // {
+            inherit format;
+            modules = args.modules ++ [{
+              imports = [
                 home-manager.nixosModules.home-manager
                 nix-ld.nixosModules.nix-ld
-              ] ++ (args.modules);
-              inherit (args) specialArgs;
-            });
-          in
-          image.config.system.build.${image.config.formatAttr};
+              ];
+            }];
+          });
       }
     else if lib.isDarwin system then {
       output = "darwinConfigurations";

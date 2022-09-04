@@ -35,7 +35,7 @@
 
     # Generate System Images
     nixos-generators.url =
-      "github:nix-community/nixos-generators?rev=fb3ee0f618b8c80dea1239691b15dfeb4bb46331";
+      "github:nix-community/nixos-generators?rev=adccd191a0e83039d537e021f19495b7bad546a1";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
     # Powercord (modded Discord)
