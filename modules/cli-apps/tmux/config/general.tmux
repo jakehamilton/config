@@ -15,13 +15,6 @@ bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R
 
-# @NOTE(jakehamilton): This is now handled by Tilish.
-# The same as above, but don't require the prefix first.
-# bind -n M-h select-pane -L
-# bind -n M-j select-pane -D
-# bind -n M-k select-pane -U
-# bind -n M-l select-pane -R
-
 # Fix colors being wrong in programs like Neovim.
 set-option -ga terminal-overrides ",xterm-256color:Tc"
 
@@ -40,3 +33,6 @@ bind -n M-E detach-client
 # of Tilish's default of ~/.tmux.conf.
 unbind -n M-C
 bind -n M-C source-file "~/.config/tmux/tmux.conf"
+
+# Use M-z to zoom and unzoom panes.
+bind -n M-z resize-pane -Z
