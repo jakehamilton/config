@@ -52,11 +52,11 @@
     nix-alien.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall
-    snowfall-lib.url = "path:/home/short/work/@snowfallorg/lib";
+    snowfall-lib.url = "github:snowfallorg/lib";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
     # Neovim
-    neovim.url = "path:/home/short/work/@jakehamilton/neovim";
+    neovim.url = "github:jakehamilton/neovim";
     neovim.inputs.nixpkgs.follows = "unstable";
   };
 

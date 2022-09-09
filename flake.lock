@@ -264,14 +264,17 @@
         "snowfall-lib": "snowfall-lib"
       },
       "locked": {
-        "lastModified": 1662763244,
-        "narHash": "sha256-4vNzpkbzDNG6DehCSJm2oucfLXSHPnbZHrgJXm+IsjA=",
-        "path": "/home/short/work/@jakehamilton/neovim",
-        "type": "path"
+        "lastModified": 1662763639,
+        "narHash": "sha256-oTNXfjZeGX2w6aKjtPS+mpvxR3pnjE4UXvbw17cbFY4=",
+        "owner": "jakehamilton",
+        "repo": "neovim",
+        "rev": "c18b2521157460f164b73cdeaedd5e9cb17c2637",
+        "type": "github"
       },
       "original": {
-        "path": "/home/short/work/@jakehamilton/neovim",
-        "type": "path"
+        "owner": "jakehamilton",
+        "repo": "neovim",
+        "type": "github"
       }
     },
     "nix-alien": {
@@ -476,14 +479,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1662763241,
-        "narHash": "sha256-thKfKJKYBFEQmk1VOPkjuzyM2znD7C36PFEmJ5dZ6l4=",
-        "path": "/home/short/work/@snowfallorg/lib",
-        "type": "path"
+        "lastModified": 1662763398,
+        "narHash": "sha256-7fDmaBybV7qlmIVLxMDpHAVLLNSL/JoCTETKm8x4+tw=",
+        "owner": "snowfallorg",
+        "repo": "lib",
+        "rev": "8141ee43d821bd45af9f4ce35a710eedaa61f1cf",
+        "type": "github"
       },
       "original": {
-        "path": "/home/short/work/@snowfallorg/lib",
-        "type": "path"
+        "owner": "snowfallorg",
+        "repo": "lib",
+        "type": "github"
       }
     },
     "snowfall-lib_2": {
@@ -495,14 +501,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1662763241,
-        "narHash": "sha256-thKfKJKYBFEQmk1VOPkjuzyM2znD7C36PFEmJ5dZ6l4=",
-        "path": "/home/short/work/@snowfallorg/lib",
-        "type": "path"
+        "lastModified": 1662763398,
+        "narHash": "sha256-7fDmaBybV7qlmIVLxMDpHAVLLNSL/JoCTETKm8x4+tw=",
+        "owner": "snowfallorg",
+        "repo": "lib",
+        "rev": "8141ee43d821bd45af9f4ce35a710eedaa61f1cf",
+        "type": "github"
       },
       "original": {
-        "path": "/home/short/work/@snowfallorg/lib",
-        "type": "path"
+        "owner": "snowfallorg",
+        "repo": "lib",
+        "type": "github"
       }
     },
     "unstable": {
