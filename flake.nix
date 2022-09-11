@@ -61,11 +61,13 @@
   };
 
   outputs = inputs:
-    inputs.snowfall-lib.mkFlake {
-      inherit inputs;
-
-      src = ./.;
-
+    let
+      lib = inputs.snowfall-lib.mkLib {
+        inherit inputs;
+        src = ./.;
+      };
+    in
+    lib.mkFlake {
       overlay-package-namespace = "plusultra";
 
       channels-config.allowUnfree = true;
@@ -80,5 +82,7 @@
         home-manager.nixosModules.home-manager
         nix-ld.nixosModules.nix-ld
       ];
+
+      deploy = lib.mkDeploy { inherit (inputs) self; };
     };
 }

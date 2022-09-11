@@ -145,5 +145,27 @@ with lib;
     };
   };
 
+  security.acme = {
+    acceptTerms = true;
+    defaults = {
+      dnsProvider = "digitalocean";
+      dnsPropagationCheck = true;
+      email = config.plusultra.user.email;
+      credentialsFile = "/var/lib/acme-secrets/digitalocean";
+    };
+  };
+
+  services.nginx = {
+    enable = true;
+    recommendedProxySettings = true;
+
+    virtualHosts = {
+      "minio.quartz.hamho.me" = {
+        enableACME = true;
+        locations."/".proxyPass = "http://127.0.0.1:${config.services.minio.listenAddress}";
+      };
+    };
+  };
+
   system.stateVersion = "21.11";
 }
