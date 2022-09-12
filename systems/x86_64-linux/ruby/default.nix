@@ -41,4 +41,6 @@ with lib;
       xkb = enabled;
     };
   };
+
+  system.stateVersion = "22.05";
 }
