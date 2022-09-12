@@ -88,10 +88,19 @@ in
             enableAutosuggestions = true;
             enableSyntaxHighlighting = true;
 
-            initExtra = builtins.concatStringsSep "\n" [
-              "export KEYTIMEOUT=1"
-              "fortune -s | cowsay | lolcat"
-            ];
+            initExtra = ''
+              # Fix an issue with tmux.
+              export KEYTIMEOUT=1
+
+              # Use vim bindings.
+              set -o vi
+
+              # Your regular rainbow cow fortune!
+              fortune -s | cowsay | lolcat
+
+              # Improved vim bindings.
+              source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+            '';
 
             plugins = [{
               name = "zsh-nix-shell";
