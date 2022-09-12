@@ -3,9 +3,8 @@
 # TODO(jakehamilton): Phase most of this out when nixos-hardware
 # is updated with Framework support.
 {
-  imports = with nixos-hardware.nixosModules; [
+  imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    framework
   ];
 
   boot.initrd.availableKernelModules =

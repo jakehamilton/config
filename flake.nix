@@ -21,8 +21,7 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     # Hardware Configuration
-    nixos-hardware.url =
-      "github:nixos/nixos-hardware?rev=0cab18a48de7914ef8cad35dca0bb36868f3e1af";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
     nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
 
     # Generate System Images
@@ -79,6 +78,10 @@
       systems.modules = with inputs; [
         home-manager.nixosModules.home-manager
         nix-ld.nixosModules.nix-ld
+      ];
+
+      systems.hosts.jasper.modules = with inputs; [
+        nixos-hardware.nixosModules.framework
       ];
 
       deploy = lib.mkDeploy { inherit (inputs) self; };
