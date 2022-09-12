@@ -24,6 +24,7 @@ with lib;
       fup-repl = enabled;
       comma = enabled;
       nix-ld = enabled;
+      bottom = enabled;
     };
 
     hardware = {

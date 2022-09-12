@@ -5,22 +5,22 @@ let
   cfg = config.plusultra.cli-apps.tmux;
   configFiles = lib.snowfall.fs.get-files ./config;
 
+  # Extrakto with wl-clipboard patched in.
   extrakto = pkgs.tmuxPlugins.mkTmuxPlugin {
     pluginName = "extrakto";
-    version = "unstable-2021-04-04";
+    version = "unstable-2021-04-04-wayland";
     src = pkgs.fetchFromGitHub {
       owner = "laktak";
       repo = "extrakto";
-      rev = "4ce105d42cdf5eb0ebf7287c2ad1a7c354b31498";
-      sha256 = "0nkxcigk32r5z5yphzbcrs5fkd5p9y2wxgs4m15hzm07kcpzvm6h";
+      rev = "de8ac3e8a9fa887382649784ed8cae81f5757f77";
+      sha256 = "0mkp9r6mipdm7408w7ls1vfn6i3hj19nmir2bvfcp12b69zlzc47";
     };
     nativeBuildInputs = [ pkgs.makeWrapper ];
     postInstall = ''
-      for f in extrakto.sh open.sh helpers.sh; do
-        chmod +x $target/scripts/$f
+      for f in extrakto.sh open.sh tmux-extrakto.sh; do
         wrapProgram $target/scripts/$f \
           --prefix PATH : ${with pkgs; lib.makeBinPath (
-            [ pkgs.fzf pkgs.python3 pkgs.xclip pkgs.wl-clipboard ]
+          [ pkgs.fzf pkgs.python3 pkgs.xclip wl-clipboard ]
           )}
       done
     '';
@@ -29,17 +29,18 @@ let
       description = "Fuzzy find your text with fzf instead of selecting it by hand ";
       license = lib.licenses.mit;
       platforms = lib.platforms.unix;
-      maintainers = with lib.maintainers; [ kidd ];
     };
   };
 
-  plugins = [ extrakto ] ++ (with pkgs.tmuxPlugins; [
-    continuum
-    nord
-    tilish
-    tmux-fzf
-    vim-tmux-navigator
-  ]);
+  plugins =
+    [ extrakto ] ++
+    (with pkgs.tmuxPlugins; [
+      continuum
+      nord
+      tilish
+      tmux-fzf
+      vim-tmux-navigator
+    ]);
 in
 {
   options.plusultra.cli-apps.tmux = with types; {

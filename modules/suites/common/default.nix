@@ -1,7 +1,8 @@
 { options, config, lib, pkgs, ... }:
 with lib;
 let cfg = config.plusultra.suites.common;
-in {
+in
+{
   options.plusultra.suites.common = with types; {
     enable = mkBoolOpt false "Whether or not to enable common configuration.";
   };
@@ -16,6 +17,7 @@ in {
         fup-repl = enabled;
         comma = enabled;
         nix-ld = enabled;
+        bottom = enabled;
       };
 
       hardware = {
