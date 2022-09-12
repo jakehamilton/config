@@ -190,13 +190,17 @@ with lib;
         create-proxy =
           { port
           , host ? "127.0.0.1"
+          , proxy-web-sockets ? false
           }: {
             sslCertificate = "${config.security.acme.certs."quartz.hamho.me".directory}/fullchain.pem";
             sslCertificateKey = "${config.security.acme.certs."quartz.hamho.me".directory}/key.pem";
 
             forceSSL = true;
 
-            locations."/".proxyPass = "http://${host}:${builtins.toString port}";
+            locations."/" = {
+              proxyPass = "http://${host}:${builtins.toString port}";
+              proxyWebsockets = proxy-web-sockets;
+            };
           };
       in
       {
@@ -215,6 +219,9 @@ with lib;
         "jellyfin.quartz.hamho.me" = create-proxy {
           # https://jellyfin.org/docs/general/networking/index.html#static-ports
           port = 8096;
+
+          # This is required to support sync play.
+          proxy-web-sockets = true;
         };
       };
   };
