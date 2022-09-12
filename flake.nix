@@ -75,7 +75,6 @@
       overlays = with inputs; [
         nix-alien.overlay
         powercord-overlay.overlay
-        neovim.overlays."nixpkgs/plusultra"
       ];
 
       systems.modules = with inputs; [
