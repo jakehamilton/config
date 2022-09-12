@@ -41,8 +41,7 @@
     comma.inputs.nixpkgs.follows = "unstable";
 
     # System Deployment
-    deploy-rs.url =
-      "github:serokell/deploy-rs?rev=41f15759dd8b638e7b4f299730d94d5aa46ab7eb";
+    deploy-rs.url = "github:serokell/deploy-rs";
     deploy-rs.inputs.nixpkgs.follows = "unstable";
 
     # Run unpatched dynamically compiled binaries
