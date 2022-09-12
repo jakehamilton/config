@@ -4,6 +4,12 @@ with lib;
 {
   imports = [ ./hardware.nix ];
 
+  services.zfs.autoSnapshot = {
+    enable = true;
+    flags = "-k -p --utc";
+    weekly = 4;
+  };
+
   plusultra = {
     nix = enabled;
 
