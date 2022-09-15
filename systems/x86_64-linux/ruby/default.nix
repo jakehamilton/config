@@ -4,10 +4,21 @@ with lib;
 {
   imports = [ ./hardware.nix ];
 
-  services.zfs.autoSnapshot = {
-    enable = true;
-    flags = "-k -p --utc";
-    weekly = 4;
+  services.zfs = {
+    autoSnapshot = {
+      enable = true;
+      flags = "-k -p --utc";
+      weekly = 3;
+      daily = 3;
+      hourly = 0;
+      frequent = 0;
+      monthly = 2;
+    };
+
+    autoScrub = {
+      enable = true;
+      pools = [ "rpool" ];
+    };
   };
 
   plusultra = {

@@ -4,10 +4,21 @@ with lib;
 {
   imports = [ ./hardware.nix ];
 
-  services.zfs.autoSnapshot = {
-    enable = true;
-    flags = "-k -p --utc";
-    weekly = 4;
+  services.zfs = {
+    autoSnapshot = {
+      enable = true;
+      flags = "-k -p --utc";
+      weekly = 3;
+      daily = 3;
+      hourly = 0;
+      frequent = 0;
+      monthly = 2;
+    };
+
+    autoScrub = {
+      enable = true;
+      pools = [ "rpool" ];
+    };
   };
 
   services.samba-wsdd = {
@@ -47,6 +58,15 @@ with lib;
       video = {
         comment = "Video";
         path = "/persist/share/video";
+        browseable = "yes";
+        public = "yes";
+        "write list" = "short";
+        "read list" = "guest, nobody";
+        "create mask" = "0755";
+      };
+      books = {
+        comment = "Books";
+        path = "/persist/share/books";
         browseable = "yes";
         public = "yes";
         "write list" = "short";
