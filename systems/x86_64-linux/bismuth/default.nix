@@ -19,7 +19,7 @@ with lib;
   # problem can be resolved by stopping dhcpcd, restarting Network Manager, and then
   # unplugging and replugging the ethernet cable. Perhaps there's some weird race
   # condition when the system is coming up that causes this.
-  networking.dhcpcd.enable = false;
+  # networking.dhcpcd.enable = false;
 
   networking.firewall = {
     allowedUDPPorts = [ 28000 ];

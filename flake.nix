@@ -22,7 +22,6 @@
 
     # Hardware Configuration
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
 
     # Generate System Images
     nixos-generators.url =

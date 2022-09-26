@@ -13,13 +13,14 @@ in
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_5_15;
+    kernelPackages = pkgs.linuxPackages_latest;
 
     initrd = {
-      kernelModules = [ "amdgpu" ];
+      # kernelModules = [ "amdgpu" ];
       availableKernelModules =
         [ "nvme" "ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod" ];
     };
+
     extraModulePackages = [ ];
   };
 
@@ -52,7 +53,7 @@ in
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  # services.xserver.videoDrivers = [ "amdgpu" ];
 
   hardware.bluetooth.enable = true;
 }
