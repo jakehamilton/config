@@ -67,6 +67,38 @@
         "type": "github"
       }
     },
+    "discord-nord-theme": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1662442143,
+        "narHash": "sha256-R0Ew/hQtXxbXEUjRS1iCRBIrwdg1RbpBOf39XU75a/k=",
+        "owner": "DapperCore",
+        "repo": "NordCord",
+        "rev": "80066952fa5b4613a19c9d13134e5a69273c3988",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DapperCore",
+        "repo": "NordCord",
+        "type": "github"
+      }
+    },
+    "discord-tweaks": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1627600834,
+        "narHash": "sha256-xSzbP86w5OUy1ZO1iHgv1drbujtlPQAgJmLA3x7UOFc=",
+        "owner": "NurMarvin",
+        "repo": "discord-tweaks",
+        "rev": "bc28b090f9ed706d7f8271aeaa64bdcb886fd0ef",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NurMarvin",
+        "repo": "discord-tweaks",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -263,11 +295,11 @@
         "snowfall-lib": "snowfall-lib"
       },
       "locked": {
-        "lastModified": 1662763639,
-        "narHash": "sha256-oTNXfjZeGX2w6aKjtPS+mpvxR3pnjE4UXvbw17cbFY4=",
+        "lastModified": 1664141405,
+        "narHash": "sha256-0mewH1rybmBn/wzGDJU5kppfMgiMByRlR5qUqUBG02k=",
         "owner": "jakehamilton",
         "repo": "neovim",
-        "rev": "c18b2521157460f164b73cdeaedd5e9cb17c2637",
+        "rev": "c021f95a7ac55fab17784e94b9cf39a6302882b2",
         "type": "github"
       },
       "original": {
@@ -412,41 +444,40 @@
         "type": "github"
       }
     },
-    "powercord": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1649687982,
-        "narHash": "sha256-DmcxRoNUplHybjzkfpaksO4fUygzjiDPssdae2RPQ/o=",
-        "owner": "powercord-org",
-        "repo": "powercord",
-        "rev": "17b66335e85a613ca0ea66dcb95d2c676b0e2f03",
-        "type": "github"
-      },
-      "original": {
-        "owner": "powercord-org",
-        "repo": "powercord",
-        "type": "github"
-      }
-    },
-    "powercord-overlay": {
+    "replugged": {
       "inputs": {
         "nixpkgs": [
           "unstable"
         ],
-        "powercord": "powercord"
+        "replugged": "replugged_2"
       },
       "locked": {
-        "lastModified": 1649724773,
-        "narHash": "sha256-IY8fVk6/RDM0VzZsprPziwl1kqg3LgD7v3+uXtjR6/k=",
-        "owner": "LavaDesu",
-        "repo": "powercord-overlay",
-        "rev": "cea1348777740f02ba58e8712ca6aaf8f295b469",
+        "lastModified": 1663288060,
+        "narHash": "sha256-OH2QJBqpI1lZeqOPljG2k7FuyzKB+q9q5j8/sfgmDbg=",
+        "owner": "LunNova",
+        "repo": "replugged-nix-flake",
+        "rev": "7078e6a68a8e86eeceae993c256236371a9a6f4e",
         "type": "github"
       },
       "original": {
-        "owner": "LavaDesu",
-        "repo": "powercord-overlay",
-        "rev": "cea1348777740f02ba58e8712ca6aaf8f295b469",
+        "owner": "LunNova",
+        "repo": "replugged-nix-flake",
+        "type": "github"
+      }
+    },
+    "replugged_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1663272800,
+        "narHash": "sha256-AOjJmONwG0NxQmmbr3XHRNu0ju4mum4Zjk4az96OjRk=",
+        "owner": "replugged-org",
+        "repo": "replugged",
+        "rev": "d389f7a0bd7c3b52bc33fc4468d306816d710ef2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "replugged-org",
+        "repo": "replugged",
         "type": "github"
       }
     },
@@ -455,6 +486,8 @@
         "comma": "comma",
         "darwin": "darwin",
         "deploy-rs": "deploy-rs",
+        "discord-nord-theme": "discord-nord-theme",
+        "discord-tweaks": "discord-tweaks",
         "home-manager": "home-manager",
         "neovim": "neovim",
         "nix-alien": "nix-alien",
@@ -462,7 +495,7 @@
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
-        "powercord-overlay": "powercord-overlay",
+        "replugged": "replugged",
         "snowfall-lib": "snowfall-lib_2",
         "unstable": "unstable"
       }

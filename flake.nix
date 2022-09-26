@@ -29,10 +29,20 @@
       "github:nix-community/nixos-generators?rev=adccd191a0e83039d537e021f19495b7bad546a1";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Powercord (modded Discord)
-    powercord-overlay.url =
-      "github:LavaDesu/powercord-overlay?rev=cea1348777740f02ba58e8712ca6aaf8f295b469";
-    powercord-overlay.inputs.nixpkgs.follows = "unstable";
+    # Discord Replugged
+    replugged.url = "github:LunNova/replugged-nix-flake";
+    replugged.inputs.nixpkgs.follows = "unstable";
+
+    # Discord Replugged plugins / themes
+    discord-tweaks = {
+      url = "github:NurMarvin/discord-tweaks";
+      flake = false;
+    };
+    discord-nord-theme = {
+      url = "github:DapperCore/NordCord";
+      flake = false;
+    };
+
 
     # Comma
     comma.url =
@@ -72,7 +82,6 @@
 
       overlays = with inputs; [
         nix-alien.overlay
-        powercord-overlay.overlay
       ];
 
       systems.modules = with inputs; [

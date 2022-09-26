@@ -14,6 +14,18 @@ with lib;
 {
   imports = [ ./hardware.nix ];
 
+  # Resolve an issue with Bismuth's wired connections failing sometimes due to weird
+  # DHCP issues. I'm not quite sure why this is the case, but I have found that the
+  # problem can be resolved by stopping dhcpcd, restarting Network Manager, and then
+  # unplugging and replugging the ethernet cable. Perhaps there's some weird race
+  # condition when the system is coming up that causes this.
+  networking.dhcpcd.enable = false;
+
+  networking.firewall = {
+    allowedUDPPorts = [ 28000 ];
+    allowedTCPPorts = [ 28000 ];
+  };
+
   environment.systemPackages = with pkgs;
     [
       chromium
@@ -52,7 +64,41 @@ with lib;
     };
   };
 
+  services.minecraft-server = {
+    enable = false;
+    eula = true;
+    declarative = true;
+    serverProperties = {
+      server-port = 43000;
+    };
+  };
+
   plusultra = {
+    # services.minecraft = {
+    #   enable = true;
+
+    #   eula = true;
+    #   infrared = {
+    #     enable = true;
+    #     openFirewall = true;
+    #   };
+
+    #   servers.bismuth = {
+    #     domain = "bismuth";
+    #   };
+    # };
+
+    services.infrared = {
+      enable = false;
+
+      servers = [
+        {
+          domain = "bismuth";
+          port = 43000;
+        }
+      ];
+    };
+
     archetypes = {
       gaming = enabled;
       workstation = enabled;

@@ -2,7 +2,8 @@
 
 with lib;
 let cfg = config.plusultra.hardware.networking;
-in {
+in
+{
   options.plusultra.hardware.networking = with types; {
     enable = mkBoolOpt false "Whether or not to enable networking support";
     hosts = mkOpt attrs { }
