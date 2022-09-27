@@ -110,11 +110,25 @@ with lib;
     rootCredentialsFile = "/persist/apps/minio/credentials";
   };
 
+  services.navidrome = {
+    enable = true;
+
+    settings = {
+      Address = "127.0.0.1";
+      Port = 4533;
+      MusicFolder = "/persist/share/audio/music";
+      EnableGravatar = "true";
+    };
+  };
+
   services.jellyfin.enable = true;
 
   networking.firewall.allowedTCPPorts = [
     # Samba
     5357
+
+    # Navidrome
+    4533
   ];
   networking.firewall.allowedUDPPorts = [
     # Samba
@@ -215,6 +229,11 @@ with lib;
         "jellyfin.quartz.hamho.me" = create-proxy {
           # https://jellyfin.org/docs/general/networking/index.html#static-ports
           port = 8096;
+        };
+
+        "navidrome.quartz.hamho.me" = create-proxy {
+          # https://www.navidrome.org/docs/usage/configuration-options/#available-options
+          port = 4533;
         };
       };
   };

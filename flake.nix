@@ -4,7 +4,8 @@
   inputs = {
     # NixPkgs (nixos-22.05)
     nixpkgs.url =
-      "github:nixos/nixpkgs/nixos-22.05";
+      "github:nixos/nixpkgs?rev=72783a2d0dbbf030bff1537873dd5b85b3fb332f";
+    # "github:nixos/nixpkgs/nixos-22.05";
 
     # NixPkgs Unstable (nixos-unstable)
     unstable.url =
