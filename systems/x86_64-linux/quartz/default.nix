@@ -129,13 +129,15 @@ with lib;
 
     # Navidrome
     4533
+
+    # Jellyfin
+    8096
   ];
   networking.firewall.allowedUDPPorts = [
     # Samba
     3702
 
     # Jellyfin
-    # We only want to open Jellyfin's UDP ports since HTTP will be proxied with nginx.
     1900
     7359
   ];
