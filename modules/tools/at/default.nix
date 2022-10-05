@@ -7,7 +7,7 @@ let
     if config.plusultra.tools.at.pkg != null then
       config.plusultra.tools.at.pkg
     else
-      (pkgs.plusultra.node-packages."@suchipi/at-js-0.4.0".override {
+      (pkgs.plusultra.node-packages."@suchipi/at-js".override {
         dontNpmInstall = true;
       });
 in
