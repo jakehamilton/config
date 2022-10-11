@@ -1,7 +1,7 @@
 { neovim, ... }:
 
 final: prev: {
-  plusultra = prev.plusultra // {
+  plusultra = (prev.plusultra or { }) // {
     inherit (neovim.packages.${prev.system}) neovim;
   };
 }

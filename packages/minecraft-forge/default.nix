@@ -22,7 +22,7 @@ let
         ln -s ${installer} $out/libexec/installer.jar
       '';
 in
-mkForgeInstaller {
+(mkForgeInstaller { }) // {
   # Pass the `mkForgeInstaller` helper through so others can easily construct their own
   # package versions.
   inherit mkForgeInstaller;
