@@ -21,7 +21,14 @@ let
         else
           value
       )
-      cfg.settings;
+      (cfg.settings // {
+        storage = (cfg.settings.storage or { }) // {
+          type = cfg.settings.storage.type or "sqlite3";
+          config = cfg.settings.storage.config or {
+            file = "${cfg.stateDir}/dex.db";
+          };
+        };
+      });
 
   secret-files = concatMap
     (client:
@@ -29,7 +36,8 @@ let
         [ client.secretFile ]
       else
         [ ]
-    );
+    )
+    (settings.staticClients or [ ]);
 
   format = pkgs.formats.yaml { };
 
@@ -106,7 +114,7 @@ in
         };
       };
 
-      groups = optionalAttrs (cfg.group == "dex") {
+      groups = lib.optionalAttrs (cfg.group == "dex") {
         dex = { };
       };
     };
@@ -123,14 +131,22 @@ in
           after = [ "networking.target" ];
 
           preStart = ''
-            "${pkgs.coreutils}/bin/install -m 600 ${configYaml} ${stateDir}/config.yaml"
+            if ! test -d "${cfg.stateDir}"; then
+              mkdir -p "${cfg.stateDir}"
+              chmod -R 600 "${cfg.stateDir}"
+            fi
+
+            "${pkgs.coreutils}/bin/install -m 600 ${configYaml} ${cfg.stateDir}/config.yaml"
 
             ${replace-config-secrets}
           '';
 
           serviceConfig = {
             ExecStart = "${pkgs.dex-oidc}/bin/dex serve /run/dex/config.yaml";
-            RuntimeDirectory = "dex";
+            WorkingDirectory = cfg.stateDir;
+
+            User = cfg.user;
+            Group = cfg.group;
 
             AmbientCapabilities = "CAP_NET_BIND_SERVICE";
             BindReadOnlyPaths = [
@@ -141,38 +157,38 @@ in
               "-/etc/localtime"
               "-/etc/dex"
             ];
-            BindPaths = optional (cfg.settings.storage.type == "postgres") "/var/run/postgresql";
+            BindPaths = [ cfg.stateDir ] ++ lib.optional (settings.storage.type == "postgres") "/var/run/postgresql";
             CapabilityBoundingSet = "CAP_NET_BIND_SERVICE";
-            # ProtectClock= adds DeviceAllow=char-rtc r
-            DeviceAllow = "";
-            DynamicUser = true;
-            LockPersonality = true;
-            MemoryDenyWriteExecute = true;
-            NoNewPrivileges = true;
-            PrivateDevices = true;
-            PrivateMounts = true;
-            # Port needs to be exposed to the host network
-            #PrivateNetwork = true;
-            PrivateTmp = true;
-            PrivateUsers = true;
-            ProcSubset = "pid";
-            ProtectClock = true;
-            ProtectHome = true;
-            ProtectHostname = true;
-            # Would re-mount paths ignored by temporary root
-            #ProtectSystem = "strict";
-            ProtectControlGroups = true;
-            ProtectKernelLogs = true;
-            ProtectKernelModules = true;
-            ProtectKernelTunables = true;
-            ProtectProc = "invisible";
-            RestrictAddressFamilies = [ "AF_INET" "AF_INET6" "AF_UNIX" ];
-            RestrictNamespaces = true;
-            RestrictRealtime = true;
-            RestrictSUIDSGID = true;
-            SystemCallArchitectures = "native";
-            SystemCallFilter = [ "@system-service" "~@privileged @resources @setuid @keyring" ];
-            TemporaryFileSystem = "/:ro";
+            ## ProtectClock= adds DeviceAllow=char-rtc r
+            #DeviceAllow = "";
+            #DynamicUser = true;
+            #LockPersonality = true;
+            #MemoryDenyWriteExecute = true;
+            #NoNewPrivileges = true;
+            #PrivateDevices = true;
+            #PrivateMounts = true;
+            ## Port needs to be exposed to the host network
+            ##PrivateNetwork = true;
+            #PrivateTmp = true;
+            #PrivateUsers = true;
+            #ProcSubset = "pid";
+            #ProtectClock = true;
+            #ProtectHome = true;
+            #ProtectHostname = true;
+            ## Would re-mount paths ignored by temporary root
+            ##ProtectSystem = "strict";
+            #ProtectControlGroups = true;
+            #ProtectKernelLogs = true;
+            #ProtectKernelModules = true;
+            #ProtectKernelTunables = true;
+            #ProtectProc = "invisible";
+            #RestrictAddressFamilies = [ "AF_INET" "AF_INET6" "AF_UNIX" ];
+            #RestrictNamespaces = true;
+            #RestrictRealtime = true;
+            #RestrictSUIDSGID = true;
+            #SystemCallArchitectures = "native";
+            #SystemCallFilter = [ "@system-service" "~@privileged @resources @setuid @keyring" ];
+            #TemporaryFileSystem = "/:ro";
             # Does not work well with the temporary root
             #UMask = "0066";
           };

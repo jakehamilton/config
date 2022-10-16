@@ -135,26 +135,6 @@ with lib;
     '';
   };
 
-  services.dex = {
-    enable = true;
-    settings = {
-      issuer = "https://dex.quartz.hamho.me";
-      web = {
-        http = "127.0.0.1:5556";
-      };
-      storage = {
-        type = "postgres";
-      };
-      connectors = [
-        {
-          type = "authproxy";
-          id = "tailscale-authproxy";
-          name = "Tailscale";
-        }
-      ];
-    };
-  };
-
   networking.firewall.allowedTCPPorts = [
     # Samba
     5357
@@ -203,6 +183,23 @@ with lib;
         enable = true;
 
         dexCallbackUrl = "https://dex.quartz.hamho.me/dex/callback/tailscale-authproxy";
+      };
+
+      dex = {
+        enable = true;
+        settings = {
+          issuer = "https://dex.quartz.hamho.me";
+          web = {
+            http = "127.0.0.1:5556";
+          };
+          connectors = [
+            {
+              type = "authproxy";
+              id = "tailscale-authproxy";
+              name = "Tailscale";
+            }
+          ];
+        };
       };
     };
 
@@ -281,7 +278,7 @@ with lib;
           (lib.network.get-address-parts config.services.vault.address);
 
         "dex.quartz.hamho.me" = create-proxy
-          (lib.network.get-address-parts config.services.dex.settings.web.http);
+          (lib.network.get-address-parts config.plusultra.services.dex.settings.web.http);
 
         "auth.quartz.hamho.me" = {
           sslCertificate = "${config.security.acme.certs."quartz.hamho.me".directory}/fullchain.pem";
