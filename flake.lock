@@ -450,6 +450,7 @@
         "nixpkgs": "nixpkgs",
         "replugged": "replugged",
         "snowfall-lib": "snowfall-lib",
+        "tailscale-authproxy": "tailscale-authproxy",
         "unstable": "unstable"
       }
     },
@@ -476,13 +477,33 @@
         "type": "github"
       }
     },
+    "tailscale-authproxy": {
+      "inputs": {
+        "nixpkgs": [
+          "unstable"
+        ],
+        "snowfall-lib": [
+          "snowfall-lib"
+        ]
+      },
+      "locked": {
+        "lastModified": 1665891422,
+        "narHash": "sha256-7pLwmhXisNQC215oEeRHvjjqJBj0njFMaWa6UIg/psg=",
+        "path": "/home/short/work/tailscale-authproxy",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/short/work/tailscale-authproxy",
+        "type": "path"
+      }
+    },
     "unstable": {
       "locked": {
-        "lastModified": 1664017330,
-        "narHash": "sha256-919WZKBTxFdTkzIK6uJXE7hwSPQb7e/ekybxxWaotR4=",
+        "lastModified": 1665732960,
+        "narHash": "sha256-WBZ+uSHKFyjvd0w4inbm0cNExYTn8lpYFcHEes8tmec=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "fde244a8c7655bc28616864e2290ad9c95409c2c",
+        "rev": "4428e23312933a196724da2df7ab78eb5e67a88e",
         "type": "github"
       },
       "original": {

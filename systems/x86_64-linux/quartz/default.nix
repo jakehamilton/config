@@ -123,6 +123,38 @@ with lib;
 
   services.jellyfin.enable = true;
 
+  services.vault = {
+    enable = true;
+
+    # Use the version of Vault built with support for the UI.
+    package = pkgs.vault-bin;
+
+    storageBackend = "file";
+    extraConfig = ''
+      ui = true
+    '';
+  };
+
+  services.dex = {
+    enable = true;
+    settings = {
+      issuer = "https://dex.quartz.hamho.me";
+      web = {
+        http = "127.0.0.1:5556";
+      };
+      storage = {
+        type = "postgres";
+      };
+      connectors = [
+        {
+          type = "authproxy";
+          id = "tailscale-authproxy";
+          name = "Tailscale";
+        }
+      ];
+    };
+  };
+
   networking.firewall.allowedTCPPorts = [
     # Samba
     5357
@@ -166,6 +198,12 @@ with lib;
     services = {
       openssh = enabled;
       tailscale = enabled;
+
+      tailscale-authproxy = {
+        enable = true;
+
+        dexCallbackUrl = "https://dex.quartz.hamho.me/dex/callback/tailscale-authproxy";
+      };
     };
 
     security = {
@@ -204,29 +242,30 @@ with lib;
     virtualHosts =
       let
         create-proxy =
-          { port
+          { port ? null
           , host ? "127.0.0.1"
-          }: {
-            sslCertificate = "${config.security.acme.certs."quartz.hamho.me".directory}/fullchain.pem";
-            sslCertificateKey = "${config.security.acme.certs."quartz.hamho.me".directory}/key.pem";
+          , extra-config ? { }
+          }:
+            assert port != "";
+            assert host != "";
+            extra-config // {
+              sslCertificate = "${config.security.acme.certs."quartz.hamho.me".directory}/fullchain.pem";
+              sslCertificateKey = "${config.security.acme.certs."quartz.hamho.me".directory}/key.pem";
 
-            forceSSL = true;
+              forceSSL = true;
 
-            locations."/".proxyPass = "http://${host}:${builtins.toString port}";
-          };
+              locations = (extra-config.locations or { }) // {
+                "/" = (extra-config.locations."/" or { }) // {
+                  proxyPass =
+                    "http://${host}${if port != null then ":${builtins.toString port}" else ""}";
+                };
+              };
+            };
       in
       {
         "minio.quartz.hamho.me" =
-          # The MinIO module is a bit non-standard and uses the default value ":9001". If customized,
-          # that value can be of the form "<ip>:<port>". So we have to split the values out, defaulting
-          # the ip to "127.0.0.1".
-          let
-            address-parts = builtins.split ":" config.services.minio.consoleAddress;
-            ip = builtins.head address-parts;
-            host = if ip == "" then "127.0.0.1" else ip;
-            port = last address-parts;
-          in
-          create-proxy { inherit host port; };
+          create-proxy
+            (lib.network.get-address-parts config.services.minio.consoleAddress);
 
         "jellyfin.quartz.hamho.me" = create-proxy {
           # https://jellyfin.org/docs/general/networking/index.html#static-ports
@@ -236,6 +275,25 @@ with lib;
         "navidrome.quartz.hamho.me" = create-proxy {
           # https://www.navidrome.org/docs/usage/configuration-options/#available-options
           port = 4533;
+        };
+
+        "vault.quartz.hamho.me" = create-proxy
+          (lib.network.get-address-parts config.services.vault.address);
+
+        "dex.quartz.hamho.me" = create-proxy
+          (lib.network.get-address-parts config.services.dex.settings.web.http);
+
+        "auth.quartz.hamho.me" = {
+          sslCertificate = "${config.security.acme.certs."quartz.hamho.me".directory}/fullchain.pem";
+          sslCertificateKey = "${config.security.acme.certs."quartz.hamho.me".directory}/key.pem";
+
+          forceSSL = true;
+
+          locations = {
+            "/auth/tailscale" = {
+              proxyPass = "http://unix:${config.systemd.sockets.tailscale-authproxy.socketConfig.ListenStream}";
+            };
+          };
         };
       };
   };

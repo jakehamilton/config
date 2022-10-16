@@ -67,6 +67,11 @@
     neovim.url = "github:jakehamilton/neovim";
     neovim.inputs.nixpkgs.follows = "unstable";
     neovim.inputs.snowfall-lib.follows = "snowfall-lib";
+
+    # Dex Tailscale Auth
+    tailscale-authproxy.url = "path:/home/short/work/tailscale-authproxy";
+    tailscale-authproxy.inputs.nixpkgs.follows = "unstable"; # Required for go 1.19
+    tailscale-authproxy.inputs.snowfall-lib.follows = "snowfall-lib";
   };
 
   outputs = inputs:
@@ -84,6 +89,7 @@
       overlays = with inputs; [
         nix-alien.overlay
         neovim.overlays."nixpkgs/neovim"
+        tailscale-authproxy.overlays."nixpkgs/tailscale-authproxy"
       ];
 
       systems.modules = with inputs; [
