@@ -13,7 +13,7 @@ in
     tcpAddress = mkOpt str "" "The address to listen on";
     socketPath = mkOpt str "" "The unix socket file to listen on";
 
-    restrictTailnet = mkOpt (either [ str null ]) null "Only allow access from a single Tailnet";
+    restrictTailnet = mkOpt (nullOr str) null "Only allow access from a single Tailnet";
 
     allowUnauthorized = mkOpt bool false "Whether or not to allow unauthorized machines";
     dexCallbackUrl = mkOpt str "http://127.0.0.1/dex/callback/tailscale-authproxy" "The url to use for authenticating with Dex";
@@ -40,7 +40,7 @@ in
       partOf = [ "tailscale-authproxy.service" ];
 
       socketConfig = {
-        ListenStream = "/var/run/tailscale-authproxy.sock";
+        ListenStream = "/run/tailscale-authproxy.sock";
       };
     };
 
@@ -52,17 +52,18 @@ in
         Type = "simple";
         User = cfg.user;
         Group = cfg.group;
-        Restart = "always";
-        RestartSec = 20;
+
+        # Restart = "always";
+        # RestartSec = 20;
+
         ExecStart =
           let
-            args = [
-              "-listen-type=systemd"
-              "-dex-callback-url='${cfg.dexCallbackUrl}'"
-            ] ++ optional (cfg.allowUnauthorized) "-allow-unauthorized"
-            ++ optional (cfg.restrictTailnet != null) "-restrict-tailnet='${cfg.restrictTailnet}'";
+            args =
+              [ "-listen-type=systemd" "-dex-callback-url='${cfg.dexCallbackUrl}'" ]
+              ++ optional (cfg.allowUnauthorized) "-allow-unauthorized"
+              ++ optional (cfg.restrictTailnet != null) "-restrict-tailnet='${cfg.restrictTailnet}'";
           in
-          "${pkgs.tailscale-authproxy} -listen-type=systemd -dex-callback-url='${cfg.dexCallbackUrl}'";
+          "${pkgs.tailscale-authproxy}/bin/tailscale-authproxy ${concatStringsSep " " args}'";
       };
     };
   };

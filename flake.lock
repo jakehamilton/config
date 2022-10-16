@@ -487,8 +487,8 @@
         ]
       },
       "locked": {
-        "lastModified": 1665891422,
-        "narHash": "sha256-7pLwmhXisNQC215oEeRHvjjqJBj0njFMaWa6UIg/psg=",
+        "lastModified": 1665899277,
+        "narHash": "sha256-9WBTmHswWpJJ5rOfSQyZ5kx3A48OsKDCjqrcgVnAfOY=",
         "path": "/home/short/work/tailscale-authproxy",
         "type": "path"
       },

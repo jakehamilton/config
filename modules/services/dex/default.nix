@@ -131,18 +131,15 @@ in
           after = [ "networking.target" ];
 
           preStart = ''
-            if ! test -d "${cfg.stateDir}"; then
-              mkdir -p "${cfg.stateDir}"
-              chmod -R 600 "${cfg.stateDir}"
-            fi
+            cp --remove-destination ${configYaml} ${cfg.stateDir}/config.yaml
 
-            "${pkgs.coreutils}/bin/install -m 600 ${configYaml} ${cfg.stateDir}/config.yaml"
+            chmod 600 ${cfg.stateDir}/config.yaml
 
             ${replace-config-secrets}
           '';
 
           serviceConfig = {
-            ExecStart = "${pkgs.dex-oidc}/bin/dex serve /run/dex/config.yaml";
+            ExecStart = "${pkgs.dex-oidc}/bin/dex serve ${cfg.stateDir}/config.yaml";
             WorkingDirectory = cfg.stateDir;
 
             User = cfg.user;
