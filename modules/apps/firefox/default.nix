@@ -12,7 +12,8 @@ let
     "browser.aboutConfig.showWarning" = false;
     "browser.ssb.enabled" = true;
   };
-in {
+in
+{
   options.plusultra.apps.firefox = with types; {
     enable = mkBoolOpt false "Whether or not to enable Firefox.";
     extraConfig =
@@ -25,10 +26,25 @@ in {
   config = mkIf cfg.enable {
     plusultra.desktop.addons.firefox-nordic-theme = enabled;
 
+    # @FIXME(jakehamilton): Enable when 22.11 releases.
+    # services.gnome.gnome-browser-connector.enable = plusultra.desktop.gnome.enable;
+
     plusultra.home.extraOptions = {
       programs.firefox = {
         enable = true;
-        package = pkgs.firefox-wayland;
+        package = pkgs.firefox-wayland.override (
+          # Using optionalAttrs here to allow for easier additions if something
+          # like KDE should be used in the future.
+          lib.optionalAttrs config.plusultra.desktop.gnome.enable {
+            cfg = {
+              enableBrowserpass = true;
+              enableGnomeExtensions = true;
+            };
+          }
+        );
+
+        # @FIXME(jakehamilton): Remove when 22.11 releases.
+        enableGnomeExtensions = true;
 
         profiles.${config.plusultra.user.name} = {
           inherit (cfg) extraConfig userChrome settings;

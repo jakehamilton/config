@@ -27,6 +27,7 @@ in
     environment.systemPackages = with pkgs; [
       (hiPrio plusultra.xdg-open-with-portal)
       wl-clipboard
+      gnome.gnome-tweaks
       gnome.nautilus-python
       gnomeExtensions.appindicator
       gnomeExtensions.big-avatar
@@ -34,6 +35,10 @@ in
       gnomeExtensions.wireless-hid
       gnomeExtensions.emoji-selector
       gnomeExtensions.clear-top-bar
+      gnomeExtensions.dash-to-dock
+      gnomeExtensions.blur-my-shell
+      gnomeExtensions.extension-list
+      gnomeExtensions.just-perfection
       gnomeExtensions.transparent-top-bar
       gnomeExtensions.gsconnect
       gnomeExtensions.gtile
@@ -54,6 +59,9 @@ in
 
     # Required for app indicators
     services.udev.packages = with pkgs; [ gnome3.gnome-settings-daemon ];
+
+    # Browser integration
+    services.gnome.chrome-gnome-shell.enable = true;
 
     services.xserver = {
       enable = true;
