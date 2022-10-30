@@ -20,6 +20,7 @@ in
       MANPAGER =
         "page -C -e 'au User PageDisconnect sleep 100m|%y p|enew! |bd! #|pu p|set ft=man'";
       NPM_CONFIG_PREFIX = "$HOME/.npm-global";
+      EDITOR = "nvim";
     };
 
     plusultra.home = {

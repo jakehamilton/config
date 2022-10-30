@@ -11,6 +11,10 @@ in
     plusultra = {
       nix = enabled;
 
+      cli-apps = {
+        flake = enabled;
+      };
+
       tools = {
         git = enabled;
         misc = enabled;
