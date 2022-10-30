@@ -59,7 +59,7 @@
     nix-alien.url = "github:thiagokokada/nix-alien";
     nix-alien.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Snowfall
+    # Snowfall Lib
     snowfall-lib.url = "github:snowfallorg/lib";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -73,6 +73,7 @@
     tailscale-authproxy.inputs.nixpkgs.follows = "unstable"; # Required for go 1.19
     tailscale-authproxy.inputs.snowfall-lib.follows = "snowfall-lib";
 
+    # Snowfall Flake
     snowfall-flake.url = "github:snowfallorg/flake";
     snowfall-flake.inputs.nixpkgs.follows = "unstable";
   };
