@@ -2,7 +2,8 @@
 
 with lib;
 let cfg = config.plusultra.hardware.audio;
-in {
+in
+{
   options.plusultra.hardware.audio = with types; {
     enable = mkBoolOpt false "Whether or not to enable audio support.";
     alsa-monitor = mkOpt attrs { } "Alsa configuration.";
@@ -10,6 +11,10 @@ in {
       "Audio nodes to pass to Pipewire as `context.objects`.";
     modules = mkOpt (listOf attrs) [ ]
       "Audio modules to pass to Pipewire as `context.modules`.";
+    extra-packages = mkOpt (listOf package) [
+      pkgs.qjackctl
+      pkgs.easyeffects
+    ] "Additional packages to install.";
   };
 
   config = mkIf cfg.enable {
@@ -62,9 +67,7 @@ in {
     environment.systemPackages = with pkgs; [
       pulsemixer
       pavucontrol
-      qjackctl
-      easyeffects
-    ];
+    ] ++ cfg.extra-packages;
 
     plusultra.user.extraGroups = [ "audio" ];
 

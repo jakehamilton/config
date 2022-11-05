@@ -21,6 +21,8 @@ with lib;
   # condition when the system is coming up that causes this.
   # networking.dhcpcd.enable = false;
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   networking.firewall = {
     allowedUDPPorts = [ 28000 ];
     allowedTCPPorts = [ 28000 ];
