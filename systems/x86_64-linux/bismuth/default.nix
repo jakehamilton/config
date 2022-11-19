@@ -32,11 +32,9 @@ with lib;
     [
       chromium
       plusultra.kalidoface
-      gparted
-      weather
     ];
 
-  services.samba-wsdd = enabled;
+  # services.samba-wsdd = enabled;
 
   services.samba = {
     enable = true;

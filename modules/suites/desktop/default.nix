@@ -1,7 +1,8 @@
 { options, config, lib, pkgs, ... }:
 with lib;
 let cfg = config.plusultra.suites.desktop;
-in {
+in
+{
   options.plusultra.suites.desktop = with types; {
     enable =
       mkBoolOpt false "Whether or not to enable common desktop configuration.";
@@ -24,6 +25,7 @@ in {
         pocketcasts = enabled;
         yt-music = enabled;
         twitter = enabled;
+        gparted = enabled;
       };
     };
   };

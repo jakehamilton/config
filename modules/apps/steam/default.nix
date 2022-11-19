@@ -2,7 +2,8 @@
 
 with lib;
 let cfg = config.plusultra.apps.steam;
-in {
+in
+{
   options.plusultra.apps.steam = with types; {
     enable = mkBoolOpt false "Whether or not to enable support for Steam.";
   };
@@ -15,5 +16,9 @@ in {
 
     # Enable GameCube controller support.
     services.udev.packages = [ pkgs.dolphinEmu ];
+
+    environment.systemPackages = with pkgs.plusultra; [
+      steam
+    ];
   };
 }

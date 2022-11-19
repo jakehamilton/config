@@ -178,29 +178,6 @@ with lib;
     services = {
       openssh = enabled;
       tailscale = enabled;
-
-      tailscale-authproxy = {
-        enable = true;
-
-        dexCallbackUrl = "https://dex.quartz.hamho.me/dex/callback/tailscale-authproxy";
-      };
-
-      dex = {
-        enable = true;
-        settings = {
-          issuer = "https://dex.quartz.hamho.me";
-          web = {
-            http = "127.0.0.1:5556";
-          };
-          connectors = [
-            {
-              type = "authproxy";
-              id = "tailscale-authproxy";
-              name = "Tailscale";
-            }
-          ];
-        };
-      };
     };
 
     security = {
@@ -279,19 +256,6 @@ with lib;
 
         "dex.quartz.hamho.me" = create-proxy
           (lib.network.get-address-parts config.plusultra.services.dex.settings.web.http);
-
-        "auth.quartz.hamho.me" = {
-          sslCertificate = "${config.security.acme.certs."quartz.hamho.me".directory}/fullchain.pem";
-          sslCertificateKey = "${config.security.acme.certs."quartz.hamho.me".directory}/key.pem";
-
-          forceSSL = true;
-
-          locations = {
-            "/auth/tailscale" = {
-              proxyPass = "http://unix:${config.systemd.sockets.tailscale-authproxy.socketConfig.ListenStream}";
-            };
-          };
-        };
       };
   };
 
