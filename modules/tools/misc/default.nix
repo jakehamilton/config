@@ -2,7 +2,8 @@
 
 with lib;
 let cfg = config.plusultra.tools.misc;
-in {
+in
+{
   options.plusultra.tools.misc = with types; {
     enable = mkBoolOpt false "Whether or not to enable common utilities.";
   };
@@ -15,11 +16,8 @@ in {
       killall
       unzip
       file
-      nixfmt
-      nix-prefetch-git
       jq
       clac
-      fup-repl
       wget
       appimage-run
     ];
