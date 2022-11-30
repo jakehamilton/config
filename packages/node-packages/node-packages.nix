@@ -409,13 +409,13 @@ let
         sha512 = "agE4QfB2Lkp9uICn7BAqoscw4SZP9kTE2hxiFI3jBPmXJfdqiahTbUuKGsMoN2GtqL9AxhYioAcVvgsb1HvRbA==";
       };
     };
-    "is-core-module-2.10.0" = {
+    "is-core-module-2.11.0" = {
       name = "is-core-module";
       packageName = "is-core-module";
-      version = "2.10.0";
+      version = "2.11.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/is-core-module/-/is-core-module-2.10.0.tgz";
-        sha512 = "Erxj2n/LDAZ7H8WNJXd9tw38GYM3dv8rk8Zcs+jJuxYTW7sozH+SS8NtrSjVL1/vpLvWi1hxy96IzjJ3EHTJJg==";
+        url = "https://registry.npmjs.org/is-core-module/-/is-core-module-2.11.0.tgz";
+        sha512 = "RRjxlvLDkD1YJwDbroBHMb+cukurkDWNyHx7D3oNB5x9rb5ogcksMC5wHCadcXoo67gVr/+3GFySh3134zi6rw==";
       };
     };
     "is-url-1.2.4" = {
@@ -706,13 +706,13 @@ let
         sha512 = "ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==";
       };
     };
-    "tslib-2.4.0" = {
+    "tslib-2.4.1" = {
       name = "tslib";
       packageName = "tslib";
-      version = "2.4.0";
+      version = "2.4.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/tslib/-/tslib-2.4.0.tgz";
-        sha512 = "d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==";
+        url = "https://registry.npmjs.org/tslib/-/tslib-2.4.1.tgz";
+        sha512 = "tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==";
       };
     };
     "upper-case-2.0.2" = {
@@ -868,7 +868,7 @@ in
       sources."inflight-1.0.6"
       sources."inherits-2.0.4"
       sources."interpret-1.4.0"
-      sources."is-core-module-2.10.0"
+      sources."is-core-module-2.11.0"
       sources."js-tokens-4.0.0"
       sources."json5-2.2.1"
       sources."kleur-4.1.5"
@@ -891,7 +891,7 @@ in
       sources."snake-case-3.0.4"
       sources."supports-color-5.5.0"
       sources."supports-preserve-symlinks-flag-1.0.0"
-      sources."tslib-2.4.0"
+      sources."tslib-2.4.1"
       sources."upper-case-2.0.2"
       sources."upper-case-first-2.0.2"
       sources."wrappy-1.0.2"

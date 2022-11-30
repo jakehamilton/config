@@ -29,6 +29,7 @@ in
             http-connections = 50
             warn-dirty = false
             log-lines = 50
+            sandbox = relaxed
           ''
           (lib.optionalString (config.plusultra.tools.direnv.enable) ''
             keep-outputs = true
