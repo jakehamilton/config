@@ -280,11 +280,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1669527030,
-        "narHash": "sha256-+aRS+T7z+TWGKgpdNrS0EJKeox9OYh4h3TKPMkUoa2Q=",
+        "lastModified": 1669877237,
+        "narHash": "sha256-tD3hzXqFeguC53cVIkhK31S0sD5ydAqx2Ttgef7+R4A=",
         "owner": "jakehamilton",
         "repo": "neovim",
-        "rev": "40dc372d3039c846e73f07c05f6b080464a24193",
+        "rev": "f000cbc628c4bb873d5830ff1c4fd7cd6b0330ca",
         "type": "github"
       },
       "original": {
