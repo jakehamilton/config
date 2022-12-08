@@ -61,7 +61,7 @@ in
     services.udev.packages = with pkgs; [ gnome3.gnome-settings-daemon ];
 
     # Browser integration
-    services.gnome.chrome-gnome-shell.enable = true;
+    services.gnome.gnome-browser-connector.enable = true;
 
     services.xserver = {
       enable = true;

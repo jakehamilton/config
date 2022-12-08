@@ -44,7 +44,7 @@ in
         );
 
         # @FIXME(jakehamilton): Remove when 22.11 releases.
-        enableGnomeExtensions = true;
+        # enableGnomeExtensions = true;
 
         profiles.${config.plusultra.user.name} = {
           inherit (cfg) extraConfig userChrome settings;

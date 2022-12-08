@@ -36,10 +36,21 @@ in
             keep-derivations = true
           '')
         ];
-        trustedUsers = users;
-        allowedUsers = users;
 
-        autoOptimiseStore = true;
+        settings = {
+          experimental-features = "nix-command flakes";
+          http-connections = 50;
+          warn-dirty = false;
+          log-lines = 50;
+          sandbox = "relaxed";
+          auto-optimise-store = true;
+          trusted-users = users;
+          allowed-users = users;
+        } // (lib.optionalAttrs config.plusultra.tools.direnv.enable {
+          keep-outputs = true;
+          keep-derivations = true;
+        });
+
         gc = {
           automatic = true;
           dates = "weekly";
