@@ -26,8 +26,7 @@ in
   config = mkIf cfg.enable {
     plusultra.desktop.addons.firefox-nordic-theme = enabled;
 
-    # @FIXME(jakehamilton): Enable when 22.11 releases.
-    # services.gnome.gnome-browser-connector.enable = plusultra.desktop.gnome.enable;
+    services.gnome.gnome-browser-connector.enable = config.plusultra.desktop.gnome.enable;
 
     plusultra.home.extraOptions = {
       programs.firefox = {

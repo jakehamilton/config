@@ -104,8 +104,10 @@ with lib;
       workstation = enabled;
     };
 
-    desktop.gnome.wallpaper =
-      pkgs.plusultra.wallpapers.pink-and-blue-ultrawide.fileName;
+    desktop.gnome = {
+      wallpaper = pkgs.plusultra.wallpapers.pink-and-blue-ultrawide.fileName;
+      monitors = ./monitors.xml;
+    };
 
     virtualisation.kvm = {
       enable = true;

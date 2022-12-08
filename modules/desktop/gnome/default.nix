@@ -13,6 +13,7 @@ in
     wayland = mkBoolOpt true "Whether or not to use Wayland.";
     suspend =
       mkBoolOpt true "Whether or not to suspend the machine after inactivity.";
+    monitors = mkOpt (nullOr path) null "The monitors.xml file to create.";
   };
 
   config = mkIf cfg.enable {
@@ -48,20 +49,22 @@ in
     environment.gnome.excludePackages = with pkgs.gnome; [
       pkgs.gnome-tour
       epiphany
+      geary
+      gnome-font-viewer
+      gnome-system-monitor
+      gnome-maps
     ];
 
     systemd.tmpfiles.rules = [
       "d ${gdmHome}/.config 0711 gdm gdm"
+    ] ++ (
       # "./monitors.xml" comes from ~/.config/monitors.xml when GNOME
       # display information is updated.
-      "L+ ${gdmHome}/.config/monitors.xml - - - - ${./monitors.xml}"
-    ];
+      lib.optional (cfg.monitors != null) "L+ ${gdmHome}/.config/monitors.xml - - - - ${cfg.monitors}"
+    );
 
     # Required for app indicators
     services.udev.packages = with pkgs; [ gnome3.gnome-settings-daemon ];
-
-    # Browser integration
-    services.gnome.gnome-browser-connector.enable = true;
 
     services.xserver = {
       enable = true;
