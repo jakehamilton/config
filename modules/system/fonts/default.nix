@@ -2,7 +2,8 @@
 
 with lib;
 let cfg = config.plusultra.system.fonts;
-in {
+in
+{
   options.plusultra.system.fonts = with types; {
     enable = mkBoolOpt false "Whether or not to manage fonts.";
     fonts = mkOpt (listOf package) [ ] "Custom font packages to install.";
@@ -20,6 +21,7 @@ in {
       [
         noto-fonts
         noto-fonts-cjk-sans
+        noto-fonts-cjk-serif
         noto-fonts-emoji
         (nerdfonts.override { fonts = [ "Hack" ]; })
       ] ++ cfg.fonts;
