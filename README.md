@@ -90,7 +90,7 @@ See the following example for how to apply overlays from this flake.
 				plusultra.overlays."nixpkgs/obs-studio"
 				plusultra.overlays."nixpkgs/obs-studio-plugins"
 				plusultra.overlays."nixpkgs/pocketcasts"
-				plusultra.overlays."nixpkgs/polymc"
+				plusultra.overlays."nixpkgs/prismlauncher"
 				plusultra.overlays."nixpkgs/tmuxPlugins"
 				plusultra.overlays."nixpkgs/wrapOBS"
 				plusultra.overlays."nixpkgs/yt-music"
@@ -181,7 +181,7 @@ passed through.
 - `neovim-remote`
 - `neovim-unwrapped`
 - `obs-studio`
-- `polymc`
+- `prismlauncher`
 - `rust-analyzer`
 - `sumneko-lua-language-server`
 - `tree-sitter`

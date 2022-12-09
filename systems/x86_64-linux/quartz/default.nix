@@ -130,18 +130,46 @@ with lib;
     rootCredentialsFile = "/persist/apps/minio/credentials";
   };
 
+  services.navidrome = {
+    enable = true;
+
+    settings = {
+      Address = "127.0.0.1";
+      Port = 4533;
+      MusicFolder = "/persist/share/audio/music";
+      EnableGravatar = "true";
+    };
+  };
+
   services.jellyfin.enable = true;
+
+  services.vault = {
+    enable = true;
+
+    # Use the version of Vault built with support for the UI.
+    package = pkgs.vault-bin;
+
+    storageBackend = "file";
+    extraConfig = ''
+      ui = true
+    '';
+  };
 
   networking.firewall.allowedTCPPorts = [
     # Samba
     5357
+
+    # Navidrome
+    4533
+
+    # Jellyfin
+    8096
   ];
   networking.firewall.allowedUDPPorts = [
     # Samba
     3702
 
     # Jellyfin
-    # We only want to open Jellyfin's UDP ports since HTTP will be proxied with nginx.
     1900
     7359
   ];
@@ -208,33 +236,31 @@ with lib;
     virtualHosts =
       let
         create-proxy =
-          { port
+          { port ? null
           , host ? "127.0.0.1"
           , proxy-web-sockets ? false
-          }: {
-            sslCertificate = "${config.security.acme.certs."quartz.hamho.me".directory}/fullchain.pem";
-            sslCertificateKey = "${config.security.acme.certs."quartz.hamho.me".directory}/key.pem";
+          , extra-config ? { }
+          }:
+            assert port != "";
+            assert host != "";
+            extra-config // {
+              sslCertificate = "${config.security.acme.certs."quartz.hamho.me".directory}/fullchain.pem";
+              sslCertificateKey = "${config.security.acme.certs."quartz.hamho.me".directory}/key.pem";
 
-            forceSSL = true;
+              forceSSL = true;
 
-            locations."/" = {
-              proxyPass = "http://${host}:${builtins.toString port}";
-              proxyWebsockets = proxy-web-sockets;
+              locations = (extra-config.locations or { }) // {
+                "/" = (extra-config.locations."/" or { }) // {
+                  proxyPass =
+                    "http://${host}${if port != null then ":${builtins.toString port}" else ""}";
+                };
+              };
             };
-          };
       in
       {
         "minio.quartz.hamho.me" =
-          # The MinIO module is a bit non-standard and uses the default value ":9001". If customized,
-          # that value can be of the form "<ip>:<port>". So we have to split the values out, defaulting
-          # the ip to "127.0.0.1".
-          let
-            address-parts = builtins.split ":" config.services.minio.consoleAddress;
-            ip = builtins.head address-parts;
-            host = if ip == "" then "127.0.0.1" else ip;
-            port = last address-parts;
-          in
-          create-proxy { inherit host port; };
+          create-proxy
+            (lib.network.get-address-parts config.services.minio.consoleAddress);
 
         "jellyfin.quartz.hamho.me" = create-proxy {
           # https://jellyfin.org/docs/general/networking/index.html#static-ports
@@ -243,6 +269,14 @@ with lib;
           # This is required to support sync play.
           proxy-web-sockets = true;
         };
+
+        "navidrome.quartz.hamho.me" = create-proxy {
+          # https://www.navidrome.org/docs/usage/configuration-options/#available-options
+          port = 4533;
+        };
+
+        "vault.quartz.hamho.me" = create-proxy
+          (lib.network.get-address-parts config.services.vault.address);
       };
   };
 

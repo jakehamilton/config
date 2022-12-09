@@ -11,15 +11,20 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      page
+      # @FIXME(jakehamilton): As of today (2022-12-09), `page` no longer works with my Neovim
+      # configuration. Either something in my configuration is breaking it or `page` is busted.
+      # page
       plusultra.neovim
     ];
 
     environment.variables = {
-      PAGER = "page";
-      MANPAGER =
-        "page -C -e 'au User PageDisconnect sleep 100m|%y p|enew! |bd! #|pu p|set ft=man'";
+      # PAGER = "page";
+      # MANPAGER =
+      #   "page -C -e 'au User PageDisconnect sleep 100m|%y p|enew! |bd! #|pu p|set ft=man'";
+      PAGER = "less";
+      MANPAGER = "less";
       NPM_CONFIG_PREFIX = "$HOME/.npm-global";
+      EDITOR = "nvim";
     };
 
     plusultra.home = {

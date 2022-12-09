@@ -2,7 +2,8 @@
 
 with lib;
 let cfg = config.plusultra.nix;
-in {
+in
+{
   options.plusultra.nix = with types; {
     enable = mkBoolOpt true "Whether or not to manage nix configuration.";
     package = mkOpt package pkgs.nix "Which nix package to use.";
@@ -11,39 +12,55 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       plusultra.nixos-revision
-      nix-index
       deploy-rs
+      nixfmt
+      nix-index
+      nix-prefetch-git
     ];
 
-    nix = let users = [ "root" config.plusultra.user.name ];
-    in {
-      package = cfg.package;
-      extraOptions = lib.concatStringsSep "\n" [
-        ''
-          experimental-features = nix-command flakes
-          http-connections = 50
-          warn-dirty = false
-          log-lines = 50
-        ''
-        (lib.optionalString (config.plusultra.tools.direnv.enable) ''
-          keep-outputs = true
-          keep-derivations = true
-        '')
-      ];
-      trustedUsers = users;
-      allowedUsers = users;
+    nix =
+      let users = [ "root" config.plusultra.user.name ];
+      in
+      {
+        package = cfg.package;
+        extraOptions = lib.concatStringsSep "\n" [
+          ''
+            experimental-features = nix-command flakes
+            http-connections = 50
+            warn-dirty = false
+            log-lines = 50
+            sandbox = relaxed
+          ''
+          (lib.optionalString (config.plusultra.tools.direnv.enable) ''
+            keep-outputs = true
+            keep-derivations = true
+          '')
+        ];
 
-      autoOptimiseStore = true;
-      gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 30d";
+        settings = {
+          experimental-features = "nix-command flakes";
+          http-connections = 50;
+          warn-dirty = false;
+          log-lines = 50;
+          sandbox = "relaxed";
+          auto-optimise-store = true;
+          trusted-users = users;
+          allowed-users = users;
+        } // (lib.optionalAttrs config.plusultra.tools.direnv.enable {
+          keep-outputs = true;
+          keep-derivations = true;
+        });
+
+        gc = {
+          automatic = true;
+          dates = "weekly";
+          options = "--delete-older-than 30d";
+        };
+
+        # flake-utils-plus
+        generateRegistryFromInputs = true;
+        generateNixPathFromInputs = true;
+        linkInputs = true;
       };
-
-      # flake-utils-plus
-      generateRegistryFromInputs = true;
-      generateNixPathFromInputs = true;
-      linkInputs = true;
-    };
   };
 }

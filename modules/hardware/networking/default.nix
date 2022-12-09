@@ -2,7 +2,8 @@
 
 with lib;
 let cfg = config.plusultra.hardware.networking;
-in {
+in
+{
   options.plusultra.hardware.networking = with types; {
     enable = mkBoolOpt false "Whether or not to enable networking support";
     hosts = mkOpt attrs { }
@@ -17,7 +18,10 @@ in {
         "127.0.0.1" = [ "local.test" ] ++ (cfg.hosts."127.0.0.1" or [ ]);
       } // cfg.hosts;
 
-      networkmanager = enabled;
+      networkmanager = {
+        enable = true;
+        dhcp = "internal";
+      };
     };
 
     # Fixes an issue that normally causes nixos-rebuild to fail.

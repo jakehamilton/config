@@ -102,6 +102,10 @@ in
               source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
             '';
 
+            shellAliases = {
+              say = "${pkgs.toilet}/bin/toilet -f pagga";
+            };
+
             plugins = [{
               name = "zsh-nix-shell";
               file = "nix-shell.plugin.zsh";

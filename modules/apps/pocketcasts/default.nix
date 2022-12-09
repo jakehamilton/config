@@ -2,12 +2,13 @@
 
 with lib;
 let cfg = config.plusultra.apps.pocketcasts;
-in {
+in
+{
   options.plusultra.apps.pocketcasts = with types; {
     enable = mkBoolOpt false "Whether or not to enable Pocketcasts.";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ pocketcasts ];
+    environment.systemPackages = with pkgs.plusultra; [ pocketcasts ];
   };
 }

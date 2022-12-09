@@ -4,7 +4,7 @@ let
   cfg = config.plusultra.suites.games;
   apps = {
     steam = enabled;
-    polymc = enabled;
+    prismlauncher = enabled;
     lutris = enabled;
     winetricks = enabled;
     protontricks = enabled;
@@ -15,7 +15,8 @@ let
     wine = enabled;
     proton = enabled;
   };
-in {
+in
+{
   options.plusultra.suites.games = with types; {
     enable =
       mkBoolOpt false "Whether or not to enable common games configuration.";

@@ -4,17 +4,66 @@
 # Use your own electron to run discord
 # Nix version of https://aur.archlinux.org/packages/discord_arch_electron/
 # TODO: Remove most of these deps
-{ discord-canary, pname ? discord-canary.pname, version ? discord-canary.version
-, src ? discord-canary.src, meta ? discord-canary.meta
-, binaryName ? "DiscordCanary", desktopName ? "Discord Canary", autoPatchelfHook
-, makeDesktopItem, lib, stdenv, wrapGAppsHook, electron_15
-, electron ? electron_15, alsa-lib, at-spi2-atk, at-spi2-core, atk, cairo, cups
-, dbus, expat, ffmpeg-full, ffmpeg ? ffmpeg-full, fontconfig, freetype
-, gdk-pixbuf, glib, gtk3, libatomic_ops, libcxx, libdrm, libnotify
-, libpulseaudio, libuuid, libX11, libXScrnSaver, libXcomposite, libXcursor
-, libXdamage, libXext, libXfixes, libXi, libXrandr, libXrender, libXtst, libxcb
-, libxshmfence, mesa, nspr, nss, pango, systemd, libappindicator-gtk3
-, libdbusmenu, writeScript, common-updater-scripts, nodePackages, ... }:
+{ discord-canary
+, pname ? discord-canary.pname
+, version ? discord-canary.version
+, src ? discord-canary.src
+, meta ? discord-canary.meta
+, binaryName ? "DiscordCanary"
+, desktopName ? "Discord Canary"
+, autoPatchelfHook
+, makeDesktopItem
+, lib
+, stdenv
+, wrapGAppsHook
+, electron_15
+, electron ? electron_15
+, alsa-lib
+, at-spi2-atk
+, at-spi2-core
+, atk
+, cairo
+, cups
+, dbus
+, expat
+, ffmpeg-full
+, ffmpeg ? ffmpeg-full
+, fontconfig
+, freetype
+, gdk-pixbuf
+, glib
+, gtk3
+, libatomic_ops
+, libcxx
+, libdrm
+, libnotify
+, libpulseaudio
+, libuuid
+, libX11
+, libXScrnSaver
+, libXcomposite
+, libXcursor
+, libXdamage
+, libXext
+, libXfixes
+, libXi
+, libXrandr
+, libXrender
+, libXtst
+, libxcb
+, libxshmfence
+, mesa
+, nspr
+, nss
+, pango
+, systemd
+, libappindicator-gtk3
+, libdbusmenu
+, writeScript
+, common-updater-scripts
+, nodePackages
+, ...
+}:
 
 let
   inherit (nodePackages) asar;
@@ -70,7 +119,8 @@ let
     categories = [ "Network" "InstantMessaging" ];
     mimeTypes = [ "x-scheme-handler/discord" ];
   };
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   inherit pname version src;
   meta = meta // { mainProgram = binaryName; };
 

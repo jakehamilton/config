@@ -38,6 +38,7 @@ in
         http = enabled;
         titan = enabled;
         at = enabled;
+        go = enabled;
       };
 
       virtualisation = { podman = enabled; };

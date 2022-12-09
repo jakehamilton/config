@@ -13,6 +13,7 @@ in
     wayland = mkBoolOpt true "Whether or not to use Wayland.";
     suspend =
       mkBoolOpt true "Whether or not to suspend the machine after inactivity.";
+    monitors = mkOpt (nullOr path) null "The monitors.xml file to create.";
   };
 
   config = mkIf cfg.enable {
@@ -27,6 +28,7 @@ in
     environment.systemPackages = with pkgs; [
       (hiPrio plusultra.xdg-open-with-portal)
       wl-clipboard
+      gnome.gnome-tweaks
       gnome.nautilus-python
       gnomeExtensions.appindicator
       gnomeExtensions.big-avatar
@@ -34,6 +36,10 @@ in
       gnomeExtensions.wireless-hid
       gnomeExtensions.emoji-selector
       gnomeExtensions.clear-top-bar
+      gnomeExtensions.dash-to-dock
+      gnomeExtensions.blur-my-shell
+      gnomeExtensions.extension-list
+      gnomeExtensions.just-perfection
       gnomeExtensions.transparent-top-bar
       gnomeExtensions.gsconnect
       gnomeExtensions.gtile
@@ -43,14 +49,19 @@ in
     environment.gnome.excludePackages = with pkgs.gnome; [
       pkgs.gnome-tour
       epiphany
+      geary
+      gnome-font-viewer
+      gnome-system-monitor
+      gnome-maps
     ];
 
     systemd.tmpfiles.rules = [
       "d ${gdmHome}/.config 0711 gdm gdm"
+    ] ++ (
       # "./monitors.xml" comes from ~/.config/monitors.xml when GNOME
       # display information is updated.
-      "L+ ${gdmHome}/.config/monitors.xml - - - - ${./monitors.xml}"
-    ];
+      lib.optional (cfg.monitors != null) "L+ ${gdmHome}/.config/monitors.xml - - - - ${cfg.monitors}"
+    );
 
     # Required for app indicators
     services.udev.packages = with pkgs; [ gnome3.gnome-settings-daemon ];

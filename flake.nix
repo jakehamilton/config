@@ -2,9 +2,9 @@
   description = "Plus Ultra";
 
   inputs = {
-    # NixPkgs (nixos-22.05)
+    # NixPkgs (nixos-22.11)
     nixpkgs.url =
-      "github:nixos/nixpkgs/nixos-22.05";
+      "github:nixos/nixpkgs/nixos-22.11";
 
     # NixPkgs Unstable (nixos-unstable)
     unstable.url =
@@ -12,31 +12,32 @@
 
     # Home Manager (release-22.05)
     home-manager.url =
-      "github:nix-community/home-manager/release-22.05";
+      "github:nix-community/home-manager/release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # macOS Support (master)
-    darwin.url =
-      "github:lnl7/nix-darwin?rev=9a388b6b56d079090ff8e9998e2d4a63e6886f01";
+    darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     # Hardware Configuration
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
 
     # Generate System Images
     nixos-generators.url =
-      "github:nix-community/nixos-generators?rev=adccd191a0e83039d537e021f19495b7bad546a1";
+      "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Powercord (modded Discord)
-    powercord-overlay.url =
-      "github:LavaDesu/powercord-overlay?rev=cea1348777740f02ba58e8712ca6aaf8f295b469";
-    powercord-overlay.inputs.nixpkgs.follows = "unstable";
+    # Snowfall Lib
+    snowfall-lib.url = "github:snowfallorg/lib";
+    snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Snowfall Flake
+    snowfall-flake.url = "github:snowfallorg/flake";
+    snowfall-flake.inputs.nixpkgs.follows = "unstable";
 
     # Comma
     comma.url =
-      "github:nix-community/comma?rev=034a9ca440370fc1eccbed43ff345fb6ea1f0d27";
+      "github:nix-community/comma";
     comma.inputs.nixpkgs.follows = "unstable";
 
     # System Deployment
@@ -45,17 +46,26 @@
 
     # Run unpatched dynamically compiled binaries
     nix-ld.url = "github:Mic92/nix-ld";
-    nix-ld.inputs.nixpkgs.follows = "nixpkgs";
-    nix-alien.url = "github:thiagokokada/nix-alien";
-    nix-alien.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Snowfall
-    snowfall-lib.url = "github:snowfallorg/lib";
-    snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
+    nix-ld.inputs.nixpkgs.follows = "unstable";
 
     # Neovim
     neovim.url = "github:jakehamilton/neovim";
     neovim.inputs.nixpkgs.follows = "unstable";
+    neovim.inputs.snowfall-lib.follows = "snowfall-lib";
+
+    # Discord Replugged
+    replugged.url = "github:LunNova/replugged-nix-flake";
+    replugged.inputs.nixpkgs.follows = "unstable";
+
+    # Discord Replugged plugins / themes
+    discord-tweaks = {
+      url = "github:NurMarvin/discord-tweaks";
+      flake = false;
+    };
+    discord-nord-theme = {
+      url = "github:DapperCore/NordCord";
+      flake = false;
+    };
   };
 
   outputs = inputs:
@@ -71,8 +81,8 @@
       channels-config.allowUnfree = true;
 
       overlays = with inputs; [
-        nix-alien.overlay
-        powercord-overlay.overlay
+        neovim.overlays."nixpkgs/neovim"
+        snowfall-flake.overlays."nixpkgs/flake"
       ];
 
       systems.modules = with inputs; [
