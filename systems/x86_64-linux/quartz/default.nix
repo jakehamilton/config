@@ -253,9 +253,6 @@ with lib;
 
         "vault.quartz.hamho.me" = create-proxy
           (lib.network.get-address-parts config.services.vault.address);
-
-        "dex.quartz.hamho.me" = create-proxy
-          (lib.network.get-address-parts config.plusultra.services.dex.settings.web.http);
       };
   };
 
