@@ -32,13 +32,14 @@ in
       inherit apps cli-apps;
 
       tools = {
+        at = enabled;
         direnv = enabled;
+        go = enabled;
+        http = enabled;
         k8s = enabled;
         node = enabled;
-        http = enabled;
         titan = enabled;
-        at = enabled;
-        go = enabled;
+        qmk = enabled;
       };
 
       virtualisation = { podman = enabled; };
