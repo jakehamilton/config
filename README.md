@@ -20,13 +20,25 @@
 - [Screenshots](#screenshots)
 - [Overlays](#overlays)
 - [Packages](#packages)
+  - [`at`](#at)
+  - [`cowsay-plus`](#cowsay-plus)
+  - [`discord-canary`](#discord-canary)
   - [`doukutsu-rs`](#doukutsu-rs)
-  - [`discord-chromium`](#discord-chromium)
-  - [`logseq`](#logseq)
-  - [`kalidoface-2d`](#kalidoface-2d)
-  - [`kalidoface-3d`](#kalidoface-3d)
-  - [`kubecolor`](#kubecolor)
+  - [`firefox-nordic-theme`](#firefox-nordic-theme)
   - [`frappe-books`](#frappe-books)
+  - [`hey`](#hey)
+  - [`infrared`](#infrared)
+  - [`kalidoface`](#kalidoface)
+  - [`list-iommu`](#list-iommu)
+  - [`nix-get-protonup`](#nix-get-protonup)
+  - [`nix-update-index`](#nix-update-index)
+  - [`nixos-option`](#nixos-option)
+  - [`nixos-revision`](#nixos-revision)
+  - [`steam`](#steam)
+  - [`titan`](#titan)
+  - [`twitter`](#twitter)
+  - [`wallpapers`](#wallpapers)
+  - [`xdg-open-with-portal`](#xdg-open-with-portal)
 - [Options](#options)
 
 ## Screenshots
@@ -63,13 +75,13 @@ See the following example for how to apply overlays from this flake.
 		};
 	};
 
-  outputs = inputs:
-    inputs.snowfall-lib.mkFlake {
+	outputs = inputs:
+		inputs.snowfall-lib.mkFlake {
 			inherit inputs;
 
 			src = ./.;
 
-      overlays = with inputs; [
+			overlays = with inputs; [
 				# Get all of the packages from this flake by using the main overlay.
 				plusultra.overlay
 
@@ -94,8 +106,8 @@ See the following example for how to apply overlays from this flake.
 				plusultra.overlays."nixpkgs/tmuxPlugins"
 				plusultra.overlays."nixpkgs/wrapOBS"
 				plusultra.overlays."nixpkgs/yt-music"
-      ];
-    };
+			];
+		};
 }
 ```
 
@@ -124,67 +136,103 @@ Packages can be used directly from the flake.
 	};
 
   outputs = inputs:
-    inputs.snowfall-lib.mkFlake {
+		inputs.snowfall-lib.mkFlake {
 			inherit inputs;
 
 			src = ./.;
 
 			outputs-builder = channels:
-        let
-          inherit (channels.nixpkgs) system;
-          inherit (plusultra.packages.${system})
-            discord-chromium
-            kubecolor
-            logseq;
-        in {
-          # ...
-        };
-    };
+				let
+					inherit (channels.nixpkgs) system;
+					inherit (plusultra.packages.${system})
+						hey
+						titan
+						nixos-option
+						nixos-revision
+						xdg-open-with-portal;
+				in {
+					# ...
+				};
+		};
 }
 ```
 
-### [`doukutsu-rs`](https://github.com/doukutsu-rs/doukutsu-rs)
+### [`at`](./packages/at/default.nix)
 
-A fully playable re-implementation of Cave Story (Doukutsu Monogatari) engine written in Rust.
+[`@`](https://npm.im/@suchipi/at-js) - JavaScript stdio transformation tool.
 
-### `discord-chromium`
+### [`cowsay-plus`](./packages/cowsay-plus/default.nix)
 
-A chromium window that opens Discord under Wayland
-with Pipewire support enabled.
+A cowsay wrapper that loads random cows.
 
-### `logseq`
+### [`discord-canary`](./packages/discord-canary/default.nix)
 
-An updated version of Logseq that fixes wayland
-and Git support.
+The canary version of [Discord](https://discord.com).
 
-### `kalidoface-2d`
+### [`doukutsu-rs`](./packages/doukutsu-rs/default.nix)
 
-Runs [Kalidoface](https://kalidoface.com/) in chromium.
+[`doukutsu-rs`](https://github.com/doukutsu-rs/doukutsu-rs) - A fully playable re-implementation of Cave Story (Doukutsu Monogatari) engine written in Rust.
 
-### `kalidoface-3d`
+### [`firefox-nordic-theme`](./packages/firefox-nordic-theme/default.nix)
 
-Runs [Kalidoface 3D](https://3d.kalidoface.com/) in chromium.
+[A dark theme for Firefox](https://github.com/EliverLara/firefox-nordic-theme) created using the [Nord](https://github.com/arcticicestudio/nord) color palette.
 
-### `frappe-books`
+### [`frappe-books`](./packages/frappe-books/default.nix)
 
 The AppImage build of [Frappe Books](https://frappebooks.com).
 
-### Unstable
+### [`hey`](./packages/hey/default.nix)
 
-The following packages are pulled in from the unstable channel and
-passed through.
+A Firefox wrapper for [HEY](https://hey.com).
 
-- `chromium`
-- `discord`
-- `gopls`
-- `kubecolor`
-- `neovim-remote`
-- `neovim-unwrapped`
-- `obs-studio`
-- `prismlauncher`
-- `rust-analyzer`
-- `sumneko-lua-language-server`
-- `tree-sitter`
+### [`infrared`](./packages/infrared/default.nix)
+
+A Minecraft [reverse proxy](https://github.com/haveachin/infrared).
+
+### [`kalidoface`](./packages/kalidoface/default.nix)
+
+Runs [Kalidoface](https://kalidoface.com) in Firefox.
+
+### [`list-iommu`](./packages/list-iommu/default.nix)
+
+A helper script to list IOMMU devices.
+
+### [`nix-get-protonup`](./packages/nix-get-protonup/default.nix)
+
+A helper script to install [Proton GE](https://github.com/GloriousEggroll/proton-ge-custom).
+
+### [`nix-update-index`](./packages/nix-update-index/default.nix)
+
+A helper script to fetch the latest index for nix-locate.
+
+### [`nixos-option`](./packages/nixos-option/default.nix)
+
+A flake-enabled version of `nixos-option`.
+
+### [`nixos-revision`](./packages/nixos-revision/default.nix)
+
+A helper script to get the configuration revision of the current system.
+
+### [`steam`](./packages/steam/default.nix)
+
+Extra desktop items for Steam to launch the application in Pipewire mode
+or enable the gamepad UI.
+
+### [`titan`](./packages/titan/default.nix)
+
+A JavaScript [monorepo management tool](https://npm.im/@jakehamiton/titan).
+
+### [`twitter`](./packages/twitter/default.nix)
+
+A Firefox wrapper for Twitter.
+
+### [`wallpapers`](./packages/wallpapers/default.nix)
+
+A collection of wallpapers.
+
+### [`xdg-open-with-portal`](./packages/xdg-open-with-portal/default.nix)
+
+A replacement for `xdg-open` that fixes issues when using xwayland.
 
 ## Options
 
