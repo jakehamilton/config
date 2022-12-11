@@ -85,8 +85,8 @@ See the following example for how to apply overlays from this flake.
 				# Get all of the packages from this flake by using the main overlay.
 				plusultra.overlay
 
-        # Individual overlays can be accessed from
-        # `plusultra.overlays.<name>`.
+				# Individual overlays can be accessed from
+				# `plusultra.overlays.<name>`.
 				plusultra.overlays."nixpkgs/at"
 				plusultra.overlays."nixpkgs/chromium"
 				plusultra.overlays."nixpkgs/comma"
