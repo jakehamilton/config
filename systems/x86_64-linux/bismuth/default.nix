@@ -1,15 +1,5 @@
 { pkgs, config, lib, channel, ... }:
 
-# @TODO(jakehamilton): Move this to my Logseq notes.
-# Wine Shenanigans (to run Cave Story):
-# 1. Install Lutris and select the game "Final Fantasy XIV Online" to install.
-# 2. Proceed with the installer until it wants to install the game and then click cancel.
-# 3. Finish with the Lutris installer and open a terminal. Run the following:
-#   WINEPREFIX=/home/short/Games/final-fantasy-xiv-online wine64 ../Cave\ Story\ Multiplayer/Doukutsu.exe
-# 4. The `final-fantasy-xiv-online` directory can be renamed/moved, or have its contents copied.
-#   to the default Wine prefix if preferred.
-# **NOTE**: wine-wow (wine64) is required to run in this prefix, so the package `wine64Packages.unstable`
-#   should be installed.
 with lib;
 {
   imports = [ ./hardware.nix ];
@@ -33,8 +23,6 @@ with lib;
       chromium
       plusultra.kalidoface
     ];
-
-  # services.samba-wsdd = enabled;
 
   services.samba = {
     enable = true;

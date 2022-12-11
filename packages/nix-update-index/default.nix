@@ -1,6 +1,6 @@
 { pkgs, lib, ... }:
 
-pkgs.writeShellScriptBin "update-nix-index" ''
+pkgs.writeShellScriptBin "nix-update-index" ''
   set -euo pipefail
 
   filename="index-${pkgs.system}"
