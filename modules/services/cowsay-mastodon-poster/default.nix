@@ -8,14 +8,8 @@ let
   cfg = config.plusultra.services.cowsay-mastodon-poster;
 
   script = ''
-    LOG_FILE=''${LOG_FILE:-~/cowsay-mastodon-poster.log}
-
-    log() {
-      echo "$@" >> $LOG_FILE
-    }
-
     if [ ! -f ~/.config/toot/config.json ]; then
-      log "File ~/.config/toot/config.json does not exist. Run 'toot login_cli' first."
+      echo "File ~/.config/toot/config.json does not exist. Run 'toot login_cli' first."
       exit 1
     fi
 
