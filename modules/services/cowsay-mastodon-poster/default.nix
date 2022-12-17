@@ -22,7 +22,7 @@ let
     tmp_dir=$(mktemp -d)
 
     pushd $tmp_dir > /dev/null
-      ${cow2img}/bin/cow2img ${if cfg.short then "--message \"$(${fortune}/bin/fortune -s)\"" else ""}
+      ${cow2img}/bin/cow2img --no-spinner ${if cfg.short then "--message \"$(${fortune}/bin/fortune -s)\"" else ""}
 
       cow_name=$(cat ./cow/name)
       cow_message=$(cat ./cow/message)
