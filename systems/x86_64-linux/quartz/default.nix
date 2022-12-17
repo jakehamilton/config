@@ -198,6 +198,7 @@ with lib;
     services = {
       openssh = enabled;
       tailscale = enabled;
+      cowsay-mastodon-poster = enabled;
     };
 
     security = {
