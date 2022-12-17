@@ -32,8 +32,8 @@
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Flake
-    snowfall-flake.url = "github:snowfallorg/flake";
-    snowfall-flake.inputs.nixpkgs.follows = "unstable";
+    flake.url = "github:snowfallorg/flake";
+    flake.inputs.nixpkgs.follows = "unstable";
 
     # Comma
     comma.url =
@@ -66,6 +66,12 @@
       url = "github:DapperCore/NordCord";
       flake = false;
     };
+
+    cowsay = {
+      url = "github:snowfallorg/cowsay";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.unstable.follows = "unstable";
+    };
   };
 
   outputs = inputs:
@@ -82,7 +88,8 @@
 
       overlays = with inputs; [
         neovim.overlays."nixpkgs/neovim"
-        snowfall-flake.overlays."nixpkgs/flake"
+        flake.overlays."nixpkgs/flake"
+        cowsay.overlay
       ];
 
       systems.modules = with inputs; [
