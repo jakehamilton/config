@@ -3,7 +3,7 @@
 pkgs.fetchFromGitHub {
   owner = "jakehamilton";
   repo = "firefox-nordic-theme";
-  rev = "a3069796a1e6ec4166adf4d3dbb887da206fef97";
-  sha256 = "07f790xbfxixsxb2c7nfn7zlqipzrkgxsqsf41jfafmapswh31f1";
+  rev = "4f9d6967671a8a193fa20438cc11c728da2b8e4c";
+  sha256 = "018scrxxp83cwchspimrfx0r1vyly0s4g1sshzl2abfbcjan2q96";
   name = "firefox-nordic-theme";
 }
