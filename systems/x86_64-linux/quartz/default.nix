@@ -258,7 +258,7 @@ with lib;
                   proxyPass =
                     "http://${host}${if port != null then ":${builtins.toString port}" else ""}";
 
-                  proxyWebSockets = proxy-web-sockets;
+                  proxyWebsockets = proxy-web-sockets;
                 };
               };
             };
