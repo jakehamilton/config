@@ -52,11 +52,11 @@
         "vhs": "vhs"
       },
       "locked": {
-        "lastModified": 1671319048,
-        "narHash": "sha256-ugp7LHoZvBLx/mMr+jlfL3zg50WnUv3k3fAWbzjKOHE=",
+        "lastModified": 1672294595,
+        "narHash": "sha256-qgHhiSZPi29vRqUzqlH7w2T/xYMT6w2DFJZ10+oLAAo=",
         "owner": "snowfallorg",
         "repo": "cowsay",
-        "rev": "848620c365bd31861dc21f9f8a48b2b53468f941",
+        "rev": "8951a3ede21bd60da7591555ab8b980add87b4d3",
         "type": "github"
       },
       "original": {

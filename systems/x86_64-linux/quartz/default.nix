@@ -198,7 +198,10 @@ with lib;
     services = {
       openssh = enabled;
       tailscale = enabled;
-      cowsay-mastodon-poster = enabled;
+      cowsay-mastodon-poster = {
+        enable = true;
+        short = true;
+      };
     };
 
     security = {
@@ -254,6 +257,8 @@ with lib;
                 "/" = (extra-config.locations."/" or { }) // {
                   proxyPass =
                     "http://${host}${if port != null then ":${builtins.toString port}" else ""}";
+
+                  proxyWebSockets = proxy-web-sockets;
                 };
               };
             };
