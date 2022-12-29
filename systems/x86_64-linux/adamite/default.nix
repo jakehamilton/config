@@ -10,6 +10,8 @@ with lib;
     rebuildFromUserData = false;
   };
 
+  boot.loader.grub = enabled;
+
   environment.systemPackages = with pkgs; [
     neovim
   ];
@@ -19,6 +21,7 @@ with lib;
 
     cli-apps = {
       tmux = enabled;
+      neovim = enabled;
     };
 
     tools = {
@@ -40,10 +43,6 @@ with lib;
       time = enabled;
       xkb = enabled;
     };
-  };
-
-  boot.loader.grub = {
-    enable = true;
   };
 
   system.stateVersion = "21.11";
