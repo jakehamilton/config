@@ -19,7 +19,6 @@ in
       jq
       clac
       wget
-      appimage-run
     ];
   };
 }
