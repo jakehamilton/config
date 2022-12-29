@@ -148,11 +148,11 @@
         "unstable": "unstable"
       },
       "locked": {
-        "lastModified": 1667678457,
-        "narHash": "sha256-+A/QMfzgpZBBlTImnZE1r2G/H3neZjVy8t4D387UZQM=",
+        "lastModified": 1671926522,
+        "narHash": "sha256-5d9g8j8R9Jg/N/uWWWOqgDhP+eRXztTNsBx+gxN4P88=",
         "owner": "snowfallorg",
         "repo": "flake",
-        "rev": "269ccbfc7f2f4aafc923c53bcf3f9ca36da34eac",
+        "rev": "fdb0db74efb0d9260b1b57420470706c2c4d5c16",
         "type": "github"
       },
       "original": {
@@ -680,15 +680,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1667153928,
-        "narHash": "sha256-SbXxxrxWzumig4ytez86B9FFkd9zH/qj+SSiMUwY8bI=",
+        "lastModified": 1672299605,
+        "narHash": "sha256-r1AwEqso6L4Q+ptKqgNVlOL3+mk4NNKnok2YBiU4Gk0=",
         "owner": "snowfallorg",
         "repo": "lib",
-        "rev": "1ffe7109a0aade9df745432e1f5788cf67a05a3e",
+        "rev": "23c08d04f9c78aaaf511f3be2849f2875071ad0e",
         "type": "github"
       },
       "original": {
         "owner": "snowfallorg",
+        "ref": "dev",
         "repo": "lib",
         "type": "github"
       }

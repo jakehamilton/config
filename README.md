@@ -87,44 +87,48 @@ See the following example for how to apply overlays from this flake.
 
 				# Individual overlays can be accessed from
 				# `plusultra.overlays.<name>`.
-				plusultra.overlays."nixpkgs/at"
-				plusultra.overlays."nixpkgs/chromium"
-				plusultra.overlays."nixpkgs/comma"
-				plusultra.overlays."nixpkgs/cowsay-plus"
-				plusultra.overlays."nixpkgs/deploy-rs"
-				plusultra.overlays."nixpkgs/discord"
-				plusultra.overlays."nixpkgs/discord-canary"
-				plusultra.overlays."nixpkgs/doukutsu-rs"
-				plusultra.overlays."nixpkgs/firefox"
-				plusultra.overlays."nixpkgs/firefox-nordic-theme"
-				plusultra.overlays."nixpkgs/flyctl"
-				plusultra.overlays."nixpkgs/frappe-books"
-				plusultra.overlays."nixpkgs/freetube"
-				plusultra.overlays."nixpkgs/gamescope"
-				plusultra.overlays."nixpkgs/gnome"
-				plusultra.overlays."nixpkgs/hey"
-				plusultra.overlays."nixpkgs/infrared"
-				plusultra.overlays."nixpkgs/kalidoface"
-				plusultra.overlays."nixpkgs/kubecolor"
-				plusultra.overlays."nixpkgs/linux"
-				plusultra.overlays."nixpkgs/list-iommu"
-				plusultra.overlays."nixpkgs/lutris"
-				plusultra.overlays."nixpkgs/minecraft-forge"
-				plusultra.overlays."nixpkgs/nix-get-protonup"
-				plusultra.overlays."nixpkgs/nix-update-index"
-				plusultra.overlays."nixpkgs/nixos-option"
-				plusultra.overlays."nixpkgs/nixos-revision"
-				plusultra.overlays."nixpkgs/nordic"
-				plusultra.overlays."nixpkgs/obs"
-				plusultra.overlays."nixpkgs/pocketcasts"
-				plusultra.overlays."nixpkgs/prismlauncher"
-				plusultra.overlays."nixpkgs/steam"
-				plusultra.overlays."nixpkgs/titan"
-				plusultra.overlays."nixpkgs/tmux"
-				plusultra.overlays."nixpkgs/twitter"
-				plusultra.overlays."nixpkgs/wallpapers"
-				plusultra.overlays."nixpkgs/xdg-open-with-portal"
-				plusultra.overlays."nixpkgs/yt-music"
+				plusultra.overlays.chromium
+				plusultra.overlays.comma
+				plusultra.overlays.default
+				plusultra.overlays.deploy-rs
+				plusultra.overlays.discord
+				plusultra.overlays.firefox
+				plusultra.overlays.flyctl
+				plusultra.overlays.freetube
+				plusultra.overlays.gamescope
+				plusultra.overlays.gnome
+				plusultra.overlays.kubecolor
+				plusultra.overlays.linux
+				plusultra.overlays.lutris
+				plusultra.overlays.nordic
+				plusultra.overlays.obs
+				plusultra.overlays.pocketcasts
+				plusultra.overlays.prismlauncher
+				plusultra.overlays.tmux
+				plusultra.overlays.yt-music
+
+				# Individual overlays for each package in this flake
+				# are available for convenience.
+				plusultra.overlays."package/at"
+				plusultra.overlays."package/cowsay-plus"
+				plusultra.overlays."package/discord-canary"
+				plusultra.overlays."package/doukutsu-rs"
+				plusultra.overlays."package/firefox-nordic-theme"
+				plusultra.overlays."package/frappe-books"
+				plusultra.overlays."package/hey"
+				plusultra.overlays."package/infrared"
+				plusultra.overlays."package/kalidoface"
+				plusultra.overlays."package/list-iommu"
+				plusultra.overlays."package/minecraft-forge"
+				plusultra.overlays."package/nix-get-protonup"
+				plusultra.overlays."package/nix-update-index"
+				plusultra.overlays."package/nixos-option"
+				plusultra.overlays."package/nixos-revision"
+				plusultra.overlays."package/steam"
+				plusultra.overlays."package/titan"
+				plusultra.overlays."package/twitter"
+				plusultra.overlays."package/wallpapers"
+				plusultra.overlays."package/xdg-open-with-portal"
 			];
 		};
 }

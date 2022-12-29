@@ -28,12 +28,13 @@
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Lib
-    snowfall-lib.url = "github:snowfallorg/lib";
+    snowfall-lib.url = "github:snowfallorg/lib/dev";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Flake
     flake.url = "github:snowfallorg/flake";
     flake.inputs.nixpkgs.follows = "unstable";
+    flake.inputs.snowfall-lib.follows = "snowfall-lib";
 
     # Comma
     comma.url =
@@ -87,8 +88,8 @@
       channels-config.allowUnfree = true;
 
       overlays = with inputs; [
-        neovim.overlays."nixpkgs/neovim"
-        flake.overlays."nixpkgs/flake"
+        neovim.overlays."package/neovim"
+        flake.overlay
         cowsay.overlay
       ];
 

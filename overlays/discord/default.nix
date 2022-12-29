@@ -1,8 +1,6 @@
 { channels, ... }:
 
 final: prev: {
-  # discord = channels.unstable.discord;
-
   plusultra = (prev.plusultra or { }) // {
     discord-chromium = with prev;
       makeDesktopItem {
