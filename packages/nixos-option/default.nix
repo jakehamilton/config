@@ -1,4 +1,4 @@
-{ lib, nixos-option, makeWrapper, fetchFromGitHub, runCommandNoCC, ... }:
+{ lib, nixos-option, makeWrapper, fetchFromGitHub, runCommandNoCC, flakeSource ? "/home/short/work/config", ... }:
 
 let
   flake-compat = fetchFromGitHub {
@@ -7,7 +7,7 @@ let
     rev = "b4a34015c698c7793d592d66adbab377907a2be8";
     sha256 = "1qc703yg0babixi6wshn5wm2kgl5y1drcswgszh4xxzbrwkk9sv7";
   };
-  prefix = ''(import ${flake-compat} { src = /home/short/work/config; }).defaultNix.nixosConfigurations.\$(hostname)'';
+  prefix = ''(import ${flake-compat} { src = ${flakeSource}; }).defaultNix.nixosConfigurations.\$(hostname)'';
 in
 runCommandNoCC "nixos-option"
 {
