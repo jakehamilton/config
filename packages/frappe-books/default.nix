@@ -12,15 +12,19 @@ let
   };
 
   appimageContents = pkgs.appimageTools.extractType2 { inherit name src; };
-in pkgs.appimageTools.wrapType2 rec {
+in
+pkgs.appimageTools.wrapType2 rec {
   inherit name src;
 
   extraInstallCommands = ''
     mv $out/bin/${name} $out/bin/${pname}
+
     install -m 444 -D ${appimageContents}/frappe-books.desktop $out/share/applications/${pname}.desktop
+
     ${pkgs.imagemagick}/bin/convert ${appimageContents}/frappe-books.png -resize 512x512 ${pname}_512.png
+
     install -m 444 -D ${pname}_512.png $out/share/icons/hicolor/512x512/apps/${pname}.png
-    cat $out/share/applications/${pname}.desktop
+
     substituteInPlace $out/share/applications/${pname}.desktop \
     	--replace 'Exec=AppRun --no-sandbox %U' 'Exec=${pname} %U'
   '';

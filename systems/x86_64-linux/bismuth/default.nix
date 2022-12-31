@@ -89,6 +89,10 @@ with lib;
   };
 
   plusultra = {
+    apps = {
+      ubports-installer = enabled;
+    };
+
     # services.minecraft = {
     #   enable = true;
 

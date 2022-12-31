@@ -37,6 +37,8 @@
   - [`steam`](#steam)
   - [`titan`](#titan)
   - [`twitter`](#twitter)
+  - [`ubports-installer`](#ubports-installer)
+  - [`ubports-installer-udev-rules`](#ubports-installer-udev-rules)
   - [`wallpapers`](#wallpapers)
   - [`xdg-open-with-portal`](#xdg-open-with-portal)
 - [Options](#options)
@@ -248,6 +250,14 @@ A JavaScript [monorepo management tool](https://npm.im/@jakehamiton/titan).
 ### [`twitter`](./packages/twitter/default.nix)
 
 A Firefox wrapper for Twitter.
+
+### [`ubports-installer`](https://devices.ubuntu-touch.io/installer)
+
+Install Ubuntu Touch on mobile devices.
+
+### [`ubports-installer-udev-rules`](https://docs.ubports.com/en/latest/userguide/install.html#missing-udev-rules)
+
+`udev` rules to allow `ubports-installer` to recognize devices.
 
 ### [`wallpapers`](./packages/wallpapers/default.nix)
 
