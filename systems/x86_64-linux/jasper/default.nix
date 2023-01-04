@@ -8,10 +8,11 @@ with lib; {
   plusultra = {
     archetypes = {
       workstation = enabled;
-      gaming = enabled;
     };
 
-    desktop.gnome.wallpaper = pkgs.plusultra.wallpapers.atmosphere.fileName;
+    apps = {
+      steam = enabled;
+    };
   };
 
   # This value determines the NixOS release from which the default

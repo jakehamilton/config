@@ -124,7 +124,10 @@ with lib;
     };
 
     desktop.gnome = {
-      wallpaper = pkgs.plusultra.wallpapers.pink-and-blue-ultrawide.fileName;
+      wallpaper = {
+        light = pkgs.plusultra.wallpapers.nord-rainbow-light-nix-ultrawide;
+        dark = pkgs.plusultra.wallpapers.nord-rainbow-dark-nix-ultrawide;
+      };
       monitors = ./monitors.xml;
     };
 

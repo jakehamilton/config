@@ -86,8 +86,6 @@ in
       steam = enabled;
     };
 
-    desktop.gnome.wallpaper = pkgs.plusultra.wallpapers.sleepy-lizard.fileName;
-
     home = {
       configFile = {
         "openbox/rc.xml".source = ./rc.xml;

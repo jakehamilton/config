@@ -9,7 +9,11 @@ in
   options.plusultra.desktop.gnome = with types; {
     enable =
       mkBoolOpt false "Whether or not to use Gnome as the desktop environment.";
-    wallpaper = mkOpt (nullOr string) null "The wallpaper to display.";
+    wallpaper = {
+      light = mkOpt (oneOf [ str package ]) pkgs.plusultra.wallpapers.nord-rainbow-light-nix "The light wallpaper to use.";
+      dark = mkOpt (oneOf [ str package ]) pkgs.plusultra.wallpapers.nord-rainbow-dark-nix "The dark wallpaper to use.";
+    };
+    color-scheme = mkOpt (enum [ "light" "dark" ]) "dark" "The color scheme to use.";
     wayland = mkBoolOpt true "Whether or not to use Wayland.";
     suspend =
       mkBoolOpt true "Whether or not to suspend the machine after inactivity.";
@@ -78,15 +82,28 @@ in
       desktopManager.gnome.enable = true;
     };
 
-    plusultra.home.extraOptions = mkIf (cfg.wallpaper != null) {
+    plusultra.home.extraOptions = {
       dconf.settings =
         let
           user = config.users.users.${config.plusultra.user.name};
-          wallpaper = "${user.home}/Pictures/wallpapers/${cfg.wallpaper}";
+          get-wallpaper = wallpaper:
+            if lib.isDerivation wallpaper then
+              builtins.toString wallpaper
+            else
+              wallpaper;
         in
         {
-          "org/gnome/desktop/background" = { "picture-uri" = wallpaper; };
-          "org/gnome/desktop/screensaver" = { "picture-uri" = wallpaper; };
+          "org/gnome/desktop/background" = {
+            "picture-uri" = get-wallpaper cfg.wallpaper.light;
+            "picture-uri-dark" = get-wallpaper cfg.wallpaper.dark;
+          };
+          "org/gnome/desktop/screensaver" = {
+            "picture-uri" = get-wallpaper cfg.wallpaper.light;
+            "picture-uri-dark" = get-wallpaper cfg.wallpaper.dark;
+          };
+          "org/gnome/desktop/interface" = {
+            "color-scheme" = if cfg.color-scheme == "light" then "default" else "prefer-dark";
+          };
         };
     };
 

@@ -23,7 +23,6 @@ with lib; {
     desktop = {
       gnome = {
         enable = true;
-        wallpaper = pkgs.plusultra.wallpapers.atmosphere.fileName;
       };
 
       addons = {

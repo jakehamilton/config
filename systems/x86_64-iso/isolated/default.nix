@@ -33,7 +33,8 @@ let
       -o $out \
       ${guide}
   '';
-in {
+in
+{
   services.pcscd.enable = true;
   services.udev.packages = with pkgs; [ yubikey-personalization ];
 
@@ -60,7 +61,6 @@ in {
     desktop = {
       gnome = {
         enable = true;
-        wallpaper = pkgs.plusultra.wallpapers.atmosphere.fileName;
       };
     };
 

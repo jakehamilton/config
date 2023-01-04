@@ -15,7 +15,6 @@ in
         desktop = enabled;
         development = enabled;
         art = enabled;
-        business = enabled;
         video = enabled;
         social = enabled;
         media = enabled;
