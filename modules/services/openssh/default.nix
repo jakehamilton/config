@@ -34,6 +34,7 @@ let
         Host ${name}
           User ${remote-user-name}
           ForwardAgent yes
+          Port ${builtins.toString cfg.port}
           ${forward-gpg}
       ''
     )
@@ -44,6 +45,7 @@ in
     enable = mkBoolOpt false "Whether or not to configure OpenSSH support.";
     authorizedKeys =
       mkOpt (listOf str) [ default-key ] "The public keys to apply.";
+    port = mkOpt port 2222 "The port to listen on (in addition to 22).";
   };
 
   config = mkIf cfg.enable {
@@ -55,6 +57,11 @@ in
       extraConfig = ''
         StreamLocalBindUnlink yes
       '';
+
+      ports = [
+        22
+        cfg.port
+      ];
     };
 
     programs.ssh.extraConfig = ''
