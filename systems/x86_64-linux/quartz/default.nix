@@ -206,6 +206,7 @@ with lib;
 
     security = {
       doas = enabled;
+      gpg = enabled;
     };
 
     system = {

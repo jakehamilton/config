@@ -20,6 +20,8 @@ let
       ''
         Host ${name}
           User ${config.plusultra.user.name}
+          ForwardAgent yes
+          RemoteForward /run/user/1000/gnupg/S.gpg-agent /run/user/1000/gnupg/S.gpg-agent.extra
       ''
     )
     (builtins.attrNames other-hosts);
@@ -36,6 +38,10 @@ in
       enable = true;
       passwordAuthentication = false;
       permitRootLogin = if format == "install-iso" then "yes" else "no";
+
+      extraConfig = ''
+        StreamLocalBindUnlink yes
+      '';
     };
 
     programs.ssh.extraConfig = ''

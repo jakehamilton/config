@@ -48,7 +48,8 @@ let
   reload-yubikey = pkgs.writeShellScriptBin "reload-yubikey" ''
     ${pkgs.gnupg}/bin/gpg-connect-agent "scd serialno" "learn --force" /bye
   '';
-in {
+in
+{
   options.plusultra.security.gpg = {
     enable = mkBoolOpt false "Whether or not to enable GPG.";
   };
@@ -59,11 +60,11 @@ in {
 
     # @NOTE(jakehamilton): This should already have been added by programs.gpg, but
     # keeping it here for now just in case.
-    environment.shellInit = ''
-      export GPG_TTY="$(tty)"
-      export SSH_AUTH_SOCK=$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)
-      ${pkgs.gnupg}/bin/gpgconf --launch gpg-agent
-    '';
+    # environment.shellInit = ''
+    #   export GPG_TTY="$(tty)"
+    #   export SSH_AUTH_SOCK=$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)
+    #   ${pkgs.gnupg}/bin/gpgconf --launch gpg-agent
+    # '';
 
     environment.systemPackages = with pkgs; [
       cryptsetup
@@ -78,9 +79,11 @@ in {
 
     programs = {
       ssh.startAgent = false;
+
       gnupg.agent = {
         enable = true;
         enableSSHSupport = true;
+        enableExtraSocket = true;
         pinentryFlavor = "gnome3";
       };
     };
