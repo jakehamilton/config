@@ -60,11 +60,11 @@ in
 
     # @NOTE(jakehamilton): This should already have been added by programs.gpg, but
     # keeping it here for now just in case.
-    # environment.shellInit = ''
-    #   export GPG_TTY="$(tty)"
-    #   export SSH_AUTH_SOCK=$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)
-    #   ${pkgs.gnupg}/bin/gpgconf --launch gpg-agent
-    # '';
+    environment.shellInit = ''
+      export GPG_TTY="$(tty)"
+      export SSH_AUTH_SOCK=$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)
+      ${pkgs.gnupg}/bin/gpgconf --launch gpg-agent
+    '';
 
     environment.systemPackages = with pkgs; [
       cryptsetup
