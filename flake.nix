@@ -34,8 +34,7 @@
     # Snowfall Flake
     flake.url = "github:snowfallorg/flake";
     flake.inputs.nixpkgs.follows = "unstable";
-    # @FIXME(jakehamilton): This input name should match the others...
-    flake.inputs.snowfall.follows = "snowfall-lib";
+    flake.inputs.snowfall-lib.follows = "snowfall-lib";
 
     # Comma
     comma.url =
