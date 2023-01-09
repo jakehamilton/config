@@ -121,7 +121,6 @@ See the following example for how to apply overlays from this flake.
 				plusultra.overlays."package/infrared"
 				plusultra.overlays."package/kalidoface"
 				plusultra.overlays."package/list-iommu"
-				plusultra.overlays."package/minecraft-forge"
 				plusultra.overlays."package/nix-get-protonup"
 				plusultra.overlays."package/nix-update-index"
 				plusultra.overlays."package/nixos-option"

@@ -1,4 +1,4 @@
-{ pkgs, rustPlatform, fetchFromGitHub, ... }:
+{ lib, pkgs, rustPlatform, fetchFromGitHub, ... }:
 
 let
   # Game data from the original freeware version of the game. All other
@@ -12,7 +12,8 @@ let
     sha256 = "0irk47ymcdq9i9zllx0m28yk9dw83zay07k3sn8iqjy2ikc64q52";
   };
 
-in rustPlatform.buildRustPackage rec {
+in
+rustPlatform.buildRustPackage rec {
   pname = "doukutsu-rs";
   version = "0.99.0-beta4";
 
@@ -53,4 +54,8 @@ in rustPlatform.buildRustPackage rec {
   nativeBuildInputs = with pkgs; [ pkg-config cmake ];
 
   buildInputs = with pkgs; [ alsa-lib SDL2 ];
+
+  meta = {
+    platforms = lib.platforms.linux;
+  };
 }

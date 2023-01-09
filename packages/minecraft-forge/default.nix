@@ -1,4 +1,4 @@
-{ runCommand, ... }:
+{ runCommand, lib, ... }:
 
 let
   defaultMinecraftVersion = "1.19.2";
@@ -13,6 +13,7 @@ let
 
       installer = builtins.fetchurl {
         url = "https://maven.minecraftforge.net/net/minecraftforge/forge/${minecraft}-${forge}/forge-${minecraft}-${forge}-installer.jar";
+        sha256 = "0slxcbd2p7hm01sy8miww9pjx32qw2g8cgl6a5705bf4lidza8xa";
       };
     in
     runCommand "minecraft-forge-installer" options

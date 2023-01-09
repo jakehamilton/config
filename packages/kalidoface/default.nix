@@ -1,7 +1,12 @@
-{ makeDesktopItem, firefox, symlinkJoin, ... }:
+{ lib, makeDesktopItem, firefox, symlinkJoin, ... }:
 
 let
-  kalidoface-2d = makeDesktopItem {
+  with-meta = lib.override-meta {
+    platforms = lib.platforms.linux;
+    broken = firefox.meta.broken;
+  };
+
+  kalidoface-2d = with-meta (makeDesktopItem {
     name = "Kalidoface 2D";
     desktopName = "Kalidoface 2D";
     genericName = "Animate Live2D characters using just your browser webcam!";
@@ -11,8 +16,8 @@ let
     type = "Application";
     categories = [ "Network" ];
     terminal = false;
-  };
-  kalidoface-3d = makeDesktopItem {
+  });
+  kalidoface-3d = with-meta (makeDesktopItem {
     name = "Kalidoface 3D";
     desktopName = "Kalidoface 3D";
     genericName =
@@ -23,9 +28,11 @@ let
     type = "Application";
     categories = [ "Network" ];
     terminal = false;
-  };
+  });
 in
+with-meta (
   symlinkJoin {
     name = "kalidoface-desktop-items";
     paths = [ kalidoface-2d kalidoface-3d ];
   }
+)

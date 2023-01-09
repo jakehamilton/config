@@ -122,7 +122,10 @@ let
 in
 stdenv.mkDerivation {
   inherit pname version src;
-  meta = meta // { mainProgram = binaryName; };
+  meta = meta // {
+    mainProgram = binaryName;
+    platforms = [ "x86_64-linux" ];
+  };
 
   nativeBuildInputs = [
     alsa-lib
