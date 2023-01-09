@@ -149,11 +149,11 @@
         "unstable": "unstable"
       },
       "locked": {
-        "lastModified": 1673279376,
-        "narHash": "sha256-9EVRLmIlHfQfDcXLBq80r1ewnueOPrJUBAw5aBaBdT4=",
+        "lastModified": 1673279766,
+        "narHash": "sha256-oqGpXn74VqbokWlcWxgTa3/o2WxWNRoqw5hFPiZnnKg=",
         "owner": "snowfallorg",
         "repo": "flake",
-        "rev": "96d2719fca4440c569addfaf7ea203d3b1c528a8",
+        "rev": "eb1ff9d4d9aa1c9feb4f3a095e747e1e46dfaa34",
         "type": "github"
       },
       "original": {
