@@ -106,16 +106,9 @@
       deploy = lib.mkDeploy { inherit (inputs) self; };
 
       checks =
-        let
-          deploy-libs = inputs.nixpkgs.lib.filterAttrs
-            (system: _:
-              builtins.elem system [ "x86_64-linux" ]
-            )
-            inputs.deploy-rs.lib;
-        in
         builtins.mapAttrs
           (system: deploy-lib:
             deploy-lib.deployChecks inputs.self.deploy)
-          deploy-libs;
+          inputs.deploy-rs.lib;
     };
 }
