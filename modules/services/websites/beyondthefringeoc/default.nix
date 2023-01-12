@@ -26,7 +26,6 @@ in
             enableACME = cfg.acme.enable;
             forceSSL = cfg.acme.enable;
 
-
             locations."/" = {
               root = cfg.package;
             };
