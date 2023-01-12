@@ -119,6 +119,14 @@ with lib;
       ];
     };
 
+    services.websites = {
+      traek = {
+        enable = true;
+        domain = "local.test";
+        acme.enable = false;
+      };
+    };
+
     archetypes = {
       gaming = enabled;
       workstation = enabled;

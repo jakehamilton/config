@@ -12,8 +12,9 @@ with lib;
 
   boot.loader.grub = enabled;
 
-  environment.systemPackages = with pkgs; [
-    neovim
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
   ];
 
   plusultra = {
@@ -30,11 +31,20 @@ with lib;
 
     security = {
       doas = enabled;
+      acme = enabled;
     };
 
     services = {
       openssh = enabled;
       tailscale = enabled;
+
+      websites = {
+        traek = enabled;
+        dotbox = enabled;
+        sokoban = enabled;
+        jakehamilton = enabled;
+        beyondthefringeoc = enabled;
+      };
     };
 
     system = {
