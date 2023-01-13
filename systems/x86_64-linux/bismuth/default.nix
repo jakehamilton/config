@@ -94,31 +94,6 @@ with lib;
       rpcs3 = enabled;
     };
 
-    # services.minecraft = {
-    #   enable = true;
-
-    #   eula = true;
-    #   infrared = {
-    #     enable = true;
-    #     openFirewall = true;
-    #   };
-
-    #   servers.bismuth = {
-    #     domain = "bismuth";
-    #   };
-    # };
-
-    services.infrared = {
-      enable = false;
-
-      servers = [
-        {
-          domain = "bismuth";
-          port = 43000;
-        }
-      ];
-    };
-
     archetypes = {
       gaming = enabled;
       workstation = enabled;
