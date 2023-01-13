@@ -73,6 +73,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.unstable.follows = "unstable";
     };
+
+    lasersandfeelings = {
+      url = "github:jakehamilton/lasersandfeelings";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.unstable.follows = "unstable";
+    };
   };
 
   outputs = inputs:
@@ -91,6 +97,7 @@
         neovim.overlay
         flake.overlay
         cowsay.overlay
+        lasersandfeelings.overlay
       ];
 
       systems.modules = with inputs; [
