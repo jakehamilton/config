@@ -79,6 +79,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.unstable.follows = "unstable";
     };
+
+    scrumfish = {
+      url = "github:jakehamilton/scrumfi.sh";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.unstable.follows = "unstable";
+    };
   };
 
   outputs = inputs:
@@ -97,7 +103,6 @@
         neovim.overlay
         flake.overlay
         cowsay.overlay
-        lasersandfeelings.overlay
       ];
 
       systems.modules = with inputs; [

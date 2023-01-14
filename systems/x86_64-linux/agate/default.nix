@@ -40,6 +40,7 @@ with lib;
 
       websites = {
         lasersandfeelings = enabled;
+        scrumfish = enabled;
       };
     };
 
