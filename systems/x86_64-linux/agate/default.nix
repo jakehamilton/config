@@ -39,8 +39,9 @@ with lib;
       tailscale = enabled;
 
       websites = {
-        lasersandfeelings = enabled;
         scrumfish = enabled;
+        retrospectacle = enabled;
+        lasersandfeelings = enabled;
       };
     };
 
