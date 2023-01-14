@@ -24,34 +24,6 @@ with lib;
       plusultra.kalidoface
     ];
 
-  services.samba = {
-    enable = true;
-    openFirewall = true;
-    shares = {
-      video = {
-        path = "/mnt/data/video";
-        comment = "Video";
-        browseable = "yes";
-        public = "yes";
-        "read only" = "yes";
-      };
-      audio = {
-        path = "/mnt/data/audio";
-        comment = "Audio";
-        browseable = "yes";
-        public = "yes";
-        "read only" = "yes";
-      };
-      shared = {
-        path = "/mnt/data/shared";
-        comment = "Shared files";
-        browseable = "yes";
-        public = "yes";
-        "read only" = "no";
-      };
-    };
-  };
-
   services.minecraft-server = {
     enable = false;
     eula = true;
@@ -69,6 +41,28 @@ with lib;
 
     services = {
       avahi = enabled;
+
+      samba = {
+        enable = true;
+
+        shares = {
+          video = {
+            path = "/mnt/data/video";
+            public = true;
+            read-only = true;
+          };
+          audio = {
+            path = "/mnt/data/audio";
+            public = true;
+            read-only = true;
+          };
+          shared = {
+            path = "/mnt/data/shared";
+            public = true;
+          };
+        };
+      };
+
     };
 
     archetypes = {
