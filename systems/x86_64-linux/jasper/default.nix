@@ -5,7 +5,9 @@ with lib.internal;
 {
   imports = [ ./hardware.nix ];
 
-  environment.systemPackages = with pkgs; [ weather ];
+  environment.systemPackages = with pkgs; [
+    snowfallorg.icehouse
+  ];
 
   plusultra = {
     archetypes = {

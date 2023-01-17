@@ -5,6 +5,10 @@ with lib.internal;
 {
   imports = [ ./hardware.nix ];
 
+  environment.systemPackages = with pkgs; [
+    snowfallorg.icehouse
+  ];
+
   services.zfs = {
     autoSnapshot = {
       enable = true;
