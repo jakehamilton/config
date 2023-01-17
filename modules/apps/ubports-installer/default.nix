@@ -1,7 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.plusultra.apps.ubports-installer;
+with lib.internal;
+let
+  cfg = config.plusultra.apps.ubports-installer;
 in
 {
   options.plusultra.apps.ubports-installer = with types; {

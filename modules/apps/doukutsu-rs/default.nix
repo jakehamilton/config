@@ -1,6 +1,7 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
+with lib.internal;
 let
   cfg = config.plusultra.apps.doukutsu-rs;
   desktopItem = pkgs.makeDesktopItem {
@@ -14,7 +15,8 @@ let
     categories = [ "Game" "AdventureGame" ];
     terminal = false;
   };
-in {
+in
+{
   options.plusultra.apps.doukutsu-rs = with types; {
     enable = mkBoolOpt false "Whether or not to enable doukutsu-rs.";
   };

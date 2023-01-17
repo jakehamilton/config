@@ -1,8 +1,10 @@
 { options, config, lib, ... }:
 
 with lib;
+with lib.internal;
 let cfg = config.plusultra.system.xkb;
-in {
+in
+{
   options.plusultra.system.xkb = with types; {
     enable = mkBoolOpt false "Whether or not to configure xkb.";
   };

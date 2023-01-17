@@ -1,8 +1,10 @@
 { options, config, pkgs, lib, ... }:
 
 with lib;
+with lib.internal;
 let cfg = config.plusultra.hardware.storage;
-in {
+in
+{
   options.plusultra.hardware.storage = with types; {
     enable = mkBoolOpt false
       "Whether or not to enable support for extra storage devices.";

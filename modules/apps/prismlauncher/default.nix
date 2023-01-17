@@ -1,7 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.plusultra.apps.prismlauncher;
+with lib.internal;
+let
+  cfg = config.plusultra.apps.prismlauncher;
 in
 {
   options.plusultra.apps.prismlauncher = with types; {

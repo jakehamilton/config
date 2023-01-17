@@ -1,6 +1,8 @@
 { pkgs, lib, nixos-hardware, ... }:
 
-with lib; {
+with lib;
+with lib.internal;
+{
   imports = [ ./hardware.nix ];
 
   environment.systemPackages = with pkgs; [ weather ];

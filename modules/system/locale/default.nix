@@ -1,8 +1,10 @@
 { options, config, pkgs, lib, ... }:
 
 with lib;
+with lib.internal;
 let cfg = config.plusultra.system.locale;
-in {
+in
+{
   options.plusultra.system.locale = with types; {
     enable = mkBoolOpt false "Whether or not to manage locale settings.";
   };

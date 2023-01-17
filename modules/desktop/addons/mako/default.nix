@@ -1,8 +1,10 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
+with lib.internal;
 let cfg = config.plusultra.desktop.addons.mako;
-in {
+in
+{
   options.plusultra.desktop.addons.mako = with types; {
     enable = mkBoolOpt false "Whether to enable Mako in Sway.";
   };

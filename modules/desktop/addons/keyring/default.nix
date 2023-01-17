@@ -1,8 +1,10 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
+with lib.internal;
 let cfg = config.plusultra.desktop.addons.keyring;
-in {
+in
+{
   options.plusultra.desktop.addons.keyring = with types; {
     enable = mkBoolOpt false "Whether to enable the gnome keyring.";
   };

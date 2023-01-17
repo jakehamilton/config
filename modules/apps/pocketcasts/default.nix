@@ -1,7 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.plusultra.apps.pocketcasts;
+with lib.internal;
+let
+  cfg = config.plusultra.apps.pocketcasts;
 in
 {
   options.plusultra.apps.pocketcasts = with types; {

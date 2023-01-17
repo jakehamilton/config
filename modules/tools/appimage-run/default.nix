@@ -1,7 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.plusultra.tools.appimage-run;
+with lib.internal;
+let
+  cfg = config.plusultra.tools.appimage-run;
 in
 {
   options.plusultra.tools.appimage-run = with types; {

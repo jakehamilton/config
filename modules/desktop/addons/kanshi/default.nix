@@ -1,11 +1,13 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
+with lib.internal;
 let
   cfg = config.plusultra.desktop.addons.kanshi;
   user = config.plusultra.user;
   home = config.users.users.${user.name}.home;
-in {
+in
+{
   options.plusultra.desktop.addons.kanshi = with types; {
     enable =
       mkBoolOpt false "Whether to enable Kanshi in the desktop environment.";

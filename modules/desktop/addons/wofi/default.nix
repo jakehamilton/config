@@ -1,8 +1,10 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
+with lib.internal;
 let cfg = config.plusultra.desktop.addons.wofi;
-in {
+in
+{
   options.plusultra.desktop.addons.wofi = with types; {
     enable =
       mkBoolOpt false "Whether to enable the Wofi in the desktop environment.";

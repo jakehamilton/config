@@ -1,7 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.plusultra.apps.steam;
+with lib.internal;
+let
+  cfg = config.plusultra.apps.steam;
 in
 {
   options.plusultra.apps.steam = with types; {

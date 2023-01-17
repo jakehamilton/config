@@ -1,4 +1,4 @@
-{ lib, inputs, ... }:
+{ lib, inputs }:
 
 let
   inherit (inputs) deploy-rs;

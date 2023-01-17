@@ -1,6 +1,7 @@
 { options, config, lib, pkgs, inputs, ... }:
 
 with lib;
+with lib.internal;
 let
   cfg = config.plusultra.apps.discord;
   discord = lib.replugged.makeDiscordPlugged {

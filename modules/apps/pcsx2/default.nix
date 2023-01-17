@@ -1,8 +1,11 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.plusultra.apps.pcsx2;
-in {
+with lib.internal;
+let
+  cfg = config.plusultra.apps.pcsx2;
+in
+{
   options.plusultra.apps.pcsx2 = with types; {
     enable = mkBoolOpt false "Whether or not to enable PCSX2.";
   };

@@ -1,7 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.plusultra.apps.rpcs3;
+with lib.internal;
+let
+  cfg = config.plusultra.apps.rpcs3;
 in
 {
   options.plusultra.apps.rpcs3 = with types; {

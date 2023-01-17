@@ -1,8 +1,11 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.plusultra.apps.etcher;
-in {
+with lib.internal;
+let
+  cfg = config.plusultra.apps.etcher;
+in
+{
   options.plusultra.apps.etcher = with types; {
     enable = mkBoolOpt false "Whether or not to enable etcher.";
   };

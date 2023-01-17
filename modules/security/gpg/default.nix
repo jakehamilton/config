@@ -1,6 +1,7 @@
 { options, config, pkgs, lib, ... }:
 
 with lib;
+with lib.internal;
 let
   cfg = config.plusultra.security.gpg;
   gpgConf = pkgs.fetchurl {

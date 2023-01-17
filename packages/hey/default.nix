@@ -1,7 +1,7 @@
 { lib, makeDesktopItem, firefox, ... }:
 
 let
-  with-meta = lib.override-meta {
+  with-meta = lib.internal.override-meta {
     platforms = lib.platforms.linux;
     broken = firefox.meta.broken;
   };

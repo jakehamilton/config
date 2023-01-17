@@ -1,7 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.plusultra.tools.comma;
+with lib.internal;
+let
+  cfg = config.plusultra.tools.comma;
 in
 {
   options.plusultra.tools.comma = with types; {

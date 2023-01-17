@@ -1,8 +1,10 @@
 { options, config, pkgs, lib, ... }:
 
 with lib;
+with lib.internal;
 let cfg = config.plusultra.security.doas;
-in {
+in
+{
   options.plusultra.security.doas = {
     enable = mkBoolOpt false "Whether or not to replace sudo with doas.";
   };

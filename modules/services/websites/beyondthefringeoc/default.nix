@@ -1,7 +1,8 @@
 { lib, pkgs, config, ... }:
 
 let
-  inherit (lib) mkIf mkOpt mkEnableOption fetchFromGitHub foldl;
+  inherit (lib) mkIf mkEnableOption fetchFromGitHub foldl;
+  inherit (lib.internal) mkOpt;
 
   cfg = config.plusultra.services.websites.beyondthefringeoc;
 in

@@ -1,6 +1,9 @@
 { options, config, lib, pkgs, ... }:
+
 with lib;
-let cfg = config.plusultra.suites.desktop;
+with lib.internal;
+let
+  cfg = config.plusultra.suites.desktop;
 in
 {
   options.plusultra.suites.desktop = with types; {

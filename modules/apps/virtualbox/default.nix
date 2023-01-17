@@ -1,8 +1,11 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.plusultra.apps.virtualbox;
-in {
+with lib.internal;
+let
+  cfg = config.plusultra.apps.virtualbox;
+in
+{
   options.plusultra.apps.virtualbox = with types; {
     enable = mkBoolOpt false "Whether or not to enable Virtualbox.";
   };

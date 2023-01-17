@@ -1,7 +1,8 @@
 { lib, pkgs, config, ... }:
 
 let
-  inherit (lib) mkBoolOpt mkOpt types mkIf;
+  inherit (lib) types mkIf;
+  inherit (lib.internal) mkBoolOpt mkOpt;
   inherit (pkgs) fortune toot;
   inherit (pkgs.snowfallorg) cow2img;
 

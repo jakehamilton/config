@@ -1,7 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.plusultra.apps.yt-music;
+with lib.internal;
+let
+  cfg = config.plusultra.apps.yt-music;
 in
 {
   options.plusultra.apps.yt-music = with types; {

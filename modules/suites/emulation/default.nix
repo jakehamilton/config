@@ -1,6 +1,9 @@
 { options, config, lib, pkgs, ... }:
+
 with lib;
-let cfg = config.plusultra.suites.emulation;
+with lib.internal;
+let
+  cfg = config.plusultra.suites.emulation;
 in
 {
   options.plusultra.suites.emulation = with types; {

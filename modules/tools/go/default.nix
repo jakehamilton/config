@@ -1,8 +1,9 @@
 { options, config, pkgs, lib, ... }:
 
 with lib;
-
-let cfg = config.plusultra.tools.go;
+with lib.internal;
+let
+  cfg = config.plusultra.tools.go;
 in
 {
   options.plusultra.tools.go = with types; {

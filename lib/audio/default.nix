@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib }:
 
 rec {
   mkAlsaRename = { name, description }: {

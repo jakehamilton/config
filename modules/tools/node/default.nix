@@ -1,8 +1,10 @@
 { options, config, pkgs, lib, ... }:
 
 with lib;
+with lib.internal;
 let cfg = config.plusultra.tools.node;
-in {
+in
+{
   options.plusultra.tools.node = with types; {
     enable = mkBoolOpt false "Whether or not to install and configure git";
     pkg = mkOpt package pkgs.nodejs-18_x "The NodeJS package to use";

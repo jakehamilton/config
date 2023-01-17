@@ -1,8 +1,10 @@
 inputs@{ options, config, pkgs, lib, home-manager, ... }:
 
 with lib;
+with lib.internal;
 let cfg = config.plusultra.home;
-in {
+in
+{
   options.plusultra.home = with types; {
     file = mkOpt attrs { }
       "A set of files to be managed by home-manager's <option>home.file</option>.";

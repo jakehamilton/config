@@ -1,7 +1,8 @@
 { lib, pkgs, config, ... }:
 
 let
-  inherit (lib) mkIf mkOpt mkEnableOption fetchFromGitHub;
+  inherit (lib) mkIf mkEnableOption fetchFromGitHub;
+  inherit (lib.internal) mkOpt;
 
   cfg = config.plusultra.services.websites.sokoban;
 in

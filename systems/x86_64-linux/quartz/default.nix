@@ -1,6 +1,7 @@
 { pkgs, config, lib, ... }:
 
 with lib;
+with lib.internal;
 {
   imports = [ ./hardware.nix ];
 
@@ -199,11 +200,11 @@ with lib;
       in
       {
         "minio.quartz.hamho.me" =
-          lib.network.create-proxy
-            ((lib.network.get-address-parts config.services.minio.consoleAddress)
+          network.create-proxy
+            ((network.get-address-parts config.services.minio.consoleAddress)
               // shared-config);
 
-        "jellyfin.quartz.hamho.me" = lib.network.create-proxy ({
+        "jellyfin.quartz.hamho.me" = network.create-proxy ({
           # https://jellyfin.org/docs/general/networking/index.html#static-ports
           port = 8096;
 
@@ -211,13 +212,13 @@ with lib;
           proxy-web-sockets = true;
         } // shared-config);
 
-        "navidrome.quartz.hamho.me" = lib.network.create-proxy ({
+        "navidrome.quartz.hamho.me" = network.create-proxy ({
           # https://www.navidrome.org/docs/usage/configuration-options/#available-options
           port = 4533;
         } // shared-config);
 
-        "vault.quartz.hamho.me" = lib.network.create-proxy
-          ((lib.network.get-address-parts config.services.vault.address)
+        "vault.quartz.hamho.me" = network.create-proxy
+          ((network.get-address-parts config.services.vault.address)
             // shared-config);
       };
   };

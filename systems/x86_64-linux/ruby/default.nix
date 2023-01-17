@@ -1,6 +1,7 @@
 { lib, pkgs, ... }:
 
 with lib;
+with lib.internal;
 {
   imports = [ ./hardware.nix ];
 

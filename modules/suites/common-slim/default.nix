@@ -1,6 +1,9 @@
 { options, config, lib, pkgs, ... }:
+
 with lib;
-let cfg = config.plusultra.suites.common-slim;
+with lib.internal;
+let
+  cfg = config.plusultra.suites.common-slim;
 in
 {
   options.plusultra.suites.common-slim = with types; {

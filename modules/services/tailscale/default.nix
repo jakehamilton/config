@@ -1,6 +1,7 @@
 { lib, pkgs, config, ... }:
 
 with lib;
+with lib.internal;
 let cfg = config.plusultra.services.tailscale;
 in
 {

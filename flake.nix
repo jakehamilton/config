@@ -28,13 +28,14 @@
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Lib
-    snowfall-lib.url = "github:snowfallorg/lib/dev";
+    # snowfall-lib.url = "github:snowfallorg/lib/dev";
+    snowfall-lib.url = "path:/home/short/work/@snowfallorg/lib";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Flake
     flake.url = "github:snowfallorg/flake";
     flake.inputs.nixpkgs.follows = "unstable";
-    flake.inputs.snowfall-lib.follows = "snowfall-lib";
+    # flake.inputs.snowfall-lib.follows = "snowfall-lib";
 
     # Comma
     comma.url =
@@ -101,7 +102,7 @@
       };
     in
     lib.mkFlake {
-      overlay-package-namespace = "plusultra";
+      package-namespace = "plusultra";
 
       channels-config.allowUnfree = true;
 

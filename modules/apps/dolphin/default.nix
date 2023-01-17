@@ -1,8 +1,10 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
+with lib.internal;
 let cfg = config.plusultra.apps.dolphin;
-in {
+in
+{
   options.plusultra.apps.dolphin = with types; {
     enable = mkBoolOpt false "Whether or not to enable Dolphin.";
   };

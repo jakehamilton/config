@@ -1,10 +1,12 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
+with lib.internal;
 let
   cfg = config.plusultra.apps.looking-glass-client;
   user = config.plusultra.user;
-in {
+in
+{
   options.plusultra.apps.looking-glass-client = with types; {
     enable =
       mkBoolOpt false "Whether or not to enable the Looking Glass client.";

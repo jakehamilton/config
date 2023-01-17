@@ -1,7 +1,8 @@
 { lib, pkgs, config, ... }:
 
 let
-  inherit (lib) mkIf mkOpt mkEnableOption;
+  inherit (lib) mkIf mkEnableOption;
+  inherit (lib.internal) mkOpt;
 
   cfg = config.plusultra.security.acme;
 in

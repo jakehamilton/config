@@ -1,8 +1,10 @@
 { options, config, pkgs, lib, ... }:
 
 with lib;
+with lib.internal;
 let cfg = config.plusultra.hardware.fingerprint;
-in {
+in
+{
   options.plusultra.hardware.fingerprint = with types; {
     enable = mkBoolOpt false "Whether or not to enable fingerprint support.";
   };

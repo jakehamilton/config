@@ -1,7 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.plusultra.apps.twitter;
+with lib.internal;
+let
+  cfg = config.plusultra.apps.twitter;
 in
 {
   options.plusultra.apps.twitter = with types; {

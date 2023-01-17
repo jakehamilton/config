@@ -1,8 +1,11 @@
 { lib, pkgs, config, ... }:
 
 with lib;
-let cfg = config.plusultra.cli-apps.prisma;
-in {
+with lib.internal;
+let
+  cfg = config.plusultra.cli-apps.prisma;
+in
+{
   options.plusultra.cli-apps.prisma = with types; {
     enable = mkBoolOpt false "Whether or not to install Prisma";
     pkgs = {

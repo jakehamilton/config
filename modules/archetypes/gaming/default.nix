@@ -1,6 +1,9 @@
 { options, config, lib, pkgs, ... }:
+
 with lib;
-let cfg = config.plusultra.archetypes.gaming;
+with lib.internal;
+let
+  cfg = config.plusultra.archetypes.gaming;
 in
 {
   options.plusultra.archetypes.gaming = with types; {

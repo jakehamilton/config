@@ -1,9 +1,10 @@
 { options, config, pkgs, lib, ... }:
 
 with lib;
+with lib.internal;
 let
   cfg = config.plusultra.desktop.addons.wallpapers;
-  wallpapers = pkgs.plusultra.wallpapers;
+  inherit (pkgs.plusultra) wallpapers;
 in
 {
   options.plusultra.desktop.addons.wallpapers = with types; {

@@ -1,8 +1,10 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
+with lib.internal;
 let cfg = config.plusultra.desktop.addons.electron-support;
-in {
+in
+{
   options.plusultra.desktop.addons.electron-support = with types; {
     enable = mkBoolOpt false
       "Whether to enable electron support in the desktop environment.";

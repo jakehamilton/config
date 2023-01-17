@@ -6,11 +6,13 @@ let
   inherit (lib)
     types
     mkEnableOption
-    mkOpt
-    mkBoolOpt
     mkIf
     mapAttrs
     optionalAttrs;
+
+  inherit (lib.internal)
+    mkOpt
+    mkBoolOpt;
 
   bool-to-yes-no = value: if value then "yes" else "no";
 
