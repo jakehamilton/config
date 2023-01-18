@@ -9,7 +9,7 @@ in
 {
   options.plusultra.services.websites.jakehamilton = with lib.types; {
     enable = mkEnableOption "Jake Hamilton Website";
-    package = mkOpt package pkgs.plusultra.jakehamilton-website "The site package to use.";
+    package = mkOpt package pkgs.jakehamilton-website "The site package to use.";
     domains = mkOpt (listOf str) [ "jakehamilton.dev" "jakehamilton.website" ] "The domain to serve the website site on.";
 
     acme = {
