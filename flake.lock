@@ -757,11 +757,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1674006126,
-        "narHash": "sha256-JZX2lXNomYtsoIcplkoUANt0U3D1ejL2p+kdOegzNFE=",
+        "lastModified": 1674007230,
+        "narHash": "sha256-FBPau1xSoFL4grFYH2ImpVmtCuB0ZnrqYU09CjZFK1M=",
         "owner": "jakehamilton",
         "repo": "jakehamilton.dev",
-        "rev": "a8d66c634b303709ecdb684e656445c96473472a",
+        "rev": "d79b9979e192a36703131f56272165bf883e65b4",
         "type": "github"
       },
       "original": {
