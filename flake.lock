@@ -242,6 +242,22 @@
         "type": "github"
       }
     },
+    "flake-compat_14": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1650374568,
+        "narHash": "sha256-Z+s0J8/r907g149rllvwhb4pKi8Wam5ij0st8PwAh+E=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "b4a34015c698c7793d592d66adbab377907a2be8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
     "flake-compat_2": {
       "flake": false,
       "locked": {
@@ -421,6 +437,24 @@
         "type": "github"
       }
     },
+    "flake-utils-plus_11": {
+      "inputs": {
+        "flake-utils": "flake-utils_11"
+      },
+      "locked": {
+        "lastModified": 1657226504,
+        "narHash": "sha256-GIYNjuq4mJlFgqKsZ+YrgzWm0IpA4axA3MCrdKYj7gs=",
+        "owner": "gytis-ivaskevicius",
+        "repo": "flake-utils-plus",
+        "rev": "2bf0f91643c2e5ae38c1b26893ac2927ac9bd82a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gytis-ivaskevicius",
+        "repo": "flake-utils-plus",
+        "type": "github"
+      }
+    },
     "flake-utils-plus_2": {
       "inputs": {
         "flake-utils": "flake-utils_2"
@@ -566,6 +600,21 @@
       }
     },
     "flake-utils_10": {
+      "locked": {
+        "lastModified": 1644229661,
+        "narHash": "sha256-1YdnJAsNy69bpcjuoKdOYQX0YxZBiCYZo4Twxerqv7k=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3cecb5b042f7f209c56ffd8371b2711a290ec797",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_11": {
       "locked": {
         "lastModified": 1644229661,
         "narHash": "sha256-1YdnJAsNy69bpcjuoKdOYQX0YxZBiCYZo4Twxerqv7k=",
@@ -925,6 +974,30 @@
         "type": "github"
       }
     },
+    "noop-ai-website": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "snowfall-lib": "snowfall-lib_8",
+        "unstable": [
+          "unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1674255740,
+        "narHash": "sha256-re9R5osNA4KpazurOdpq4HmyNnR5hE6q7UoB5J3FmjA=",
+        "owner": "noopai",
+        "repo": "noop.ai",
+        "rev": "95641484639f6cd3e7fee7e3cd6f3f5f5a8a474f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noopai",
+        "repo": "noop.ai",
+        "type": "github"
+      }
+    },
     "replugged": {
       "inputs": {
         "nixpkgs": [
@@ -967,7 +1040,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "snowfall-lib": "snowfall-lib_8",
+        "snowfall-lib": "snowfall-lib_9",
         "unstable": [
           "unstable"
         ]
@@ -1004,10 +1077,11 @@
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "noop-ai-website": "noop-ai-website",
         "replugged": "replugged",
         "retrospectacle": "retrospectacle",
         "scrumfish": "scrumfish",
-        "snowfall-lib": "snowfall-lib_10",
+        "snowfall-lib": "snowfall-lib_11",
         "unstable": "unstable_2"
       }
     },
@@ -1016,7 +1090,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "snowfall-lib": "snowfall-lib_9",
+        "snowfall-lib": "snowfall-lib_10",
         "unstable": [
           "unstable"
         ]
@@ -1062,6 +1136,29 @@
       "inputs": {
         "flake-compat": "flake-compat_13",
         "flake-utils-plus": "flake-utils-plus_10",
+        "nixpkgs": [
+          "scrumfish",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1667153928,
+        "narHash": "sha256-SbXxxrxWzumig4ytez86B9FFkd9zH/qj+SSiMUwY8bI=",
+        "owner": "snowfallorg",
+        "repo": "lib",
+        "rev": "1ffe7109a0aade9df745432e1f5788cf67a05a3e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "snowfallorg",
+        "repo": "lib",
+        "type": "github"
+      }
+    },
+    "snowfall-lib_11": {
+      "inputs": {
+        "flake-compat": "flake-compat_14",
+        "flake-utils-plus": "flake-utils-plus_11",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -1224,7 +1321,7 @@
         "flake-compat": "flake-compat_11",
         "flake-utils-plus": "flake-utils-plus_8",
         "nixpkgs": [
-          "retrospectacle",
+          "noop-ai-website",
           "nixpkgs"
         ]
       },
@@ -1247,7 +1344,7 @@
         "flake-compat": "flake-compat_12",
         "flake-utils-plus": "flake-utils-plus_9",
         "nixpkgs": [
-          "scrumfish",
+          "retrospectacle",
           "nixpkgs"
         ]
       },

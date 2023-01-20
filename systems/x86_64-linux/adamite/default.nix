@@ -42,6 +42,7 @@ with lib.internal;
       websites = {
         traek = enabled;
         dotbox = enabled;
+        noop-ai = enabled;
         sokoban = enabled;
         jakehamilton = enabled;
         beyondthefringeoc = enabled;

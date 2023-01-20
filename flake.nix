@@ -104,6 +104,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.unstable.follows = "unstable";
     };
+
+    noop-ai-website = {
+      url = "github:noopai/noop.ai";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.unstable.follows = "unstable";
+    };
   };
 
   outputs = inputs:
