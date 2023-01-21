@@ -985,11 +985,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1674255740,
-        "narHash": "sha256-re9R5osNA4KpazurOdpq4HmyNnR5hE6q7UoB5J3FmjA=",
+        "lastModified": 1674259763,
+        "narHash": "sha256-IQM6xo6FhD5Z49FwSPwJFgwehgsGYktgo8cwGo7ppIk=",
         "owner": "noopai",
         "repo": "noop.ai",
-        "rev": "95641484639f6cd3e7fee7e3cd6f3f5f5a8a474f",
+        "rev": "38dae9e9a9f4ff653156f72ccc267d9e76c07491",
         "type": "github"
       },
       "original": {
