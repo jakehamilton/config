@@ -22,7 +22,6 @@
 - [Packages](#packages)
   - [`at`](#at)
   - [`cowsay-plus`](#cowsay-plus)
-  - [`discord-canary`](#discord-canary)
   - [`doukutsu-rs`](#doukutsu-rs)
   - [`firefox-nordic-theme`](#firefox-nordic-theme)
   - [`frappe-books`](#frappe-books)
@@ -113,7 +112,6 @@ See the following example for how to apply overlays from this flake.
 				# are available for convenience.
 				plusultra.overlays."package/at"
 				plusultra.overlays."package/cowsay-plus"
-				plusultra.overlays."package/discord-canary"
 				plusultra.overlays."package/doukutsu-rs"
 				plusultra.overlays."package/firefox-nordic-theme"
 				plusultra.overlays."package/frappe-books"
@@ -188,10 +186,6 @@ Packages can be used directly from the flake.
 ### [`cowsay-plus`](./packages/cowsay-plus/default.nix)
 
 A cowsay wrapper that loads random cows.
-
-### [`discord-canary`](./packages/discord-canary/default.nix)
-
-The canary version of [Discord](https://discord.com).
 
 ### [`doukutsu-rs`](./packages/doukutsu-rs/default.nix)
 

@@ -36,8 +36,9 @@ with lib.internal;
 
   plusultra = {
     apps = {
-      ubports-installer = enabled;
       rpcs3 = enabled;
+      ubports-installer = enabled;
+      steamtinkerlaunch = enabled;
     };
 
     services = {
