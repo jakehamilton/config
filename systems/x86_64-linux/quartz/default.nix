@@ -174,12 +174,18 @@ with lib.internal;
   security.acme = {
     acceptTerms = true;
     defaults = {
+      # Use the staging server when testing...
+      # server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+
       dnsProvider = "digitalocean";
       dnsPropagationCheck = true;
-      # server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+
       email = config.plusultra.user.email;
       credentialsFile = "/var/lib/acme-secrets/digitalocean";
       group = "nginx";
+
+      # Reload nginx when certs change.
+      reloadServices = [ "nginx.service" ];
     };
 
     certs."quartz.hamho.me" = {
