@@ -52,7 +52,6 @@
     # Neovim
     neovim.url = "github:jakehamilton/neovim";
     neovim.inputs.nixpkgs.follows = "unstable";
-    # neovim.inputs.snowfall-lib.follows = "snowfall-lib";
 
     # Discord Replugged
     replugged.url = "github:LunNova/replugged-nix-flake";
@@ -68,42 +67,53 @@
       flake = false;
     };
 
+    # Cows!
     cowsay = {
       url = "github:snowfallorg/cowsay";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.unstable.follows = "unstable";
     };
 
-    lasersandfeelings = {
-      url = "github:jakehamilton/lasersandfeelings";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.unstable.follows = "unstable";
-    };
-
-    scrumfish = {
-      url = "github:jakehamilton/scrumfi.sh";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.unstable.follows = "unstable";
-    };
-
-    retrospectacle = {
-      url = "github:jakehamilton/retrospectacle.app";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.unstable.follows = "unstable";
-    };
-
+    # Backup management
     icehouse = {
       url = "github:snowfallorg/icehouse";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.unstable.follows = "unstable";
     };
 
+    # Yubikey Guide
+    yubikey-guide = {
+      url = "github:drduh/YubiKey-Guide";
+      flake = false;
+    };
+
+    # GPG default configuration
+    gpg-base-conf = {
+      url = "github:drduh/config";
+      flake = false;
+    };
+
+    # Hosted Sites
+    lasersandfeelings = {
+      url = "github:jakehamilton/lasersandfeelings";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.unstable.follows = "unstable";
+    };
+    scrumfish = {
+      url = "github:jakehamilton/scrumfi.sh";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.unstable.follows = "unstable";
+    };
+    retrospectacle = {
+      url = "github:jakehamilton/retrospectacle.app";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.unstable.follows = "unstable";
+    };
     jakehamilton-website = {
       url = "github:jakehamilton/jakehamilton.dev";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.unstable.follows = "unstable";
     };
-
     noop-ai-website = {
       url = "github:noopai/noop.ai";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -749,6 +749,22 @@
         "type": "github"
       }
     },
+    "gpg-base-conf": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1672097286,
+        "narHash": "sha256-Fto8FCVYeKviMz0VmCiXHrgMT1pVopJGGDHF0s3K4ts=",
+        "owner": "drduh",
+        "repo": "config",
+        "rev": "6bea1fdaa8732ec8625f4bac7022b25e14b15ffe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "drduh",
+        "repo": "config",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -1068,6 +1084,7 @@
         "discord-nord-theme": "discord-nord-theme",
         "discord-tweaks": "discord-tweaks",
         "flake": "flake",
+        "gpg-base-conf": "gpg-base-conf",
         "home-manager": "home-manager",
         "icehouse": "icehouse",
         "jakehamilton-website": "jakehamilton-website",
@@ -1082,7 +1099,8 @@
         "retrospectacle": "retrospectacle",
         "scrumfish": "scrumfish",
         "snowfall-lib": "snowfall-lib_11",
-        "unstable": "unstable_2"
+        "unstable": "unstable_2",
+        "yubikey-guide": "yubikey-guide"
       }
     },
     "scrumfish": {
@@ -1477,6 +1495,22 @@
       "original": {
         "owner": "snowfallorg",
         "repo": "vhs",
+        "type": "github"
+      }
+    },
+    "yubikey-guide": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1672094877,
+        "narHash": "sha256-jm0WRnyRmwylAqRVyK0mUzYxEkmk3g0u6f+DIdMZW3I=",
+        "owner": "drduh",
+        "repo": "YubiKey-Guide",
+        "rev": "6437be8fda70926f11afa22a61287af63d943c24",
+        "type": "github"
+      },
+      "original": {
+        "owner": "drduh",
+        "repo": "YubiKey-Guide",
         "type": "github"
       }
     }
