@@ -7,7 +7,7 @@ in
 {
   options.plusultra.nix = with types; {
     enable = mkBoolOpt true "Whether or not to manage nix configuration.";
-    package = mkOpt package pkgs.nix "Which nix package to use.";
+    package = mkOpt package pkgs.nixUnstable "Which nix package to use.";
   };
 
   config = mkIf cfg.enable {

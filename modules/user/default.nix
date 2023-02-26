@@ -65,9 +65,9 @@ in
         home.shellAliases = {
           lc = "${pkgs.colorls}/bin/colorls --sd";
           lcg = "lc --gs";
-          lcu = "${pkgs.colorls}/bin/colorls -U";
           lcl = "lc -1";
           lclg = "lc -1 --gs";
+          lcu = "${pkgs.colorls}/bin/colorls -U";
           lclu = "${pkgs.colorls}/bin/colorls -U -1";
         };
 
@@ -96,8 +96,7 @@ in
               # Use vim bindings.
               set -o vi
 
-              # Your regular rainbow cow fortune!
-              fortune -s | cowsay | lolcat
+              ${pkgs.toilet}/bin/toilet -f future "Plus Ultra" --gay
 
               # Improved vim bindings.
               source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh

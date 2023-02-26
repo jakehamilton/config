@@ -13,9 +13,9 @@ in
       pkg = mkOpt package pkgs.nordic "The package to use for the theme.";
     };
     cursor = {
-      name = mkOpt str "Nordzy-white-cursors"
+      name = mkOpt str "Bibata-Modern-Ice"
         "The name of the cursor theme to apply.";
-      pkg = mkOpt package pkgs.nordzy-cursor-theme "The package to use for the cursor theme.";
+      pkg = mkOpt package pkgs.bibata-cursors "The package to use for the cursor theme.";
     };
     icon = {
       name = mkOpt str "Papirus"

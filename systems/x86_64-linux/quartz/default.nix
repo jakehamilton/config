@@ -5,27 +5,6 @@ with lib.internal;
 {
   imports = [ ./hardware.nix ];
 
-  environment.systemPackages = with pkgs; [
-    snowfallorg.icehouse
-  ];
-
-  services.zfs = {
-    autoSnapshot = {
-      enable = true;
-      flags = "-k -p --utc";
-      weekly = 3;
-      daily = 3;
-      hourly = 0;
-      frequent = 0;
-      monthly = 2;
-    };
-
-    autoScrub = {
-      enable = true;
-      pools = [ "rpool" ];
-    };
-  };
-
   services.minio = {
     enable = true;
 
@@ -90,6 +69,7 @@ with lib.internal;
       comma = enabled;
       nix-ld = enabled;
       bottom = enabled;
+      icehouse = enabled;
     };
 
     hardware = {
@@ -160,6 +140,7 @@ with lib.internal;
     security = {
       doas = enabled;
       gpg = enabled;
+      acme = enabled;
     };
 
     system = {
@@ -168,24 +149,19 @@ with lib.internal;
       locale = enabled;
       time = enabled;
       xkb = enabled;
+      zfs = {
+        enable = true;
+        auto-snapshot = enabled;
+      };
     };
   };
 
   security.acme = {
-    acceptTerms = true;
     defaults = {
-      # Use the staging server when testing...
-      # server = "https://acme-staging-v02.api.letsencrypt.org/directory";
-
       dnsProvider = "digitalocean";
       dnsPropagationCheck = true;
 
-      email = config.plusultra.user.email;
       credentialsFile = "/var/lib/acme-secrets/digitalocean";
-      group = "nginx";
-
-      # Reload nginx when certs change.
-      reloadServices = [ "nginx.service" ];
     };
 
     certs."quartz.hamho.me" = {
