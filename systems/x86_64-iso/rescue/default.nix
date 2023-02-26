@@ -1,6 +1,8 @@
 { pkgs, lib, ... }:
 
-with lib; {
+with lib;
+with lib.internal;
+{
   plusultra = {
     nix = enabled;
 

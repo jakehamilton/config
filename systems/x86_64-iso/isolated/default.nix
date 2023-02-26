@@ -1,6 +1,7 @@
 { pkgs, lib, ... }:
 
 with lib;
+with lib.internal;
 let
   gpgConf = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/drduh/config/master/gpg.conf";
