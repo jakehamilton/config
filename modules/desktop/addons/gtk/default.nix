@@ -29,6 +29,10 @@ in
       cfg.icon.pkg
     ];
 
+    environment.sessionVariables = {
+      XCURSOR_THEME = cfg.cursor.name;
+    };
+
     plusultra.home.extraOptions = {
       gtk = {
         enable = true;

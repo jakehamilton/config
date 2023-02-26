@@ -17,6 +17,14 @@ let
 
     passthru = { fileName = defaultIconFileName; };
   };
+  propagatedIcon = pkgs.runCommandNoCC "propagated-icon"
+    { passthru = { fileName = cfg.icon.fileName; }; }
+    ''
+      local target="$out/share/plusultra-icons/user/${cfg.name}"
+      mkdir -p "$target"
+
+      cp ${cfg.icon} "$target/${cfg.icon.fileName}"
+    '';
 in
 {
   options.plusultra.user = with types; {
@@ -38,6 +46,7 @@ in
       fortune
       lolcat
       plusultra.cowsay-plus
+      propagatedIcon
     ];
 
     programs.zsh = {

@@ -24,19 +24,6 @@ in
       in
       {
         package = cfg.package;
-        extraOptions = lib.concatStringsSep "\n" [
-          ''
-            experimental-features = nix-command flakes
-            http-connections = 50
-            warn-dirty = false
-            log-lines = 50
-            sandbox = relaxed
-          ''
-          (lib.optionalString (config.plusultra.tools.direnv.enable) ''
-            keep-outputs = true
-            keep-derivations = true
-          '')
-        ];
 
         settings = {
           experimental-features = "nix-command flakes";

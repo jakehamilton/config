@@ -68,6 +68,41 @@ in
       lib.optional (cfg.monitors != null) "L+ ${gdmHome}/.config/monitors.xml - - - - ${cfg.monitors}"
     );
 
+    systemd.services.plusultra-user-icon = {
+      before = [ "display-manager.service" ];
+      wantedBy = [ "display-manager.service" ];
+
+      serviceConfig = {
+        Type = "simple";
+        User = "root";
+        Group = "root";
+      };
+
+      script = ''
+        config_file=/var/lib/AccountsService/users/${config.plusultra.user.name}
+        icon_file=/run/current-system/sw/share/plusultra-icons/user/${config.plusultra.user.name}/${config.plusultra.user.icon.fileName}
+
+        if ! [ -d "$(dirname "$config_file")"]; then
+          mkdir -p "$(dirname "$config_file")"
+        fi
+
+        if ! [ -f "$config_file" ]; then
+          echo "[User]
+          Session=gnome
+          SystemAccount=false
+          Icon=$icon_file" > "$config_file"
+        else
+          icon_config=$(sed -E -n -e "/Icon=.*/p" $config_file)
+
+          if [[ "$icon_config" == "" ]]; then
+            echo "Icon=$icon_file" >> $config_file
+          else
+            sed -E -i -e "s#^Icon=.*$#Icon=$icon_file#" $config_file
+          fi
+        fi
+      '';
+    };
+
     # Required for app indicators
     services.udev.packages = with pkgs; [ gnome3.gnome-settings-daemon ];
 

@@ -8,8 +8,6 @@
   ];
 
   boot = {
-    # Required as of 2023-01-04 in order to have ZFS support in the kernel.
-    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     kernelModules = [ "kvm-intel" ];
 
     initrd = {
