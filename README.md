@@ -85,7 +85,7 @@ See the following example for how to apply overlays from this flake.
 
 			overlays = with inputs; [
 				# Get all of the packages from this flake by using the main overlay.
-				plusultra.overlay
+				plusultra.overlays.default
 
 				# Individual overlays can be accessed from
 				# `plusultra.overlays.<name>`.
