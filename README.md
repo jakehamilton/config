@@ -21,6 +21,7 @@
 - [Overlays](#overlays)
 - [Packages](#packages)
   - [`at`](#at)
+  - [`bibata-cursors`](#bibata-cursors)
   - [`cowsay-plus`](#cowsay-plus)
   - [`doukutsu-rs`](#doukutsu-rs)
   - [`firefox-nordic-theme`](#firefox-nordic-theme)
@@ -89,6 +90,9 @@ See the following example for how to apply overlays from this flake.
 
 				# Individual overlays can be accessed from
 				# `plusultra.overlays.<name>`.
+
+				# These overlays pull packages from nixos-unstable or other sources.
+				plusultra.overlays.bibata-cursors
 				plusultra.overlays.chromium
 				plusultra.overlays.comma
 				plusultra.overlays.default
@@ -112,6 +116,7 @@ See the following example for how to apply overlays from this flake.
 				# Individual overlays for each package in this flake
 				# are available for convenience.
 				plusultra.overlays."package/at"
+				plusultra.overlays."package/bibata-cursors"
 				plusultra.overlays."package/cowsay-plus"
 				plusultra.overlays."package/doukutsu-rs"
 				plusultra.overlays."package/firefox-nordic-theme"
@@ -183,6 +188,10 @@ Packages can be used directly from the flake.
 ### [`at`](./packages/at/default.nix)
 
 [`@`](https://npm.im/@suchipi/at-js) - JavaScript stdio transformation tool.
+
+### [`bibata-cursors`](./packages/bibata-cursors/default.nix)
+
+The [Bibata Cursor](https://github.com/ful1e5/Bibata_Cursor) theme.
 
 ### [`cowsay-plus`](./packages/cowsay-plus/default.nix)
 
