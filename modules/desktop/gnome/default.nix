@@ -8,6 +8,7 @@ let
 
   defaultExtensions = with pkgs.gnomeExtensions; [
     appindicator
+    aylurs-widgets
     dash-to-dock
     emoji-selector
     extension-list
@@ -16,12 +17,11 @@ let
     just-perfection
     logo-menu
     no-overview
-    wireless-hid
-    space-bar
-    aylurs-widgets
     remove-app-menu
-    vitals
+    space-bar
     top-bar-organizer
+    vitals
+    wireless-hid
 
     # @NOTE(jakehamilton): These extensions are currently unsupported. They may also
     # no longer be required.
