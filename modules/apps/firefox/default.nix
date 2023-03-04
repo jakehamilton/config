@@ -31,24 +31,35 @@ in
 
     services.gnome.gnome-browser-connector.enable = config.plusultra.desktop.gnome.enable;
 
-    plusultra.home.extraOptions = {
-      programs.firefox = {
-        enable = true;
-        package = pkgs.firefox-wayland.override (
-          # Using optionalAttrs here to allow for easier additions if something
-          # like KDE should be used in the future.
-          lib.optionalAttrs config.plusultra.desktop.gnome.enable {
-            cfg = {
-              enableBrowserpass = true;
-              enableGnomeExtensions = true;
-            };
-          }
-        );
+    plusultra.home = {
+      file = {
+        ".mozilla/native-messaging-hosts/com.dannyvankooten.browserpass.json".source = "${pkgs.browserpass}/lib/mozilla/native-messaging-hosts/com.dannyvankooten.browserpass.json";
 
-        profiles.${config.plusultra.user.name} = {
-          inherit (cfg) extraConfig userChrome settings;
-          id = 0;
-          name = config.plusultra.user.name;
+        ".mozilla/native-messaging-hosts/org.gnome.chrome_gnome_shell.json".source = mkIf config.plusultra.desktop.gnome.enable "${pkgs.chrome-gnome-shell}/lib/mozilla/native-messaging-hosts/org.gnome.chrome_gnome_shell.json";
+      };
+
+      extraOptions = {
+        programs.firefox = {
+          enable = true;
+          package = pkgs.firefox.override (
+            {
+              cfg = {
+                enableBrowserpass = true;
+                enableGnomeExtensions = config.plusultra.desktop.gnome.enable;
+              };
+
+              extraNativeMessagingHosts =
+                optional
+                  config.plusultra.desktop.gnome.enable
+                  pkgs.gnomeExtensions.gsconnect;
+            }
+          );
+
+          profiles.${config.plusultra.user.name} = {
+            inherit (cfg) extraConfig userChrome settings;
+            id = 0;
+            name = config.plusultra.user.name;
+          };
         };
       };
     };

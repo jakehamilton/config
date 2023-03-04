@@ -5,6 +5,31 @@ with lib.internal;
 let
   cfg = config.plusultra.desktop.gnome;
   gdmHome = config.users.users.gdm.home;
+
+  defaultExtensions = with pkgs.gnomeExtensions; [
+    appindicator
+    dash-to-dock
+    emoji-selector
+    extension-list
+    gsconnect
+    gtile
+    just-perfection
+    logo-menu
+    no-overview
+    wireless-hid
+    space-bar
+    aylurs-widgets
+    remove-app-menu
+    vitals
+    top-bar-organizer
+
+    # @NOTE(jakehamilton): These extensions are currently unsupported. They may also
+    # no longer be required.
+
+    # audio-output-switcher
+    # big-avatar
+    # clear-top-bar
+  ];
 in
 {
   options.plusultra.desktop.gnome = with types; {
@@ -19,6 +44,7 @@ in
     suspend =
       mkBoolOpt true "Whether or not to suspend the machine after inactivity.";
     monitors = mkOpt (nullOr path) null "The monitors.xml file to create.";
+    extensions = mkOpt (listOf package) [ ] "Extra Gnome extensions to install.";
   };
 
   config = mkIf cfg.enable {
@@ -35,21 +61,7 @@ in
       wl-clipboard
       gnome.gnome-tweaks
       gnome.nautilus-python
-      gnomeExtensions.appindicator
-      gnomeExtensions.big-avatar
-      gnomeExtensions.no-overview
-      gnomeExtensions.wireless-hid
-      gnomeExtensions.emoji-selector
-      gnomeExtensions.clear-top-bar
-      gnomeExtensions.dash-to-dock
-      gnomeExtensions.blur-my-shell
-      gnomeExtensions.extension-list
-      gnomeExtensions.just-perfection
-      gnomeExtensions.transparent-top-bar
-      gnomeExtensions.gsconnect
-      gnomeExtensions.gtile
-      gnomeExtensions.audio-output-switcher
-    ];
+    ] ++ defaultExtensions ++ cfg.extensions;
 
     environment.gnome.excludePackages = with pkgs.gnome; [
       pkgs.gnome-tour
@@ -129,16 +141,126 @@ in
               wallpaper;
         in
         {
+          "org/gnome/shell" = {
+            disable-user-extensions = false;
+            enabled-extensions = (builtins.map (extension: extension.extensionUuid) (cfg.extensions ++ defaultExtensions))
+              ++ [
+              "native-window-placement@gnome-shell-extensions.gcampax.github.com"
+              "drive-menu@gnome-shell-extensions.gcampax.github.com"
+              "user-theme@gnome-shell-extensions.gcampax.github.com"
+            ];
+            favorite-apps =
+              [ "org.gnome.Nautilus.desktop" ]
+              ++ optional config.plusultra.apps.firefox.enable "firefox.desktop"
+              ++ optional config.plusultra.apps.vscode.enable "code.desktop"
+              ++ optional config.plusultra.desktop.addons.foot.enable "foot.desktop"
+              ++ optional config.plusultra.apps.logseq.enable "logseq.desktop"
+              ++ optional config.plusultra.apps.discord.enable "discord.desktop"
+              ++ optional config.plusultra.apps.element.enable "element-desktop.desktop"
+              ++ optional config.plusultra.apps.steam.enable "steam.desktop";
+          };
+
           "org/gnome/desktop/background" = {
-            "picture-uri" = get-wallpaper cfg.wallpaper.light;
-            "picture-uri-dark" = get-wallpaper cfg.wallpaper.dark;
+            picture-uri = get-wallpaper cfg.wallpaper.light;
+            picture-uri-dark = get-wallpaper cfg.wallpaper.dark;
           };
           "org/gnome/desktop/screensaver" = {
-            "picture-uri" = get-wallpaper cfg.wallpaper.light;
-            "picture-uri-dark" = get-wallpaper cfg.wallpaper.dark;
+            picture-uri = get-wallpaper cfg.wallpaper.light;
+            picture-uri-dark = get-wallpaper cfg.wallpaper.dark;
           };
           "org/gnome/desktop/interface" = {
-            "color-scheme" = if cfg.color-scheme == "light" then "default" else "prefer-dark";
+            color-scheme = if cfg.color-scheme == "light" then "default" else "prefer-dark";
+            enable-hot-corners = false;
+          };
+          "org/gnome/desktop/wm/preferences" = {
+            num-workspaces = 10;
+          };
+          "org/gnome/desktop/wm/keybindings" = {
+            move-to-workspace-1 = [ "<Super>1" ];
+            move-to-workspace-2 = [ "<Super>2" ];
+            move-to-workspace-3 = [ "<Super>3" ];
+            move-to-workspace-4 = [ "<Super>4" ];
+            move-to-workspace-5 = [ "<Super>5" ];
+            move-to-workspace-6 = [ "<Super>6" ];
+            move-to-workspace-7 = [ "<Super>7" ];
+            move-to-workspace-8 = [ "<Super>8" ];
+            move-to-workspace-9 = [ "<Super>9" ];
+            move-to-workspace-10 = [ "<Super>0" ];
+          };
+          "org/gnome/mutter" = {
+            edge-tiling = false;
+          };
+
+          "org/gnome/shell/extensions/dash-to-dock" = {
+            autohide = true;
+            dock-fixed = false;
+            dock-position = "BOTTOM";
+            pressure-threshold = 200.0;
+            require-pressure-to-show = true;
+            show-favorites = true;
+            hot-keys = false;
+          };
+
+          "org/gnome/shell/extensions/just-perfection" = {
+            panel-size = 48;
+            activities-button = false;
+          };
+
+          "org/gnome/shell/extensions/Logo-menu" = {
+            hide-softwarecentre = true;
+
+            # Use right click to open Activities.
+            menu-button-icon-click-type = 3;
+
+            # Use the NixOS logo.
+            menu-button-icon-image = 23;
+
+            menu-button-terminal =
+              if config.plusultra.desktop.addons.term.enable then
+                lib.getExe config.plusultra.desktop.addons.term.pkg
+              else
+                lib.getExe pkgs.gnome.gnome-terminal;
+          };
+
+          "org/gnome/shell/extensions/aylurs-widgets" = {
+            background-clock = false;
+            dash-board = false;
+            date-menu-date-format = "%H:%M  %B %m";
+            date-menu-hide-clocks = true;
+            date-menu-hide-system-levels = true;
+            date-menu-hide-user = true;
+            media-player = false;
+            media-player-prefer = "firefox";
+            notification-indicator = false;
+            power-menu = false;
+            quick-toggles = false;
+            workspace-indicator = false;
+          };
+
+          "org/gnome/shell/extensions/top-bar-organizer" = {
+            left-box-order = [
+              "menuButton"
+              "activities"
+              "dateMenu"
+              "appMenu"
+            ];
+
+            center-box-order = [
+              "Space Bar"
+            ];
+
+            right-box-order = [
+              "keyboard"
+              "EmojisMenu"
+              "wireless-hid"
+              "drive-menu"
+              "vitalsMenu"
+              "screenRecording"
+              "screenSharing"
+              "dwellClick"
+              "a11y"
+              "quickSettings"
+            ];
           };
         };
     };
@@ -152,5 +274,4 @@ in
     networking.firewall.extraCommands =
       "iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns";
   };
-
 }

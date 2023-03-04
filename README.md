@@ -111,6 +111,7 @@ See the following example for how to apply overlays from this flake.
 				plusultra.overlays.pocketcasts
 				plusultra.overlays.prismlauncher
 				plusultra.overlays.tmux
+				plusultra.overlays.top-bar-organizer
 				plusultra.overlays.yt-music
 
 				# Individual overlays for each package in this flake
