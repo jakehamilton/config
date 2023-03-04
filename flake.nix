@@ -93,6 +93,11 @@
       flake = false;
     };
 
+    bibata-cursors = {
+      url = "github:suchipi/Bibata_Cursor";
+      flake = false;
+    };
+
     # Hosted Sites
     lasersandfeelings = {
       url = "github:jakehamilton/lasersandfeelings";

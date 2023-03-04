@@ -17,7 +17,7 @@ in
     cursor = {
       name = mkOpt str "Bibata-Modern-Ice"
         "The name of the cursor theme to apply.";
-      pkg = mkOpt package pkgs.bibata-cursors "The package to use for the cursor theme.";
+      pkg = mkOpt package pkgs.plusultra.bibata-cursors "The package to use for the cursor theme.";
     };
     icon = {
       name = mkOpt str "Papirus"
