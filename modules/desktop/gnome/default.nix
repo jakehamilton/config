@@ -11,7 +11,6 @@ let
     aylurs-widgets
     dash-to-dock
     emoji-selector
-    extension-list
     gsconnect
     gtile
     just-perfection
@@ -20,7 +19,6 @@ let
     remove-app-menu
     space-bar
     top-bar-organizer
-    vitals
     wireless-hid
 
     # @NOTE(jakehamilton): These extensions are currently unsupported. They may also
@@ -30,6 +28,9 @@ let
     # big-avatar
     # clear-top-bar
   ];
+
+  default-attrs = mapAttrs (key: mkDefault);
+  nested-default-attrs = mapAttrs (key: default-attrs);
 in
 {
   options.plusultra.desktop.gnome = with types; {
@@ -140,7 +141,7 @@ in
             else
               wallpaper;
         in
-        {
+        nested-default-attrs {
           "org/gnome/shell" = {
             disable-user-extensions = false;
             enabled-extensions = (builtins.map (extension: extension.extensionUuid) (cfg.extensions ++ defaultExtensions))
@@ -172,6 +173,9 @@ in
             color-scheme = if cfg.color-scheme == "light" then "default" else "prefer-dark";
             enable-hot-corners = false;
           };
+          "org/gnome/desktop/peripherals/touchpad" = {
+            disable-while-typing = false;
+          };
           "org/gnome/desktop/wm/preferences" = {
             num-workspaces = 10;
           };
@@ -198,8 +202,22 @@ in
             move-to-workspace-9 = [ "<Shift><Super>9" ];
             move-to-workspace-10 = [ "<Shift><Super>0" ];
           };
+          "org/gnome/shell/keybindings" = {
+            # Remove the default hotkeys for opening favorited applications.
+            switch-to-application-1 = [ ];
+            switch-to-application-2 = [ ];
+            switch-to-application-3 = [ ];
+            switch-to-application-4 = [ ];
+            switch-to-application-5 = [ ];
+            switch-to-application-6 = [ ];
+            switch-to-application-7 = [ ];
+            switch-to-application-8 = [ ];
+            switch-to-application-9 = [ ];
+            switch-to-application-10 = [ ];
+          };
           "org/gnome/mutter" = {
             edge-tiling = false;
+            dynamic-workspaces = false;
           };
 
           "org/gnome/shell/extensions/dash-to-dock" = {
@@ -235,11 +253,16 @@ in
 
           "org/gnome/shell/extensions/aylurs-widgets" = {
             background-clock = false;
+            battery-bar = false;
             dash-board = false;
             date-menu-date-format = "%H:%M  %B %m";
             date-menu-hide-clocks = true;
             date-menu-hide-system-levels = true;
             date-menu-hide-user = true;
+
+            # Hide the indincator
+            date-menu-indicator-position = 2;
+
             media-player = false;
             media-player-prefer = "firefox";
             notification-indicator = false;
@@ -276,6 +299,13 @@ in
 
           "org/gnome/shell/extensions/space-bar/shortcuts" = {
             enable-activate-workspace-shortcuts = false;
+          };
+          "org/gnome/shell/extensions/space-bar/behavior" = {
+            show-empty-workspaces = false;
+          };
+
+          "org/gnome/shell/extensions/gtile" = {
+            show-icon = false;
           };
         };
     };
