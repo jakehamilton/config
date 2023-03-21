@@ -48,8 +48,6 @@
 
 ![clean](./assets/clean.png)
 
-![launcher](./assets/launcher.png)
-
 ![busy](./assets/busy.png)
 
 ![firefox](./assets/firefox.png)
