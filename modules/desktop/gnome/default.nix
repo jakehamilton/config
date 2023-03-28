@@ -255,7 +255,7 @@ in
             background-clock = false;
             battery-bar = false;
             dash-board = false;
-            date-menu-date-format = "%H:%M  %B %m";
+            date-menu-date-format = "%H:%M  %B %d";
             date-menu-hide-clocks = true;
             date-menu-hide-system-levels = true;
             date-menu-hide-user = true;
