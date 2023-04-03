@@ -1,26 +1,23 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, inputs, ... }:
 
 with lib;
 with lib.internal;
 let
-  gpgConf = pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/drduh/config/master/gpg.conf";
-    sha256 = "0va62sgnah8rjgp4m6zygs4z9gbpmqvq9m3x4byywk1dha6nvvaj";
-  };
+  gpgConf = "${inputs.gpg-base-conf}/gpg.conf";
+
   gpgAgentConf = ''
     pinentry-program /run/current-system/sw/bin/pinentry-curses
   '';
-  guide = pkgs.fetchurl {
-    url =
-      "https://raw.githubusercontent.com/drduh/YubiKey-Guide/master/README.md";
-    sha256 = "164pyqm3yjybxlvwxzfb9mpp38zs9rb2fycngr6jv20n3vr1dipj";
-  };
+
+  guide = "${inputs.yubikey-guide}/README.md";
+
   theme = pkgs.fetchFromGitHub {
     owner = "jez";
     repo = "pandoc-markdown-css-theme";
     rev = "019a4829242937761949274916022e9861ed0627";
     sha256 = "1h48yqffpaz437f3c9hfryf23r95rr319lrb3y79kxpxbc9hihxb";
   };
+
   guideHTML = pkgs.runCommand "yubikey-guide" { } ''
     ${pkgs.pandoc}/bin/pandoc \
       --standalone \
@@ -34,6 +31,19 @@ let
       -o $out \
       ${guide}
   '';
+
+  guideDesktopItem = pkgs.makeDesktopItem {
+    name = "yubikey-guide";
+    desktopName = "Yubikey Guide";
+    genericName = "View Yubikey Guide in a web browser";
+    exec = "${pkgs.xdg-utils}/bin/xdg-open ${guideHTML}";
+    icon = lib.snowfall.fs.get-file "modules/security/gpg/yubico-icon.svg";
+    categories = [ "System" ];
+  };
+
+  reload-yubikey = pkgs.writeShellScriptBin "reload-yubikey" ''
+    ${pkgs.gnupg}/bin/gpg-connect-agent "scd serialno" "learn --force" /bye
+  '';
 in
 {
   services.pcscd.enable = true;
@@ -46,6 +56,9 @@ in
     pinentry-qt
     paperkey
     wget
+    guideDesktopItem
+    reload-yubikey
+    firefox
   ];
 
   programs = {
