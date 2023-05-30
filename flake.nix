@@ -3,16 +3,13 @@
 
   inputs = {
     # NixPkgs (nixos-22.11)
-    nixpkgs.url =
-      "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
 
     # NixPkgs Unstable (nixos-unstable)
-    unstable.url =
-      "github:nixos/nixpkgs/nixos-unstable";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Home Manager (release-22.05)
-    home-manager.url =
-      "github:nix-community/home-manager/release-23.05";
+    home-manager.url = "github:nix-community/home-manager/release-23.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # macOS Support (master)
@@ -28,7 +25,7 @@
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Lib
-    snowfall-lib.url = "github:snowfallorg/lib/dev";
+    snowfall-lib.url = "github:snowfallorg/lib/feat/home-manager";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Flake
@@ -36,8 +33,7 @@
     flake.inputs.nixpkgs.follows = "unstable";
 
     # Comma
-    comma.url =
-      "github:nix-community/comma";
+    comma.url = "github:nix-community/comma";
     comma.inputs.nixpkgs.follows = "unstable";
 
     # System Deployment
@@ -55,9 +51,9 @@
     # Binary Cache
     attic = {
       url = "github:zhaofengli/attic";
+
       # @FIXME(jakehamilton): A specific version of Rust is needed right now or
       # the build fails. Re-enable this after some time has passed.
-
       inputs.nixpkgs.follows = "unstable";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
@@ -172,18 +168,20 @@
       };
 
       overlays = with inputs; [
-        neovim.overlay
+        neovim.overlays.default
         flake.overlay
         cowsay.overlay
         icehouse.overlay
         attic.overlays.default
       ];
 
-      systems.modules = with inputs; [
+      systems.modules.nixos = with inputs; [
         home-manager.nixosModules.home-manager
         nix-ld.nixosModules.nix-ld
-        # attic.nixosModules.atticd
         vault-service.nixosModules.nixos-vault-service
+        # @TODO(jakehamilton): Replace plusultra.services.attic now that vault-agent
+        # exists and can force override environment files.
+        # attic.nixosModules.atticd
       ];
 
       systems.hosts.jasper.modules = with inputs; [
