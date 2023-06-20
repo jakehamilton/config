@@ -1,32 +1,27 @@
-{ pkgs, lib, nixos-hardware, ... }:
+{ pkgs, config, lib, modulesPath, inputs, ... }:
 
 with lib;
 with lib.internal;
 {
-  imports = [ ./hardware.nix ];
+  imports = with inputs.nixos-hardware.nixosModules; [
+    (modulesPath + "/installer/scan/not-detected.nix")
+    raspberry-pi-4
+  ];
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  nixpkgs.config.allowUnsupportedSystem = true;
+  nixpkgs.crossSystem.system = "aarch64-linux";
 
   plusultra = {
     archetypes = {
-      workstation = enabled;
-    };
-
-    apps = {
-      steam = enabled;
+      server = enabled;
     };
 
     system = {
-      zfs = enabled;
+      boot = {
+        # Raspberry Pi requires a specific bootloader.
+        enable = mkForce false;
+      };
     };
-  };
-
-  plusultra.home.extraOptions = {
-    # dconf.settings = {
-    #   "org/gnome/shell/extensions/just-perfection" = {
-    #     panel-size = 60;
-    #   };
-    # };
   };
 
   # This value determines the NixOS release from which the default

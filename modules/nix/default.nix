@@ -1,4 +1,4 @@
-{ options, config, pkgs, lib, ... }:
+{ options, config, pkgs, lib, inputs, ... }:
 
 with lib;
 with lib.internal;
@@ -13,10 +13,14 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       plusultra.nixos-revision
+      (plusultra.nixos-hosts.override {
+        hosts = inputs.self.nixosConfigurations;
+      })
       deploy-rs
       nixfmt
       nix-index
       nix-prefetch-git
+      nix-output-monitor
     ];
 
     nix =

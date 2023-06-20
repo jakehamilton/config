@@ -136,7 +136,15 @@
     lib.mkFlake {
       package-namespace = "plusultra";
 
-      channels-config.allowUnfree = true;
+      channels-config = {
+        allowUnfree = true;
+        permittedInsecurePackages = [
+          # @FIXME(jakehamilton): This is a workaround for 22.11 and can
+          # be removed once NixPkgs is upgraded to 23.05.
+          "electron-20.3.11"
+          "nodejs-16.20.0"
+        ];
+      };
 
       overlays = with inputs; [
         neovim.overlay

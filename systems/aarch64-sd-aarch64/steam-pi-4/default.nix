@@ -15,14 +15,14 @@ let
   start-steam = pkgs.writeShellApplication {
     name = "start-steam";
     checkPhase = "";
-    runtimeInputs = with pkgs; [ gamescope ];
+    # runtimeInputs = with pkgs; [ gamescope ];
     text = ''
       if ! [ -d ~/.local/share/Steam ]; then
-        xterm "${steam-pi-setup}/bin/steam-pi-setup" &
-        steam
+        exec xterm "${steam-pi-setup}/bin/steam-pi-setup"
+        # steam
       fi
 
-      gamescope -f -- steam -gamepadui
+      # gamescope -f -- steam -gamepadui
     '';
   };
 in
@@ -38,6 +38,8 @@ in
   # high-resolution display
   hardware.video.hidpi.enable = true;
   hardware.opengl.driSupport32Bit = mkForce false;
+
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
 
   services.xserver = {
     enable = true;
@@ -84,7 +86,7 @@ in
     };
 
     apps = {
-      steam = enabled;
+      # steam = enabled;
     };
 
     home = {
