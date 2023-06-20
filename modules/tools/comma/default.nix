@@ -16,6 +16,14 @@ in
       plusultra.nix-update-index
     ];
 
-    plusultra.home.extraOptions = { programs.nix-index.enable = true; };
+    plusultra.home = {
+      configFile = {
+        "wgetrc".text = "";
+      };
+
+      extraOptions = {
+        programs.nix-index.enable = true;
+      };
+    };
   };
 }
