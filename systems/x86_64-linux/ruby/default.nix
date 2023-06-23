@@ -91,6 +91,38 @@ with lib.internal;
               };
             };
           };
+
+          "acme-ruby.hamho.me" = {
+            settings = {
+              vault.address = "https://vault.quartz.hamho.me";
+
+              auto_auth = {
+                method = [{
+                  type = "approle";
+
+                  config = {
+                    role_id_file_path = "/var/lib/vault-agent/acme/role-id";
+                    secret_id_file_path = "/var/lib/vault-agent/acme/secret-id";
+
+                    remove_secret_id_file_after_reading = false;
+                  };
+                }];
+              };
+            };
+
+            secrets.environment = {
+              force = true;
+              templates = {
+                dns = {
+                  text = ''
+                    {{ with secret "secret/dns/hamhome" }}
+                    DO_AUTH_TOKEN="{{ .Data.do_auth_token }}"
+                    {{ end }}
+                  '';
+                };
+              };
+            };
+          };
         };
       };
     };
@@ -127,6 +159,8 @@ with lib.internal;
       domain = "*.ruby.hamho.me";
     };
   };
+
+  # systemd.services."acme-ruby.hamho.me".serviceConfig.EnvironmentFile = mkForce config.plusultra.services.vault-agent.services."acme-ruby.hamho.me".secrets.environment.paths;
 
   services.nginx = {
     enable = true;

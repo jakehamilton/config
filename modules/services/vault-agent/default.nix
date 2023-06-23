@@ -7,12 +7,19 @@ let
 
   # nixos-vault-service places generated files here:
   # https://github.com/DeterminateSystems/nixos-vault-service/blob/45e65627dff5dc4bb40d0f2595916f37e78959c1/module/helpers.nix#L4
-  secret-files-root = "/tmp/detsys-vault/";
+  secret-files-root = "/tmp/detsys-vault";
+  environment-files-root = "/run/keys/environment";
 
-  environment-files-submodule = types.submodule ({ name, ... }: {
+  create-environment-files-submodule = service-name: types.submodule ({ name, ... }: {
     options = {
       text = mkOpt (types.nullOr types.str) null "An inline template for Vault to template.";
       source = mkOpt (types.nullOr types.path) null "The file with environment variables for Vault to template.";
+      path = mkOption {
+        readOnly = true;
+        type = types.str;
+        description = "The path to the environment file.";
+        default = "${environment-files-root}/${service-name}/${name}.EnvFile";
+      };
     };
   });
 
@@ -26,7 +33,7 @@ let
         readOnly = true;
         type = types.str;
         description = "The path to the secret file.";
-        default = "${secret-files-root}${name}";
+        default = "${secret-files-root}/${name}";
       };
     };
   });
@@ -34,15 +41,30 @@ let
 
   services-submodule =
     types.submodule
-      ({ name, ... }: {
+      ({ name, config, ... }: {
         options = {
           enable = mkBoolOpt true "Whether to enable Vault Agent for this service.";
           settings = mkOpt types.attrs { } "Vault Agent configuration.";
           secrets = {
             environment = {
+              force = mkOpt types.bool false "Whether or not to force the use of Vault Agent's environment files.";
               change-action = mkOpt (types.enum [ "restart" "stop" "none" ]) "restart" "The action to take when secrets change.";
-              templates = mkOpt (types.attrsOf environment-files-submodule) { } "Environment variable files for Vault to template.";
+              templates = mkOpt (types.attrsOf (create-environment-files-submodule name)) { } "Environment variable files for Vault to template.";
               template = mkOpt (types.nullOr (types.either types.path types.str)) null "An environment variable template.";
+              paths = mkOption {
+                readOnly = true;
+                type = types.listOf types.str;
+                description = "Paths to all of the environment files";
+                default =
+                  if config.secrets.environment.template != null then
+                    [ "${environment-files-root}/${name}/EnvFile" ]
+                  else
+                    (
+                      mapAttrsToList
+                        (template-name: value: value.path)
+                        config.secrets.environment.templates
+                    );
+              };
             };
 
             file = {
@@ -92,6 +114,12 @@ in
           service.secrets.file.files)
       )
       cfg.services);
+
+    systemd.services = mapAttrs
+      (service-name: value: mkIf value.secrets.environment.force {
+        serviceConfig.EnvironmentFile = mkForce value.secrets.environment.paths;
+      })
+      cfg.services;
 
     detsys.vaultAgent = {
       defaultAgentConfig = cfg.settings;
