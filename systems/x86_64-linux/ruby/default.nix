@@ -160,8 +160,6 @@ with lib.internal;
     };
   };
 
-  # systemd.services."acme-ruby.hamho.me".serviceConfig.EnvironmentFile = mkForce config.plusultra.services.vault-agent.services."acme-ruby.hamho.me".secrets.environment.paths;
-
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
