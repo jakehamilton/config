@@ -306,6 +306,7 @@ in
 
           "org/gnome/shell/extensions/gtile" = {
             show-icon = false;
+            grid-sizes = "8x2,4x2,2x2";
           };
         };
     };
