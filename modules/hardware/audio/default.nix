@@ -1,9 +1,63 @@
 { options, config, pkgs, lib, ... }:
 
+# @FIXME(jakehamilton): The transition to wireplumber from media-session has completely
+# broken my setup. I'll need to invest some time to figure out how to override Alsa things
+# again...
+
 with lib;
 with lib.internal;
 let
   cfg = config.plusultra.hardware.audio;
+
+  lua-format = {
+    type = with lib.types; let
+      valueType = nullOr
+        (oneOf [
+          bool
+          int
+          float
+          str
+          path
+          (attrsOf valueType)
+          (listOf valueType)
+        ]) // {
+        description = "Lua value";
+      };
+    in
+    valueType;
+
+    generate = name: value:
+      let
+        toLuaValue = value:
+          if value == null then "null" else
+          if value == true then "true" else
+          if value == false then "false" else
+          if builtins.isInt value || builtins.isFloat value then builtins.toString value else
+          if builtins.isString value then toLuaString value else
+          if builtins.isAttrs value then toLuaTable value else
+          if builtins.isList value then toLuaList value else
+          builtins.abort "Unsupported value used with formats.lua.generate: ${value}";
+
+        toLuaString = value: "\"${builtins.toString value}\"";
+
+        toLuaTable = value:
+          let
+            pairs = mapAttrsToList
+              (name: value: "[${toLuaString name}] = ${toLuaValue value}")
+              value;
+            content = concatStringsSep ", " pairs;
+          in
+          "{ ${content} }";
+
+        toLuaList = value:
+          let
+            parts = builtins.map toLuaValue value;
+            content = concatStringsSep ", " parts;
+          in
+          "{ ${content} }";
+      in
+      toLuaValue value;
+  };
 
   pipewire-config = {
     "context.objects" = cfg.nodes ++ [ ];
@@ -15,11 +69,20 @@ let
       }
       { name = "libpipewire-module-protocol-native"; }
       { name = "libpipewire-module-profiler"; }
-      { name = "libpipewire-module-metadata"; }
+      # {
+      #   name = "libpipewire-module-metadata";
+      #   flags = [ "ifexists" "nofail" ];
+      # }
       { name = "libpipewire-module-spa-device-factory"; }
       { name = "libpipewire-module-spa-node-factory"; }
-      { name = "libpipewire-module-client-node"; }
-      { name = "libpipewire-module-client-device"; }
+      # {
+      #   name = "libpipewire-module-client-node";
+      #   flags = [ "ifexists" "nofail" ];
+      # }
+      # {
+      #   name = "libpipewire-module-client-device";
+      #   flags = [ "ifexists" "nofail" ];
+      # }
       {
         name = "libpipewire-module-portal";
         flags = [ "ifexists" "nofail" ];
@@ -32,6 +95,10 @@ let
       { name = "libpipewire-module-link-factory"; }
       { name = "libpipewire-module-session-manager"; }
     ] ++ cfg.modules;
+    "context.components" = [
+      { name = "libwireplumber-module-lua-scripting"; type = "module"; }
+      { name = "config.lua"; type = "config/lua"; }
+    ];
   };
 
   alsa-config = {
@@ -65,10 +132,27 @@ in
     };
 
     environment.etc = {
-      "pipewire/pipewire.conf.d/100-pipewire.conf".source =
+      "pipewire/pipewire.conf.d/10-pipewire.conf".source =
         pkgs.writeText "pipewire.conf" (builtins.toJSON pipewire-config);
-      "pipewire/pipewire.conf.d/110-alsa.conf".source =
-        pkgs.writeText "pipewire.conf" (builtins.toJSON alsa-config);
+      # "pipewire/pipewire.conf.d/21-alsa.conf".source =
+      #   pkgs.writeText "pipewire.conf" (builtins.toJSON alsa-config);
+
+      #       "wireplumber/wireplumber.conf".source =
+      #         pkgs.writeText "pipewire.conf" (builtins.toJSON pipewire-config);
+
+      # "wireplumber/scripts/config.lua.d/alsa.lua".text = ''
+      #   local input = ${lua-format.generate "sample.lua" cfg.alsa-monitor}
+
+      #   if input.rules == nil then
+      #    input.rules = {}
+      #   end
+
+      #   local rules = input.rules
+
+      #   for _, rule in ipairs(input.rules) do
+      #     table.insert(alsa_monitor.rules, rule)
+      #   end
+      # '';
     };
 
     hardware.pulseaudio.enable = mkForce false;
