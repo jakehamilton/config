@@ -29,18 +29,6 @@ with lib.internal;
 
   services.jellyfin.enable = true;
 
-  services.vault = {
-    enable = true;
-
-    # Use the version of Vault built with support for the UI.
-    package = pkgs.vault-bin;
-
-    storageBackend = "file";
-    extraConfig = ''
-      ui = true
-    '';
-  };
-
   networking.firewall.allowedTCPPorts = [
     # Navidrome
     4533
@@ -77,7 +65,6 @@ with lib.internal;
     };
 
     services = {
-      # avahi = enabled;
       openssh = enabled;
       tailscale = enabled;
 
@@ -85,6 +72,25 @@ with lib.internal;
         enable = true;
         short = true;
       };
+
+      vault = {
+        enable = true;
+
+        policies =
+          builtins.foldl'
+            (policies: file: policies // {
+              "${snowfall.path.get-file-name-without-extension file}" = file;
+            })
+            { }
+            (builtins.filter (snowfall.path.has-file-extension "hcl")
+              (builtins.map
+                (path:
+                  ./vault/policies +
+                  "/${builtins.baseNameOf (builtins.unsafeDiscardStringContext path)}"
+                )
+                (snowfall.fs.get-files ./vault/policies)));
+      };
+
 
       samba = {
         enable = true;

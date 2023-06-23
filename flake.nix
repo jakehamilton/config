@@ -4,7 +4,7 @@
   inputs = {
     # NixPkgs (nixos-22.11)
     nixpkgs.url =
-      "github:nixos/nixpkgs/nixos-22.11";
+      "github:nixos/nixpkgs/nixos-23.05";
 
     # NixPkgs Unstable (nixos-unstable)
     unstable.url =
@@ -12,7 +12,7 @@
 
     # Home Manager (release-22.05)
     home-manager.url =
-      "github:nix-community/home-manager/release-22.11";
+      "github:nix-community/home-manager/release-23.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # macOS Support (master)
@@ -34,7 +34,6 @@
     # Snowfall Flake
     flake.url = "github:snowfallorg/flake";
     flake.inputs.nixpkgs.follows = "unstable";
-    # flake.inputs.snowfall-lib.follows = "snowfall-lib";
 
     # Comma
     comma.url =
@@ -52,6 +51,28 @@
     # Neovim
     neovim.url = "github:jakehamilton/neovim";
     neovim.inputs.nixpkgs.follows = "unstable";
+
+    # Binary Cache
+    attic = {
+      url = "github:zhaofengli/attic";
+      # @FIXME(jakehamilton): A specific version of Rust is needed right now or
+      # the build fails. Re-enable this after some time has passed.
+
+      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
+    };
+
+    # Vault Integration
+    vault-service = {
+      url = "github:DeterminateSystems/nixos-vault-service";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Flake Hygiene
+    flake-checker = {
+      url = "github:DeterminateSystems/flake-checker";
+      inputs.nixpkgs.follows = "unstable";
+    };
 
     # Discord Replugged
     replugged.url = "github:LunNova/replugged-nix-flake";
@@ -151,11 +172,14 @@
         flake.overlay
         cowsay.overlay
         icehouse.overlay
+        attic.overlays.default
       ];
 
       systems.modules = with inputs; [
         home-manager.nixosModules.home-manager
         nix-ld.nixosModules.nix-ld
+        # attic.nixosModules.atticd
+        vault-service.nixosModules.nixos-vault-service
       ];
 
       systems.hosts.jasper.modules = with inputs; [

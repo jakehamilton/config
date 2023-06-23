@@ -18,6 +18,8 @@ in
     plusultra = {
       nix = enabled;
 
+      cache.public = enabled;
+
       cli-apps = {
         flake = enabled;
       };

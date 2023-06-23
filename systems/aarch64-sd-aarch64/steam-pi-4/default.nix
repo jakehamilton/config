@@ -35,8 +35,6 @@ in
   nixpkgs.config.allowUnsupportedSystem = true;
   nixpkgs.crossSystem.system = "aarch64-linux";
 
-  # high-resolution display
-  hardware.video.hidpi.enable = true;
   hardware.opengl.driSupport32Bit = mkForce false;
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
