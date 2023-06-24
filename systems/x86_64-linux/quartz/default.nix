@@ -69,7 +69,7 @@ with lib.internal;
       tailscale = enabled;
 
       cowsay-mastodon-poster = {
-        enable = true;
+        enable = false;
         short = true;
       };
 
