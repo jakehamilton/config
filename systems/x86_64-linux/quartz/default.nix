@@ -214,7 +214,7 @@ with lib.internal;
                 {
                   name = "bytesize.xyz";
                   icon = "fas fa-cubes";
-                  url = "https://";
+                  url = "https://bytesize.xyz";
                   target = "_blank";
                 }
                 {
