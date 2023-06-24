@@ -2,6 +2,12 @@
 
 with lib;
 with lib.internal;
+let
+  build-machine = hostName: system: speedFactor: {
+    inherit hostName system speedFactor;
+    sshUser = "short";
+  };
+in
 {
   imports = [ ./hardware.nix ];
 
@@ -147,6 +153,26 @@ with lib.internal;
     };
   };
 
+  nix = {
+    distributedBuilds = true;
+
+    buildMachines = [
+      (build-machine "zoisite" "aarch64-linux" 1)
+      (build-machine "wulfenite" "aarch64-linux" 1)
+      (build-machine "wavellite" "aarch64-linux" 1)
+      (build-machine "vivianite" "aarch64-linux" 1)
+      (build-machine "violane" "aarch64-linux" 2)
+      (build-machine "vesuvianite" "aarch64-linux" 2)
+    ];
+  };
+
+  services.hydra = {
+    enable = true;
+    hydraURL = "https://hydra.ruby.hamho.me";
+    notificationSender = "hydra@ruby.hamho.me";
+    useSubstitutes = true;
+  };
+
   security.acme = {
     defaults = {
       dnsProvider = "digitalocean";
@@ -180,6 +206,12 @@ with lib.internal;
           network.create-proxy
             ({
               port = 8989;
+            }
+            // shared-config);
+        "hydra.ruby.hamho.me" =
+          network.create-proxy
+            ({
+              port = 3000;
             }
             // shared-config);
       };

@@ -5,6 +5,10 @@ let
     pname = "homer";
     version = "unstable-2023-06-23";
 
+    packageJSON = ./package.json;
+    yarnLock = ./yarn.lock;
+    yarnNix = ./yarn.nix;
+
     src = fetchFromGitHub {
       owner = "bastienwirtz";
       repo = "homer";
