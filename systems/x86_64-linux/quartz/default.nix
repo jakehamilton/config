@@ -173,7 +173,7 @@ with lib.internal;
           services = [
             {
               name = "Media";
-              icon = "fas fa-photo-film-music";
+              icon = "fas fa-photo-film";
               items = [
                 {
                   name = "Jellyfin";
@@ -183,7 +183,7 @@ with lib.internal;
                 }
                 {
                   name = "Navidrome";
-                  icon = "fas fa-headphones";
+                  icon = "fas fa-music";
                   url = "https://navidrome.quartz.hamho.me";
                   target = "_blank";
                 }
@@ -202,7 +202,7 @@ with lib.internal;
               ];
             }
             {
-              name = "Blogs";
+              name = "Blog";
               icon = "fas fa-pencil";
               items = [
                 {
