@@ -1291,6 +1291,7 @@
         "retrospectacle": "retrospectacle",
         "scrumfish": "scrumfish",
         "snowfall-lib": "snowfall-lib_11",
+        "sokoban-app-website": "sokoban-app-website",
         "unstable": "unstable_2",
         "vault-service": "vault-service",
         "yubikey-guide": "yubikey-guide"
@@ -1653,6 +1654,22 @@
       "original": {
         "owner": "snowfallorg",
         "repo": "lib",
+        "type": "github"
+      }
+    },
+    "sokoban-app-website": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1654068061,
+        "narHash": "sha256-7WL3uw6ZZ5r1X3ruQd389OVJAnPCRL/dYzitGqvbbkU=",
+        "owner": "jakehamilton",
+        "repo": "sokoban.app",
+        "rev": "db66504d7283606f147a31e37772fbe6e95afdfb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jakehamilton",
+        "repo": "sokoban.app",
         "type": "github"
       }
     },

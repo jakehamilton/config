@@ -38,7 +38,13 @@ in
     };
 
     services = {
-      openssh = enabled;
+      openssh = {
+        enable = true;
+
+        # Hydra needs to SSH to other machines and explodes if we remap
+        # to another port.
+        manage-other-hosts = false;
+      };
       tailscale = enabled;
 
       attic = {

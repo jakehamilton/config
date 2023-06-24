@@ -46,7 +46,8 @@ in
     ];
 
     nix =
-      let users = [ "root" config.plusultra.user.name ];
+      let users = [ "root" config.plusultra.user.name ] ++
+        optional config.services.hydra.enable "hydra";
       in
       {
         package = cfg.package;

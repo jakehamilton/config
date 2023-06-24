@@ -47,6 +47,7 @@ in
     authorizedKeys =
       mkOpt (listOf str) [ default-key ] "The public keys to apply.";
     port = mkOpt port 2222 "The port to listen on (in addition to 22).";
+    manage-other-hosts = mkOpt bool true "Whether or not to add other host configurations to SSH config.";
   };
 
   config = mkIf cfg.enable {
@@ -72,7 +73,7 @@ in
       Host *
         HostKeyAlgorithms +ssh-rsa
 
-      ${other-hosts-config}
+      ${optionalString cfg.manage-other-hosts other-hosts-config}
     '';
 
     plusultra.user.extraOptions.openssh.authorizedKeys.keys =

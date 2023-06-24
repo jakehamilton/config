@@ -145,6 +145,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.unstable.follows = "unstable";
     };
+    sokoban-app-website = {
+      url = "github:jakehamilton/sokoban.app";
+      flake = false;
+    };
   };
 
   outputs = inputs:
