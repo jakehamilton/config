@@ -241,6 +241,12 @@ with lib.internal;
                   url = "https://vault.quartz.hamho.me";
                   target = "_blank";
                 }
+                {
+                  name = "Hydra";
+                  icon = "fas fa-dragon";
+                  url = "https://hydra.quartz.hamho.me";
+                  target = "_blank";
+                }
               ];
             }
           ];
