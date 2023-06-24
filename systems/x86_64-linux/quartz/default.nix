@@ -141,6 +141,113 @@ with lib.internal;
           };
         };
       };
+
+      homer = {
+        enable = true;
+        host = "hamho.me";
+
+        package = pkgs.plusultra.homer-catppuccin.override { favicon = "light"; };
+
+        settings = {
+          title = "Dashboard";
+          subtitle = "Hamilton Home";
+
+          logo = pkgs.plusultra.homer-catppuccin.logos.light;
+
+          stylesheet = [
+            pkgs.plusultra.homer-catppuccin.stylesheets.latte
+            pkgs.plusultra.homer-catppuccin.stylesheets.frappe
+          ];
+
+          footer = "";
+
+          connectivityCheck = true;
+
+          columns = "auto";
+
+          defaults = {
+            layout = "list";
+            colorTheme = "auto";
+          };
+
+          services = [
+            {
+              name = "Media";
+              icon = "fas fa-photo-film-music";
+              items = [
+                {
+                  name = "Jellyfin";
+                  icon = "fas fa-film";
+                  url = "https://jellyfin.quartz.hamho.me";
+                  target = "_blank";
+                }
+                {
+                  name = "Navidrome";
+                  icon = "fas fa-headphones";
+                  url = "https://navidrome.quartz.hamho.me";
+                  target = "_blank";
+                }
+              ];
+            }
+            {
+              name = "Social";
+              icon = "fas fa-users";
+              items = [
+                {
+                  name = "Mastodon";
+                  icon = "fas fa-comment";
+                  url = "https://hachyderm.io";
+                  target = "_blank";
+                }
+              ];
+            }
+            {
+              name = "Blogs";
+              icon = "fas fa-pencil";
+              items = [
+                {
+                  name = "uncertain.ink";
+                  icon = "fas fa-book";
+                  url = "https://uncertain.ink";
+                  target = "_blank";
+                }
+                {
+                  name = "bytesize.xyz";
+                  icon = "fas fa-cubes";
+                  url = "https://";
+                  target = "_blank";
+                }
+                {
+                  name = "kilo.bytesize.xyz";
+                  icon = "fas fa-code";
+                  url = "https://kilo.bytesize.xyz";
+                  target = "_blank";
+                }
+              ];
+            }
+            {
+              name = "Administration";
+              icon = "fas fa-shield-halved";
+              items = [
+                {
+                  name = "Documentation";
+                  icon = "fas fa-note-sticky";
+                  url = "https://github.com/jakehamilton/notes";
+                  target = "_blank";
+                }
+                {
+                  name = "Vault";
+                  icon = "fas fa-lock";
+                  url = "https://vault.quartz.hamho.me";
+                  target = "_blank";
+                }
+              ];
+            }
+          ];
+        };
+
+        # settings-path = "/var/lib/homer/config.yml";
+      };
     };
 
     security = {
@@ -173,6 +280,10 @@ with lib.internal;
     certs."quartz.hamho.me" = {
       domain = "*.quartz.hamho.me";
     };
+
+    certs."hamho.me" = {
+      domain = "hamho.me";
+    };
   };
 
   services.nginx = {
@@ -191,6 +302,13 @@ with lib.internal;
         };
       in
       {
+        "hamho.me" = {
+          forceSSL = mkForce true;
+
+          sslCertificate = "${config.security.acme.certs."hamho.me".directory}/fullchain.pem";
+          sslCertificateKey = "${config.security.acme.certs."hamho.me".directory}/key.pem";
+        };
+
         "minio.quartz.hamho.me" =
           network.create-proxy
             ((network.get-address-parts config.services.minio.consoleAddress)
