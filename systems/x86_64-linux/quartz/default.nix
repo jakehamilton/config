@@ -196,7 +196,7 @@ with lib.internal;
                 {
                   name = "Mastodon";
                   icon = "fas fa-comment";
-                  url = "https://hachyderm.io";
+                  url = "https://elk.zone/home";
                   target = "_blank";
                 }
               ];
