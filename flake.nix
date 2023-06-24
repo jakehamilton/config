@@ -146,7 +146,7 @@
       inputs.unstable.follows = "unstable";
     };
     sokoban-app-website = {
-      url = "github:jakehamilton/sokoban.app";
+      url = "https://github.com/jakehamilton/sokoban.app/releases/download/v1/sokoban.app.tar.gz";
       flake = false;
     };
   };

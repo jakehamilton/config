@@ -1660,17 +1660,13 @@
     "sokoban-app-website": {
       "flake": false,
       "locked": {
-        "lastModified": 1654068061,
-        "narHash": "sha256-7WL3uw6ZZ5r1X3ruQd389OVJAnPCRL/dYzitGqvbbkU=",
-        "owner": "jakehamilton",
-        "repo": "sokoban.app",
-        "rev": "db66504d7283606f147a31e37772fbe6e95afdfb",
-        "type": "github"
+        "narHash": "sha256-54DH8BuaZU1Ofutyx/4ICgBZgIFur4nTiI04d74ZNSs=",
+        "type": "tarball",
+        "url": "https://github.com/jakehamilton/sokoban.app/releases/download/v1/sokoban.app.tar.gz"
       },
       "original": {
-        "owner": "jakehamilton",
-        "repo": "sokoban.app",
-        "type": "github"
+        "type": "tarball",
+        "url": "https://github.com/jakehamilton/sokoban.app/releases/download/v1/sokoban.app.tar.gz"
       }
     },
     "systems": {
