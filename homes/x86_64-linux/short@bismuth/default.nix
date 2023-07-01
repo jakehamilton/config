@@ -19,6 +19,4 @@ with lib.internal;
       direnv = enabled;
     };
   };
-
-  home.stateVersion = "22.11";
 }

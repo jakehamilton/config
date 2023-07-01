@@ -196,6 +196,8 @@ in
     enable = true;
     recommendedProxySettings = true;
 
+    clientMaxBodySize = "256m";
+
     virtualHosts =
       let
         shared-config = {
@@ -214,12 +216,7 @@ in
               port = 8989;
             }
             // shared-config);
-        "hydra.ruby.hamho.me" =
-          network.create-proxy
-            ({
-              port = 3000;
-            }
-            // shared-config);
+        "hydra.ruby.hamho.me" = network.create-proxy ({ port = 3000; } // shared-config);
       };
   };
 
