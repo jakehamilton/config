@@ -20,6 +20,10 @@ with lib.internal;
       zfs = enabled;
     };
 
+    desktop.gnome = {
+      monitors = ./monitors.xml;
+    };
+
     hardware.audio = {
       alsa-monitor.rules = [
         (mkAlsaRename {
