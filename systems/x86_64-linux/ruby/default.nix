@@ -173,7 +173,7 @@ in
   };
 
   services.hydra = {
-    enable = true;
+    enable = false;
     hydraURL = "https://hydra.ruby.hamho.me";
     notificationSender = "hydra@ruby.hamho.me";
     useSubstitutes = true;
@@ -216,7 +216,7 @@ in
               port = 8989;
             }
             // shared-config);
-        "hydra.ruby.hamho.me" = network.create-proxy ({ port = 3000; } // shared-config);
+        # "hydra.ruby.hamho.me" = network.create-proxy ({ port = 3000; } // shared-config);
       };
   };
 
