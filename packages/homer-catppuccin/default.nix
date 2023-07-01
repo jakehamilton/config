@@ -14,11 +14,6 @@ let
     repo = "catppucin-homer";
     rev = "b1d081ec58f0769a19d462c650d3243c5c718b95";
     sha256 = "1rs77kn2iyp3hdbq7r6skzj2lg1cjhiiifnw8zvplwp7avrf8i4p";
-
-    postFetch = ''
-      ls -la
-      exit 1
-    '';
   };
 
   catppuccin = runCommandNoCC "catpuccin"
