@@ -41,6 +41,8 @@ with lib.internal;
       steamtinkerlaunch = enabled;
     };
 
+    user.prompt-init = false;
+
     services = {
       avahi = enabled;
 

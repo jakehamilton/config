@@ -35,6 +35,7 @@ in
       "The initial password to use when the user is first created.";
     icon = mkOpt (nullOr package) defaultIcon
       "The profile picture to use for the user.";
+    prompt-init = mkBoolOpt true "Whether or not to show an initial message when opening a new shell.";
     extraGroups = mkOpt (listOf str) [ ] "Groups for the user to be assigned.";
     extraOptions = mkOpt attrs { }
       "Extra options passed to <option>users.users.<name></option>.";
@@ -105,10 +106,10 @@ in
               # Use vim bindings.
               set -o vi
 
-              ${pkgs.toilet}/bin/toilet -f future "Plus Ultra" --gay
-
               # Improved vim bindings.
               source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+            '' + optionalString cfg.prompt-init ''
+              ${pkgs.toilet}/bin/toilet -f future "Plus Ultra" --gay
             '';
 
             shellAliases = {
