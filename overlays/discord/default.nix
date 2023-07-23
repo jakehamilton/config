@@ -30,4 +30,6 @@ final: prev: {
         mimeTypes = [ "x-scheme-handler/discord" ];
       };
   };
+
+  inherit (channels.unstable) discord;
 }

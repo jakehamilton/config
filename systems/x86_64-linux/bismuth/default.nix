@@ -14,6 +14,10 @@ with lib.internal;
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
+  # @NOTE(jakehamilton): This _may_ be required for openvpn to work. However, I have
+  # not confirmed that...
+  boot.kernelModules = [ "tun" ];
+
   networking.firewall = {
     allowedUDPPorts = [ 28000 ];
     allowedTCPPorts = [ 28000 ];
@@ -23,6 +27,7 @@ with lib.internal;
     [
       chromium
       plusultra.kalidoface
+      deluge
     ];
 
   services.minecraft-server = {
@@ -31,6 +36,13 @@ with lib.internal;
     declarative = true;
     serverProperties = {
       server-port = 43000;
+    };
+  };
+
+  services.openvpn.servers = {
+    expressvpn = {
+      autoStart = false;
+      config = "config /var/lib/openvpn/expressvpn.ovpn";
     };
   };
 
