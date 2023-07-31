@@ -22,6 +22,18 @@ with lib.internal;
     };
   };
 
+  # services.k3s = {
+  #   enable = true;
+  #   role = "agent";
+  #   serverAddr = "http://ruby:6443";
+  # };
+
+  boot.kernelParams = [
+    "cgroup_enable=cpuset"
+    "cgroup_memory=1"
+    "cgroup_enable=memory"
+  ];
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

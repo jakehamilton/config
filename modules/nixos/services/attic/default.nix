@@ -20,6 +20,35 @@ let
     cat < $config > $out
   '';
 
+  atticadm-shim = pkgs.writeShellScript "atticadm" ''
+    if [ -n "$ATTICADM_PWD" ]; then
+      cd "$ATTICADM_PWD"
+      if [ "$?" != "0" ]; then
+        >&2 echo "Warning: Failed to change directory to $ATTICADM_PWD"
+      fi
+    fi
+
+    exec ${cfg.package}/bin/atticadm -f ${server-toml} "$@"
+  '';
+
+  atticadm-systemd-wrapper = pkgs.writeShellScript "atticd-atticadm" ''
+    exec systemd-run \
+      --quiet \
+      --pty \
+      --same-dir \
+      --wait \
+      --collect \
+      --service-type=exec \
+      --property=DynamicUser=yes \
+      --property=User=atticd \
+      --property=Environment=ATTICADM_PWD=$(pwd) \
+      --property=JoinsNamespaceOf=atticd.service \
+      ${builtins.map (path: "--property=EnvironmentFile=${path}") config.plusultra.services.vault-agent.services.atticd.secrets.environment.paths} \
+      --working-directory / \
+      -- \
+      ${atticadm-shim} "$@"
+  '';
+
   is-local-postgres =
     let
       url = cfg.settings.database.url or "";

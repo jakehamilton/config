@@ -11,6 +11,8 @@ in
 {
   imports = [ ./hardware.nix ];
 
+  networking.firewall.allowedTCPPorts = [ 6443 ];
+
   plusultra = {
     nix = enabled;
 
@@ -172,11 +174,10 @@ in
     ];
   };
 
-  services.hydra = {
-    enable = false;
-    hydraURL = "https://hydra.ruby.hamho.me";
-    notificationSender = "hydra@ruby.hamho.me";
-    useSubstitutes = true;
+  services.k3s = {
+    enable = true;
+    role = "server";
+    disableAgent = true;
   };
 
   security.acme = {
@@ -216,7 +217,6 @@ in
               port = 8989;
             }
             // shared-config);
-        # "hydra.ruby.hamho.me" = network.create-proxy ({ port = 3000; } // shared-config);
       };
   };
 

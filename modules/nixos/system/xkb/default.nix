@@ -14,6 +14,7 @@ in
     services.xserver = {
       layout = "us";
       xkbOptions = "caps:escape";
+      autoRepeatDelay = 50;
     };
   };
 }

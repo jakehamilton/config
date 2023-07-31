@@ -63,13 +63,13 @@ in
           allowed-users = users;
 
           substituters =
-            # [ cfg.default-substituter.url ]
-            # ++
-            (mapAttrsToList (name: value: name) cfg.extra-substituters);
+            [ cfg.default-substituter.url ]
+              ++
+              (mapAttrsToList (name: value: name) cfg.extra-substituters);
           trusted-public-keys =
-            # [ cfg.default-substituter.key ]
-            # ++
-            (mapAttrsToList (name: value: value.key) cfg.extra-substituters);
+            [ cfg.default-substituter.key ]
+              ++
+              (mapAttrsToList (name: value: value.key) cfg.extra-substituters);
 
         } // (lib.optionalAttrs config.plusultra.tools.direnv.enable {
           keep-outputs = true;

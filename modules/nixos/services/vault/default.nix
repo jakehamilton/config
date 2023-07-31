@@ -85,12 +85,13 @@ in
       enable = true;
       inherit package;
 
+      storageBackend = cfg.storage.backend;
+
       extraConfig = ''
         ui = ${if cfg.ui then "true" else "false"}
 
         ${cfg.settings}
       '';
-
     };
 
     systemd.services.vault = { };
