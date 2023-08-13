@@ -10,6 +10,7 @@
 
 let
   inherit (lib) mapAttrsToList concatStringsSep;
+  inherit (lib.internal) override-meta;
 
   substitute = args: builtins.readFile (substituteAll args);
 
@@ -21,21 +22,28 @@ let
     Name,System
     ${concatStringsSep "\n" formatted-hosts}
   '';
-in
-writeShellApplication
-{
-  name = "nixos-hosts";
 
-  text = substitute {
-    src = ./nixos-hosts.sh;
+  nixos-hosts = writeShellApplication {
+    name = "nixos-hosts";
 
-    help = ./help;
-    hosts = if hosts == { } then "" else hosts-csv;
+    text = substitute {
+      src = ./nixos-hosts.sh;
+
+      help = ./help;
+      hosts = if hosts == { } then "" else hosts-csv;
+    };
+
+    checkPhase = "";
+
+    runtimeInputs = [
+      gum
+    ];
   };
 
-  checkPhase = "";
-
-  runtimeInputs = [
-    gum
-  ];
-}
+  new-meta = with lib; {
+    description = "A helper to list all of the NixOS hosts available from your flake.";
+    license = licenses.asl20;
+    maintainers = with maintainers; [ jakehamilton ];
+  };
+in
+override-meta new-meta nixos-hosts

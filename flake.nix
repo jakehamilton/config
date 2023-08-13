@@ -25,7 +25,8 @@
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Lib
-    snowfall-lib.url = "github:snowfallorg/lib/feat/home-manager";
+    # snowfall-lib.url = "github:snowfallorg/lib/feat/home-manager";
+    snowfall-lib.url = "path:/home/short/work/@snowfallorg/lib";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Flake
@@ -152,6 +153,13 @@
       lib = inputs.snowfall-lib.mkLib {
         inherit inputs;
         src = ./.;
+
+        snowfall = {
+          meta = {
+            name = "plusultra";
+            title = "Plus Ultra";
+          };
+        };
       };
     in
     lib.mkFlake {

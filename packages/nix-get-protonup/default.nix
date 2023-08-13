@@ -5,24 +5,36 @@
 , ...
 }:
 
-writeShellApplication
-{
-  name = "nix-get-protonup";
-  checkPhase = "";
-  runtimeInputs = [
-    python311
-  ];
-  text = ''
-    venv="${venvDir}"
+let
+  inherit (lib.internal) override-meta;
 
-    python -m venv "$venv"
+  nix-get-proton-up =
+    writeShellApplication
+      {
+        name = "nix-get-protonup";
+        checkPhase = "";
+        runtimeInputs = [
+          python311
+        ];
+        text = ''
+          venv="${venvDir}"
 
-    source "$venv/bin/activate"
+          python -m venv "$venv"
 
-    python -m pip install --upgrade pip
+          source "$venv/bin/activate"
 
-    pip install protonup-ng
+          python -m pip install --upgrade pip
 
-    protonup
-  '';
-} 
+          pip install protonup-ng
+
+          protonup
+        '';
+      };
+
+  new-meta = with lib; {
+    description = "A helper for installing protonup on NixOS.";
+    license = licenses.asl20;
+    maintainers = with maintainers; [ jakehamilton ];
+  };
+in
+override-meta new-meta nix-get-proton-up

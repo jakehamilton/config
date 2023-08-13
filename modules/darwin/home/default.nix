@@ -6,9 +6,9 @@ let
   cfg = config.plusultra.home;
 in
 {
-  imports = with inputs; [
-    home-manager.darwinModules.home-manager
-  ];
+  # imports = with inputs; [
+  #   home-manager.darwinModules.home-manager
+  # ];
 
   options.plusultra.home = with types; {
     file = mkOpt attrs { }

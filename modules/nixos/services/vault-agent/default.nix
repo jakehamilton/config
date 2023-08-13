@@ -19,6 +19,7 @@ let
         type = types.str;
         description = "The path to the environment file.";
         default = "${environment-files-root}/${service-name}/${name}.EnvFile";
+        defaultText = "${environment-files-root}/<service-name>/<template-name>.EnvFile";
       };
     };
   });
@@ -80,9 +81,9 @@ let
       });
 in
 {
-  imports = [
-    inputs.vault-service.nixosModules.nixos-vault-service
-  ];
+  # imports = [
+  #   inputs.vault-service.nixosModules.nixos-vault-service
+  # ];
 
   options.plusultra.services.vault-agent = {
     enable = mkEnableOption "Vault Agent";

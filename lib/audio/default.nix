@@ -1,6 +1,9 @@
 { lib }:
 
 rec {
+  ## Renames an alsa device from a given `name` using the new `description`.
+  ##
+  #@ { name: String, description: String } -> { matches: List, apply_properties: Attrs }
   mkAlsaRename = { name, description }: {
     matches = [
       [
@@ -12,6 +15,10 @@ rec {
       "device.description" = description;
     };
   };
+
+  ## Create a pipewire audio node.
+  ##
+  #@ { name: String, factory: String ? "adapter", ... } -> { factory: String, args: Attrs }
   mkAudioNode = args@{ name, factory ? "adapter", ... }: {
     inherit factory;
     args = (builtins.removeAttrs args [ "name" "description" ]) // {
@@ -20,6 +27,10 @@ rec {
       "factory.name" = args."factory.name" or "support.null-audio-sink";
     };
   };
+
+  ## Create a virtual pipewire audio node.
+  ##
+  #@ { name: String, ... } -> { factory: "adapter", args: Attrs }
   mkVirtualAudioNode = args@{ name, ... }:
     mkAudioNode (args // {
       name = "virtual-${lib.toLower name}-audio";
@@ -29,6 +40,10 @@ rec {
       "audio.position" = args."audio.position" or [ "FL" "FR" ];
       "monitor.channel-volumes" = args."monitor.channel-volumes" or true;
     });
+
+  ## Connect two pipewire audio nodes
+  ##
+  #@ { name: String?, from: String, to: String, ... } -> { name: "libpipewire-module-loopback", args: Attrs }
   mkBridgeAudioModule = args@{ from, to, ... }: {
     name = "libpipewire-module-loopback";
     args = (builtins.removeAttrs args [ "from" "to" "name" ]) // {

@@ -18,6 +18,20 @@ in
       in
       { inherit host port; };
 
+    ## Create proxy configuration for NGINX virtual hosts.
+    ##
+    ## ```nix
+    ## services.nginx.virtualHosts."example.com" = lib.network.create-proxy {
+    ##   port = 3000;
+    ##   host = "0.0.0.0";
+    ##   proxy-web-sockets = true;
+    ##   extra-config = {
+    ##     forceSSL = true;
+    ##   };
+    ## }
+    ## ``
+    ##
+    #@ { port: Int ? null, host: String ? "127.0.0.1", proxy-web-sockets: Bool ? false, extra-config: Attrs ? { } } -> Attrs
     create-proxy =
       { port ? null
       , host ? "127.0.0.1"

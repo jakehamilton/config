@@ -1078,11 +1078,11 @@
         "snowfall-lib": "snowfall-lib_7"
       },
       "locked": {
-        "lastModified": 1688151363,
-        "narHash": "sha256-b/ivNvltch8wuOk3Z80w0bLCZZ+FT0BSg7kbe7G9kAg=",
+        "lastModified": 1688264172,
+        "narHash": "sha256-k+Ua1zcT9Q9qIboIf3tjgN87dXTDPrgjONRpVn7vRl8=",
         "owner": "jakehamilton",
         "repo": "neovim",
-        "rev": "e2fda8fbc0b9404d4f69f7f90d257b16f7a2390b",
+        "rev": "5a86057202865bdf9c12c39191dd694ace9650ec",
         "type": "github"
       },
       "original": {
@@ -1114,11 +1114,11 @@
     },
     "nixlib": {
       "locked": {
-        "lastModified": 1636849918,
-        "narHash": "sha256-nzUK6dPcTmNVrgTAC1EOybSMsrcx+QrVPyqRdyKLkjA=",
+        "lastModified": 1689469483,
+        "narHash": "sha256-2SBhY7rZQ/iNCxe04Eqxlz9YK9KgbaTMBssq3/BgdWY=",
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
-        "rev": "28a5b0557f14124608db68d3ee1f77e9329e9dd5",
+        "rev": "02fea408f27186f139153e1ae88f8ab2abd9c22c",
         "type": "github"
       },
       "original": {
@@ -1135,11 +1135,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1676297861,
-        "narHash": "sha256-YECUmK34xzg0IERpnbCnaO6z6YgfecJlstMWX7dqOZ8=",
+        "lastModified": 1690133435,
+        "narHash": "sha256-YNZiefETggroaTLsLJG2M+wpF0pJPwiauKG4q48ddNU=",
         "owner": "nix-community",
         "repo": "nixos-generators",
-        "rev": "1e0a05219f2a557d4622bc38f542abb360518795",
+        "rev": "b1171de4d362c022130c92d7c8adc4bf2b83d586",
         "type": "github"
       },
       "original": {
@@ -1455,18 +1455,14 @@
         ]
       },
       "locked": {
-        "lastModified": 1688258652,
-        "narHash": "sha256-/m3pDCBov+V/7tj998NUILf+Zw4i7rk3GpQ9yqbdE6U=",
-        "owner": "snowfallorg",
-        "repo": "lib",
-        "rev": "66e133580374d96700cde9396865ba996dfd2a78",
-        "type": "github"
+        "lastModified": 1688974468,
+        "narHash": "sha256-Mr1YRstVGRYuEOgp0Ml/W/uofGLTuRbAPPYHfrvgT3E=",
+        "path": "/home/short/work/@snowfallorg/lib",
+        "type": "path"
       },
       "original": {
-        "owner": "snowfallorg",
-        "ref": "feat/home-manager",
-        "repo": "lib",
-        "type": "github"
+        "path": "/home/short/work/@snowfallorg/lib",
+        "type": "path"
       }
     },
     "snowfall-lib_2": {

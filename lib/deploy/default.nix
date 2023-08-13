@@ -4,6 +4,18 @@ let
   inherit (inputs) deploy-rs;
 in
 rec {
+  ## Create deployment configuration for use with deploy-rs.
+  ##
+  ## ```nix
+  ## mkDeploy {
+  ##   inherit self;
+  ##   overrides = {
+  ##     my-host.system.sudo = "doas -u";
+  ##   };
+  ## }
+  ## ```
+  ##
+  #@ { self: Flake, overrides: Attrs ? {} } -> Attrs
   mkDeploy = { self, overrides ? { } }:
     let
       hosts = self.nixosConfigurations or { };

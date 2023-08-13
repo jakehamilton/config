@@ -92,14 +92,16 @@ in
               id = "oidcclient";
               name = "Client";
               redirectURIs = [ "https://example.com/callback" ];
-              secretFile = "/etc/dex/oidcclient"; # The content of `secretFile` will be written into to the config as `secret`.
+
+              # The content of `secretFile` will be written into to the config as `secret`.
+              secretFile = "/etc/dex/oidcclient";
             }
           ];
         }
       '';
-      description = ''
+      description = lib.mdDoc ''
         The available options can be found in
-        <link xlink:href="https://github.com/dexidp/dex/blob/v${pkgs.dex.version}/config.yaml.dist">the example configuration</link>.
+        [the example configuration](https://github.com/dexidp/dex/blob/v${pkgs.dex.version}/config.yaml.dist).
       '';
     };
   };

@@ -1,6 +1,8 @@
 { lib, fetchFromGitHub, buildNpmPackage, ... }:
 
 let
+  inherit (lib.internal) override-meta;
+
   src = fetchFromGitHub {
     owner = "jakehamilton";
     repo = "beyondthefringeoc";
@@ -14,5 +16,10 @@ let
       mv app $out
     '';
   };
+
+  new-meta = with lib; src.meta // {
+    description = "The website for beyondthefringeoc.com.";
+    maintainers = with maintainers; [ jakehamilton ];
+  };
 in
-src
+override-meta new-meta src

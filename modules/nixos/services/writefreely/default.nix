@@ -10,13 +10,15 @@ let
   format = pkgs.formats.ini {
     mkKeyValue = key: value:
       let
-        value' = if builtins.isNull value then
-          ""
-        else if builtins.isBool value then
-          if value == true then "true" else "false"
-        else
-          toString value;
-      in "${key} = ${value'}";
+        value' =
+          if builtins.isNull value then
+            ""
+          else if builtins.isBool value then
+            if value == true then "true" else "false"
+          else
+            toString value;
+      in
+      "${key} = ${value'}";
   };
 
   cfg = config.plusultra.services.writefreely;
@@ -32,19 +34,20 @@ let
       host = cfg.settings.app.host or "${hostProtocol}://${cfg.host}";
     };
 
-    database = if cfg.database.type == "sqlite3" then {
-      type = "sqlite3";
-      filename = cfg.settings.database.filename or "writefreely.db";
-      database = cfg.database.name;
-    } else {
-      type = "mysql";
-      username = cfg.database.user;
-      password = "#dbpass#";
-      database = cfg.database.name;
-      host = cfg.database.host;
-      port = cfg.database.port;
-      tls = cfg.database.tls;
-    };
+    database =
+      if cfg.database.type == "sqlite3" then {
+        type = "sqlite3";
+        filename = cfg.settings.database.filename or "writefreely.db";
+        database = cfg.database.name;
+      } else {
+        type = "mysql";
+        username = cfg.database.user;
+        password = "#dbpass#";
+        database = cfg.database.name;
+        host = cfg.database.host;
+        port = cfg.database.port;
+        tls = cfg.database.tls;
+      };
 
     server = cfg.settings.server or { } // {
       bind = cfg.settings.server.bind or "localhost";
@@ -130,48 +133,49 @@ let
 
       ${text}
     '';
-in {
+in
+{
   options.plusultra.services.writefreely = {
     enable =
-      lib.mkEnableOption "Writefreely, build a digital writing community";
+      lib.mkEnableOption (lib.mdDoc "Writefreely, build a digital writing community");
 
     package = lib.mkOption {
       type = lib.types.package;
       default = pkgs.writefreely;
       defaultText = lib.literalExpression "pkgs.writefreely";
-      description = "Writefreely package to use.";
+      description = lib.mdDoc "Writefreely package to use.";
     };
 
     stateDir = mkOption {
       type = types.path;
       default = "/var/lib/writefreely";
-      description = "The state directory where keys and data are stored.";
+      description = lib.mdDoc "The state directory where keys and data are stored.";
     };
 
     user = mkOption {
       type = types.str;
       default = "writefreely";
-      description = "User under which Writefreely is ran.";
+      description = lib.mdDoc "User under which Writefreely is ran.";
     };
 
     group = mkOption {
       type = types.str;
       default = "writefreely";
-      description = "Group under which Writefreely is ran.";
+      description = lib.mdDoc "Group under which Writefreely is ran.";
     };
 
     host = mkOption {
       type = types.str;
       default = "";
-      description = "The public host name to serve.";
+      description = lib.mdDoc "The public host name to serve.";
       example = "example.com";
     };
 
     settings = mkOption {
       default = { };
-      description = ''
-        Writefreely configuration (<filename>config.ini</filename>). Refer to
-        <link xlink:href="https://writefreely.org/docs/latest/admin/config" />
+      description = lib.mdDoc ''
+        Writefreely configuration (`config.ini`). Refer to
+        [writefreely.org/docs/latest/admin/config](https://writefreely.org/docs/latest/admin/config)
         for details.
       '';
 
@@ -216,47 +220,47 @@ in {
         type = types.nullOr types.str;
         default = if cfg.database.type == "mysql" then "writefreely" else null;
         defaultText = "writefreely";
-        description = "The database user to connect as.";
+        description = lib.mdDoc "The database user to connect as.";
       };
 
       passwordFile = mkOption {
         type = types.nullOr types.path;
         default = null;
-        description = "The file to load the database password from.";
+        description = lib.mdDoc "The file to load the database password from.";
       };
 
       host = mkOption {
         type = types.str;
         default = "localhost";
-        description = "The database host to connect to.";
+        description = lib.mdDoc "The database host to connect to.";
       };
 
       port = mkOption {
         type = types.port;
         default = 3306;
-        description = "The port used when connecting to the database host.";
+        description = lib.mdDoc "The port used when connecting to the database host.";
       };
 
       tls = mkOption {
         type = types.bool;
         default = false;
         description =
-          "Whether or not TLS should be used for the database connection.";
+          lib.mdDoc "Whether or not TLS should be used for the database connection.";
       };
 
       migrate = mkOption {
         type = types.bool;
         default = true;
         description =
-          "Whether or not to automatically run migrations on startup.";
+          lib.mdDoc "Whether or not to automatically run migrations on startup.";
       };
 
       createLocally = mkOption {
         type = types.bool;
         default = false;
-        description = ''
-          When <option>plusultra.services.writefreely.database.type</option> is set to
-          <code>"mysql"</code>, this option will enable the MySQL service locally.
+        description = lib.mdDoc ''
+          When `plusultra.services.writefreely.database.type` is set to
+          `"mysql"`, this option will enable the MySQL service locally.
         '';
       };
     };
@@ -383,27 +387,29 @@ in {
           cfg.admin.initialPasswordFile;
       };
 
-      script = let
-        migrateDatabase = optionalString cfg.database.migrate ''
-          ${cfg.package}/bin/writefreely -c '${cfg.stateDir}/config.ini' db migrate
-        '';
+      script =
+        let
+          migrateDatabase = optionalString cfg.database.migrate ''
+            ${cfg.package}/bin/writefreely -c '${cfg.stateDir}/config.ini' db migrate
+          '';
 
-        createAdmin = optionalString (cfg.admin.name != null) ''
-          if [[ $(query "SELECT COUNT(*) FROM users") == 0 ]]; then
-            admin_pass=$(head -n1 ${cfg.admin.initialPasswordFile})
+          createAdmin = optionalString (cfg.admin.name != null) ''
+            if [[ $(query "SELECT COUNT(*) FROM users") == 0 ]]; then
+              admin_pass=$(head -n1 ${cfg.admin.initialPasswordFile})
 
-            ${cfg.package}/bin/writefreely -c '${cfg.stateDir}/config.ini' --create-admin ${cfg.admin.name}:$admin_pass
+              ${cfg.package}/bin/writefreely -c '${cfg.stateDir}/config.ini' --create-admin ${cfg.admin.name}:$admin_pass
+            fi
+          '';
+        in
+        withSqlite ''
+          if ! test -f '${settings.database.filename}'; then
+            ${cfg.package}/bin/writefreely -c '${cfg.stateDir}/config.ini' db init
           fi
+
+          ${migrateDatabase}
+
+          ${createAdmin}
         '';
-      in withSqlite ''
-        if ! test -f '${settings.database.filename}'; then
-          ${cfg.package}/bin/writefreely -c '${cfg.stateDir}/config.ini' db init
-        fi
-
-        ${migrateDatabase}
-
-        ${createAdmin}
-      '';
     };
 
     systemd.services.writefreely-mysql-init = mkIf isMysql {
@@ -420,36 +426,38 @@ in {
           cfg.admin.initialPasswordFile;
       };
 
-      script = let
-        updateUser = optionalString isMysqlLocal ''
-          # WriteFreely currently *requires* a password for authentication, so we
-          # need to update the user in MySQL accordingly. By default MySQL users
-          # authenticate with auth_socket or unix_socket.
-          # See: https://github.com/writefreely/writefreely/issues/568
-          ${config.services.mysql.package}/bin/mysql --skip-column-names --execute "ALTER USER '${cfg.database.user}'@'localhost' IDENTIFIED VIA unix_socket OR mysql_native_password USING PASSWORD('$db_pass'); FLUSH PRIVILEGES;"
-        '';
+      script =
+        let
+          updateUser = optionalString isMysqlLocal ''
+            # WriteFreely currently *requires* a password for authentication, so we
+            # need to update the user in MySQL accordingly. By default MySQL users
+            # authenticate with auth_socket or unix_socket.
+            # See: https://github.com/writefreely/writefreely/issues/568
+            ${config.services.mysql.package}/bin/mysql --skip-column-names --execute "ALTER USER '${cfg.database.user}'@'localhost' IDENTIFIED VIA unix_socket OR mysql_native_password USING PASSWORD('$db_pass'); FLUSH PRIVILEGES;"
+          '';
 
-        migrateDatabase = optionalString cfg.database.migrate ''
-          ${cfg.package}/bin/writefreely -c '${cfg.stateDir}/config.ini' db migrate
-        '';
+          migrateDatabase = optionalString cfg.database.migrate ''
+            ${cfg.package}/bin/writefreely -c '${cfg.stateDir}/config.ini' db migrate
+          '';
 
-        createAdmin = optionalString (cfg.admin.name != null) ''
-          if [[ $(query 'SELECT COUNT(*) FROM users') == 0 ]]; then
-            admin_pass=$(head -n1 ${cfg.admin.initialPasswordFile})
-            ${cfg.package}/bin/writefreely -c '${cfg.stateDir}/config.ini' --create-admin ${cfg.admin.name}:$admin_pass
+          createAdmin = optionalString (cfg.admin.name != null) ''
+            if [[ $(query 'SELECT COUNT(*) FROM users') == 0 ]]; then
+              admin_pass=$(head -n1 ${cfg.admin.initialPasswordFile})
+              ${cfg.package}/bin/writefreely -c '${cfg.stateDir}/config.ini' --create-admin ${cfg.admin.name}:$admin_pass
+            fi
+          '';
+        in
+        withMysql ''
+          ${updateUser}
+
+          if [[ $(query "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '${cfg.database.name}'") == 0 ]]; then
+            ${cfg.package}/bin/writefreely -c '${cfg.stateDir}/config.ini' db init
           fi
+
+          ${migrateDatabase}
+
+          ${createAdmin}
         '';
-      in withMysql ''
-        ${updateUser}
-
-        if [[ $(query "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '${cfg.database.name}'") == 0 ]]; then
-          ${cfg.package}/bin/writefreely -c '${cfg.stateDir}/config.ini' db init
-        fi
-
-        ${migrateDatabase}
-
-        ${createAdmin}
-      '';
     };
 
     services.mysql = mkIf isMysqlLocal {

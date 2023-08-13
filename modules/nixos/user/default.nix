@@ -38,7 +38,7 @@ in
     prompt-init = mkBoolOpt true "Whether or not to show an initial message when opening a new shell.";
     extraGroups = mkOpt (listOf str) [ ] "Groups for the user to be assigned.";
     extraOptions = mkOpt attrs { }
-      "Extra options passed to <option>users.users.<name></option>.";
+      (mdDoc "Extra options passed to `users.users.<name>`.");
   };
 
   config = {
