@@ -94,11 +94,11 @@
         "vhs": "vhs"
       },
       "locked": {
-        "lastModified": 1676275717,
-        "narHash": "sha256-a12WLBN44xDLdEzCnlCdBZFhGIqqlEKICatNyYY1mXM=",
+        "lastModified": 1687578803,
+        "narHash": "sha256-YeIBrMBsJRbrGpuUwI2Oxfv62FxrYbIe+NlznLrnaKI=",
         "owner": "snowfallorg",
         "repo": "cowsay",
-        "rev": "00bcc91fecba0743c1eae453ee83b8292cdae145",
+        "rev": "25d477e8de1703b91dee4651a16c0d3504d7246b",
         "type": "github"
       },
       "original": {
@@ -1786,11 +1786,11 @@
         "snowfall-lib": "snowfall-lib_2"
       },
       "locked": {
-        "lastModified": 1671070955,
-        "narHash": "sha256-Zj1l0cqT+XJfiaZTaOa2AbyCoqlCPXQZOIzMShVyUks=",
+        "lastModified": 1676276003,
+        "narHash": "sha256-NanCLBZ2kHmC6WtY3uFVPsLzRMz4J53TUUaxSW5/5Mc=",
         "owner": "snowfallorg",
         "repo": "vhs",
-        "rev": "f8370799a1513e0e29f6b03ad936983f25622530",
+        "rev": "35db149a6118bd305619c5bdb065179b57265e64",
         "type": "github"
       },
       "original": {
