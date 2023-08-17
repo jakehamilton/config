@@ -88,8 +88,12 @@
     # Cows!
     cowsay = {
       url = "github:snowfallorg/cowsay";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.unstable.follows = "unstable";
+      # @NOTE(jakehamilton): A recent version of VHS currently fails
+      # causes cow2img to fail. This needs to be fixed upstream:
+      # https://github.com/charmbracelet/vhs/issues/361
+
+      # inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.unstable.follows = "unstable";
     };
 
     # Backup management
