@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 
 let
-  inherit (lib.internal) override-meta;
+  inherit (lib.plusultra) override-meta;
 
   nix-update-index =
     pkgs.writeShellScriptBin "nix-update-index" ''

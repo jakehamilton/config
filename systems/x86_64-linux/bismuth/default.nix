@@ -1,7 +1,7 @@
 { pkgs, config, lib, channel, ... }:
 
 with lib;
-with lib.internal;
+with lib.plusultra;
 {
   imports = [ ./hardware.nix ];
 

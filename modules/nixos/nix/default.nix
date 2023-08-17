@@ -1,7 +1,7 @@
 { options, config, pkgs, lib, inputs, ... }:
 
 with lib;
-with lib.internal;
+with lib.plusultra;
 let
   cfg = config.plusultra.nix;
 

@@ -4,7 +4,7 @@
 { lib, writeShellScriptBin, glib, ... }:
 
 let
-  inherit (lib.internal) override-meta;
+  inherit (lib.plusultra) override-meta;
 
   new-meta = with lib; {
     description = "A replacement for the default xdg-open program which correctly handles portals.";

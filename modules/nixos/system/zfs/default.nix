@@ -4,7 +4,7 @@ let
   cfg = config.plusultra.system.zfs;
 
   inherit (lib) mkEnableOption mkIf mkDefault;
-  inherit (lib.internal) mkOpt enabled;
+  inherit (lib.plusultra) mkOpt enabled;
   inherit (lib.types) listOf str;
 in
 {

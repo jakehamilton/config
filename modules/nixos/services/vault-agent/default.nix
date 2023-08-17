@@ -1,7 +1,7 @@
 { lib, config, pkgs, inputs, ... }:
 
 with lib;
-with lib.internal;
+with lib.plusultra;
 let
   cfg = config.plusultra.services.vault-agent;
 

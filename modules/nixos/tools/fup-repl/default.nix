@@ -1,7 +1,7 @@
 { lib, pkgs, config, ... }:
 
 with lib;
-with lib.internal;
+with lib.plusultra;
 let
   cfg = config.plusultra.tools.fup-repl;
   fup-repl = pkgs.writeShellScriptBin "fup-repl" ''

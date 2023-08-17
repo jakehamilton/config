@@ -2,7 +2,7 @@
 
 let
   inherit (lib) types mkIf;
-  inherit (lib.internal) mkOpt enabled;
+  inherit (lib.plusultra) mkOpt enabled;
 
   cfg = config.plusultra.services.nix-daemon;
 in

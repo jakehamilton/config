@@ -1,7 +1,7 @@
 { lib, pkgs, modulesPath, ... }:
 
 with lib;
-with lib.internal;
+with lib.plusultra;
 {
   imports = [
     (modulesPath + "/virtualisation/digital-ocean-config.nix")

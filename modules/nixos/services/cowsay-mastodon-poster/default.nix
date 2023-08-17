@@ -2,7 +2,7 @@
 
 let
   inherit (lib) types mkIf;
-  inherit (lib.internal) mkBoolOpt mkOpt;
+  inherit (lib.plusultra) mkBoolOpt mkOpt;
   inherit (pkgs) fortune toot;
   inherit (pkgs.snowfallorg) cow2img;
 

@@ -4,7 +4,7 @@ let
   tailscale-key = builtins.getEnv "TAILSCALE_AUTH_KEY";
 in
 with lib;
-with lib.internal;
+with lib.plusultra;
 {
   virtualisation.digitalOcean = {
     rebuildFromUserData = false;

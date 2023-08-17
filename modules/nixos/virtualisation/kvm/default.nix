@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-with lib.internal;
+with lib.plusultra;
 let
   cfg = config.plusultra.virtualisation.kvm;
   user = config.plusultra.user;

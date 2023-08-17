@@ -2,7 +2,7 @@
 
 let
   inherit (lib) mkIf mkEnableOption optional;
-  inherit (lib.internal) mkOpt;
+  inherit (lib.plusultra) mkOpt;
 
   cfg = config.plusultra.security.acme;
 in

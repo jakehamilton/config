@@ -1,6 +1,6 @@
 { lib, pkgs, config, osConfig ? { }, format ? "unknown", ... }:
 
-with lib.internal;
+with lib.plusultra;
 {
   plusultra = {
     user = {

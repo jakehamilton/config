@@ -3,7 +3,7 @@
 let
   inherit (lib) mkIf mkEnableOption fetchFromGitHub optionalString
     optionalAttrs;
-  inherit (lib.internal) mkOpt;
+  inherit (lib.plusultra) mkOpt;
 
   cfg = config.plusultra.services.websites.lasersandfeelings;
 in

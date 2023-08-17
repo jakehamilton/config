@@ -1,7 +1,7 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-with lib.internal;
+with lib.plusultra;
 let
   cfg = config.plusultra.desktop.addons.firefox-nordic-theme;
   profileDir = ".mozilla/firefox/${config.plusultra.user.name}";

@@ -2,7 +2,7 @@
 
 let
   inherit (lib) types mkIf mkDefault mkMerge;
-  inherit (lib.internal) mkOpt;
+  inherit (lib.plusultra) mkOpt;
 
   cfg = config.plusultra.user;
 

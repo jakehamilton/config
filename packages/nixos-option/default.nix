@@ -8,7 +8,7 @@
 }:
 
 let
-  inherit (lib.internal) override-meta;
+  inherit (lib.plusultra) override-meta;
 
   flake-compat = fetchFromGitHub {
     owner = "edolstra";

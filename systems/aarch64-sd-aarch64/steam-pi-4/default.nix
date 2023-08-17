@@ -1,7 +1,7 @@
 { pkgs, config, lib, modulesPath, inputs, ... }:
 
 with lib;
-with lib.internal;
+with lib.plusultra;
 let
   steam-pi-setup = pkgs.writeShellApplication {
     name = "steam-pi-setup";

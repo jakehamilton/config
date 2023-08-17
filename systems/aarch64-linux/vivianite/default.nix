@@ -1,7 +1,7 @@
 { pkgs, config, lib, modulesPath, inputs, ... }:
 
 with lib;
-with lib.internal;
+with lib.plusultra;
 {
   imports = with inputs.nixos-hardware.nixosModules; [
     (modulesPath + "/installer/scan/not-detected.nix")

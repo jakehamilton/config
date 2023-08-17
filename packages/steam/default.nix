@@ -1,7 +1,7 @@
 { lib, makeDesktopItem, symlinkJoin, ... }:
 
 let
-  inherit (lib.internal) override-meta;
+  inherit (lib.plusultra) override-meta;
 
   steam-pipewire = makeDesktopItem {
     name = "Steam (Pipewire)";

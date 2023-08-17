@@ -25,7 +25,7 @@
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Lib
-    snowfall-lib.url = "github:snowfallorg/lib/feat/docs";
+    snowfall-lib.url = "github:snowfallorg/lib/dev";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Flake
@@ -162,12 +162,12 @@
             name = "plusultra";
             title = "Plus Ultra";
           };
+
+          namespace = "plusultra";
         };
       };
     in
     lib.mkFlake {
-      package-namespace = "plusultra";
-
       channels-config = {
         allowUnfree = true;
         permittedInsecurePackages = [

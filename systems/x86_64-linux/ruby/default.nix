@@ -1,7 +1,7 @@
 { lib, pkgs, config, ... }:
 
 with lib;
-with lib.internal;
+with lib.plusultra;
 let
   build-machine = hostName: system: speedFactor: {
     inherit hostName system speedFactor;

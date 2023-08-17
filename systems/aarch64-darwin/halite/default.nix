@@ -1,6 +1,6 @@
 { lib, pkgs, ... }:
 
-with lib.internal;
+with lib.plusultra;
 {
   plusultra = {
     suites = {

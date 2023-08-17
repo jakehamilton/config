@@ -2,7 +2,7 @@
 
 let
   inherit (lib) types mkEnableOption mkIf;
-  inherit (lib.internal) mkOpt enabled;
+  inherit (lib.plusultra) mkOpt enabled;
 
   cfg = config.plusultra.tools.git;
   user = config.plusultra.user;

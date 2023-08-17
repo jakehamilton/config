@@ -2,7 +2,7 @@
 
 let
   inherit (lib) mkEnableOption mkIf;
-  inherit (lib.internal) enabled;
+  inherit (lib.plusultra) enabled;
 
   cfg = config.plusultra.cli-apps.home-manager;
 in

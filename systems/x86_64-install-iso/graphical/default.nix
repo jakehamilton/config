@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 
 with lib;
-with lib.internal;
+with lib.plusultra;
 {
   # `install-iso` adds wireless support that
   # is incompatible with networkmanager.

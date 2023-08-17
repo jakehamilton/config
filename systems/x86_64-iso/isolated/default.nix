@@ -1,7 +1,7 @@
 { pkgs, lib, inputs, ... }:
 
 with lib;
-with lib.internal;
+with lib.plusultra;
 let
   gpgConf = "${inputs.gpg-base-conf}/gpg.conf";
 

@@ -2,7 +2,7 @@
 
 let
   inherit (lib) types;
-  inherit (lib.internal) mkOpt;
+  inherit (lib.plusultra) mkOpt;
 in
 {
   options.plusultra.host = {

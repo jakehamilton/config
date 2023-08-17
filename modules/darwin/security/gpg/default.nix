@@ -2,7 +2,7 @@
 
 let
   inherit (lib) types mkEnableOption mkIf;
-  inherit (lib.internal) mkOpt;
+  inherit (lib.plusultra) mkOpt;
 
   cfg = config.plusultra.security.gpg;
 

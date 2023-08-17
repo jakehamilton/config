@@ -1,7 +1,7 @@
 { lib, runCommandNoCC, ... }:
 
 let
-  inherit (lib.internal) override-meta;
+  inherit (lib.plusultra) override-meta;
 
   # Taken from https://docs.ubports.com/en/latest/userguide/install.html#missing-udev-rules
   rules = ./51-android.rules;

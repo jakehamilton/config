@@ -1,7 +1,7 @@
 { lib, makeDesktopItem, firefox, symlinkJoin, ... }:
 
 let
-  with-meta = lib.internal.override-meta {
+  with-meta = lib.plusultra.override-meta {
     platforms = lib.platforms.linux;
     broken = firefox.meta.broken;
   };

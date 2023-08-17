@@ -1,7 +1,7 @@
 { options, config, pkgs, lib, host ? "", format ? "", inputs ? { }, ... }:
 
 with lib;
-with lib.internal;
+with lib.plusultra;
 let
   cfg = config.plusultra.services.openssh;
 

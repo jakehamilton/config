@@ -10,7 +10,7 @@ let
     mapAttrs
     optionalAttrs;
 
-  inherit (lib.internal)
+  inherit (lib.plusultra)
     mkOpt
     mkBoolOpt;
 

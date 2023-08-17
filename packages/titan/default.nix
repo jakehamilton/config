@@ -1,7 +1,7 @@
 { lib, pkgs, runCommandNoCC, nodejs, ... }:
 
 let
-  inherit (lib.internal) override-meta;
+  inherit (lib.plusultra) override-meta;
 
   raw-node-packages = pkgs.callPackage ./create-node-packages.nix {
     inherit nodejs;
