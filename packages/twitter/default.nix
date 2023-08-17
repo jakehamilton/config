@@ -4,6 +4,10 @@ let
   with-meta = lib.internal.override-meta {
     platforms = lib.platforms.linux;
     broken = firefox.meta.broken;
+
+    description = "A desktop item to open Twitter in Firefox.";
+    license = lib.licenses.asl20;
+    maintainers = with lib.maintainers; [ jakehamilton ];
   };
 
   twitter =

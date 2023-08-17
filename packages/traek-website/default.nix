@@ -1,6 +1,8 @@
 { lib, fetchFromGitHub, buildNpmPackage, ... }:
 
 let
+  inherit (lib.internal) override-meta;
+
   src = fetchFromGitHub {
     owner = "jakehamilton";
     repo = "traek.app";
@@ -8,25 +10,30 @@ let
     sha256 = "sha256-HjJ/t+nFXeDrTRE0kJSV1ZSk0SP7w38prNm9rPOkRh8";
   };
 
-  # inherit (lib.importJSON "${src}/package.json") version;
+  new-meta = with lib; {
+    description = "The website for [traek.app](https://traek.app).";
+    license = licenses.asl20;
+    maintainers = with maintainers; [ jakehamilton ];
+  };
+  package = buildNpmPackage
+    {
+      name = "dotbox-website";
+      verison = "unstable-2022-01-12";
+
+      inherit src;
+
+      npmDepsHash = "sha256-VLvqA+a/VmEt2oF1DK4LyUNeUwgGklc1Aeh+sV7DA1k";
+
+      npmFlags = [ "--legacy-peer-deps" ];
+      NODE_OPTIONS = "--openssl-legacy-provider";
+
+      buildPhase = ''
+        npm run build -- --no-prerender
+      '';
+
+      installPhase = ''
+        mv build $out
+      '';
+    };
 in
-buildNpmPackage
-{
-  name = "dotbox-website";
-  verison = "unstable-2022-01-12";
-
-  inherit src;
-
-  npmDepsHash = "sha256-VLvqA+a/VmEt2oF1DK4LyUNeUwgGklc1Aeh+sV7DA1k";
-
-  npmFlags = [ "--legacy-peer-deps" ];
-  NODE_OPTIONS = "--openssl-legacy-provider";
-
-  buildPhase = ''
-    npm run build -- --no-prerender
-  '';
-
-  installPhase = ''
-    mv build $out
-  '';
-}
+override-meta new-meta package

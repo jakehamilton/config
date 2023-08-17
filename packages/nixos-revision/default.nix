@@ -1,58 +1,73 @@
-{ pkgs, lib, gitHostCommitUrl ? "https://github.com/jakehamilton/config/commit"
-, ... }:
+{ pkgs
+, lib
+, gitHostCommitUrl ? "https://github.com/jakehamilton/config/commit"
+, ...
+}:
 
-pkgs.writeShellScriptBin "nixos-revision" ''
-  HAS_HELP=false
-  HAS_OPEN=false
+let
+  inherit (lib.internal) override-meta;
 
-  while [[ $# -gt 0 ]]; do
-  	case $1 in
-  		-h|--help)
-  			HAS_HELP=true
-  			shift
-  			;;
-  		-o|--open)
-  			HAS_OPEN=true
-  			shift
-  			;;
-  		*)
-  			shift
-  			;;
-  	esac
-  done
+  new-meta = with lib; {
+    description = "A helper show the current git revision of the system configuration.";
+    license = licenses.asl20;
+    maintainers = with maintainers; [ jakehamilton ];
+  };
 
-  if [ $HAS_HELP == true ]; then
-  	HELP_MSG="
-  nixos-revision
+  package =
+    pkgs.writeShellScriptBin "nixos-revision" ''
+      HAS_HELP=false
+      HAS_OPEN=false
 
-  USAGE
+      while [[ $# -gt 0 ]]; do
+      	case $1 in
+      		-h|--help)
+      			HAS_HELP=true
+      			shift
+      			;;
+      		-o|--open)
+      			HAS_OPEN=true
+      			shift
+      			;;
+      		*)
+      			shift
+      			;;
+      	esac
+      done
 
-    nixos-revision [options]
+      if [ $HAS_HELP == true ]; then
+      	HELP_MSG="
+      nixos-revision
 
-  OPTIONS
+      USAGE
 
-    -h, --help              Show this help message
-    -o, --open              Open the revision on GitHub
+        nixos-revision [options]
 
-  EXAMPLES
+      OPTIONS
 
-    $ # Print the current revision
-    $ nixos-revision
+        -h, --help              Show this help message
+        -o, --open              Open the revision on GitHub
 
-    $ # Open the current revision on GitHub
-    $ nixos-revision --open
-  "
-  	echo "$HELP_MSG"
-    exit 0
-  fi
+      EXAMPLES
 
-  REVISION=$(nixos-version --json | ${pkgs.jq}/bin/jq -r .configurationRevision)
+        $ # Print the current revision
+        $ nixos-revision
 
-  if [ $HAS_OPEN == true ]; then
-    GITHUB_URL="${gitHostCommitUrl}/$REVISION"
-    echo "Opening URL: $GITHUB_URL"
-    ${pkgs.xdg-utils}/bin/xdg-open $GITHUB_URL
-  else
-    echo $REVISION
-  fi
-''
+        $ # Open the current revision on GitHub
+        $ nixos-revision --open
+      "
+      	echo "$HELP_MSG"
+        exit 0
+      fi
+
+      REVISION=$(nixos-version --json | ${pkgs.jq}/bin/jq -r .configurationRevision)
+
+      if [ $HAS_OPEN == true ]; then
+        GITHUB_URL="${gitHostCommitUrl}/$REVISION"
+        echo "Opening URL: $GITHUB_URL"
+        ${pkgs.xdg-utils}/bin/xdg-open $GITHUB_URL
+      else
+        echo $REVISION
+      fi
+    '';
+in
+override-meta new-meta package
