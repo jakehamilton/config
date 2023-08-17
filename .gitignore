@@ -1,0 +1,12 @@
+# macOS adds a file when opening a directory with Finder.
+.DS_Store
+
+# Running `nixos-rebuild build` or `nix build` generates a result directory.
+result
+
+# Running `nixos-rebuild build-vm` and starting the VM adds a file for
+# the virtual storage drive.
+*.qcow2
+
+# A useful artifact when working with configuration documentation
+options.json
