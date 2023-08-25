@@ -10,6 +10,7 @@ with lib.plusultra;
 
     cli-apps = {
       zsh = enabled;
+      tmux = enabled;
       neovim = enabled;
       home-manager = enabled;
     };
@@ -19,6 +20,10 @@ with lib.plusultra;
       direnv = enabled;
     };
   };
+
+  home.sessionPath = [
+    "$HOME/bin"
+  ];
 
   home.stateVersion = "22.11";
 }

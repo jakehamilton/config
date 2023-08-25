@@ -7,6 +7,8 @@ with lib.plusultra;
       common = enabled;
       development = enabled;
     };
+
+    desktop.yabai = enabled;
   };
 
   environment.systemPath = [

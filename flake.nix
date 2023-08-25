@@ -48,6 +48,13 @@
     neovim.url = "github:jakehamilton/neovim";
     neovim.inputs.nixpkgs.follows = "unstable";
 
+    # Tmux
+    tmux.url = "github:jakehamilton/tmux";
+    tmux.inputs = {
+      nixpkgs.follows = "nixpkgs";
+      unstable.follows = "unstable";
+    };
+
     # Binary Cache
     attic = {
       url = "github:zhaofengli/attic";
@@ -175,11 +182,13 @@
           # be removed once NixPkgs is upgraded to 23.05.
           "electron-20.3.11"
           "nodejs-16.20.0"
+          "python-2.7.18.6"
         ];
       };
 
       overlays = with inputs; [
         neovim.overlays.default
+        tmux.overlay
         flake.overlay
         cowsay.overlay
         icehouse.overlay

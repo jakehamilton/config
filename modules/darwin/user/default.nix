@@ -24,7 +24,19 @@ in
       # @NOTE(jakehamilton): Setting the uid here is required for another
       # module to evaluate successfully since it reads
       # `users.users.${plusultra.user.name}.uid`.
-      uid = mkIf (cfg.uid != null) cfg.uid;
+      # uid = mkIf (cfg.uid != null) cfg.uid;
+    };
+
+    snowfallorg.user.${config.plusultra.user.name}.home.config = {
+      home = {
+        file = {
+          ".profile".text = ''
+            # The default file limit is far too low and throws an error when rebuilding the system.
+            # See the original with: ulimit -Sa
+            ulimit -n 4096
+          '';
+        };
+      };
     };
   };
 }

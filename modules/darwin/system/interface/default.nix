@@ -23,5 +23,7 @@ in
         AppleShowScrollBars = "Always";
       };
     };
+
+    plusultra.home.file.".hushlogin".text = "";
   };
 }

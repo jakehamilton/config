@@ -21,7 +21,7 @@ in
 
   config = {
     plusultra.home.extraOptions = {
-      home.stateVersion = config.system.stateVersion;
+      home.stateVersion = mkDefault "22.11";
       home.file = mkAliasDefinitions options.plusultra.home.file;
       xdg.enable = true;
       xdg.configFile = mkAliasDefinitions options.plusultra.home.configFile;
