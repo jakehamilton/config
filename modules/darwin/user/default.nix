@@ -24,7 +24,7 @@ in
       # @NOTE(jakehamilton): Setting the uid here is required for another
       # module to evaluate successfully since it reads
       # `users.users.${plusultra.user.name}.uid`.
-      # uid = mkIf (cfg.uid != null) cfg.uid;
+      uid = mkIf (cfg.uid != null) cfg.uid;
     };
 
     snowfallorg.user.${config.plusultra.user.name}.home.config = {
