@@ -42,7 +42,12 @@ in
       "f /dev/shm/scream 0660 ${user.name} qemu-libvirtd -"
     ];
 
-    environment.systemPackages = with pkgs; [ virt-manager ];
+    environment.systemPackages = with pkgs; [
+      virt-manager
+
+      # Needed for Windows 11
+      swtpm
+    ];
 
     virtualisation = {
       libvirtd = {
