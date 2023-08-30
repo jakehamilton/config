@@ -11,10 +11,6 @@ with lib.plusultra;
     desktop.yabai = enabled;
   };
 
-  environment.variables = {
-    CLOUDSDK_PYTHON = "${pkgs.python}/bin/python";
-  };
-
   environment.systemPath = [
     "/opt/homebrew/bin"
   ];
