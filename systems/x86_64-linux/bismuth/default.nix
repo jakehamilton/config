@@ -46,6 +46,12 @@ with lib.plusultra;
     };
   };
 
+  services.hardware.openrgb = {
+    enable = true;
+    package = pkgs.openrgb-with-all-plugins;
+    motherboard = "amd";
+  };
+
   plusultra = {
     apps = {
       rpcs3 = enabled;
