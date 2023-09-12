@@ -29,7 +29,10 @@ in
           http-connections = 50;
           warn-dirty = false;
           log-lines = 50;
-          sandbox = "relaxed";
+
+          # Large builds apparently fail due to an issue with darwin:
+          # https://github.com/NixOS/nix/issues/4119
+          sandbox = false;
 
           # This appears to break on darwin
           # https://github.com/NixOS/nix/issues/7273
