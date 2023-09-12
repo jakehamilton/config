@@ -247,11 +247,11 @@
         "unstable": "unstable_2"
       },
       "locked": {
-        "lastModified": 1693418173,
-        "narHash": "sha256-KzifhzhKH0HLB2uL09Q7OpgLK9drYkeG2Liq89R1YoI=",
+        "lastModified": 1693426329,
+        "narHash": "sha256-waS9I2HNvDN5PTxehHg/po16Ai88csmkKjZxqxLrjB0=",
         "owner": "snowfallorg",
         "repo": "flake",
-        "rev": "695cdbd600b5e90dce939958aa645c596816a5f0",
+        "rev": "5df1163dbe8a5d295141fda89a4e8d457f1397ed",
         "type": "github"
       },
       "original": {
@@ -1226,11 +1226,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1692794066,
-        "narHash": "sha256-H0aG8r16dj0x/Wz6wQhQxc9V7AsObOiHPaKxQgH6Y08=",
+        "lastModified": 1693341273,
+        "narHash": "sha256-wrsPjsIx2767909MPGhSIOmkpGELM9eufqLQOPxmZQg=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "fc944919f743bb22379dddf18dcb72db6cff84aa",
+        "rev": "2ab91c8d65c00fd22a441c69bbf1bc9b420d5ea1",
         "type": "github"
       },
       "original": {
@@ -1828,11 +1828,11 @@
     },
     "unstable_3": {
       "locked": {
-        "lastModified": 1692734709,
-        "narHash": "sha256-SCFnyHCyYjwEmgUsHDDuU0TsbVMKeU1vwkR+r7uS2Rg=",
+        "lastModified": 1693377291,
+        "narHash": "sha256-vYGY9bnqEeIncNarDZYhm6KdLKgXMS+HA2mTRaWEc80=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b85ed9dcbf187b909ef7964774f8847d554fab3b",
+        "rev": "e7f38be3775bab9659575f192ece011c033655f0",
         "type": "github"
       },
       "original": {

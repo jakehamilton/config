@@ -66,18 +66,18 @@ in
         lctrl + shift + cmd - 4 : yabai -m window --space 4; yabai -m space --focus 4
 
         # Focus Space
-        shift + cmd - m : yabai -m space --focus last
-        shift + cmd - p : yabai -m space --focus prev
-        shift + cmd - n : yabai -m space --focus next
+        # shift + cmd - m : yabai -m space --focus last
+        # shift + cmd - p : yabai -m space --focus prev
+        # shift + cmd - n : yabai -m space --focus next
         shift + cmd - 1 : yabai -m space --focus 1
         shift + cmd - 2 : yabai -m space --focus 2
         shift + cmd - 3 : yabai -m space --focus 3
         shift + cmd - 4 : yabai -m space --focus 4
 
         # Insert Direction
-        shift + cmd - v : yabai -m window --insert south
-        shift + cmd - b : yabai -m window --insert east
-        shift + cmd - s : yabai -m window --insert stack
+        lctrl + shift + cmd - v : yabai -m window --insert south
+        lctrl + shift + cmd - b : yabai -m window --insert east
+        lctrl + shift + cmd - s : yabai -m window --insert stack
 
         # Floating Windows
         # shift + cmd - space : \

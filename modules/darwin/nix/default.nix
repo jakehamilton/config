@@ -30,7 +30,11 @@ in
           warn-dirty = false;
           log-lines = 50;
           sandbox = "relaxed";
-          auto-optimise-store = true;
+
+          # This appears to break on darwin
+          # https://github.com/NixOS/nix/issues/7273
+          auto-optimise-store = false;
+
           trusted-users = users;
           allowed-users = users;
 
