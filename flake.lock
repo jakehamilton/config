@@ -1283,11 +1283,11 @@
         "snowfall-lib": "snowfall-lib_7"
       },
       "locked": {
-        "lastModified": 1694505010,
-        "narHash": "sha256-/fd/975fzGbMYTyl82aB9yPq5541FsaJXCZv4ceLaHc=",
+        "lastModified": 1694610790,
+        "narHash": "sha256-Dj4E5hOt9UP8bIko2dNdZyL1ImQxfxP6cuMqvf4vTzM=",
         "owner": "jakehamilton",
         "repo": "neovim",
-        "rev": "9e81af1d817b8a299f545e0f87a7d3494fa576cd",
+        "rev": "492b7228a3675126e9133a16d9a947ff8a91c672",
         "type": "github"
       },
       "original": {
