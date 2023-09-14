@@ -20,8 +20,7 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     # Generate System Images
-    nixos-generators.url =
-      "github:nix-community/nixos-generators";
+    nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Lib
@@ -156,24 +155,27 @@
       url = "https://github.com/jakehamilton/sokoban.app/releases/download/v1/sokoban.app.tar.gz";
       flake = false;
     };
+    snowfall-docs = {
+      url = "github:snowfallorg/docs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs:
-    let
-      lib = inputs.snowfall-lib.mkLib {
-        inherit inputs;
-        src = ./.;
+  outputs = inputs: let
+    lib = inputs.snowfall-lib.mkLib {
+      inherit inputs;
+      src = ./.;
 
-        snowfall = {
-          meta = {
-            name = "plusultra";
-            title = "Plus Ultra";
-          };
-
-          namespace = "plusultra";
+      snowfall = {
+        meta = {
+          name = "plusultra";
+          title = "Plus Ultra";
         };
+
+        namespace = "plusultra";
       };
-    in
+    };
+  in
     lib.mkFlake {
       channels-config = {
         allowUnfree = true;
@@ -193,6 +195,7 @@
         cowsay.overlay
         icehouse.overlay
         attic.overlays.default
+        snowfall-docs.overlay
       ];
 
       systems.modules.nixos = with inputs; [
@@ -208,12 +211,12 @@
         nixos-hardware.nixosModules.framework
       ];
 
-      deploy = lib.mkDeploy { inherit (inputs) self; };
+      deploy = lib.mkDeploy {inherit (inputs) self;};
 
       checks =
         builtins.mapAttrs
-          (system: deploy-lib:
-            deploy-lib.deployChecks inputs.self.deploy)
-          inputs.deploy-rs.lib;
+        (system: deploy-lib:
+          deploy-lib.deployChecks inputs.self.deploy)
+        inputs.deploy-rs.lib;
     };
 }

@@ -1,8 +1,11 @@
-{ lib, pkgs, modulesPath, ... }:
-
-with lib;
-with lib.plusultra;
 {
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
+with lib;
+with lib.plusultra; {
   imports = [
     (modulesPath + "/virtualisation/digital-ocean-config.nix")
   ];
@@ -46,6 +49,7 @@ with lib.plusultra;
         sokoban = enabled;
         jakehamilton = enabled;
         beyondthefringeoc = enabled;
+        snowfall-docs = enabled;
       };
     };
 
