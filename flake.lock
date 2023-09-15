@@ -2232,11 +2232,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1694581027,
-        "narHash": "sha256-fNWtenW8PLiPnuJxotXDhWBkLCss1UfDN9i3IvMVDNI=",
+        "lastModified": 1694760755,
+        "narHash": "sha256-18QzwqZJmJqVdQzjEJjwXOe6UyGO7x6W2K2KUX9Z6tU=",
         "owner": "jakehamilton",
         "repo": "tmux",
-        "rev": "35cf0c7ef41a12787db4078de5a70d22320acd33",
+        "rev": "69906a99c233a2aa69dbc5822a99ea98c669d9ab",
         "type": "github"
       },
       "original": {
