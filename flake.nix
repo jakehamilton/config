@@ -131,6 +131,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.unstable.follows = "unstable";
     };
+    pungeonquest = {
+      url = "github:jakehamilton/pungeonquest";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.unstable.follows = "unstable";
+    };
     scrumfish = {
       url = "github:jakehamilton/scrumfi.sh";
       inputs.nixpkgs.follows = "nixpkgs";
