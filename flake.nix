@@ -196,7 +196,7 @@
       overlays = with inputs; [
         neovim.overlays.default
         tmux.overlay
-        flake.overlay
+        flake.overlays.default
         cowsay.overlay
         icehouse.overlay
         attic.overlays.default
