@@ -1,12 +1,14 @@
-{ lib, pkgs, config, ... }:
-
-let
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}: let
   cfg = config.plusultra.desktop.yabai;
 
   inherit (lib) types mkEnableOption mkIf;
   inherit (lib.plusultra) mkOpt enabled;
-in
-{
+in {
   options.plusultra.desktop.yabai = {
     enable = mkEnableOption "Yabai";
     enable-scripting-addition = mkOpt types.bool true "Whether to enable the scripting addition for Yabai. (Requires SIP to be disabled)";
@@ -37,14 +39,17 @@ in
         window_gap = 6;
         window_topmost = "on";
         window_shadow = "float";
-        window_border = "on";
-        window_border_width = 5;
-        window_border_radius = 14;
-        window_border_blur = "off";
-        window_border_hidpi = "on";
-        insert_feedback_color = "0xffb48ead";
-        normal_window_border_color = "0x002e3440";
-        active_window_border_color = "0xff5e81ac";
+
+        # As of macOS Sonoma, window borders break Yabai and cause a bunch of lag.
+        window_border = "off";
+        # window_border = "on";
+        # window_border_width = 5;
+        # window_border_radius = 14;
+        # window_border_blur = "off";
+        # window_border_hidpi = "on";
+        # insert_feedback_color = "0xffb48ead";
+        # normal_window_border_color = "0x002e3440";
+        # active_window_border_color = "0xff5e81ac";
 
         external_bar = "all:${builtins.toString config.services.spacebar.config.height}:0";
 
