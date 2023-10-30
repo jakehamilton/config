@@ -190,6 +190,8 @@
           "electron-20.3.11"
           "nodejs-16.20.0"
           "python-2.7.18.6"
+
+          "electron-22.3.27"
         ];
       };
 
