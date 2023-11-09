@@ -24,12 +24,15 @@
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Lib
-    snowfall-lib.url = "github:snowfallorg/lib/dev";
+    snowfall-lib.url = "github:snowfallorg/lib/dev?ref=v2.1.1";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Flake
-    flake.url = "github:snowfallorg/flake";
+    flake.url = "github:snowfallorg/flake?ref=v1.1.0";
     flake.inputs.nixpkgs.follows = "unstable";
+
+    # Snowfall Thaw
+    thaw.url = "github:snowfallorg/thaw?ref=v1.0.1";
 
     # Comma
     comma.url = "github:nix-community/comma";
@@ -92,7 +95,7 @@
 
     # Cows!
     cowsay = {
-      url = "github:snowfallorg/cowsay";
+      url = "github:snowfallorg/cowsay?ref=v1.1.0";
       # @NOTE(jakehamilton): A recent version of VHS currently fails
       # causes cow2img to fail. This needs to be fixed upstream:
       # https://github.com/charmbracelet/vhs/issues/361
@@ -103,7 +106,7 @@
 
     # Backup management
     icehouse = {
-      url = "github:snowfallorg/icehouse";
+      url = "github:snowfallorg/icehouse?ref=v1.1.0";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.unstable.follows = "unstable";
     };
@@ -199,6 +202,7 @@
         neovim.overlays.default
         tmux.overlay
         flake.overlays.default
+        thaw.overlays.default
         cowsay.overlay
         icehouse.overlay
         attic.overlays.default
