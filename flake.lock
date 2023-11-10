@@ -110,20 +110,19 @@
         "cowfiles": "cowfiles",
         "nixpkgs": "nixpkgs",
         "snowfall-lib": "snowfall-lib",
-        "unstable": "unstable",
         "vhs": "vhs"
       },
       "locked": {
-        "lastModified": 1694679374,
-        "narHash": "sha256-EVDSFQ4PihLCtzjL8abtEU4gGtNDhJ5AGhxsuXArdRU=",
+        "lastModified": 1699577347,
+        "narHash": "sha256-TtP0nZMaiRXqnALMcK7a085yvnh2deTs4RV29yRmS24=",
         "owner": "snowfallorg",
         "repo": "cowsay",
-        "rev": "255be0879384547fe5e1a9963c0cab658ac8d853",
+        "rev": "5c711e906d2d0015329483986e19998def407b67",
         "type": "github"
       },
       "original": {
         "owner": "snowfallorg",
-        "ref": "v1.1.0",
+        "ref": "v1.2.1",
         "repo": "cowsay",
         "type": "github"
       }
@@ -1519,16 +1518,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1688392541,
-        "narHash": "sha256-lHrKvEkCPTUO+7tPfjIcb7Trk6k31rz18vkyqmkeJfY=",
+        "lastModified": 1699099776,
+        "narHash": "sha256-X09iKJ27mGsGambGfkKzqvw5esP1L/Rf8H3u3fCqIiU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "ea4c80b39be4c09702b0cb3b42eab59e2ba4f24b",
+        "rev": "85f1ba3e51676fa8cc604a3d863d729026a6b8eb",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-22.11",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -1843,7 +1842,7 @@
         "sokoban-app-website": "sokoban-app-website",
         "thaw": "thaw",
         "tmux": "tmux",
-        "unstable": "unstable_3",
+        "unstable": "unstable_2",
         "vault-service": "vault-service",
         "yubikey-guide": "yubikey-guide"
       }
@@ -2006,15 +2005,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1667153928,
-        "narHash": "sha256-SbXxxrxWzumig4ytez86B9FFkd9zH/qj+SSiMUwY8bI=",
+        "lastModified": 1696432959,
+        "narHash": "sha256-oJQZv2MYyJaVyVJY5IeevzqpGvMGKu5pZcCCJvb+xjc=",
         "owner": "snowfallorg",
         "repo": "lib",
-        "rev": "1ffe7109a0aade9df745432e1f5788cf67a05a3e",
+        "rev": "92803a029b5314d4436a8d9311d8707b71d9f0b6",
         "type": "github"
       },
       "original": {
         "owner": "snowfallorg",
+        "ref": "v2.1.1",
         "repo": "lib",
         "type": "github"
       }
@@ -2426,7 +2426,7 @@
       "inputs": {
         "nixpkgs": "nixpkgs_3",
         "snowfall-lib": "snowfall-lib_14",
-        "unstable": "unstable_2"
+        "unstable": "unstable"
       },
       "locked": {
         "lastModified": 1698651333,
@@ -2469,22 +2469,6 @@
     },
     "unstable": {
       "locked": {
-        "lastModified": 1692174805,
-        "narHash": "sha256-xmNPFDi/AUMIxwgOH/IVom55Dks34u1g7sFKKebxUm0=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "caac0eb6bdcad0b32cb2522e03e4002c8975c62e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "unstable_2": {
-      "locked": {
         "lastModified": 1698318101,
         "narHash": "sha256-gUihHt3yPD7bVqg+k/UVHgngyaJ3DMEBchbymBMvK1E=",
         "owner": "nixos",
@@ -2499,7 +2483,7 @@
         "type": "github"
       }
     },
-    "unstable_3": {
+    "unstable_2": {
       "locked": {
         "lastModified": 1699099776,
         "narHash": "sha256-X09iKJ27mGsGambGfkKzqvw5esP1L/Rf8H3u3fCqIiU=",
@@ -2604,15 +2588,16 @@
         "snowfall-lib": "snowfall-lib_2"
       },
       "locked": {
-        "lastModified": 1676276003,
-        "narHash": "sha256-NanCLBZ2kHmC6WtY3uFVPsLzRMz4J53TUUaxSW5/5Mc=",
+        "lastModified": 1692933636,
+        "narHash": "sha256-ezJNTTH5ugu5+FVAVyJkO2C/Z+QHJUtj5hJRbapNjSs=",
         "owner": "snowfallorg",
         "repo": "vhs",
-        "rev": "35db149a6118bd305619c5bdb065179b57265e64",
+        "rev": "8203d902b4ba7e257ee8c5a89d1ed5ea62102af3",
         "type": "github"
       },
       "original": {
         "owner": "snowfallorg",
+        "ref": "v1.0.0",
         "repo": "vhs",
         "type": "github"
       }

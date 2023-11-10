@@ -1,9 +1,13 @@
-{ pkgs, config, lib, channel, ... }:
-
-with lib;
-with lib.plusultra;
 {
-  imports = [ ./hardware.nix ];
+  pkgs,
+  config,
+  lib,
+  channel,
+  ...
+}:
+with lib;
+with lib.plusultra; {
+  imports = [./hardware.nix];
 
   # Resolve an issue with Bismuth's wired connections failing sometimes due to weird
   # DHCP issues. I'm not quite sure why this is the case, but I have found that the
@@ -12,23 +16,22 @@ with lib.plusultra;
   # condition when the system is coming up that causes this.
   # networking.dhcpcd.enable = false;
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
-  # @NOTE(jakehamilton): This _may_ be required for openvpn to work. However, I have
+  # NOTE: This _may_ be required for openvpn to work. However, I have
   # not confirmed that...
-  boot.kernelModules = [ "tun" ];
+  boot.kernelModules = ["tun"];
 
   networking.firewall = {
-    allowedUDPPorts = [ 28000 ];
-    allowedTCPPorts = [ 28000 ];
+    allowedUDPPorts = [28000];
+    allowedTCPPorts = [28000];
   };
 
-  environment.systemPackages = with pkgs;
-    [
-      chromium
-      plusultra.kalidoface
-      deluge
-    ];
+  environment.systemPackages = with pkgs; [
+    chromium
+    plusultra.kalidoface
+    deluge
+  ];
 
   services.minecraft-server = {
     enable = false;
@@ -84,7 +87,6 @@ with lib.plusultra;
           };
         };
       };
-
     };
 
     archetypes = {
@@ -106,8 +108,8 @@ with lib.plusultra;
       # RX480 when in the bottom slot:
       # IOMMU Group 23 23:00.0 VGA compatible controller [0300]: Advanced Micro Devices, Inc. [AMD/ATI] Ellesmere [Radeon RX 470/480/570/570X/580/580X/590] [1002:67df] (rev c7)
       # IOMMU Group 23 23:00.1 Audio device [0403]: Advanced Micro Devices, Inc. [AMD/ATI] Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] [1002:aaf0]
-      vfioIds = [ "1002:67df" "1002:aaf0" ];
-      machineUnits = [ "machine-qemu\\x2d1\\x2dwin10.scope" ];
+      vfioIds = ["1002:67df" "1002:aaf0"];
+      machineUnits = ["machine-qemu\\x2d1\\x2dwin10.scope"];
     };
 
     hardware.audio = {
@@ -117,25 +119,22 @@ with lib.plusultra;
           description = "Speakers";
         })
         (mkAlsaRename {
-          name =
-            "alsa_input.usb-Valve_Corporation_Valve_VR_Radio___HMD_Mic_426C59CC3D-LYM-01.mono-fallback";
+          name = "alsa_input.usb-Valve_Corporation_Valve_VR_Radio___HMD_Mic_426C59CC3D-LYM-01.mono-fallback";
           description = "Valve Index";
         })
         (mkAlsaRename {
-          name =
-            "alsa_output.usb-Blue_Microphones_Yeti_Stereo_Microphone_797_2020_06_11_32800-00.analog-stereo";
+          name = "alsa_output.usb-Blue_Microphones_Yeti_Stereo_Microphone_797_2020_06_11_32800-00.analog-stereo";
           description = "Blue Yeti";
         })
         (mkAlsaRename {
-          name =
-            "alsa_input.usb-Blue_Microphones_Yeti_Stereo_Microphone_797_2020_06_11_32800-00.analog-stereo";
+          name = "alsa_input.usb-Blue_Microphones_Yeti_Stereo_Microphone_797_2020_06_11_32800-00.analog-stereo";
           description = "Blue Yeti";
         })
       ];
 
       nodes = [
-        (mkVirtualAudioNode { name = "Desktop"; })
-        (mkVirtualAudioNode { name = "Discord"; })
+        (mkVirtualAudioNode {name = "Desktop";})
+        (mkVirtualAudioNode {name = "Discord";})
         (mkVirtualAudioNode {
           name = "Headphones";
           class = "Audio/Sink";
@@ -155,8 +154,7 @@ with lib.plusultra;
         (mkBridgeAudioModule {
           name = "headphones";
           from = "virtual-headphones-audio";
-          to =
-            "alsa_output.usb-Blue_Microphones_Yeti_Stereo_Microphone_797_2020_06_11_32800-00.analog-stereo";
+          to = "alsa_output.usb-Blue_Microphones_Yeti_Stereo_Microphone_797_2020_06_11_32800-00.analog-stereo";
         })
         (mkBridgeAudioModule {
           name = "speakers-to-desktop";

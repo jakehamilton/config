@@ -1,18 +1,21 @@
-inputs@{ options, config, lib, pkgs, ... }:
-
+inputs @ {
+  options,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-with lib.plusultra;
-let
+with lib.plusultra; let
   cfg = config.plusultra.cli-apps.neovim;
-in
-{
+in {
   options.plusultra.cli-apps.neovim = with types; {
     enable = mkBoolOpt false "Whether or not to enable neovim.";
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      # @FIXME(jakehamilton): As of today (2022-12-09), `page` no longer works with my Neovim
+      # FIXME: As of today (2022-12-09), `page` no longer works with my Neovim
       # configuration. Either something in my configuration is breaking it or `page` is busted.
       # page
       plusultra.neovim

@@ -21,7 +21,7 @@ in {
     plusultra = {
       nix = enabled;
 
-      # @TODO(jakehamilton): Enable this once Attic is configured again.
+      # TODO: Enable this once Attic is configured again.
       # cache.public = enabled;
 
       cli-apps = {

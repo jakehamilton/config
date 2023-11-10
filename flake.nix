@@ -61,7 +61,7 @@
     attic = {
       url = "github:zhaofengli/attic";
 
-      # @FIXME(jakehamilton): A specific version of Rust is needed right now or
+      # FIXME: A specific version of Rust is needed right now or
       # the build fails. Re-enable this after some time has passed.
       inputs.nixpkgs.follows = "unstable";
       inputs.nixpkgs-stable.follows = "nixpkgs";
@@ -95,20 +95,17 @@
 
     # Cows!
     cowsay = {
-      url = "github:snowfallorg/cowsay?ref=v1.1.0";
-      # @NOTE(jakehamilton): A recent version of VHS currently fails
-      # causes cow2img to fail. This needs to be fixed upstream:
-      # https://github.com/charmbracelet/vhs/issues/361
-
+      url = "github:snowfallorg/cowsay?ref=v1.2.1";
+      # TODO: Cowsay currently requires a newer version of ttyd that works
+      # around an issue with whitespace coloring. Until that is fixed,
+      # we won't be able to specify a unique nixpkgs value safely.
       # inputs.nixpkgs.follows = "nixpkgs";
-      # inputs.unstable.follows = "unstable";
     };
 
     # Backup management
     icehouse = {
       url = "github:snowfallorg/icehouse?ref=v1.1.0";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.unstable.follows = "unstable";
     };
 
     # Yubikey Guide
@@ -188,7 +185,7 @@
       channels-config = {
         allowUnfree = true;
         permittedInsecurePackages = [
-          # @FIXME(jakehamilton): This is a workaround for 22.11 and can
+          # FIXME: This is a workaround for 22.11 and can
           # be removed once NixPkgs is upgraded to 23.05.
           "electron-20.3.11"
           "nodejs-16.20.0"
@@ -203,8 +200,8 @@
         tmux.overlay
         flake.overlays.default
         thaw.overlays.default
-        cowsay.overlay
-        icehouse.overlay
+        cowsay.overlays.default
+        icehouse.overlays.default
         attic.overlays.default
         snowfall-docs.overlay
       ];
@@ -213,7 +210,7 @@
         home-manager.nixosModules.home-manager
         nix-ld.nixosModules.nix-ld
         vault-service.nixosModules.nixos-vault-service
-        # @TODO(jakehamilton): Replace plusultra.services.attic now that vault-agent
+        # TODO: Replace plusultra.services.attic now that vault-agent
         # exists and can force override environment files.
         # attic.nixosModules.atticd
       ];

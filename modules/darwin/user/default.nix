@@ -1,6 +1,9 @@
-{ lib, config, pkgs, ... }:
-
-let
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
   inherit (lib) types mkIf mkDefault;
   inherit (lib.plusultra) mkOpt;
 
@@ -8,8 +11,7 @@ let
 
   is-linux = pkgs.stdenv.isLinux;
   is-darwin = pkgs.stdenv.isDarwin;
-in
-{
+in {
   options.plusultra.user = {
     name = mkOpt types.str "short" "The user account.";
 
@@ -21,7 +23,7 @@ in
 
   config = {
     users.users.${cfg.name} = {
-      # @NOTE(jakehamilton): Setting the uid here is required for another
+      # NOTE: Setting the uid here is required for another
       # module to evaluate successfully since it reads
       # `users.users.${plusultra.user.name}.uid`.
       uid = mkIf (cfg.uid != null) cfg.uid;

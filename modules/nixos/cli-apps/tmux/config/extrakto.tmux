@@ -8,7 +8,7 @@ set -g @extrakto_split_direction "v"
 # Tmux's built-in clipboard functionality.
 set -g @extrakto_clip_tool_run "tmux_osc52"
 
-# @FIXME(jakehamilton): The current version of Extrakto in
+# FIXME: The current version of Extrakto in
 # NixPkgs is out of date and does not support wayland.
 # This overrides the clipping tool to ensure that it works
 # under wayland.

@@ -186,7 +186,7 @@ require_flake_nix() {
 get_flake_attributes() {
 		local outputs=""
 
-		# @NOTE(jakehamilton): Some flakes may not contain the values we're looking for. In
+		# NOTE: Some flakes may not contain the values we're looking for. In
 		# which case, we swallow errors here to keep the output clean.
 		set +e
 		outputs=$(nix eval --impure --raw --expr "\
