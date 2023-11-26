@@ -12,4 +12,4 @@ jobs:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
       - name: Thaw
-        uses: snowfallorg/thaw-action@dev
+        uses: snowfallorg/thaw-action@main
