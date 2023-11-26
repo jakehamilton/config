@@ -28,11 +28,11 @@
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Flake
-    flake.url = "github:snowfallorg/flake?ref=v1.0.0";
+    flake.url = "github:snowfallorg/flake?ref=v1.1.0";
     flake.inputs.nixpkgs.follows = "unstable";
 
     # Snowfall Thaw
-    thaw.url = "github:snowfallorg/thaw?ref=v1.0.3";
+    thaw.url = "github:snowfallorg/thaw?ref=v1.0.4";
 
     # Comma
     comma.url = "github:nix-community/comma";
