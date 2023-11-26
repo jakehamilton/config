@@ -28,7 +28,7 @@
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Flake
-    flake.url = "github:snowfallorg/flake?ref=v1.0.0";
+    flake.url = "github:snowfallorg/flake?ref=v1.1.0";
     flake.inputs.nixpkgs.follows = "unstable";
 
     # Snowfall Thaw
