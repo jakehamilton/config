@@ -12,5 +12,3 @@ jobs:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: snowfallorg/thaw-action@main
-        with:
-          thaw-uri: 'github:snowfallorg/thaw/dev'
