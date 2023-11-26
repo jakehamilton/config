@@ -1,0 +1,14 @@
+name: 'Thaw'
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - name: Thaw
+        uses: snowfallorg/thaw-action@dev
