@@ -2429,16 +2429,16 @@
         "unstable": "unstable"
       },
       "locked": {
-        "lastModified": 1698651333,
-        "narHash": "sha256-DkUcYLJK9hl0BDSI8GaY7Hr2wLhHQjFNtthTkpiwsvI=",
+        "lastModified": 1700981841,
+        "narHash": "sha256-BfoeEK/NUZ9l81OTy7venIHUP4gpbHrVrZM10fsiOtY=",
         "owner": "snowfallorg",
         "repo": "thaw",
-        "rev": "074c095b3d2aae96f9d8660019f574eb13e3fcd2",
+        "rev": "133077957998acd5899dce3a227fc33979f6965d",
         "type": "github"
       },
       "original": {
         "owner": "snowfallorg",
-        "ref": "v1.0.1",
+        "ref": "v1.0.3",
         "repo": "thaw",
         "type": "github"
       }
