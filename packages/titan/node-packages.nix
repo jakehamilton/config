@@ -67,6 +67,15 @@ let
         sha512 = "/6w/C21Pm1A7aZitlI5Ni/2J6FFQN8i1Cvz3kHABAAbw93v/NlvKdVOqz7CCWz/3iv/JplRSEEZ83XION15ovw==";
       };
     };
+    "ansi-regex-5.0.1" = {
+      name = "ansi-regex";
+      packageName = "ansi-regex";
+      version = "5.0.1";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz";
+        sha512 = "quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==";
+      };
+    };
     "ansi-styles-4.3.0" = {
       name = "ansi-styles";
       packageName = "ansi-styles";
@@ -166,13 +175,13 @@ let
         sha512 = "7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==";
       };
     };
-    "enquirer-2.3.6" = {
+    "enquirer-2.4.1" = {
       name = "enquirer";
       packageName = "enquirer";
-      version = "2.3.6";
+      version = "2.4.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/enquirer/-/enquirer-2.3.6.tgz";
-        sha512 = "yjNnPr315/FjS4zIsUxYguYUPP2e1NK4d7E7ZOLiyYCcbFBiTMyID+2wvm2w6+pZ/odMA7cRkjhsPbltwBOrLg==";
+        url = "https://registry.npmjs.org/enquirer/-/enquirer-2.4.1.tgz";
+        sha512 = "rRqJg/6gd538VHvR3PSrdRBb/1Vy2YfzHqzvbhGIQpDRKIa4FgV/54b5Q1xYSxOOwKvjXweS26E0Q+nAMwp2pQ==";
       };
     };
     "event-target-shim-5.0.1" = {
@@ -193,13 +202,13 @@ let
         sha512 = "OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==";
       };
     };
-    "giturl-1.0.1" = {
+    "giturl-1.0.3" = {
       name = "giturl";
       packageName = "giturl";
-      version = "1.0.1";
+      version = "1.0.3";
       src = fetchurl {
-        url = "https://registry.npmjs.org/giturl/-/giturl-1.0.1.tgz";
-        sha512 = "wQourBdI13n8tbjcZTDl6k+ZrCRMU6p9vfp9jknZq+zfWc8xXNztpZFM4XkPHVzHcMSUZxEMYYKZjIGkPlei6Q==";
+        url = "https://registry.npmjs.org/giturl/-/giturl-1.0.3.tgz";
+        sha512 = "qVDEXufVtYUzYqI5hoDUONh9GCEPi0n+e35KNDafdsNt9fPxB0nvFW/kFiw7W42wkg8TUyhBqb+t24yyaoc87A==";
       };
     };
     "glob-7.2.3" = {
@@ -346,13 +355,22 @@ let
         sha512 = "JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==";
       };
     };
-    "semver-7.3.8" = {
+    "semver-7.5.4" = {
       name = "semver";
       packageName = "semver";
-      version = "7.3.8";
+      version = "7.5.4";
       src = fetchurl {
-        url = "https://registry.npmjs.org/semver/-/semver-7.3.8.tgz";
-        sha512 = "NB1ctGL5rlHrPJtFDVIVzTyQylMLu9N9VICA6HSFJo8MCGVTMW6gfpicwKmmK/dAjTOrqu5l63JJOpDSrAis3A==";
+        url = "https://registry.npmjs.org/semver/-/semver-7.5.4.tgz";
+        sha512 = "1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==";
+      };
+    };
+    "strip-ansi-6.0.1" = {
+      name = "strip-ansi";
+      packageName = "strip-ansi";
+      version = "6.0.1";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz";
+        sha512 = "Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==";
       };
     };
     "supports-color-7.2.0" = {
@@ -417,6 +435,7 @@ in
       sources."@types/node-10.17.60"
       sources."abort-controller-3.0.0"
       sources."ansi-colors-4.1.3"
+      sources."ansi-regex-5.0.1"
       sources."ansi-styles-4.3.0"
       sources."arg-4.1.3"
       sources."balanced-match-1.0.2"
@@ -428,10 +447,10 @@ in
       sources."concat-map-0.0.1"
       sources."copy-dir-1.3.0"
       sources."ejs-2.7.4"
-      sources."enquirer-2.3.6"
+      sources."enquirer-2.4.1"
       sources."event-target-shim-5.0.1"
       sources."fs.realpath-1.0.0"
-      sources."giturl-1.0.1"
+      sources."giturl-1.0.3"
       sources."glob-7.2.3"
       sources."has-flag-4.0.0"
       sources."inflight-1.0.6"
@@ -448,7 +467,8 @@ in
       sources."path-is-absolute-1.0.1"
       sources."render-in-place-1.0.2"
       sources."rimraf-3.0.2"
-      sources."semver-7.3.8"
+      sources."semver-7.5.4"
+      sources."strip-ansi-6.0.1"
       sources."supports-color-7.2.0"
       sources."which-1.3.1"
       sources."wrappy-1.0.2"

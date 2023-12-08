@@ -2,14 +2,14 @@
   description = "Plus Ultra";
 
   inputs = {
-    # NixPkgs (nixos-22.11)
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    # NixPkgs (nixos-23.11)
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
 
     # NixPkgs Unstable (nixos-unstable)
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Home Manager (release-22.05)
-    home-manager.url = "github:nix-community/home-manager/release-23.05";
+    home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # macOS Support (master)
@@ -187,11 +187,7 @@
         permittedInsecurePackages = [
           # FIXME: This is a workaround for 22.11 and can
           # be removed once NixPkgs is upgraded to 23.05.
-          "electron-20.3.11"
-          "nodejs-16.20.0"
           "python-2.7.18.6"
-
-          "electron-22.3.27"
         ];
       };
 

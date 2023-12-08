@@ -1,15 +1,20 @@
-{ pkgs, config, lib, modulesPath, inputs, ... }:
-
-with lib;
-with lib.plusultra;
 {
+  pkgs,
+  config,
+  lib,
+  modulesPath,
+  inputs,
+  ...
+}:
+with lib;
+with lib.plusultra; {
   imports = with inputs.nixos-hardware.nixosModules; [
     (modulesPath + "/installer/scan/not-detected.nix")
     raspberry-pi-4
   ];
 
-  nixpkgs.config.allowUnsupportedSystem = true;
-  nixpkgs.crossSystem.system = "aarch64-linux";
+  # nixpkgs.config.allowUnsupportedSystem = true;
+  # nixpkgs.crossSystem.system = "aarch64-linux";
 
   plusultra = {
     archetypes = {

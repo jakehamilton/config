@@ -1,12 +1,17 @@
-{ pkgs, config, lib, modulesPath, inputs, ... }:
-
+{
+  pkgs,
+  config,
+  lib,
+  modulesPath,
+  inputs,
+  ...
+}:
 with lib;
-with lib.plusultra;
-let
+with lib.plusultra; let
   steam-pi-setup = pkgs.writeShellApplication {
     name = "steam-pi-setup";
     checkPhase = "";
-    runtimeInputs = with pkgs; [ slides ];
+    runtimeInputs = with pkgs; [slides];
     text = ''
       slides ${./slides.md}
     '';
@@ -25,15 +30,14 @@ let
       # gamescope -f -- steam -gamepadui
     '';
   };
-in
-{
+in {
   imports = with inputs.nixos-hardware.nixosModules; [
     (modulesPath + "/installer/scan/not-detected.nix")
     raspberry-pi-4
   ];
 
-  nixpkgs.config.allowUnsupportedSystem = true;
-  nixpkgs.crossSystem.system = "aarch64-linux";
+  # nixpkgs.config.allowUnsupportedSystem = true;
+  # nixpkgs.crossSystem.system = "aarch64-linux";
 
   hardware.opengl.driSupport32Bit = mkForce false;
 
@@ -74,7 +78,7 @@ in
     };
 
     hardware = {
-      audio.extra-packages = [ ];
+      audio.extra-packages = [];
     };
 
     services = {

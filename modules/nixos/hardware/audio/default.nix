@@ -149,8 +149,8 @@ in {
     };
 
     environment.etc = {
-      "pipewire/pipewire.conf.d/10-pipewire.conf".source =
-        pkgs.writeText "pipewire.conf" (builtins.toJSON pipewire-config);
+      # "pipewire/pipewire.conf.d/10-pipewire.conf".source =
+      #   pkgs.writeText "pipewire.conf" (builtins.toJSON pipewire-config);
       # "pipewire/pipewire.conf.d/21-alsa.conf".source =
       #   pkgs.writeText "pipewire.conf" (builtins.toJSON alsa-config);
 

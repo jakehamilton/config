@@ -1,11 +1,13 @@
-{ lib, config, pkgs, ... }:
-
-let
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.plusultra.cli-apps.zsh;
-in
-{
+in {
   options.plusultra.cli-apps.zsh = {
     enable = mkEnableOption "ZSH";
   };
@@ -16,7 +18,7 @@ in
         enable = true;
         enableAutosuggestions = true;
         enableCompletion = true;
-        enableSyntaxHighlighting = true;
+        syntaxHighlighting.enable = true;
 
         initExtra = ''
           # Fix an issue with tmux.
@@ -35,16 +37,18 @@ in
           say = "${pkgs.toilet}/bin/toilet -f pagga";
         };
 
-        plugins = [{
-          name = "zsh-nix-shell";
-          file = "nix-shell.plugin.zsh";
-          src = pkgs.fetchFromGitHub {
-            owner = "chisui";
-            repo = "zsh-nix-shell";
-            rev = "v0.4.0";
-            sha256 = "037wz9fqmx0ngcwl9az55fgkipb745rymznxnssr3rx9irb6apzg";
-          };
-        }];
+        plugins = [
+          {
+            name = "zsh-nix-shell";
+            file = "nix-shell.plugin.zsh";
+            src = pkgs.fetchFromGitHub {
+              owner = "chisui";
+              repo = "zsh-nix-shell";
+              rev = "v0.4.0";
+              sha256 = "037wz9fqmx0ngcwl9az55fgkipb745rymznxnssr3rx9irb6apzg";
+            };
+          }
+        ];
       };
 
       starship = {

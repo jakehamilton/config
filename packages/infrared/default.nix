@@ -1,5 +1,9 @@
-{ lib, buildGoModule, fetchFromGitHub, ... }:
-
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
+  ...
+}:
 buildGoModule rec {
   pname = "infrared";
   version = "1.3.4";
@@ -11,7 +15,7 @@ buildGoModule rec {
     sha256 = "2DkPGq7/9Ow/c4GP8Ca9gzKmSWMot7G+BaGDhUJfNHI=";
   };
 
-  vendorSha256 = "vUKz+Y2ekOGgDROkoSch+feXZhFOvs6hQgR8LIjCkNY=";
+  vendorHash = "sha256-vUKz+Y2ekOGgDROkoSch+feXZhFOvs6hQgR8LIjCkNY=";
 
   meta = with lib; {
     description = "An ultra lightweight minecraft reverse proxy and idle placeholder";
