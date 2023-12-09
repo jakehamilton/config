@@ -40,7 +40,7 @@
 
     # System Deployment
     deploy-rs.url = "github:serokell/deploy-rs";
-    deploy-rs.inputs.nixpkgs.follows = "unstable";
+    deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
 
     # Run unpatched dynamically compiled binaries
     nix-ld.url = "github:Mic92/nix-ld";
