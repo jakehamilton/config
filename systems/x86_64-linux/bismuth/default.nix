@@ -60,6 +60,7 @@ with lib.plusultra; {
       rpcs3 = enabled;
       ubports-installer = enabled;
       steamtinkerlaunch = enabled;
+      r2modman = enabled;
     };
 
     user.prompt-init = false;

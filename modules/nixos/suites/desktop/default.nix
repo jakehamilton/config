@@ -26,7 +26,7 @@ in {
         _1password = enabled;
         firefox = enabled;
         vlc = enabled;
-        # logseq = enabled;
+        logseq = enabled;
         hey = enabled;
         pocketcasts = enabled;
         yt-music = enabled;
