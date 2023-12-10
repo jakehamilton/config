@@ -95,7 +95,7 @@
 
     # Cows!
     cowsay = {
-      url = "github:snowfallorg/cowsay?ref=v1.2.1";
+      url = "github:snowfallorg/cowsay?ref=v1.3.0";
       # TODO: Cowsay currently requires a newer version of ttyd that works
       # around an issue with whitespace coloring. Until that is fixed,
       # we won't be able to specify a unique nixpkgs value safely.
