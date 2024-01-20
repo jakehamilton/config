@@ -32,6 +32,7 @@ with lib.plusultra; {
     services = {
       openssh = enabled;
       tailscale = enabled;
+      palworld = enabled;
     };
 
     security = {
