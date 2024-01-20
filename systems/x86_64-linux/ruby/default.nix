@@ -55,6 +55,7 @@ with lib.plusultra; {
   };
 
   security.acme = {
+    acceptTerms = true;
     defaults = {
       dnsProvider = "digitalocean";
       dnsPropagationCheck = true;
