@@ -63,9 +63,9 @@ with lib.plusultra; {
       credentialsFile = "/var/lib/acme-secrets/digitalocean";
     };
 
-    certs."ruby.hamho.me" = {
-      domain = "*.ruby.hamho.me";
-    };
+    # certs."ruby.hamho.me" = {
+    #   domain = "*.ruby.hamho.me";
+    # };
   };
 
   services.nginx = {
