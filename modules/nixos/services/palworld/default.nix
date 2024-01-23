@@ -44,18 +44,26 @@ in {
       createHome = true;
       homeMode = "750";
       group = config.users.groups.palworld.name;
-
-      extraGroups = [
-        "steamcmd"
-      ];
     };
 
     users.groups.palworld = {};
 
     systemd.tmpfiles.rules = [
       "d ${config.users.users.palworld.home}/.steam 0755 ${config.users.users.palworld.name} ${config.users.groups.palworld.name} - -"
-      "L+ ${config.users.users.palworld.home}/.steam/sdk64 - ${config.users.users.palworld.name} ${config.users.groups.palworld.name} - /var/lib/steamcmd/apps/1007/linux64"
+      "L+ ${config.users.users.palworld.home}/.steam/sdk64 - - - - /var/lib/steamcmd/apps/1007/linux64"
     ];
+
+    systemd.services.palworld-permissions = {
+      script = ''
+        ${pkgs.coreutils}/bin/chmod -R ugo+rwx /var/lib/steamcmd/apps/${steam-id}/Pal
+      '';
+
+      serviceConfig = {
+        wants = ["steamcmd@${steam-id}.service"];
+        after = ["steamcmd@${steam-id}.service"];
+        User = config.users.users.steamcmd.name;
+      };
+    };
 
     systemd.services.palworld = {
       path = [pkgs.xdg-user-dirs];
@@ -64,8 +72,8 @@ in {
       wantedBy = [];
 
       # Install the game before launching.
-      wants = ["steamcmd@${steam-id}.service" "steamworks-sdk.service"];
-      after = ["steamcmd@${steam-id}.service" "steamworks-sdk.service"];
+      wants = ["steamcmd@${steam-id}.service"];
+      after = ["steamcmd@${steam-id}.service" "palworld-permissions.service"];
 
       serviceConfig = {
         ExecStart = "${script}/bin/run-server";

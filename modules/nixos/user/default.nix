@@ -161,7 +161,7 @@ in {
         # system to select).
         uid = 1000;
 
-        extraGroups = [] ++ cfg.extraGroups;
+        extraGroups = ["steamcmd"] ++ cfg.extraGroups;
       }
       // cfg.extraOptions;
   };
