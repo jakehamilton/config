@@ -55,12 +55,13 @@ in {
 
     systemd.services.palworld-permissions = {
       script = ''
-        ${pkgs.coreutils}/bin/chmod -R ugo+rwx /var/lib/steamcmd/apps/${steam-id}/Pal
+        ${pkgs.coreutils}/bin/chmod -R ugo+rwx /var/lib/steamcmd/apps/${steam-id}/
       '';
 
+      wants = ["steamcmd@${steam-id}.service"];
+      after = ["steamcmd@${steam-id}.service"];
+
       serviceConfig = {
-        wants = ["steamcmd@${steam-id}.service"];
-        after = ["steamcmd@${steam-id}.service"];
         User = config.users.users.steamcmd.name;
       };
     };
@@ -72,7 +73,7 @@ in {
       wantedBy = [];
 
       # Install the game before launching.
-      wants = ["steamcmd@${steam-id}.service"];
+      wants = ["steamcmd@${steam-id}.service" "palworld-permissions.service"];
       after = ["steamcmd@${steam-id}.service" "palworld-permissions.service"];
 
       serviceConfig = {
