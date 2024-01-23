@@ -213,7 +213,7 @@
       ];
 
       systems.hosts.jasper.modules = with inputs; [
-        nixos-hardware.nixosModules.framework
+        nixos-hardware.nixosModules.framework-11th-gen-intel
       ];
 
       deploy = lib.mkDeploy {inherit (inputs) self;};

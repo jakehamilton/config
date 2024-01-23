@@ -1,11 +1,13 @@
-{ pkgs, lib, nixos-hardware, ... }:
-
-with lib;
-with lib.plusultra;
 {
-  imports = [ ./hardware.nix ];
+  pkgs,
+  lib,
+  ...
+}:
+with lib;
+with lib.plusultra; {
+  imports = [./hardware.nix];
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
   plusultra = {
     archetypes = {
