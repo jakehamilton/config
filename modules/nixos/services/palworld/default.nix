@@ -7,94 +7,127 @@
   ...
 }: let
   cfg = config.plusultra.services.palworld;
-  steam-id = "2394010";
-  port = 8211;
 
-  run-server = lib.escapeShellArgs [
+  steam-id = "2394010";
+  app-id = "1623730";
+
+  palworld-server = lib.escapeShellArgs [
     "${pkgs.steam-run}/bin/steam-run"
     "/var/lib/steamcmd/apps/${steam-id}/PalServer.sh"
-    "-publicport=${toString port}"
+    "-publicport=${toString cfg.port}"
     "-useperfthreads"
     "-NoAsyncLoadingThread"
     "-UseMultithreadForDS"
     "EpicApp=PalServer"
   ];
 
-  script = pkgs.writeScriptBin "run-server" ''
-    #!${pkgs.stdenv.shell}
-    echo "here============================================="
-    echo pwd: $(pwd)
-    echo whoami: $(whoami)
-    echo groups: $(groups)
-    ls -la /var/lib/steamcmd/apps/2394010/Pal/Binaries/Linux/PalServer-Linux-Test
+  user-home = config.users.users.${cfg.user.name}.home;
+  steamcmd-home = config.users.users.${cfg.steamcmd.name}.home;
 
-    exec ${run-server}
-  '';
+  steamcmd-install-service = "steamcmd@${steam-id}.service";
 in {
   options.plusultra.services.palworld = {
     enable = lib.mkEnableOption "Palworld server";
+
+    autostart = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Automatically start the server.";
+    };
+
+    port = lib.mkOption {
+      type = lib.types.port;
+      default = 8211;
+      description = "The port to run the server on.";
+    };
+
+    user = {
+      name = lib.mkOption {
+        type = lib.types.str;
+        default = "palworld";
+        description = "The user to run the server as";
+      };
+
+      group = lib.mkOption {
+        type = lib.types.str;
+        default = "palworld";
+        description = "The group to run the server as";
+      };
+    };
+
+    steamcmd = {
+      name = lib.mkOption {
+        type = lib.types.str;
+        default = "steamcmd";
+        description = "The user that runs steamcmd to install the game server.";
+      };
+
+      group = lib.mkOption {
+        type = lib.types.str;
+        default = "steamcmd";
+        description = "The group that runs steamcmd to install the game server.";
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
     plusultra.services.steam.enable = true;
 
-    users.users.palworld = {
-      isSystemUser = true;
-      home = "/var/lib/palworld";
-      createHome = true;
-      homeMode = "750";
-      group = config.users.groups.palworld.name;
-    };
-
-    users.groups.palworld = {};
-
-    systemd.tmpfiles.rules = [
-      "d ${config.users.users.palworld.home}/.steam 0755 ${config.users.users.palworld.name} ${config.users.groups.palworld.name} - -"
-      "L+ ${config.users.users.palworld.home}/.steam/sdk64 - - - - /var/lib/steamcmd/apps/1007/linux64"
+    networking.firewall.allowedTCPPorts = [
+      cfg.port
     ];
 
-    systemd.services.palworld-permissions = {
-      script = ''
-        ${pkgs.coreutils}/bin/chmod -R ugo+rwx /var/lib/steamcmd/apps/${steam-id}/
-      '';
+    networking.firewall.allowedUDPPorts = [
+      cfg.port
+    ];
 
-      wants = ["steamcmd@${steam-id}.service"];
-      after = ["steamcmd@${steam-id}.service"];
+    users = {
+      users = lib.optionalAttrs (cfg.user.name == "palworld") {
+        palworld = {
+          isSystemUser = true;
+          home = "/var/lib/palworld";
+          createHome = true;
+          homeMode = "750";
+          group = cfg.user.group;
 
-      serviceConfig = {
-        User = config.users.users.steamcmd.name;
+          extraGroups = [
+            cfg.steamcmd.group
+          ];
+        };
+      };
+
+      groups = lib.optionalAttrs (cfg.user.group == "palworld") {
+        palworld = {};
       };
     };
+
+    systemd.tmpfiles.rules = [
+      "d ${user-home}/.steam 0755 ${cfg.user.name} ${cfg.user.group} - -"
+      "L+ ${user-home}/.steam/sdk64 - - - - ${steamcmd-home}/apps/1007/linux64"
+    ];
 
     systemd.services.palworld = {
       path = [pkgs.xdg-user-dirs];
 
       # Manually start the server if needed, to save resources.
-      wantedBy = [];
+      wantedBy = lib.optional cfg.autostart "network-online.target";
 
       # Install the game before launching.
-      wants = ["steamcmd@${steam-id}.service" "palworld-permissions.service"];
-      after = ["steamcmd@${steam-id}.service" "palworld-permissions.service"];
+      wants = [steamcmd-install-service];
+      after = [steamcmd-install-service];
 
       serviceConfig = {
-        ExecStart = "${script}/bin/run-server";
+        ExecStart = palworld-server;
         Nice = "-5";
         PrivateTmp = true;
         Restart = "on-failure";
         User = config.users.users.palworld.name;
         WorkingDirectory = "~";
       };
+
       environment = {
-        SteamAppId = "1623730";
+        SteamAppId = app-id;
       };
     };
-
-    networking.firewall.allowedTCPPorts = [
-      port
-    ];
-
-    networking.firewall.allowedUDPPorts = [
-      port
-    ];
   };
 }
