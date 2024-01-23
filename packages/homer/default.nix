@@ -1,6 +1,9 @@
-{ yarn2nix-moretea, fetchFromGitHub, lib, ... }:
-
-let
+{
+  yarn2nix-moretea,
+  fetchFromGitHub,
+  lib,
+  ...
+}: let
   homer = yarn2nix-moretea.mkYarnPackage rec {
     pname = "homer";
     version = "unstable-2023-06-23";
@@ -47,5 +50,4 @@ let
     '';
   };
 in
-homer
-
+  homer

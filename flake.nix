@@ -188,6 +188,7 @@
           # FIXME: This is a workaround for 22.11 and can
           # be removed once NixPkgs is upgraded to 23.05.
           "python-2.7.18.6"
+          "electron-25.9.0"
         ];
       };
 
