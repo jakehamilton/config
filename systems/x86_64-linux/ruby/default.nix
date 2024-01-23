@@ -8,6 +8,16 @@ with lib;
 with lib.plusultra; {
   imports = [./hardware.nix];
 
+  networking.firewall.allowedTCPPorts = [
+    8211
+    8221
+  ];
+
+  networking.firewall.allowedUDPPorts = [
+    8211
+    8221
+  ];
+
   plusultra = {
     nix = enabled;
 
@@ -32,7 +42,7 @@ with lib.plusultra; {
     services = {
       openssh = enabled;
       tailscale = enabled;
-      palworld = enabled;
+      # palworld = enabled;
     };
 
     security = {
@@ -40,6 +50,10 @@ with lib.plusultra; {
       acme = {
         enable = false;
       };
+    };
+
+    virtualisation = {
+      podman = enabled;
     };
 
     system = {

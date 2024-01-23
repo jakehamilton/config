@@ -9,6 +9,27 @@
   cfg = config.plusultra.services.palworld;
   steam-id = "2394010";
   port = 8211;
+
+  run-server = lib.escapeShellArgs [
+    "${pkgs.steam-run}/bin/steam-run"
+    "/var/lib/steamcmd/apps/${steam-id}/PalServer.sh"
+    "-publicport=${toString port}"
+    "-useperfthreads"
+    "-NoAsyncLoadingThread"
+    "-UseMultithreadForDS"
+    "EpicApp=PalServer"
+  ];
+
+  script = pkgs.writeScriptBin "run-server" ''
+    #!${pkgs.stdenv.shell}
+    echo "here============================================="
+    echo pwd: $(pwd)
+    echo whoami: $(whoami)
+    echo groups: $(groups)
+    ls -la /var/lib/steamcmd/apps/2394010/Pal/Binaries/Linux/PalServer-Linux-Test
+
+    exec ${run-server}
+  '';
 in {
   options.plusultra.services.palworld = {
     enable = lib.mkEnableOption "Palworld server";
@@ -23,13 +44,17 @@ in {
       createHome = true;
       homeMode = "750";
       group = config.users.groups.palworld.name;
+
+      extraGroups = [
+        "steamcmd"
+      ];
     };
 
     users.groups.palworld = {};
 
     systemd.tmpfiles.rules = [
       "d ${config.users.users.palworld.home}/.steam 0755 ${config.users.users.palworld.name} ${config.users.groups.palworld.name} - -"
-      "L+ ${config.users.users.palworld.home}/.steam/sdk64 - - - - /var/lib/steamcmd/apps/1007/linux64"
+      "L+ ${config.users.users.palworld.home}/.steam/sdk64 - ${config.users.users.palworld.name} ${config.users.groups.palworld.name} - /var/lib/steamcmd/apps/1007/linux64"
     ];
 
     systemd.services.palworld = {
@@ -39,19 +64,11 @@ in {
       wantedBy = [];
 
       # Install the game before launching.
-      wants = ["steamcmd@${steam-id}.service"];
-      after = ["steamcmd@${steam-id}.service"];
+      wants = ["steamcmd@${steam-id}.service" "steamworks-sdk.service"];
+      after = ["steamcmd@${steam-id}.service" "steamworks-sdk.service"];
 
       serviceConfig = {
-        ExecStart = lib.escapeShellArgs [
-          "${pkgs.steam-run}/bin/steam-run"
-          "/var/lib/steamcmd/apps/${steam-id}/PalServer.sh"
-          "-publicport=${toString port}"
-          "-useperfthreads"
-          "-NoAsyncLoadingThread"
-          "-UseMultithreadForDS"
-          "EpicApp=PalServer"
-        ];
+        ExecStart = "${script}/bin/run-server";
         Nice = "-5";
         PrivateTmp = true;
         Restart = "on-failure";
