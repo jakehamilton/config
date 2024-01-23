@@ -68,8 +68,6 @@ with lib.plusultra; {
     services = {
       avahi = enabled;
 
-      palworld = enabled;
-
       samba = {
         enable = true;
 
