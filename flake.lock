@@ -1985,11 +1985,11 @@
         "snowfall-lib": "snowfall-lib_12"
       },
       "locked": {
-        "lastModified": 1702217634,
-        "narHash": "sha256-R0fMcUErB37sd0QeE4h+YI4EIoNTkF/NWhZY+4Z+WeU=",
+        "lastModified": 1706430031,
+        "narHash": "sha256-7+VAkz1wYcJjL4weOLyKs0Op5dDtsOsCvVisEvMWL0c=",
         "owner": "snowfallorg",
         "repo": "docs",
-        "rev": "a001b8fc3aa78aecf0288404a3458309e20a3fbc",
+        "rev": "8da359e3b80b167844678971ce7bce973423731e",
         "type": "github"
       },
       "original": {
