@@ -183,8 +183,16 @@ in {
               else "prefer-dark";
             enable-hot-corners = false;
           };
+          "org/gnome/desktop/peripherals/mouse" = {
+            speed = 0.0;
+            accel-profile = "flat";
+            natural-scroll = true;
+          };
           "org/gnome/desktop/peripherals/touchpad" = {
             disable-while-typing = false;
+          };
+          "org/gnome/desktop/peripherals/keyboard" = {
+            delay = lib.home-manager.hm.gvariant.mkUint32 200;
           };
           "org/gnome/desktop/wm/preferences" = {
             num-workspaces = 10;
