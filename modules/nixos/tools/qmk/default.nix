@@ -16,6 +16,7 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       qmk
+      keymapper
     ];
 
     services.udev.packages = with pkgs; [
