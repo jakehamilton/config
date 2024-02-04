@@ -25,11 +25,9 @@ in {
     systemd.services."steamcmd@" = {
       after = ["network-online.target"];
       wants = ["network-online.target"];
-      unitConfig = {
-        StopWhenUnneeded = true;
-      };
       serviceConfig = {
         Type = "oneshot";
+        RemainAfterExit = true;
         ExecStart = "${pkgs.resholve.writeScript "steam" {
             interpreter = "${pkgs.zsh}/bin/zsh";
             inputs = with pkgs; [
@@ -69,7 +67,9 @@ in {
             steamcmd $cmds
 
             for f in $dir/*; do
+              set +e
               chmod -R ugo+rwx $f
+              set -e
 
               if ! [[ -f $f && -x $f ]]; then
                 continue

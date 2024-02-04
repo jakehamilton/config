@@ -33,6 +33,7 @@ with lib.plusultra; {
       openssh = enabled;
       tailscale = enabled;
       palworld = enabled;
+      local-ai = enabled;
     };
 
     security = {

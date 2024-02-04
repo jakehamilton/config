@@ -1,0 +1,55 @@
+# Aliases and endpoints for OpenAI compatible REST API.
+# LocalAI setup instructions: https://github.com/go-skynet/LocalAI#example-use-gpt4all-j-model
+apis:
+  localai:
+    base-url: http://ruby:8080
+    models:
+      luna-ai-llama2:
+        aliases: ["local", "luna", "gpt-3.5-turbo"]
+        max-input-chars: 12250
+        fallback:
+  # openai:
+  #   base-url: https://api.openai.com/v1
+  #   models:
+  #     gpt-4:
+  #       aliases: ["4"]
+  #       max-input-chars: 24500
+  #       fallback: gpt-3.5-turbo
+  #     gpt-4-32k:
+  #       aliases: ["32k"]
+  #       max-input-chars: 98000
+  #       fallback: gpt-4
+  #     gpt-3.5-turbo:
+  #       aliases: ["35t"]
+  #       max-input-chars: 12250
+  #       fallback: gpt-3.5
+  #     gpt-3.5:
+  #       aliases: ["35"]
+  #       max-input-chars: 12250
+  #       fallback:
+# Default model (gpt-3.5-turbo, gpt-4, ggml-gpt4all-j...).
+default-model: local
+# Default character limit on input to model.
+max-input-chars: 12250
+# Format response as markdown.
+format: false
+# Quiet mode (hide the spinner while loading).
+quiet: false
+# Temperature (randomness) of results, from 0.0 to 2.0.
+temp: 1.0
+# TopP, an alternative to temperature that narrows response, from 0.0 to 1.0.
+topp: 1.0
+# Turn off the client-side limit on the size of the input into the model.
+no-limit: false
+# Include the prompt from the arguments in the response.
+include-prompt-args: false
+# Include the prompt from the arguments and stdin, truncate stdin to specified number of lines.
+include-prompt: 0
+# Maximum number of times to retry API calls.
+max-retries: 5
+# Number of cycling characters in the 'generating' animation.
+fanciness: 10
+# Text to show while generating.
+status-text: Generating
+# Maximum number of tokens in response.
+# max-tokens: 100

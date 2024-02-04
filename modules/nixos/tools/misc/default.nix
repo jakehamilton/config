@@ -1,10 +1,14 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let cfg = config.plusultra.tools.misc;
-in
 {
+  options,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib;
+with lib.plusultra; let
+  cfg = config.plusultra.tools.misc;
+in {
   options.plusultra.tools.misc = with types; {
     enable = mkBoolOpt false "Whether or not to enable common utilities.";
   };
@@ -20,6 +24,7 @@ in
       jq
       clac
       wget
+      glow
     ];
   };
 }
