@@ -32,7 +32,7 @@
     flake.inputs.nixpkgs.follows = "unstable";
 
     # Snowfall Thaw
-    thaw.url = "github:snowfallorg/thaw?ref=v1.0.4";
+    thaw.url = "github:snowfallorg/thaw?ref=v1.0.5";
 
     # Comma
     comma.url = "github:nix-community/comma";

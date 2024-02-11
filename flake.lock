@@ -2424,7 +2424,7 @@
       },
       "original": {
         "owner": "snowfallorg",
-        "ref": "v1.0.4",
+        "ref": "v1.0.5",
         "repo": "thaw",
         "type": "github"
       }
