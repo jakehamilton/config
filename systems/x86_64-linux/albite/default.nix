@@ -44,6 +44,7 @@ with lib.plusultra; {
 
       websites = {
         pungeonquest = enabled;
+        nixpkgs-news = enabled;
       };
     };
 

@@ -164,6 +164,10 @@
       url = "github:snowfallorg/docs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs-news = {
+      url = "github:jakehamilton/nixpkgs.news";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: let
@@ -201,6 +205,7 @@
         icehouse.overlays.default
         attic.overlays.default
         snowfall-docs.overlay
+        nixpkgs-news.overlays.default
       ];
 
       systems.modules.nixos = with inputs; [
