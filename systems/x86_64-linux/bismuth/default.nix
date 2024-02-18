@@ -16,31 +16,31 @@ with lib.plusultra; {
   # condition when the system is coming up that causes this.
   # networking.dhcpcd.enable = false;
 
-  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+  # boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
   # NOTE: This _may_ be required for openvpn to work. However, I have
   # not confirmed that...
   boot.kernelModules = ["tun"];
 
-  networking.firewall = {
-    allowedUDPPorts = [28000];
-    allowedTCPPorts = [28000];
-  };
+  # networking.firewall = {
+  #   allowedUDPPorts = [28000];
+  #   allowedTCPPorts = [28000];
+  # };
 
-  environment.systemPackages = with pkgs; [
-    chromium
-    plusultra.kalidoface
-    deluge
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   chromium
+  #   plusultra.kalidoface
+  #   deluge
+  # ];
 
-  services.minecraft-server = {
-    enable = false;
-    eula = true;
-    declarative = true;
-    serverProperties = {
-      server-port = 43000;
-    };
-  };
+  # services.minecraft-server = {
+  #   enable = false;
+  #   eula = true;
+  #   declarative = true;
+  #   serverProperties = {
+  #     server-port = 43000;
+  #   };
+  # };
 
   services.openvpn.servers = {
     expressvpn = {
@@ -49,69 +49,69 @@ with lib.plusultra; {
     };
   };
 
-  services.hardware.openrgb = {
-    enable = true;
-    package = pkgs.openrgb-with-all-plugins;
-    motherboard = "amd";
-  };
+  # services.hardware.openrgb = {
+  #   enable = true;
+  #   package = pkgs.openrgb-with-all-plugins;
+  #   motherboard = "amd";
+  # };
 
   plusultra = {
-    apps = {
-      rpcs3 = enabled;
-      ubports-installer = enabled;
-      steamtinkerlaunch = enabled;
-      r2modman = enabled;
-    };
+    # apps = {
+    #   rpcs3 = enabled;
+    #   ubports-installer = enabled;
+    #   steamtinkerlaunch = enabled;
+    #   r2modman = enabled;
+    # };
 
     user.prompt-init = false;
 
-    services = {
-      avahi = enabled;
+    # services = {
+    #   avahi = enabled;
 
-      samba = {
-        enable = true;
+    #   samba = {
+    #     enable = true;
 
-        shares = {
-          video = {
-            path = "/mnt/data/video";
-            public = true;
-            read-only = true;
-          };
-          audio = {
-            path = "/mnt/data/audio";
-            public = true;
-            read-only = true;
-          };
-          shared = {
-            path = "/mnt/data/shared";
-            public = true;
-          };
-        };
-      };
-    };
+    #     shares = {
+    #       video = {
+    #         path = "/mnt/data/video";
+    #         public = true;
+    #         read-only = true;
+    #       };
+    #       audio = {
+    #         path = "/mnt/data/audio";
+    #         public = true;
+    #         read-only = true;
+    #       };
+    #       shared = {
+    #         path = "/mnt/data/shared";
+    #         public = true;
+    #       };
+    #     };
+    #   };
+    # };
 
     archetypes = {
-      gaming = enabled;
+      # gaming = enabled;
       workstation = enabled;
     };
 
-    desktop.gnome = {
-      wallpaper = {
-        light = pkgs.plusultra.wallpapers.nord-rainbow-light-nix-ultrawide;
-        dark = pkgs.plusultra.wallpapers.nord-rainbow-dark-nix-ultrawide;
-      };
-      monitors = ./monitors.xml;
-    };
+    # desktop.gnome = {
+    #   wallpaper = {
+    #     light = pkgs.plusultra.wallpapers.nord-rainbow-light-nix-ultrawide;
+    #     dark = pkgs.plusultra.wallpapers.nord-rainbow-dark-nix-ultrawide;
+    #   };
+    #   monitors = ./monitors.xml;
+    # };
 
-    virtualisation.kvm = {
-      enable = true;
-      platform = "amd";
-      # RX480 when in the bottom slot:
-      # IOMMU Group 23 23:00.0 VGA compatible controller [0300]: Advanced Micro Devices, Inc. [AMD/ATI] Ellesmere [Radeon RX 470/480/570/570X/580/580X/590] [1002:67df] (rev c7)
-      # IOMMU Group 23 23:00.1 Audio device [0403]: Advanced Micro Devices, Inc. [AMD/ATI] Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] [1002:aaf0]
-      vfioIds = ["1002:67df" "1002:aaf0"];
-      machineUnits = ["machine-qemu\\x2d1\\x2dwin10.scope"];
-    };
+    # virtualisation.kvm = {
+    #   enable = true;
+    #   platform = "amd";
+    #   # RX480 when in the bottom slot:
+    #   # IOMMU Group 23 23:00.0 VGA compatible controller [0300]: Advanced Micro Devices, Inc. [AMD/ATI] Ellesmere [Radeon RX 470/480/570/570X/580/580X/590] [1002:67df] (rev c7)
+    #   # IOMMU Group 23 23:00.1 Audio device [0403]: Advanced Micro Devices, Inc. [AMD/ATI] Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] [1002:aaf0]
+    #   vfioIds = ["1002:67df" "1002:aaf0"];
+    #   machineUnits = ["machine-qemu\\x2d1\\x2dwin10.scope"];
+    # };
   };
 
   # WiFi is typically unused on the desktop. Enable this service
