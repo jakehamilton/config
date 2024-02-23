@@ -24,7 +24,7 @@
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Lib
-    snowfall-lib.url = "github:snowfallorg/lib/fix/home-module-imports";
+    snowfall-lib.url = "github:snowfallorg/lib/dev";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Flake
@@ -204,7 +204,7 @@
         cowsay.overlays.default
         icehouse.overlays.default
         attic.overlays.default
-        snowfall-docs.overlay
+        snowfall-docs.overlays.default
         nixpkgs-news.overlays.default
       ];
 
