@@ -1623,11 +1623,11 @@
         "unstable": "unstable"
       },
       "locked": {
-        "lastModified": 1708310121,
-        "narHash": "sha256-kQKZF4wOsdhkzkR/Fuwe66OuT/olc+J5VUXR/iuTSkw=",
+        "lastModified": 1709033651,
+        "narHash": "sha256-R0k3bCEmHx6tAFL67mRrfpCSDfw550fxR63Ks5d4SJM=",
         "owner": "jakehamilton",
         "repo": "nixpkgs.news",
-        "rev": "575fd9fce35f9aab3706e7ef4067e35e8ac91659",
+        "rev": "c4fdc2eb9c1ea239ae4d983f943e4c3f21f9b7f6",
         "type": "github"
       },
       "original": {
@@ -2047,11 +2047,11 @@
         "snowfall-lib": "snowfall-lib_13"
       },
       "locked": {
-        "lastModified": 1708718256,
-        "narHash": "sha256-ydEIdQL7tD4c6ffAyZ7rcKKu7fMC7v0Mq3MUV3hd8SE=",
+        "lastModified": 1708790670,
+        "narHash": "sha256-VpOT5GLuLy9ij5PHRexmDoLFMMUdRlMhagTzwwmM3k8=",
         "owner": "snowfallorg",
         "repo": "docs",
-        "rev": "e819c97456f35c6430dc4901a15351faa6faab6f",
+        "rev": "4384dd619b66e7129ceccdb5fc66c07fa61e17a7",
         "type": "github"
       },
       "original": {
