@@ -1,17 +1,21 @@
-{ options, config, pkgs, lib, inputs, ... }:
-
+{
+  options,
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 with lib;
-with lib.plusultra;
-let
+with lib.plusultra; let
   cfg = config.plusultra.nix;
 
-  substituters-submodule = types.submodule ({ name, ... }: {
+  substituters-submodule = types.submodule ({name, ...}: {
     options = with types; {
       key = mkOpt (nullOr str) null "The trusted public key for this substituter.";
     };
   });
-in
-{
+in {
   options.plusultra.nix = with types; {
     enable = mkBoolOpt true "Whether or not to manage nix configuration.";
     package = mkOpt package pkgs.nixUnstable "Which nix package to use.";
@@ -21,11 +25,12 @@ in
       key = mkOpt str "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" "The trusted public key for the substituter.";
     };
 
-    extra-substituters = mkOpt (attrsOf substituters-submodule) { } "Extra substituters to configure.";
+    extra-substituters = mkOpt (attrsOf substituters-submodule) {} "Extra substituters to configure.";
   };
 
   config = mkIf cfg.enable {
-    assertions = mapAttrsToList
+    assertions =
+      mapAttrsToList
       (name: value: {
         assertion = value.key != null;
         message = "plusultra.nix.extra-substituters.${name}.key must be set";
@@ -45,14 +50,15 @@ in
       flake-checker
     ];
 
-    nix =
-      let users = [ "root" config.plusultra.user.name ] ++
-        optional config.services.hydra.enable "hydra";
-      in
-      {
-        package = cfg.package;
+    nix = let
+      users =
+        ["root" config.plusultra.user.name]
+        ++ optional config.services.hydra.enable "hydra";
+    in {
+      package = cfg.package;
 
-        settings = {
+      settings =
+        {
           experimental-features = "nix-command flakes";
           http-connections = 50;
           warn-dirty = false;
@@ -63,29 +69,27 @@ in
           allowed-users = users;
 
           substituters =
-            [ cfg.default-substituter.url ]
-              ++
-              (mapAttrsToList (name: value: name) cfg.extra-substituters);
+            [cfg.default-substituter.url]
+            ++ (mapAttrsToList (name: value: name) cfg.extra-substituters);
           trusted-public-keys =
-            [ cfg.default-substituter.key ]
-              ++
-              (mapAttrsToList (name: value: value.key) cfg.extra-substituters);
-
-        } // (lib.optionalAttrs config.plusultra.tools.direnv.enable {
+            [cfg.default-substituter.key]
+            ++ (mapAttrsToList (name: value: value.key) cfg.extra-substituters);
+        }
+        // (lib.optionalAttrs config.plusultra.tools.direnv.enable {
           keep-outputs = true;
           keep-derivations = true;
         });
 
-        gc = {
-          automatic = true;
-          dates = "weekly";
-          options = "--delete-older-than 30d";
-        };
-
-        # flake-utils-plus
-        generateRegistryFromInputs = true;
-        generateNixPathFromInputs = true;
-        linkInputs = true;
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 30d";
       };
+
+      # flake-utils-plus
+      generateRegistryFromInputs = true;
+      generateNixPathFromInputs = true;
+      linkInputs = true;
+    };
   };
 }

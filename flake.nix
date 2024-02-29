@@ -28,7 +28,7 @@
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Flake
-    flake.url = "github:snowfallorg/flake?ref=v1.3.0";
+    flake.url = "github:snowfallorg/flake?ref=v1.3.1";
     flake.inputs.nixpkgs.follows = "unstable";
 
     # Snowfall Thaw
@@ -76,7 +76,7 @@
     # Flake Hygiene
     flake-checker = {
       url = "github:DeterminateSystems/flake-checker";
-      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Discord Replugged
@@ -189,9 +189,7 @@
       channels-config = {
         allowUnfree = true;
         permittedInsecurePackages = [
-          # FIXME: This is a workaround for 22.11 and can
-          # be removed once NixPkgs is upgraded to 23.05.
-          "python-2.7.18.6"
+          # "python-2.7.18.6"
           "electron-25.9.0"
         ];
       };
