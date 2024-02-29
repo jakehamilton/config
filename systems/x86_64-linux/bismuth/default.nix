@@ -22,6 +22,11 @@ with lib.plusultra; {
   # not confirmed that...
   boot.kernelModules = ["tun"];
 
+  # Bismuth has had issues with FS corruption in the past and has now experienced
+  # extremely strange errors when attempting to install NixOS. There may be some
+  # memory problems and memtest86 can help to confirm.
+  boot.loader.systemd-boot.memtest86.enable = true;
+
   networking.firewall = {
     allowedUDPPorts = [28000];
     allowedTCPPorts = [28000];
