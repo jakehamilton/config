@@ -9,7 +9,7 @@
 with lib.plusultra; {
   plusultra = {
     cli-apps = {
-      zsh = enabled;
+      zsh = disabled;
       neovim = enabled;
       home-manager = enabled;
     };

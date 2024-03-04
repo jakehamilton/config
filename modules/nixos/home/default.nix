@@ -10,10 +10,6 @@ with lib;
 with lib.plusultra; let
   cfg = config.plusultra.home;
 in {
-  # imports = with inputs; [
-  #   home-manager.nixosModules.home-manager
-  # ];
-
   options.plusultra.home = with types; {
     file =
       mkOpt attrs {}
@@ -32,14 +28,11 @@ in {
       xdg.configFile = mkAliasDefinitions options.plusultra.home.configFile;
     };
 
-    snowfallorg.user.${config.plusultra.user.name}.home.config = mkAliasDefinitions options.plusultra.home.extraOptions;
+    snowfallorg.user.${config.plusultra.user.name}.home.config = config.plusultra.home.extraOptions;
 
     home-manager = {
       useUserPackages = true;
       useGlobalPkgs = true;
-
-      # users.${config.plusultra.user.name} =
-      #   mkAliasDefinitions options.plusultra.home.extraOptions;
     };
   };
 }
