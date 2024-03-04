@@ -1,6 +1,10 @@
-{ lib, config, pkgs, osConfig ? { }, ... }:
-
-let
+{
+  lib,
+  config,
+  pkgs,
+  osConfig ? {},
+  ...
+}: let
   inherit (lib) types mkIf mkDefault mkMerge;
   inherit (lib.plusultra) mkOpt;
 
@@ -10,17 +14,15 @@ let
   is-darwin = pkgs.stdenv.isDarwin;
 
   home-directory =
-    if cfg.name == null then
-      null
-    else if is-darwin then
-      "/Users/${cfg.name}"
-    else
-      "/home/${cfg.name}";
-in
-{
+    if cfg.name == null
+    then null
+    else if is-darwin
+    then "/Users/${cfg.name}"
+    else "/home/${cfg.name}";
+in {
   options.plusultra.user = {
-    enable = mkOpt types.bool false "Whether to configure the user account.";
-    name = mkOpt (types.nullOr types.str) config.snowfallorg.user.name "The user account.";
+    enable = mkOpt types.bool true "Whether to configure the user account.";
+    name = mkOpt (types.nullOr types.str) (config.snowfallorg.user.name or "short") "The user account.";
 
     fullName = mkOpt types.str "Jake Hamilton" "The full name of the user.";
     email = mkOpt types.str "jake.hamilton@hey.com" "The email of the user.";
