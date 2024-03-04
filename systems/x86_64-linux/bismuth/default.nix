@@ -63,8 +63,6 @@ with lib.plusultra; {
       r2modman = enabled;
     };
 
-    user.prompt-init = false;
-
     services = {
       avahi = enabled;
 
