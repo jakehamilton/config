@@ -1623,11 +1623,11 @@
         "unstable": "unstable"
       },
       "locked": {
-        "lastModified": 1711955002,
-        "narHash": "sha256-LDwRnBD2h29rV3zq2wDZbc7ApCfgGNijCRSpVojOdFE=",
+        "lastModified": 1711957277,
+        "narHash": "sha256-q3+xSm5zomAnCqbIY6qU9zvP0G79/DHHWZ5UwYxoaAI=",
         "owner": "jakehamilton",
         "repo": "nixpkgs.news",
-        "rev": "71500605e3fd08d241a6185930534c18540cfeb2",
+        "rev": "ef9e8c7cb6076ee38f0dd2164f3fb8a60061278d",
         "type": "github"
       },
       "original": {
