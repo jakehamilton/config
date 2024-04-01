@@ -9,6 +9,8 @@ with lib.plusultra; {
 
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
+  networking.hostName = "testing2";
+
   plusultra = {
     archetypes = {
       workstation = enabled;
