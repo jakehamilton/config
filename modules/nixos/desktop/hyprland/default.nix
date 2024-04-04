@@ -37,8 +37,7 @@ in {
 
     wallpaper = mkOption {
       type = types.oneOf [types.package types.path types.str];
-      # default = pkgs.plusultra.wallpapers.nord-rainbow-dark-nix;
-      default = pkgs.plusultra.wallpapers.mountains;
+      default = pkgs.plusultra.wallpapers.nord-rainbow-dark-nix;
       description = "The wallpaper to use.";
     };
 
