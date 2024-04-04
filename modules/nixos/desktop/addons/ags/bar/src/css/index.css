@@ -1,0 +1,76 @@
+.bar {
+  color: #eceff4;
+  background: #2e3440;
+  border-radius: 0; }
+
+.icon-font {
+  font: 24px "Hack Nerd Font"; }
+
+.panel {
+  background: #2e3440; }
+
+.toggle-panel {
+  border-radius: 0;
+  border: none; }
+  .toggle-panel .toggle-panel-button {
+    border-radius: 0;
+    border: none;
+    margin: 0;
+    padding: 0;
+    outline: none; }
+    .toggle-panel .toggle-panel-button .toggle-panel-icon {
+      font-size: 48px; }
+
+.workspace {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  border-radius: 99999px; }
+
+.network .wired.connected {
+  color: #eceff4; }
+
+.network .wired.disconnected {
+  color: #bf616a; }
+
+.vertical-bar .network {
+  padding-right: 6px; }
+
+.vertical-bar .vertical-bar-bottom {
+  padding-bottom: 8px; }
+
+.vertical-bar .vertical-time {
+  font: 26px "Vina Sans";
+  margin-top: -8px; }
+  .vertical-bar .vertical-time .minutes {
+    margin-top: -10px; }
+
+.vertical-bar .workspaces .workspaces-container {
+  padding-top: 8px;
+  padding-bottom: 8px; }
+
+.vertical-bar .workspaces .workspace {
+  min-width: 8px;
+  min-height: 8px;
+  background: #3b4252;
+  transition: min-height 0.25s ease-in-out, background 0.25s ease-in-out; }
+  .vertical-bar .workspaces .workspace.occupied {
+    background: #616e88; }
+  .vertical-bar .workspaces .workspace.active {
+    background: #5e81ac;
+    min-height: 24px; }
+
+.vertical-panel {
+  min-width: 400px; }
+  .vertical-panel .apps .apps-search {
+    min-height: 48px;
+    background: #3b4252; }
+    .vertical-panel .apps .apps-search .apps-search-entry {
+      border-radius: 0;
+      border: none;
+      background: #3b4252; }
+    .vertical-panel .apps .apps-search .apps-search-icon {
+      color: #4c566a;
+      font-size: 32px;
+      padding-right: 16px; }

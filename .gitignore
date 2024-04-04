@@ -10,3 +10,9 @@ result
 
 # A useful artifact when working with configuration documentation
 options.json
+
+# Direnv
+.direnv
+
+# Ags
+modules/nixos/desktop/addons/ags/bar/src/types

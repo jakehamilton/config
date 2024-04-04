@@ -1491,11 +1491,11 @@
         "snowfall-lib": "snowfall-lib_7"
       },
       "locked": {
-        "lastModified": 1710554081,
-        "narHash": "sha256-V+/6AZ6KiQqIkXz9F2Ghxn9oF4Eob0YUqg3Nx42op0k=",
+        "lastModified": 1712146563,
+        "narHash": "sha256-f/hoM+Ar8WP9Pc43hd99GDN/L7/C3l4sNk8jehwFGj4=",
         "owner": "jakehamilton",
         "repo": "neovim",
-        "rev": "9375031a8da6a654bf0f971d23c302f2fb555b35",
+        "rev": "cdc0749394ed0645bd9516977514108c410cec15",
         "type": "github"
       },
       "original": {
@@ -1696,11 +1696,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1707010224,
-        "narHash": "sha256-1HTmGop2l8QSufw1wW1mMldWJDt5VstbdjGDgbvODJA=",
+        "lastModified": 1712146455,
+        "narHash": "sha256-m3QbYT+7ofXSAxKosoXCNw5mrviQExlsGbpFD8XwJRY=",
         "owner": "jakehamilton",
         "repo": "nixvim",
-        "rev": "eb67566293fdbdf06457922bb5da0ed7dd45b0b8",
+        "rev": "3f62ee0121baeab27d56717935ec7f3116ba0fcf",
         "type": "github"
       },
       "original": {
@@ -2602,11 +2602,11 @@
     },
     "unstable_2": {
       "locked": {
-        "lastModified": 1706732774,
-        "narHash": "sha256-hqJlyJk4MRpcItGYMF+3uHe8HvxNETWvlGtLuVpqLU0=",
+        "lastModified": 1711703276,
+        "narHash": "sha256-iMUFArF0WCatKK6RzfUJknjem0H9m4KgorO/p3Dopkk=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b8b232ae7b8b144397fdb12d20f592e5e7c1a64d",
+        "rev": "d8fe5e6c92d0d190646fb9f1056741a229980089",
         "type": "github"
       },
       "original": {

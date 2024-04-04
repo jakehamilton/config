@@ -28,7 +28,7 @@ in {
       xdg.configFile = mkAliasDefinitions options.plusultra.home.configFile;
     };
 
-    snowfallorg.user.${config.plusultra.user.name}.home.config = config.plusultra.home.extraOptions;
+    snowfallorg.users.${config.plusultra.user.name}.home.config = config.plusultra.home.extraOptions;
 
     home-manager = {
       useUserPackages = true;

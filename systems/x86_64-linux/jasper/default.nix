@@ -22,7 +22,11 @@ with lib.plusultra; {
       zfs = enabled;
     };
 
+    desktop.hyprland = enabled;
+
     desktop.gnome = {
+      enable =
+        mkForce false;
       monitors = ./monitors.xml;
     };
 

@@ -1,0 +1,12 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "description": "if suggestions don't work, first make sure you have TypeScript LSP working in your editor",
+  "main": "config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
