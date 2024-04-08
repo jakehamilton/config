@@ -74,6 +74,8 @@ in {
       };
     };
 
+    services.upower = enabled;
+
     programs.dconf = enabled;
 
     plusultra = {
