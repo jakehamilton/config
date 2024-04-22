@@ -271,7 +271,7 @@ nixos_hosts_all() {
 		log_error "To use this program, override it with your nixosConfigurations:"
 		log_error ""
 		log_error "  nixos-hosts.override {"
-		log_error "    inherit (self) nixosConfigurations;"
+		log_error "    hosts = self.nixosConfigurations;"
 		log_error "  }"
 		log_error ""
 		log_fatal "No hosts configured."
