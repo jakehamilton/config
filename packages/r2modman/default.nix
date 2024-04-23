@@ -1,21 +1,25 @@
 {
   pkgs,
   lib,
+  writeShellScriptBin,
+  curl,
+  jq,
+  gnused,
   ...
 }: let
   pname = "r2modman";
-  version = "3.1.45";
+  version = "3.1.48";
   name = "${pname}-${version}";
 
   src = pkgs.fetchurl {
     url = "https://github.com/ebkr/r2modmanPlus/releases/download/v${version}/${name}.AppImage";
-    sha256 = "15gj6yp29hbc2p2safnps12cwxl1l12lgw9z93nvxwn2q8h83lks";
+    sha256 = "/eXPmeS/cO3zn8WaJ4s+yowWtXKPa0qdANW82ANmD1M=";
   };
 
   appimageContents = pkgs.appimageTools.extractType2 {inherit name src;};
 in
   pkgs.appimageTools.wrapType2 rec {
-    inherit name src;
+    inherit name src version;
 
     extraInstallCommands = ''
       mv $out/bin/${name} $out/bin/${pname}
@@ -37,5 +41,20 @@ in
       maintainers = with maintainers; [jakehamilton];
       platforms = ["x86_64-linux"];
       mainProgram = "r2modman";
+    };
+
+    passthru = {
+      # NOTE: `appimageTools` doesn't pass through the version of the package to the resulting
+      # derivation. We need this for Drift to be able to swap out the previous version with the
+      # latest one.
+      inherit version;
+
+      update = writeShellScriptBin "r2modman-update" ''
+        set -euo pipefail
+
+        latest="$(${curl}/bin/curl -s "https://api.github.com/repos/ebkr/r2modmanPlus/releases?per_page=1" | ${jq}/bin/jq -r ".[0].tag_name" | ${gnused}/bin/sed 's/^v//')"
+
+        drift rewrite --auto-hash --new-version "$latest"
+      '';
     };
   }

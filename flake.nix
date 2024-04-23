@@ -34,6 +34,10 @@
     # Snowfall Thaw
     thaw.url = "github:snowfallorg/thaw?ref=v1.0.5";
 
+    # Snowfall Drift
+    drift.url = "github:snowfallorg/drift";
+    drift.inputs.nixpkgs.follows = "nixpkgs";
+
     # Comma
     comma.url = "github:nix-community/comma";
     comma.inputs.nixpkgs.follows = "unstable";
@@ -189,7 +193,6 @@
       channels-config = {
         allowUnfree = true;
         permittedInsecurePackages = [
-          # "python-2.7.18.6"
           "electron-25.9.0"
         ];
       };
@@ -199,6 +202,7 @@
         tmux.overlay
         flake.overlays.default
         thaw.overlays.default
+        drift.overlays.default
         cowsay.overlays.default
         icehouse.overlays.default
         attic.overlays.default

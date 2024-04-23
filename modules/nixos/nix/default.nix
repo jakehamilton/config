@@ -48,6 +48,7 @@ in {
       nix-prefetch-git
       nix-output-monitor
       flake-checker
+      snowfallorg.drift
     ];
 
     nix = let
