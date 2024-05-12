@@ -9,6 +9,12 @@ with lib.plusultra; {
 
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
+  snowfallorg = {
+    avalanche.desktop = {
+      enable = true;
+    };
+  };
+
   plusultra = {
     archetypes = {
       workstation = enabled;
@@ -54,6 +60,13 @@ with lib.plusultra; {
     #     panel-size = 60;
     #   };
     # };
+    snowfallorg.avalanche.desktop.monitors = {
+      default.wallpaper = pkgs.snowfallorg.avalanche-wallpapers.nord-rainbow-dark-nix;
+
+      eDP-1 = {
+        clamshell = true;
+      };
+    };
   };
 
   # This value determines the NixOS release from which the default

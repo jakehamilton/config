@@ -27,6 +27,14 @@
     snowfall-lib.url = "github:snowfallorg/lib/dev";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Avalanche
+    avalanche.url = "github:snowfallorg/avalanche";
+    # avalanche.url = "path:/home/short/work/@snowfallorg/avalanche";
+    avalanche.inputs.nixpkgs.follows = "unstable";
+
+    aux-website.url = "github:auxolotl/website";
+    aux-website.inputs.nixpkgs.follows = "nixpkgs";
+
     # Snowfall Flake
     flake.url = "github:snowfallorg/flake?ref=v1.3.1";
     flake.inputs.nixpkgs.follows = "unstable";
@@ -198,6 +206,8 @@
       };
 
       overlays = with inputs; [
+        avalanche.overlays.default
+        aux-website.overlays.default
         neovim.overlays.default
         tmux.overlay
         flake.overlays.default
@@ -211,6 +221,7 @@
       ];
 
       systems.modules.nixos = with inputs; [
+        avalanche.nixosModules."avalanche/desktop"
         home-manager.nixosModules.home-manager
         nix-ld.nixosModules.nix-ld
         vault-service.nixosModules.nixos-vault-service

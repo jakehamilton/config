@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  config,
   modulesPath,
   ...
 }:
@@ -22,22 +23,53 @@ with lib.plusultra; {
   ];
 
   services = {
-    castopod = {
+    discourse = {
       enable = true;
-      localDomain = "cast.nixpkgs.news";
-    };
+      hostname = "forum.aux.computer";
 
-    nginx = {
-      enable = true;
+      admin = {
+        # We only want to create the admin account on the initial deployment. Now that one
+        # exists, we can skip this step.
+        skipCreate = true;
 
-      virtualHosts."cast.nixpkgs.news" = {
-        enableACME = true;
-        forceSSL = true;
+        email = "jake.hamilton@hey.com";
+        username = "admin";
+        fullName = "Administrator";
+        passwordFile = "/var/lib/secrets/discourse-admin-password";
       };
+
+      mail = {
+        outgoing = {
+          username = "mail@forum.aux.computer";
+          passwordFile = "/var/lib/secrets/discourse-smtp-password";
+
+          serverAddress = "smtp.mailgun.org";
+          port = 587;
+        };
+      };
+
+      plugins =
+        (with config.services.discourse.package.plugins; [
+          discourse-canned-replies
+          discourse-checklist
+          discourse-assign
+          discourse-voting
+          discourse-spoiler-alert
+          discourse-solved
+        ])
+        ++ [
+          # (config.services.discourse.package.mkDiscoursePlugin {
+          #   name = "discourse-user-notes";
+          #   src = pkgs.fetchFromGitHub {
+          #     owner = "discourse";
+          #     repo = "discourse-user-notes";
+          #     rev = "e50c9d37f191e3f2f6564311abfa559f9f11f4a6";
+          #     sha256 = "0jqrih7cqz7a8ap15vf20yjw81bpm07zg6dzsfwcpdpf8yj3cdak";
+          #   };
+          # })
+        ];
     };
   };
-
-  systemd.services.castopod-scheduled.enable = false;
 
   plusultra = {
     nix = enabled;
@@ -59,6 +91,10 @@ with lib.plusultra; {
     services = {
       openssh = enabled;
       tailscale = enabled;
+
+      websites = {
+        aux = enabled;
+      };
     };
 
     system = {
