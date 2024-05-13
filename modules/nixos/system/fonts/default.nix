@@ -28,6 +28,7 @@ in {
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
         noto-fonts-emoji
+        pkgs.plusultra.rf
         (nerdfonts.override {fonts = ["Hack"];})
       ]
       ++ cfg.fonts;

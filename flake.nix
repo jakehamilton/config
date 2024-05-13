@@ -137,6 +137,11 @@
       flake = false;
     };
 
+    rf = {
+      url = "github:jakehamilton/rf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Hosted Sites
     lasersandfeelings = {
       url = "github:jakehamilton/lasersandfeelings";
@@ -215,6 +220,7 @@
         drift.overlays.default
         cowsay.overlays.default
         icehouse.overlays.default
+        rf.overlays.default
         attic.overlays.default
         snowfall-docs.overlays.default
         nixpkgs-news.overlays.default
