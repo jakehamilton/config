@@ -1,14 +1,17 @@
-{ lib, config, pkgs, ... }:
-
-let
-  inherit (lib) types mkEnableOption mkIf;
-  inherit (lib.plusultra) mkOpt enabled;
-
-  cfg = config.plusultra.tools.git;
-  user = config.plusultra.user;
-in
 {
-  options.plusultra.tools.git = {
+  lib,
+  config,
+  pkgs,
+  namespace,
+  ...
+}: let
+  inherit (lib) types mkEnableOption mkIf;
+  inherit (lib.${namespace}) mkOpt enabled;
+
+  cfg = config.${namespace}.tools.git;
+  user = config.${namespace}.user;
+in {
+  options.${namespace}.tools.git = {
     enable = mkEnableOption "Git";
     userName = mkOpt types.str user.fullName "The name to configure git with.";
     userEmail = mkOpt types.str user.email "The email to configure git with.";
@@ -27,10 +30,10 @@ in
         inherit (cfg) signByDefault;
       };
       extraConfig = {
-        init = { defaultBranch = "main"; };
-        pull = { rebase = true; };
-        push = { autoSetupRemote = true; };
-        core = { whitespace = "trailing-space,space-before-tab"; };
+        init = {defaultBranch = "main";};
+        pull = {rebase = true;};
+        push = {autoSetupRemote = true;};
+        core = {whitespace = "trailing-space,space-before-tab";};
         safe = {
           directory = "${user.home}/work/config";
         };

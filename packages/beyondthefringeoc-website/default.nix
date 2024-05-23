@@ -1,7 +1,11 @@
-{ lib, fetchFromGitHub, buildNpmPackage, ... }:
-
-let
-  inherit (lib.plusultra) override-meta;
+{
+  lib,
+  fetchFromGitHub,
+  buildNpmPackage,
+  namespace,
+  ...
+}: let
+  inherit (lib.${namespace}) override-meta;
 
   src = fetchFromGitHub {
     owner = "jakehamilton";
@@ -17,9 +21,11 @@ let
     '';
   };
 
-  new-meta = with lib; src.meta // {
-    description = "The website for beyondthefringeoc.com.";
-    maintainers = with maintainers; [ jakehamilton ];
-  };
+  new-meta = with lib;
+    src.meta
+    // {
+      description = "The website for beyondthefringeoc.com.";
+      maintainers = with maintainers; [jakehamilton];
+    };
 in
-override-meta new-meta src
+  override-meta new-meta src

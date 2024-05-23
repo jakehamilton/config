@@ -1,12 +1,14 @@
-{ config, lib, ... }:
-
-with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.cache.public;
-in
 {
-  options.plusultra.cache.public = {
+  config,
+  lib,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.cache.public;
+in {
+  options.${namespace}.cache.public = {
     enable = mkEnableOption "Plus Ultra public cache";
   };
 

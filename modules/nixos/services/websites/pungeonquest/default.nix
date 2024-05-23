@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  namespace,
   ...
 }: let
   inherit
@@ -12,11 +13,11 @@
     optionalString
     optionalAttrs
     ;
-  inherit (lib.plusultra) mkOpt;
+  inherit (lib.${namespace}) mkOpt;
 
-  cfg = config.plusultra.services.websites.pungeonquest;
+  cfg = config.${namespace}.services.websites.pungeonquest;
 in {
-  options.plusultra.services.websites.pungeonquest = with lib.types; {
+  options.${namespace}.services.websites.pungeonquest = with lib.types; {
     enable = mkEnableOption "Pungeonquest";
     package = mkOpt package pkgs.pungeonquest "The package to use.";
     domain = mkOpt str "pungeonquest.com" "The domain to serve the website site on.";

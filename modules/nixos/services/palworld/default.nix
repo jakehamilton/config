@@ -3,10 +3,11 @@
 {
   config,
   pkgs,
+  namespace,
   lib,
   ...
 }: let
-  cfg = config.plusultra.services.palworld;
+  cfg = config.${namespace}.services.palworld;
 
   steam-id = "2394010";
   app-id = "1623730";
@@ -26,7 +27,7 @@
 
   steamcmd-install-service = "steamcmd@${steam-id}.service";
 in {
-  options.plusultra.services.palworld = {
+  options.${namespace}.services.palworld = {
     enable = lib.mkEnableOption "Palworld server";
 
     autostart = lib.mkOption {

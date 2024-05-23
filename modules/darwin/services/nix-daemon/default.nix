@@ -1,13 +1,15 @@
-{ lib, config, ... }:
-
-let
-  inherit (lib) types mkIf;
-  inherit (lib.plusultra) mkOpt enabled;
-
-  cfg = config.plusultra.services.nix-daemon;
-in
 {
-  options.plusultra.services.nix-daemon = {
+  lib,
+  config,
+  namespace,
+  ...
+}: let
+  inherit (lib) types mkIf;
+  inherit (lib.${namespace}) mkOpt enabled;
+
+  cfg = config.${namespace}.services.nix-daemon;
+in {
+  options.${namespace}.services.nix-daemon = {
     enable = mkOpt types.bool true "Whether to enable the Nix daemon.";
   };
 

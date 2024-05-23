@@ -1,7 +1,11 @@
-{ lib, makeDesktopItem, firefox, ... }:
-
-let
-  with-meta = lib.plusultra.override-meta {
+{
+  lib,
+  makeDesktopItem,
+  firefox,
+  namespace,
+  ...
+}: let
+  with-meta = lib.${namespace}.override-meta {
     platforms = lib.platforms.linux;
     broken = firefox.meta.broken;
   };
@@ -14,8 +18,8 @@ let
       ${firefox}/bin/firefox "https://app.hey.com/?plusultra.app=true"'';
     icon = ./icon.svg;
     type = "Application";
-    categories = [ "Office" "Network" "Email" ];
+    categories = ["Office" "Network" "Email"];
     terminal = false;
   };
 in
-with-meta hey
+  with-meta hey

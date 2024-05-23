@@ -1,7 +1,12 @@
-{ lib, makeDesktopItem, firefox, symlinkJoin, ... }:
-
-let
-  with-meta = lib.plusultra.override-meta {
+{
+  lib,
+  makeDesktopItem,
+  firefox,
+  symlinkJoin,
+  namespace,
+  ...
+}: let
+  with-meta = lib.${namespace}.override-meta {
     platforms = lib.platforms.linux;
     broken = firefox.meta.broken;
   };
@@ -14,25 +19,24 @@ let
       ${firefox}/bin/firefox "https://kalidoface.com/?plusultra.app=true"'';
     icon = ./icon-2d.svg;
     type = "Application";
-    categories = [ "Network" ];
+    categories = ["Network"];
     terminal = false;
   });
   kalidoface-3d = with-meta (makeDesktopItem {
     name = "Kalidoface 3D";
     desktopName = "Kalidoface 3D";
-    genericName =
-      "Animate character faces, poses and fingers in 3D using just your browser webcam!";
+    genericName = "Animate character faces, poses and fingers in 3D using just your browser webcam!";
     exec = ''
       ${firefox}/bin/firefox "https://3d.kalidoface.com/?plusultra.app=true"'';
     icon = ./icon-3d.svg;
     type = "Application";
-    categories = [ "Network" ];
+    categories = ["Network"];
     terminal = false;
   });
 in
-with-meta (
-  symlinkJoin {
-    name = "kalidoface-desktop-items";
-    paths = [ kalidoface-2d kalidoface-3d ];
-  }
-)
+  with-meta (
+    symlinkJoin {
+      name = "kalidoface-desktop-items";
+      paths = [kalidoface-2d kalidoface-3d];
+    }
+  )

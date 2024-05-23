@@ -1,14 +1,23 @@
-{ lib, pkgs, config, ... }:
-
-let
-  inherit (lib) mkIf mkEnableOption fetchFromGitHub optionalString
-    optionalAttrs;
-  inherit (lib.plusultra) mkOpt;
-
-  cfg = config.plusultra.services.websites.retrospectacle;
-in
 {
-  options.plusultra.services.websites.retrospectacle = with lib.types; {
+  lib,
+  pkgs,
+  config,
+  namespace,
+  ...
+}: let
+  inherit
+    (lib)
+    mkIf
+    mkEnableOption
+    fetchFromGitHub
+    optionalString
+    optionalAttrs
+    ;
+  inherit (lib.${namespace}) mkOpt;
+
+  cfg = config.${namespace}.services.websites.retrospectacle;
+in {
+  options.${namespace}.services.websites.retrospectacle = with lib.types; {
     enable = mkEnableOption "Retrospectacle";
     package = mkOpt package pkgs.retrospectacle "The package to use.";
     domain = mkOpt str "retrospectacle.app" "The domain to serve the website site on.";
@@ -33,13 +42,13 @@ in
       };
 
       groups = optionalAttrs (cfg.group == "retrospectacle") {
-        retrospectacle = { };
+        retrospectacle = {};
       };
     };
 
     systemd.services.retrospectacle = {
-      after = [ "network.target" ];
-      wantedBy = [ "multi-user.target" ];
+      after = ["network.target"];
+      wantedBy = ["multi-user.target"];
 
       serviceConfig = {
         Type = "simple";

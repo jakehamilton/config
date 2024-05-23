@@ -3,11 +3,12 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.apps.firefox;
+with lib.${namespace}; let
+  cfg = config.${namespace}.apps.firefox;
   defaultSettings = {
     "browser.aboutwelcome.enabled" = false;
     "browser.meta_refresh_when_inactive.disabled" = true;
@@ -19,7 +20,7 @@ with lib.plusultra; let
     "browser.ssb.enabled" = true;
   };
 in {
-  options.plusultra.apps.firefox = with types; {
+  options.${namespace}.apps.firefox = with types; {
     enable = mkBoolOpt false "Whether or not to enable Firefox.";
     extraConfig =
       mkOpt str "" "Extra configuration for the user profile JS file.";
@@ -31,14 +32,14 @@ in {
   config = mkIf cfg.enable {
     plusultra.desktop.addons.firefox-nordic-theme = enabled;
 
-    services.gnome.gnome-browser-connector.enable = config.plusultra.desktop.gnome.enable;
+    services.gnome.gnome-browser-connector.enable = config.${namespace}.desktop.gnome.enable;
 
     plusultra.home = {
       file = mkMerge [
         {
           ".mozilla/native-messaging-hosts/com.dannyvankooten.browserpass.json".source = "${pkgs.browserpass}/lib/mozilla/native-messaging-hosts/com.dannyvankooten.browserpass.json";
         }
-        (mkIf config.plusultra.desktop.gnome.enable {
+        (mkIf config.${namespace}.desktop.gnome.enable {
           ".mozilla/native-messaging-hosts/org.gnome.chrome_gnome_shell.json".source = "${pkgs.chrome-gnome-shell}/lib/mozilla/native-messaging-hosts/org.gnome.chrome_gnome_shell.json";
         })
       ];
@@ -49,19 +50,19 @@ in {
           package = pkgs.firefox.override {
             cfg = {
               enableBrowserpass = true;
-              enableGnomeExtensions = config.plusultra.desktop.gnome.enable;
+              enableGnomeExtensions = config.${namespace}.desktop.gnome.enable;
             };
 
             extraNativeMessagingHosts =
               optional
-              config.plusultra.desktop.gnome.enable
+              config.${namespace}.desktop.gnome.enable
               pkgs.gnomeExtensions.gsconnect;
           };
 
-          profiles.${config.plusultra.user.name} = {
+          profiles.${config.${namespace}.user.name} = {
             inherit (cfg) extraConfig userChrome settings;
             id = 0;
-            name = config.plusultra.user.name;
+            name = config.${namespace}.user.name;
           };
         };
       };

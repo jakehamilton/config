@@ -3,11 +3,12 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.desktop.gnome;
+with lib.${namespace}; let
+  cfg = config.${namespace}.desktop.gnome;
   gdmHome = config.users.users.gdm.home;
 
   defaultExtensions = with pkgs.gnomeExtensions; [
@@ -36,7 +37,7 @@ with lib.plusultra; let
   default-attrs = mapAttrs (key: mkDefault);
   nested-default-attrs = mapAttrs (key: default-attrs);
 in {
-  options.plusultra.desktop.gnome = with types; {
+  options.${namespace}.desktop.gnome = with types; {
     enable =
       mkBoolOpt false "Whether or not to use Gnome as the desktop environment.";
     wallpaper = {
@@ -100,8 +101,8 @@ in {
       };
 
       script = ''
-        config_file=/var/lib/AccountsService/users/${config.plusultra.user.name}
-        icon_file=/run/current-system/sw/share/plusultra-icons/user/${config.plusultra.user.name}/${config.plusultra.user.icon.fileName}
+        config_file=/var/lib/AccountsService/users/${config.${namespace}.user.name}
+        icon_file=/run/current-system/sw/share/plusultra-icons/user/${config.${namespace}.user.name}/${config.${namespace}.user.icon.fileName}
 
         if ! [ -d "$(dirname "$config_file")"]; then
           mkdir -p "$(dirname "$config_file")"
@@ -141,7 +142,7 @@ in {
 
     plusultra.home.extraOptions = {
       dconf.settings = let
-        user = config.users.users.${config.plusultra.user.name};
+        user = config.users.users.${config.${namespace}.user.name};
         get-wallpaper = wallpaper:
           if lib.isDerivation wallpaper
           then builtins.toString wallpaper
@@ -159,13 +160,13 @@ in {
               ];
             favorite-apps =
               ["org.gnome.Nautilus.desktop"]
-              ++ optional config.plusultra.apps.firefox.enable "firefox.desktop"
-              ++ optional config.plusultra.apps.vscode.enable "code.desktop"
-              ++ optional config.plusultra.desktop.addons.foot.enable "foot.desktop"
-              ++ optional config.plusultra.apps.logseq.enable "logseq.desktop"
-              ++ optional config.plusultra.apps.discord.enable "discord.desktop"
-              ++ optional config.plusultra.apps.element.enable "element-desktop.desktop"
-              ++ optional config.plusultra.apps.steam.enable "steam.desktop";
+              ++ optional config.${namespace}.apps.firefox.enable "firefox.desktop"
+              ++ optional config.${namespace}.apps.vscode.enable "code.desktop"
+              ++ optional config.${namespace}.desktop.addons.foot.enable "foot.desktop"
+              ++ optional config.${namespace}.apps.logseq.enable "logseq.desktop"
+              ++ optional config.${namespace}.apps.discord.enable "discord.desktop"
+              ++ optional config.${namespace}.apps.element.enable "element-desktop.desktop"
+              ++ optional config.${namespace}.apps.steam.enable "steam.desktop";
           };
 
           "org/gnome/desktop/background" = {
@@ -264,8 +265,8 @@ in {
             menu-button-icon-image = 23;
 
             menu-button-terminal =
-              if config.plusultra.desktop.addons.term.enable
-              then lib.getExe config.plusultra.desktop.addons.term.pkg
+              if config.${namespace}.desktop.addons.term.enable
+              then lib.getExe config.${namespace}.desktop.addons.term.pkg
               else lib.getExe pkgs.gnome.gnome-terminal;
           };
 

@@ -3,14 +3,15 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.desktop.addons.gtk;
+with lib.${namespace}; let
+  cfg = config.${namespace}.desktop.addons.gtk;
   gdmCfg = config.services.xserver.displayManager.gdm;
 in {
-  options.plusultra.desktop.addons.gtk = with types; {
+  options.${namespace}.desktop.addons.gtk = with types; {
     enable = mkBoolOpt false "Whether to customize GTK and apply themes.";
     theme = {
       name =

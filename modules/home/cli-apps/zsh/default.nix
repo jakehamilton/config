@@ -2,13 +2,14 @@
   lib,
   config,
   pkgs,
+  namespace,
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
 
-  cfg = config.plusultra.cli-apps.zsh;
+  cfg = config.${namespace}.cli-apps.zsh;
 
-  tty-color-support = with lib.plusultra.colors; ''
+  tty-color-support = with lib.${namespace}.colors; ''
     if [ "$TERM" = "linux" ]; then
       echo -ne "\e]P0${without-hash nord.nord0}" # black
       echo -ne "\e]P8${without-hash nord.nord3}" # darkgrey
@@ -30,7 +31,7 @@
     fi
   '';
 in {
-  options.plusultra.cli-apps.zsh = {
+  options.${namespace}.cli-apps.zsh = {
     enable = mkEnableOption "ZSH";
   };
 

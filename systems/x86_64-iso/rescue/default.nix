@@ -1,12 +1,15 @@
-{ pkgs, lib, ... }:
-
-with lib;
-with lib.plusultra;
 {
+  pkgs,
+  lib,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; {
   plusultra = {
     nix = enabled;
 
-    cli-apps = { neovim = enabled; };
+    cli-apps = {neovim = enabled;};
 
     tools = {
       misc = enabled;
@@ -14,9 +17,9 @@ with lib.plusultra;
       http = enabled;
     };
 
-    hardware = { networking = enabled; };
+    hardware = {networking = enabled;};
 
-    security = { doas = enabled; };
+    security = {doas = enabled;};
 
     system = {
       fonts = enabled;

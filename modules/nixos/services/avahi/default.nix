@@ -1,12 +1,15 @@
-{ lib, config, options, ... }:
-
-let
-  cfg = config.plusultra.services.avahi;
+{
+  lib,
+  config,
+  options,
+  namespace,
+  ...
+}: let
+  cfg = config.${namespace}.services.avahi;
 
   inherit (lib) types mkEnableOption mkIf;
-in
-{
-  options.plusultra.services.avahi = with types; {
+in {
+  options.${namespace}.services.avahi = with types; {
     enable = mkEnableOption "Avahi";
   };
 

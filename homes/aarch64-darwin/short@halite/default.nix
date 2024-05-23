@@ -1,7 +1,13 @@
-{ lib, pkgs, config, osConfig ? { }, format ? "unknown", ... }:
-
-with lib.plusultra;
 {
+  lib,
+  pkgs,
+  config,
+  osConfig ? {},
+  format ? "unknown",
+  namespace,
+  ...
+}:
+with lib.${namespace}; {
   plusultra = {
     user = {
       enable = true;

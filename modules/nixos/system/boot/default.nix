@@ -3,13 +3,14 @@
   config,
   pkgs,
   lib,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.system.boot;
+with lib.${namespace}; let
+  cfg = config.${namespace}.system.boot;
 in {
-  options.plusultra.system.boot = with types; {
+  options.${namespace}.system.boot = with types; {
     enable = mkBoolOpt false "Whether or not to enable booting.";
   };
 

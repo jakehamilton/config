@@ -2,13 +2,14 @@
   lib,
   config,
   pkgs,
+  namespace,
   osConfig ? {},
   ...
 }: let
   inherit (lib) types mkIf mkDefault mkMerge;
-  inherit (lib.plusultra) mkOpt;
+  inherit (lib.${namespace}) mkOpt;
 
-  cfg = config.plusultra.user;
+  cfg = config.${namespace}.user;
 
   is-linux = pkgs.stdenv.isLinux;
   is-darwin = pkgs.stdenv.isDarwin;
@@ -20,7 +21,7 @@
     then "/Users/${cfg.name}"
     else "/home/${cfg.name}";
 in {
-  options.plusultra.user = {
+  options.${namespace}.user = {
     enable = mkOpt types.bool true "Whether to configure the user account.";
     name = mkOpt (types.nullOr types.str) (config.snowfallorg.user.name or "short") "The user account.";
 

@@ -1,20 +1,20 @@
-{ autoPatchelfHook
-, buildFHSEnv
-, buildFHSEnvChroot
-, dpkg
-, fetchurl
-, inotify-tools
-, lib
-, stdenvNoCC
-, sysctl
-, writeScript
-}:
-
-let
+{
+  autoPatchelfHook,
+  buildFHSEnv,
+  buildFHSEnvChroot,
+  dpkg,
+  fetchurl,
+  inotify-tools,
+  lib,
+  stdenvNoCC,
+  sysctl,
+  writeScript,
+  namespace,
+}: let
   pname = "expressvpn";
   clientVersion = "3.25.0";
   clientBuild = "13";
-  version = lib.strings.concatStringsSep "." [ clientVersion clientBuild ];
+  version = lib.strings.concatStringsSep "." [clientVersion clientBuild];
 
   expressvpnBase = stdenvNoCC.mkDerivation {
     inherit pname version;
@@ -24,7 +24,7 @@ let
       hash = "sha256-lyDjG346FrgT7SZbsWET+Hexl9Un6mzMukfO2PwlInA=";
     };
 
-    nativeBuildInputs = [ dpkg autoPatchelfHook ];
+    nativeBuildInputs = [dpkg autoPatchelfHook];
 
     dontConfigure = true;
     dontBuild = true;
@@ -70,35 +70,35 @@ let
     # The expressvpnd binary also uses hard-coded paths to the other binaries and files
     # it ships with, hence the FHS environment.
 
-    targetPkgs = pkgs: with pkgs; [
-      expressvpnBase
-      inotify-tools
-      iproute2
-    ];
+    targetPkgs = pkgs:
+      with pkgs; [
+        expressvpnBase
+        inotify-tools
+        iproute2
+      ];
   };
 in
-stdenvNoCC.mkDerivation {
-  inherit pname version;
+  stdenvNoCC.mkDerivation {
+    inherit pname version;
 
-  dontUnpack = true;
-  dontConfigure = true;
-  dontBuild = true;
+    dontUnpack = true;
+    dontConfigure = true;
+    dontBuild = true;
 
-  installPhase = ''
-    runHook preInstall
-    mkdir -p $out/bin $out/share
-    ln -s ${expressvpnBase}/bin/expressvpn $out/bin
-    ln -s ${expressvpndFHS}/bin/expressvpnd $out/bin
-    ln -s ${expressvpnBase}/share/{bash-completion,doc,man} $out/share/
-    runHook postInstall
-  '';
+    installPhase = ''
+      runHook preInstall
+      mkdir -p $out/bin $out/share
+      ln -s ${expressvpnBase}/bin/expressvpn $out/bin
+      ln -s ${expressvpndFHS}/bin/expressvpnd $out/bin
+      ln -s ${expressvpnBase}/share/{bash-completion,doc,man} $out/share/
+      runHook postInstall
+    '';
 
-  meta = with lib; {
-    description = "CLI client for ExpressVPN";
-    homepage = "https://www.expressvpn.com";
-    license = licenses.unfree;
-    platforms = [ "x86_64-linux" ];
-    maintainers = with maintainers; [ yureien ];
-  };
-}
-
+    meta = with lib; {
+      description = "CLI client for ExpressVPN";
+      homepage = "https://www.expressvpn.com";
+      license = licenses.unfree;
+      platforms = ["x86_64-linux"];
+      maintainers = with maintainers; [yureien];
+    };
+  }

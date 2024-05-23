@@ -1,12 +1,15 @@
-{ config, lib, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.tools.attic;
-in
 {
-  options.plusultra.tools.attic = {
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.tools.attic;
+in {
+  options.${namespace}.tools.attic = {
     enable = mkEnableOption "Attic";
   };
 

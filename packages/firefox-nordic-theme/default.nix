@@ -1,5 +1,8 @@
-{ pkgs, ... }:
-
+{
+  pkgs,
+  namespace,
+  ...
+}:
 pkgs.fetchFromGitHub {
   owner = "glasket";
   repo = "firefox-nordic-theme";

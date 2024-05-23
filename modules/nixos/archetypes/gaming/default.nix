@@ -1,12 +1,16 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.archetypes.gaming;
-in
 {
-  options.plusultra.archetypes.gaming = with types; {
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.archetypes.gaming;
+in {
+  options.${namespace}.archetypes.gaming = with types; {
     enable = mkBoolOpt false "Whether or not to enable the gaming archetype.";
   };
 

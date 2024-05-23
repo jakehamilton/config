@@ -1,11 +1,16 @@
-{ options, config, pkgs, lib, ... }:
-
-with lib;
-with lib.plusultra;
-let cfg = config.plusultra.security.doas;
-in
 {
-  options.plusultra.security.doas = {
+  options,
+  config,
+  pkgs,
+  lib,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.security.doas;
+in {
+  options.${namespace}.security.doas = {
     enable = mkBoolOpt false "Whether or not to replace sudo with doas.";
   };
 
@@ -16,14 +21,16 @@ in
     # Enable and configure `doas`.
     security.doas = {
       enable = true;
-      extraRules = [{
-        users = [ config.plusultra.user.name ];
-        noPass = true;
-        keepEnv = true;
-      }];
+      extraRules = [
+        {
+          users = [config.${namespace}.user.name];
+          noPass = true;
+          keepEnv = true;
+        }
+      ];
     };
 
     # Add an alias to the shell for backward-compat and convenience.
-    environment.shellAliases = { sudo = "doas"; };
+    environment.shellAliases = {sudo = "doas";};
   };
 }

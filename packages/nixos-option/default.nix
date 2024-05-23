@@ -1,14 +1,14 @@
-{ lib
-, nixos-option
-, makeWrapper
-, fetchFromGitHub
-, runCommandNoCC
-, flakeSource ? "/home/short/work/config"
-, ...
-}:
-
-let
-  inherit (lib.plusultra) override-meta;
+{
+  lib,
+  nixos-option,
+  makeWrapper,
+  fetchFromGitHub,
+  runCommandNoCC,
+  flakeSource ? "/home/short/work/config",
+  namespace,
+  ...
+}: let
+  inherit (lib.${namespace}) override-meta;
 
   flake-compat = fetchFromGitHub {
     owner = "edolstra";
@@ -21,12 +21,13 @@ let
   new-meta = with lib; {
     description = "A wrapper around nixos-option to work with a Flake-based configuration.";
     license = licenses.asl20;
-    maintainers = with maintainers; [ jakehamilton ];
+    maintainers = with maintainers; [jakehamilton];
   };
 
-  package = runCommandNoCC "nixos-option"
+  package =
+    runCommandNoCC "nixos-option"
     {
-      buildInputs = [ makeWrapper ];
+      buildInputs = [makeWrapper];
     }
     ''
       makeWrapper ${nixos-option}/bin/nixos-option $out/bin/nixos-option \
@@ -36,4 +37,4 @@ let
         --add-flags "\"${prefix}.options\""
     '';
 in
-override-meta new-meta package
+  override-meta new-meta package

@@ -4,10 +4,11 @@
   lib,
   modulesPath,
   inputs,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
+with lib.${namespace}; let
   steam-pi-setup = pkgs.writeShellApplication {
     name = "steam-pi-setup";
     checkPhase = "";
@@ -52,7 +53,7 @@ in {
 
     displayManager = {
       defaultSession = "none+openbox";
-      autoLogin.user = config.plusultra.user.name;
+      autoLogin.user = config.${namespace}.user.name;
 
       lightdm = {
         enable = true;

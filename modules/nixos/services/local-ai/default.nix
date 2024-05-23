@@ -2,12 +2,13 @@
   pkgs,
   lib,
   config,
+  namespace,
   ...
 }: let
-  cfg = config.plusultra.services.local-ai;
+  cfg = config.${namespace}.services.local-ai;
 
   inherit (lib) mkEnableOption mkIf types optionalAttrs optionalString;
-  inherit (lib.plusultra) mkOpt;
+  inherit (lib.${namespace}) mkOpt;
 
   address = "${cfg.host}:${toString cfg.port}";
 
@@ -28,7 +29,7 @@
       ln -s '${cfg.models}' '${cfg.stateDir}/models'
     '';
 in {
-  options.plusultra.services.local-ai = {
+  options.${namespace}.services.local-ai = {
     enable = mkEnableOption "LocalAI";
 
     package = mkOpt types.package pkgs.plusultra.local-ai "The package to use.";

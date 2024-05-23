@@ -1,9 +1,15 @@
-{ options, config, lib, pkgs, inputs, ... }:
-
+{
+  options,
+  config,
+  lib,
+  pkgs,
+  inputs,
+  namespace,
+  ...
+}:
 with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.apps.discord;
+with lib.${namespace}; let
+  cfg = config.${namespace}.apps.discord;
   discord = lib.replugged.makeDiscordPlugged {
     inherit pkgs;
 
@@ -18,14 +24,15 @@ let
       inherit (inputs) discord-nord-theme;
     };
   };
-in
-{
-  options.plusultra.apps.discord = with types; {
+in {
+  options.${namespace}.apps.discord = with types; {
     enable = mkBoolOpt false "Whether or not to enable Discord.";
     canary.enable = mkBoolOpt false "Whether or not to enable Discord Canary.";
-    chromium.enable = mkBoolOpt false
+    chromium.enable =
+      mkBoolOpt false
       "Whether or not to enable the Chromium version of Discord.";
-    firefox.enable = mkBoolOpt false
+    firefox.enable =
+      mkBoolOpt false
       "Whether or not to enable the Firefox version of Discord.";
     native.enable = mkBoolOpt false "Whether or not to enable the native version of Discord.";
   };

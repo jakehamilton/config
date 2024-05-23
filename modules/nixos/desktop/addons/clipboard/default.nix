@@ -2,13 +2,14 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }: let
-  cfg = config.plusultra.desktop.addons.clipboard;
+  cfg = config.${namespace}.desktop.addons.clipboard;
 
   inherit (lib) mkIf mkEnableOption mkOption;
 in {
-  options.plusultra.desktop.addons.clipboard = {
+  options.${namespace}.desktop.addons.clipboard = {
     enable = mkEnableOption "Clipboard";
   };
 

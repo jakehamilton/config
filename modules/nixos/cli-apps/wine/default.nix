@@ -1,12 +1,16 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.cli-apps.wine;
-in
 {
-  options.plusultra.cli-apps.wine = with types; {
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.cli-apps.wine;
+in {
+  options.${namespace}.cli-apps.wine = with types; {
     enable = mkBoolOpt false "Whether or not to enable Wine.";
   };
 

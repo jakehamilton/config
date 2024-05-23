@@ -1,20 +1,24 @@
-{ lib, pkgs, config, ... }:
-
+{
+  lib,
+  pkgs,
+  config,
+  namespace,
+  ...
+}:
 with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.desktop.addons.skhd;
+with lib.${namespace}; let
+  cfg = config.${namespace}.desktop.addons.skhd;
 
-  mkScript = name: file: pkgs.writeShellApplication {
-    inherit name;
-    checkPhase = "";
-    text = builtins.readFile file;
-  };
+  mkScript = name: file:
+    pkgs.writeShellApplication {
+      inherit name;
+      checkPhase = "";
+      text = builtins.readFile file;
+    };
 
   open-iterm2 = mkScript "open-iterm2" ./scripts/open-iterm2.sh;
-in
-{
-  options.plusultra.desktop.addons.skhd = {
+in {
+  options.${namespace}.desktop.addons.skhd = {
     enable = mkEnableOption "skhd";
   };
 

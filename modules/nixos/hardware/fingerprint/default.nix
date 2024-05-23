@@ -1,13 +1,18 @@
-{ options, config, pkgs, lib, ... }:
-
-with lib;
-with lib.plusultra;
-let cfg = config.plusultra.hardware.fingerprint;
-in
 {
-  options.plusultra.hardware.fingerprint = with types; {
+  options,
+  config,
+  pkgs,
+  lib,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.hardware.fingerprint;
+in {
+  options.${namespace}.hardware.fingerprint = with types; {
     enable = mkBoolOpt false "Whether or not to enable fingerprint support.";
   };
 
-  config = mkIf cfg.enable { services.fprintd.enable = true; };
+  config = mkIf cfg.enable {services.fprintd.enable = true;};
 }

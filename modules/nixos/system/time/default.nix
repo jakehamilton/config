@@ -1,14 +1,19 @@
-{ options, config, pkgs, lib, ... }:
-
-with lib;
-with lib.plusultra;
-let cfg = config.plusultra.system.time;
-in
 {
-  options.plusultra.system.time = with types; {
+  options,
+  config,
+  pkgs,
+  lib,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.system.time;
+in {
+  options.${namespace}.system.time = with types; {
     enable =
       mkBoolOpt false "Whether or not to configure timezone information.";
   };
 
-  config = mkIf cfg.enable { time.timeZone = "America/Los_Angeles"; };
+  config = mkIf cfg.enable {time.timeZone = "America/Los_Angeles";};
 }

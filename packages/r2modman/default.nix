@@ -5,6 +5,7 @@
   curl,
   jq,
   gnused,
+  namespace,
   ...
 }: let
   pname = "r2modman";

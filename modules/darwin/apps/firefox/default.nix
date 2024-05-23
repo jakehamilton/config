@@ -3,11 +3,12 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.apps.firefox;
+with lib.${namespace}; let
+  cfg = config.${namespace}.apps.firefox;
   defaultSettings = {
     "browser.aboutwelcome.enabled" = false;
     "browser.meta_refresh_when_inactive.disabled" = true;
@@ -19,7 +20,7 @@ with lib.plusultra; let
     "browser.ssb.enabled" = true;
   };
 in {
-  options.plusultra.apps.firefox = with types; {
+  options.${namespace}.apps.firefox = with types; {
     enable = mkBoolOpt false "Whether or not to enable Firefox.";
     extraConfig =
       mkOpt str "" "Extra configuration for the user profile JS file.";
@@ -46,10 +47,10 @@ in {
             };
           };
 
-          profiles.${config.plusultra.user.name} = {
+          profiles.${config.${namespace}.user.name} = {
             inherit (cfg) extraConfig userChrome settings;
             id = 0;
-            name = config.plusultra.user.name;
+            name = config.${namespace}.user.name;
           };
         };
       };

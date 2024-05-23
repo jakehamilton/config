@@ -1,14 +1,19 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let cfg = config.plusultra.apps.cadence;
-in
 {
-  options.plusultra.apps.cadence = with types; {
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.apps.cadence;
+in {
+  options.${namespace}.apps.cadence = with types; {
     enable = mkBoolOpt false "Whether or not to enable Cadence.";
   };
 
   config =
-    mkIf cfg.enable { environment.systemPackages = with pkgs; [ cadence ]; };
+    mkIf cfg.enable {environment.systemPackages = with pkgs; [cadence];};
 }

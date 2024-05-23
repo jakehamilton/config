@@ -3,12 +3,13 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }: let
-  cfg = config.plusultra.desktop.hyprland;
+  cfg = config.${namespace}.desktop.hyprland;
 
   inherit (lib) mkIf mkEnableOption mkOption mkMerge types optional;
-  inherit (lib.plusultra) enabled colors;
+  inherit (lib.${namespace}) enabled colors;
 
   pamixer = lib.getExe pkgs.pamixer;
 
@@ -26,7 +27,7 @@
     esac
   '';
 in {
-  options.plusultra.desktop.hyprland = {
+  options.${namespace}.desktop.hyprland = {
     enable = mkEnableOption "Hyprland";
 
     package = mkOption {
@@ -281,8 +282,8 @@ in {
                     # "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
                     # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
                   ]
-                  ++ optional config.plusultra.desktop.addons.gtk.enable
-                  "${cfg.package}/bin/hyprctl setcursor \"${config.plusultra.desktop.addons.gtk.cursor.name}\" 16";
+                  ++ optional config.${namespace}.desktop.addons.gtk.enable
+                  "${cfg.package}/bin/hyprctl setcursor \"${config.${namespace}.desktop.addons.gtk.cursor.name}\" 16";
 
                 # Decorations
                 decoration = {

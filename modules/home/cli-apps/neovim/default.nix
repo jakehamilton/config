@@ -1,12 +1,15 @@
-{ lib, config, pkgs, ... }:
-
-let
+{
+  lib,
+  config,
+  pkgs,
+  namespace,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf;
 
-  cfg = config.plusultra.cli-apps.neovim;
-in
-{
-  options.plusultra.cli-apps.neovim = {
+  cfg = config.${namespace}.cli-apps.neovim;
+in {
+  options.${namespace}.cli-apps.neovim = {
     enable = mkEnableOption "Neovim";
   };
 

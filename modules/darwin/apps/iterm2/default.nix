@@ -1,12 +1,16 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.apps.iterm2;
-in
 {
-  options.plusultra.apps.iterm2 = with types; {
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.apps.iterm2;
+in {
+  options.${namespace}.apps.iterm2 = with types; {
     enable = mkBoolOpt false "Whether or not to enable iTerm2.";
   };
 

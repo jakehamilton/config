@@ -2,13 +2,14 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.cli-apps.thaw;
+with lib.${namespace}; let
+  cfg = config.${namespace}.cli-apps.thaw;
 in {
-  options.plusultra.cli-apps.thaw = with types; {
+  options.${namespace}.cli-apps.thaw = with types; {
     enable = mkBoolOpt false "Whether or not to enable thaw.";
   };
 

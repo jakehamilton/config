@@ -1,12 +1,15 @@
-{ lib, pkgs, config, ... }:
-
-let
-  cfg = config.plusultra.apps.steamtinkerlaunch;
+{
+  lib,
+  pkgs,
+  config,
+  namespace,
+  ...
+}: let
+  cfg = config.${namespace}.apps.steamtinkerlaunch;
 
   inherit (lib) mkIf mkEnableOption;
-in
-{
-  options.plusultra.apps.steamtinkerlaunch = {
+in {
+  options.${namespace}.apps.steamtinkerlaunch = {
     enable = mkEnableOption "Steam Tinker Launch";
   };
 

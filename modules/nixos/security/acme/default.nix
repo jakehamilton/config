@@ -1,15 +1,19 @@
-{ lib, pkgs, config, virtual, ... }:
-
-let
-  inherit (lib) mkIf mkEnableOption optional;
-  inherit (lib.plusultra) mkOpt;
-
-  cfg = config.plusultra.security.acme;
-in
 {
-  options.plusultra.security.acme = with lib.types; {
+  lib,
+  pkgs,
+  config,
+  virtual,
+  namespace,
+  ...
+}: let
+  inherit (lib) mkIf mkEnableOption optional;
+  inherit (lib.${namespace}) mkOpt;
+
+  cfg = config.${namespace}.security.acme;
+in {
+  options.${namespace}.security.acme = with lib.types; {
     enable = mkEnableOption "default ACME configuration";
-    email = mkOpt str config.plusultra.user.email "The email to use.";
+    email = mkOpt str config.${namespace}.user.email "The email to use.";
     staging = mkOpt bool virtual "Whether to use the staging server or not.";
   };
 

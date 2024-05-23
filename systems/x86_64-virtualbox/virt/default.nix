@@ -1,8 +1,11 @@
-{ pkgs, lib, ... }:
-
-with lib;
-with lib.plusultra;
 {
+  pkgs,
+  lib,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; {
   virtualisation.virtualbox.guest.enable = true;
 
   boot.loader.grub.enable = true;
@@ -21,7 +24,7 @@ with lib.plusultra;
       vscode = enabled;
     };
 
-    cli-apps = { neovim = enabled; };
+    cli-apps = {neovim = enabled;};
 
     desktop = {
       gnome = {
@@ -49,7 +52,7 @@ with lib.plusultra;
       networking = enabled;
     };
 
-    services = { printing = enabled; };
+    services = {printing = enabled;};
 
     security = {
       doas = enabled;

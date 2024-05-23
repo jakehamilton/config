@@ -1,8 +1,14 @@
-{ pkgs, config, lib, modulesPath, inputs, ... }:
-
-with lib;
-with lib.plusultra;
 {
+  pkgs,
+  config,
+  lib,
+  modulesPath,
+  inputs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; {
   imports = with inputs.nixos-hardware.nixosModules; [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")

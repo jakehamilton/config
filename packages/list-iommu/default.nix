@@ -1,9 +1,10 @@
-{ lib
-, writeShellApplication
-, pciutils
-, ...
+{
+  lib,
+  writeShellApplication,
+  pciutils,
+  namespace,
+  ...
 }:
-
 writeShellApplication
 {
   name = "list-iommu";
@@ -20,4 +21,4 @@ writeShellApplication
       lspci -nns "''${d##*/}"
     done
   '';
-} 
+}

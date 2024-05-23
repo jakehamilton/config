@@ -1,12 +1,16 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.suites.emulation;
-in
 {
-  options.plusultra.suites.emulation = with types; {
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.suites.emulation;
+in {
+  options.${namespace}.suites.emulation = with types; {
     enable =
       mkBoolOpt false "Whether or not to enable emulation configuration.";
   };

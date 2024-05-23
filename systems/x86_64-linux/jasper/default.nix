@@ -1,10 +1,11 @@
 {
   pkgs,
   lib,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; {
+with lib.${namespace}; {
   imports = [./hardware.nix];
 
   boot.binfmt.emulatedSystems = ["aarch64-linux"];

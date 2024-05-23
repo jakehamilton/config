@@ -1,12 +1,15 @@
-{ lib, pkgs, config, ... }:
-
-with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.desktop.addons.spacebar;
-in
 {
-  options.plusultra.desktop.addons.spacebar = {
+  lib,
+  pkgs,
+  config,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.desktop.addons.spacebar;
+in {
+  options.${namespace}.desktop.addons.spacebar = {
     enable = mkEnableOption "Spacebar";
   };
 

@@ -3,13 +3,14 @@
   config,
   pkgs,
   lib,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.tools.node;
+with lib.${namespace}; let
+  cfg = config.${namespace}.tools.node;
 in {
-  options.plusultra.tools.node = with types; {
+  options.${namespace}.tools.node = with types; {
     enable = mkBoolOpt false "Whether or not to install and configure git";
     pkg = mkOpt package pkgs.nodejs "The NodeJS package to use";
     prettier = {

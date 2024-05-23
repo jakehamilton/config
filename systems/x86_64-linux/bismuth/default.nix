@@ -3,10 +3,11 @@
   config,
   lib,
   channel,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; {
+with lib.${namespace}; {
   imports = [./hardware.nix];
 
   # Resolve an issue with Bismuth's wired connections failing sometimes due to weird

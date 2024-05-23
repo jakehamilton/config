@@ -1,11 +1,19 @@
-{ lib, plusultra, fetchFromGitHub, runCommandNoCC, callPackage, unzip, favicon ? "light", ... }:
-
-let
-  homer = callPackage ../homer { };
+{
+  lib,
+  plusultra,
+  fetchFromGitHub,
+  runCommandNoCC,
+  callPackage,
+  unzip,
+  favicon ? "light",
+  namespace,
+  ...
+}: let
+  homer = plusultra.homer;
 
   is-valid-favicon = favicon == "light" || favicon == "dark";
 
-  flavors = [ "latte" "frappe" "macchiato" "mocha" ];
+  flavors = ["latte" "frappe" "macchiato" "mocha"];
 
   stylesheet = flavor: "assets/catppuccin-${flavor}.css";
 
@@ -16,48 +24,56 @@ let
     sha256 = "1rs77kn2iyp3hdbq7r6skzj2lg1cjhiiifnw8zvplwp7avrf8i4p";
   };
 
-  catppuccin = runCommandNoCC "catpuccin"
+  catppuccin =
+    runCommandNoCC "catpuccin"
     {
       src = catppuccin-raw;
-      buildInputs = [ unzip ];
+      buildInputs = [unzip];
     }
     (''
-      mkdir $out
+        mkdir $out
 
-      cp -r --no-preserve=mode $src/assets $out/
+        cp -r --no-preserve=mode $src/assets $out/
 
-      mv $out/assets/images/backgrounds/* $out/assets/images/
-      rm -rf $out/assets/images/backgrounds
-      rm -rf $out/assets/images/examples
+        mv $out/assets/images/backgrounds/* $out/assets/images/
+        rm -rf $out/assets/images/backgrounds
+        rm -rf $out/assets/images/examples
 
-      rm -rf $out/assets/palette
+        rm -rf $out/assets/palette
 
-      cp $src/flavours/* $out/assets/
-    '' + lib.optionalString is-valid-favicon ''
-      mkdir -p $out/assets/icons
+        cp $src/flavours/* $out/assets/
+      ''
+      + lib.optionalString is-valid-favicon ''
+        mkdir -p $out/assets/icons
 
-      unzip $out/assets/favicons/${favicon}_favicon.zip -d $out/assets/icons/
+        unzip $out/assets/favicons/${favicon}_favicon.zip -d $out/assets/icons/
 
-    '' + ''
-      rm -rf $out/assets/favicons
-    '');
+      ''
+      + ''
+        rm -rf $out/assets/favicons
+      '');
 
   homer-catppuccin = homer.overrideAttrs (prevAttrs: {
     inherit catppuccin;
 
-    passthru = (prevAttrs.passthru or { }) // {
-      stylesheets = builtins.foldl'
-        (stylesheets: flavor: stylesheets // {
-          ${flavor} = stylesheet flavor;
-        })
-        { }
-        flavors;
+    passthru =
+      (prevAttrs.passthru or {})
+      // {
+        stylesheets =
+          builtins.foldl'
+          (stylesheets: flavor:
+            stylesheets
+            // {
+              ${flavor} = stylesheet flavor;
+            })
+          {}
+          flavors;
 
-      logos = {
-        dark = "assets/logos/dark_circle.png";
-        light = "assets/logos/light_circle.png";
+        logos = {
+          dark = "assets/logos/dark_circle.png";
+          light = "assets/logos/light_circle.png";
+        };
       };
-    };
 
     postBuild = ''
       dist="deps/${homer.pname}/dist"
@@ -78,4 +94,4 @@ let
     '';
   });
 in
-homer-catppuccin
+  homer-catppuccin

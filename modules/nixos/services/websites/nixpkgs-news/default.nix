@@ -2,14 +2,15 @@
   lib,
   pkgs,
   config,
+  namespace,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption fetchFromGitHub;
-  inherit (lib.plusultra) mkOpt;
+  inherit (lib.${namespace}) mkOpt;
 
-  cfg = config.plusultra.services.websites.nixpkgs-news;
+  cfg = config.${namespace}.services.websites.nixpkgs-news;
 in {
-  options.plusultra.services.websites.nixpkgs-news = with lib.types; {
+  options.${namespace}.services.websites.nixpkgs-news = with lib.types; {
     enable = mkEnableOption "nixpkgs.news Website";
     package = mkOpt package pkgs.plusultra.nixpkgs-news "The site package to use.";
     domain = mkOpt str "nixpkgs.news" "The domain to serve the website site on.";

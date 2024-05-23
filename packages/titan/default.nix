@@ -1,26 +1,34 @@
-{ lib, pkgs, runCommandNoCC, nodejs, ... }:
-
-let
-  inherit (lib.plusultra) override-meta;
+{
+  lib,
+  pkgs,
+  runCommandNoCC,
+  nodejs,
+  namespace,
+  ...
+}: let
+  inherit (lib.${namespace}) override-meta;
 
   raw-node-packages = pkgs.callPackage ./create-node-packages.nix {
     inherit nodejs;
   };
 
-  node-packages = lib.mapAttrs
-    (key: value: value.override {
-      dontNpmInstall = true;
-    })
+  node-packages =
+    lib.mapAttrs
+    (key: value:
+      value.override {
+        dontNpmInstall = true;
+      })
     raw-node-packages;
 
   new-meta = with lib; {
     description = "A little tool for big (monorepo) projects.";
     homepage = "https://www.npmjs.com/package/@jakehamilton/titan";
     license = licenses.asl20;
-    maintainers = with maintainers; [ jakehamilton ];
+    maintainers = with maintainers; [jakehamilton];
   };
-  package = runCommandNoCC "titan"
-    { src = node-packages."@jakehamilton/titan"; }
+  package =
+    runCommandNoCC "titan"
+    {src = node-packages."@jakehamilton/titan";}
     ''
       rstrip() {
         # Usage: rstrip "string" "pattern"
@@ -36,4 +44,4 @@ let
       done
     '';
 in
-override-meta new-meta package
+  override-meta new-meta package

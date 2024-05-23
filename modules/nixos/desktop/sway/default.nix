@@ -1,17 +1,21 @@
-{ options, config, lib, pkgs, ... }:
-
+{
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.desktop.sway;
-  term = config.plusultra.desktop.addons.term;
+with lib.${namespace}; let
+  cfg = config.${namespace}.desktop.sway;
+  term = config.${namespace}.desktop.addons.term;
   substitutedConfig = pkgs.substituteAll {
     src = ./config;
     term = term.pkg.pname or term.pkg.name;
   };
-in
-{
-  options.plusultra.desktop.sway = with types; {
+in {
+  options.${namespace}.desktop.sway = with types; {
     enable = mkBoolOpt false "Whether or not to enable Sway.";
     wallpaper = mkOpt (nullOr package) null "The wallpaper to display.";
     extraConfig =
@@ -35,31 +39,30 @@ in
       electron-support = enabled;
     };
 
-    plusultra.home.configFile."sway/config".text =
-      fileWithText substitutedConfig ''
-        #############################
-        #░░░░░░░░░░░░░░░░░░░░░░░░░░░#
-        #░░█▀▀░█░█░█▀▀░▀█▀░█▀▀░█▄█░░#
-        #░░▀▀█░░█░░▀▀█░░█░░█▀▀░█░█░░#
-        #░░▀▀▀░░▀░░▀▀▀░░▀░░▀▀▀░▀░▀░░#
-        #░░░░░░░░░░░░░░░░░░░░░░░░░░░#
-        #############################
+    plusultra.home.configFile."sway/config".text = fileWithText substitutedConfig ''
+      #############################
+      #░░░░░░░░░░░░░░░░░░░░░░░░░░░#
+      #░░█▀▀░█░█░█▀▀░▀█▀░█▀▀░█▄█░░#
+      #░░▀▀█░░█░░▀▀█░░█░░█▀▀░█░█░░#
+      #░░▀▀▀░░▀░░▀▀▀░░▀░░▀▀▀░▀░▀░░#
+      #░░░░░░░░░░░░░░░░░░░░░░░░░░░#
+      #############################
 
-        # Launch services waiting for the systemd target sway-session.target
-        exec "systemctl --user import-environment; systemctl --user start sway-session.target"
+      # Launch services waiting for the systemd target sway-session.target
+      exec "systemctl --user import-environment; systemctl --user start sway-session.target"
 
-        # Start a user session dbus (required for things like starting
-        # applications through wofi).
-        exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
+      # Start a user session dbus (required for things like starting
+      # applications through wofi).
+      exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
 
-        ${optionalString (cfg.wallpaper != null) ''
-          output * {
-            bg ${cfg.wallpaper.gnomeFilePath or cfg.wallpaper} fill
-          }
-        ''}
+      ${optionalString (cfg.wallpaper != null) ''
+        output * {
+          bg ${cfg.wallpaper.gnomeFilePath or cfg.wallpaper} fill
+        }
+      ''}
 
-        ${cfg.extraConfig}
-      '';
+      ${cfg.extraConfig}
+    '';
 
     programs.sway = {
       enable = true;
@@ -92,39 +95,38 @@ in
       '';
     };
 
-    environment.systemPackages = with pkgs;
-      [
-        (pkgs.writeTextFile {
-          name = "startsway";
-          destination = "/bin/startsway";
-          executable = true;
-          text = ''
-            #! ${pkgs.bash}/bin/bash
+    environment.systemPackages = with pkgs; [
+      (pkgs.writeTextFile {
+        name = "startsway";
+        destination = "/bin/startsway";
+        executable = true;
+        text = ''
+          #! ${pkgs.bash}/bin/bash
 
-            # Import environment variables from the login manager
-            systemctl --user import-environment
+          # Import environment variables from the login manager
+          systemctl --user import-environment
 
-            # Start Sway
-            exec systemctl --user start sway.service
-          '';
-        })
-      ];
+          # Start Sway
+          exec systemctl --user start sway.service
+        '';
+      })
+    ];
 
     # configuring sway itself (assmung a display manager starts it)
     systemd.user.targets.sway-session = {
       description = "Sway compositor session";
-      documentation = [ "man:systemd.special(7)" ];
-      bindsTo = [ "graphical-session.target" ];
-      wants = [ "graphical-session-pre.target" ];
-      after = [ "graphical-session-pre.target" ];
+      documentation = ["man:systemd.special(7)"];
+      bindsTo = ["graphical-session.target"];
+      wants = ["graphical-session-pre.target"];
+      after = ["graphical-session-pre.target"];
     };
 
     systemd.user.services.sway = {
       description = "Sway - Wayland window manager";
-      documentation = [ "man:sway(5)" ];
-      bindsTo = [ "graphical-session.target" ];
-      wants = [ "graphical-session-pre.target" ];
-      after = [ "graphical-session-pre.target" ];
+      documentation = ["man:sway(5)"];
+      bindsTo = ["graphical-session.target"];
+      wants = ["graphical-session-pre.target"];
+      after = ["graphical-session-pre.target"];
       # We explicitly unset PATH here, as we want it to be set by
       # systemctl --user import-environment in startsway
       environment.PATH = lib.mkForce null;

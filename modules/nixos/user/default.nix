@@ -3,11 +3,12 @@
   config,
   pkgs,
   lib,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.user;
+with lib.${namespace}; let
+  cfg = config.${namespace}.user;
   defaultIconFileName = "profile.png";
   defaultIcon = pkgs.stdenvNoCC.mkDerivation {
     name = "default-icon";
@@ -31,7 +32,7 @@ with lib.plusultra; let
       cp ${cfg.icon} "$target/${cfg.icon.fileName}"
     '';
 in {
-  options.plusultra.user = with types; {
+  options.${namespace}.user = with types; {
     name = mkOpt str "short" "The name to use for the user account.";
     fullName = mkOpt str "Jake Hamilton" "The full name of the user.";
     email = mkOpt str "jake.hamilton@hey.com" "The email of the user.";

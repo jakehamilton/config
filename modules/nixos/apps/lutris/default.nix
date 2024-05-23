@@ -1,12 +1,16 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.apps.lutris;
-in
 {
-  options.plusultra.apps.lutris = with types; {
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.apps.lutris;
+in {
+  options.${namespace}.apps.lutris = with types; {
     enable = mkBoolOpt false "Whether or not to enable Lutris.";
   };
 

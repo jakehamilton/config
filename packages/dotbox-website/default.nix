@@ -1,6 +1,10 @@
-{ lib, fetchFromGitHub, buildNpmPackage, ... }:
-
-let
+{
+  lib,
+  fetchFromGitHub,
+  buildNpmPackage,
+  namespace,
+  ...
+}: let
   src = fetchFromGitHub {
     owner = "jakehamilton";
     repo = "dotbox";
@@ -14,19 +18,18 @@ let
       mv website $out
     '';
   };
-
   # inherit (lib.importJSON "${src}/package.json") version;
 in
-buildNpmPackage
-{
-  name = "dotbox-website";
-  verison = "unstable-2022-01-12";
+  buildNpmPackage
+  {
+    name = "dotbox-website";
+    verison = "unstable-2022-01-12";
 
-  inherit src;
+    inherit src;
 
-  npmDepsHash = "sha256-RdRQMrYoOaf2rjhvVpZw0skcekKL8rzG3oFlf/1D1cY";
+    npmDepsHash = "sha256-RdRQMrYoOaf2rjhvVpZw0skcekKL8rzG3oFlf/1D1cY";
 
-  installPhase = ''
-    mv dist $out
-  '';
-}
+    installPhase = ''
+      mv dist $out
+    '';
+  }

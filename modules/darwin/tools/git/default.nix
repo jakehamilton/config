@@ -1,14 +1,18 @@
-{ options, config, pkgs, lib, ... }:
-
-with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.tools.git;
-  gpg = config.plusultra.security.gpg;
-  user = config.plusultra.user;
-in
 {
-  options.plusultra.tools.git = with types; {
+  options,
+  config,
+  pkgs,
+  lib,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.tools.git;
+  gpg = config.${namespace}.security.gpg;
+  user = config.${namespace}.user;
+in {
+  options.${namespace}.tools.git = with types; {
     enable = mkBoolOpt false "Whether or not to install and configure git.";
     userName = mkOpt types.str user.fullName "The name to configure git with.";
     userEmail = mkOpt types.str user.email "The email to configure git with.";
@@ -17,7 +21,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ git ];
+    environment.systemPackages = with pkgs; [git];
 
     plusultra.home.extraOptions = {
       programs.git = {
@@ -29,10 +33,10 @@ in
           signByDefault = mkIf gpg.enable true;
         };
         extraConfig = {
-          init = { defaultBranch = "main"; };
-          pull = { rebase = true; };
-          push = { autoSetupRemote = true; };
-          core = { whitespace = "trailing-space,space-before-tab"; };
+          init = {defaultBranch = "main";};
+          pull = {rebase = true;};
+          push = {autoSetupRemote = true;};
+          core = {whitespace = "trailing-space,space-before-tab";};
           safe = {
             directory = "${config.users.users.${user.name}.home}/work/config";
           };

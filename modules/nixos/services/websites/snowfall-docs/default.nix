@@ -2,14 +2,15 @@
   lib,
   pkgs,
   config,
+  namespace,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption fetchFromGitHub;
-  inherit (lib.plusultra) mkOpt;
+  inherit (lib.${namespace}) mkOpt;
 
-  cfg = config.plusultra.services.websites.snowfall-docs;
+  cfg = config.${namespace}.services.websites.snowfall-docs;
 in {
-  options.plusultra.services.websites.snowfall-docs = with lib.types; {
+  options.${namespace}.services.websites.snowfall-docs = with lib.types; {
     enable = mkEnableOption "docs.snowfall.org Website";
     package = mkOpt package pkgs.snowfallorg.snowfall-docs "The site package to use.";
     domain = mkOpt str "snowfall.org" "The domain to serve the website site on.";

@@ -3,14 +3,15 @@
   config,
   pkgs,
   lib,
+  namespace,
   ...
 }:
 # FIXME: The transition to wireplumber from media-session has completely
 # broken my setup. I'll need to invest some time to figure out how to override Alsa things
 # again...
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.hardware.audio;
+with lib.${namespace}; let
+  cfg = config.${namespace}.hardware.audio;
 
   lua-format = {
     type = with lib.types; let
@@ -121,7 +122,7 @@ with lib.plusultra; let
     alsa_monitor = cfg.alsa-monitor;
   };
 in {
-  options.plusultra.hardware.audio = with types; {
+  options.${namespace}.hardware.audio = with types; {
     enable = mkBoolOpt false "Whether or not to enable audio support.";
     alsa-monitor = mkOpt attrs {} "Alsa configuration.";
     nodes =

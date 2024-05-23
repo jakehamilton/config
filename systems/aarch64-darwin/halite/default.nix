@@ -1,7 +1,10 @@
-{ lib, pkgs, ... }:
-
-with lib.plusultra;
 {
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib.${namespace}; {
   plusultra = {
     suites = {
       common = enabled;

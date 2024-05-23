@@ -1,12 +1,16 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.suites.common;
-in
 {
-  options.plusultra.suites.common = with types; {
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.suites.common;
+in {
+  options.${namespace}.suites.common = with types; {
     enable = mkBoolOpt false "Whether or not to enable common configuration.";
   };
 

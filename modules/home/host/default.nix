@@ -1,11 +1,16 @@
-{ lib, config, pkgs, host ? null, format ? "unknown", ... }:
-
-let
-  inherit (lib) types;
-  inherit (lib.plusultra) mkOpt;
-in
 {
-  options.plusultra.host = {
+  lib,
+  config,
+  pkgs,
+  host ? null,
+  format ? "unknown",
+  namespace,
+  ...
+}: let
+  inherit (lib) types;
+  inherit (lib.${namespace}) mkOpt;
+in {
+  options.${namespace}.host = {
     name = mkOpt (types.nullOr types.str) host "The host name.";
   };
 }

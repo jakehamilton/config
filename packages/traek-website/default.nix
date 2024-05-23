@@ -1,7 +1,11 @@
-{ lib, fetchFromGitHub, buildNpmPackage, ... }:
-
-let
-  inherit (lib.plusultra) override-meta;
+{
+  lib,
+  fetchFromGitHub,
+  buildNpmPackage,
+  namespace,
+  ...
+}: let
+  inherit (lib.${namespace}) override-meta;
 
   src = fetchFromGitHub {
     owner = "jakehamilton";
@@ -13,9 +17,10 @@ let
   new-meta = with lib; {
     description = "The website for [traek.app](https://traek.app).";
     license = licenses.asl20;
-    maintainers = with maintainers; [ jakehamilton ];
+    maintainers = with maintainers; [jakehamilton];
   };
-  package = buildNpmPackage
+  package =
+    buildNpmPackage
     {
       name = "dotbox-website";
       verison = "unstable-2022-01-12";
@@ -24,7 +29,7 @@ let
 
       npmDepsHash = "sha256-VLvqA+a/VmEt2oF1DK4LyUNeUwgGklc1Aeh+sV7DA1k";
 
-      npmFlags = [ "--legacy-peer-deps" ];
+      npmFlags = ["--legacy-peer-deps"];
       NODE_OPTIONS = "--openssl-legacy-provider";
 
       buildPhase = ''
@@ -36,4 +41,4 @@ let
       '';
     };
 in
-override-meta new-meta package
+  override-meta new-meta package

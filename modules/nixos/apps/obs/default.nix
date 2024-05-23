@@ -1,12 +1,16 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.apps.obs;
-in
 {
-  options.plusultra.apps.obs = with types; {
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.apps.obs;
+in {
+  options.${namespace}.apps.obs = with types; {
     enable = mkBoolOpt false "Whether or not to enable support for OBS.";
   };
 

@@ -3,13 +3,14 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.archetypes.workstation;
+with lib.${namespace}; let
+  cfg = config.${namespace}.archetypes.workstation;
 in {
-  options.plusultra.archetypes.workstation = with types; {
+  options.${namespace}.archetypes.workstation = with types; {
     enable =
       mkBoolOpt false "Whether or not to enable the workstation archetype.";
   };

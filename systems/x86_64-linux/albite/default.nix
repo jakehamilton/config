@@ -2,10 +2,11 @@
   lib,
   pkgs,
   modulesPath,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; {
+with lib.${namespace}; {
   imports = [
     (modulesPath + "/virtualisation/digital-ocean-config.nix")
   ];

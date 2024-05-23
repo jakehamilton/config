@@ -6,13 +6,14 @@
   host ? "",
   format ? "",
   inputs ? {},
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.services.openssh;
+with lib.${namespace}; let
+  cfg = config.${namespace}.services.openssh;
 
-  user = config.users.users.${config.plusultra.user.name};
+  user = config.users.users.${config.${namespace}.user.name};
   user-id = builtins.toString user.uid;
 
   # TODO: This is a hold-over from an earlier Snowfall Lib version which used
@@ -24,7 +25,7 @@ with lib.plusultra; let
   other-hosts =
     lib.filterAttrs
     (key: host:
-      key != name && (host.config.plusultra.user.name or null) != null)
+      key != name && (host.config.${namespace}.user.name or null) != null)
     ((inputs.self.nixosConfigurations or {}) // (inputs.self.darwinConfigurations or {}));
 
   other-hosts-config =
@@ -33,7 +34,7 @@ with lib.plusultra; let
     (
       name: let
         remote = other-hosts.${name};
-        remote-user-name = remote.config.plusultra.user.name;
+        remote-user-name = remote.config.${namespace}.user.name;
         remote-user-id = builtins.toString remote.config.users.users.${remote-user-name}.uid;
 
         forward-gpg =
@@ -52,7 +53,7 @@ with lib.plusultra; let
     )
     (builtins.attrNames other-hosts);
 in {
-  options.plusultra.services.openssh = with types; {
+  options.${namespace}.services.openssh = with types; {
     enable = mkBoolOpt false "Whether or not to configure OpenSSH support.";
     authorizedKeys =
       mkOpt (listOf str) [default-key] "The public keys to apply.";

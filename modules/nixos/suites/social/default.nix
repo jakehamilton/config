@@ -3,13 +3,14 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.suites.social;
+with lib.${namespace}; let
+  cfg = config.${namespace}.suites.social;
 in {
-  options.plusultra.suites.social = with types; {
+  options.${namespace}.suites.social = with types; {
     enable = mkBoolOpt false "Whether or not to enable social configuration.";
   };
 

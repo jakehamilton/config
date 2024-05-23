@@ -1,15 +1,20 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let cfg = config.plusultra.apps.inkscape;
-in
 {
-  options.plusultra.apps.inkscape = with types; {
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.apps.inkscape;
+in {
+  options.${namespace}.apps.inkscape = with types; {
     enable = mkBoolOpt false "Whether or not to enable Inkscape.";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ inkscape-with-extensions google-fonts ];
+    environment.systemPackages = with pkgs; [inkscape-with-extensions google-fonts];
   };
 }

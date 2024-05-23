@@ -2,14 +2,15 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.virtualisation.kvm;
-  user = config.plusultra.user;
+with lib.${namespace}; let
+  cfg = config.${namespace}.virtualisation.kvm;
+  user = config.${namespace}.user;
 in {
-  options.plusultra.virtualisation.kvm = with types; {
+  options.${namespace}.virtualisation.kvm = with types; {
     enable = mkBoolOpt false "Whether or not to enable KVM virtualisation.";
     vfioIds =
       mkOpt (listOf str) []

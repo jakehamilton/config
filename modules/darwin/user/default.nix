@@ -2,17 +2,18 @@
   lib,
   config,
   pkgs,
+  namespace,
   ...
 }: let
   inherit (lib) types mkIf mkDefault;
-  inherit (lib.plusultra) mkOpt;
+  inherit (lib.${namespace}) mkOpt;
 
-  cfg = config.plusultra.user;
+  cfg = config.${namespace}.user;
 
   is-linux = pkgs.stdenv.isLinux;
   is-darwin = pkgs.stdenv.isDarwin;
 in {
-  options.plusultra.user = {
+  options.${namespace}.user = {
     name = mkOpt types.str "short" "The user account.";
 
     fullName = mkOpt types.str "Jake Hamilton" "The full name of the user.";
@@ -29,7 +30,7 @@ in {
       uid = mkIf (cfg.uid != null) cfg.uid;
     };
 
-    snowfallorg.user.${config.plusultra.user.name}.home.config = {
+    snowfallorg.user.${config.${namespace}.user.name}.home.config = {
       home = {
         file = {
           ".profile".text = ''

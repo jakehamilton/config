@@ -1,12 +1,16 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.apps.virtualbox;
-in
 {
-  options.plusultra.apps.virtualbox = with types; {
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.apps.virtualbox;
+in {
+  options.${namespace}.apps.virtualbox = with types; {
     enable = mkBoolOpt false "Whether or not to enable Virtualbox.";
   };
 
@@ -16,6 +20,6 @@ in
       enableExtensionPack = true;
     };
 
-    plusultra.user.extraGroups = [ "vboxusers" ];
+    plusultra.user.extraGroups = ["vboxusers"];
   };
 }

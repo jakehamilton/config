@@ -3,13 +3,14 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.apps.r2modman;
+with lib.${namespace}; let
+  cfg = config.${namespace}.apps.r2modman;
 in {
-  options.plusultra.apps.r2modman = with types; {
+  options.${namespace}.apps.r2modman = with types; {
     enable = mkBoolOpt false "Whether or not to enable r2modman.";
   };
 

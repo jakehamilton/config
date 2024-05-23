@@ -1,8 +1,12 @@
-{ pkgs, lib, inputs, ... }:
-
+{
+  pkgs,
+  lib,
+  inputs,
+  namespace,
+  ...
+}:
 with lib;
-with lib.plusultra;
-let
+with lib.${namespace}; let
   gpgConf = "${inputs.gpg-base-conf}/gpg.conf";
 
   gpgAgentConf = ''
@@ -18,7 +22,7 @@ let
     sha256 = "1h48yqffpaz437f3c9hfryf23r95rr319lrb3y79kxpxbc9hihxb";
   };
 
-  guideHTML = pkgs.runCommand "yubikey-guide" { } ''
+  guideHTML = pkgs.runCommand "yubikey-guide" {} ''
     ${pkgs.pandoc}/bin/pandoc \
       --standalone \
       --metadata title="Yubikey Guide" \
@@ -38,16 +42,15 @@ let
     genericName = "View Yubikey Guide in a web browser";
     exec = "${pkgs.xdg-utils}/bin/xdg-open ${guideHTML}";
     icon = lib.snowfall.fs.get-file "modules/security/gpg/yubico-icon.svg";
-    categories = [ "System" ];
+    categories = ["System"];
   };
 
   reload-yubikey = pkgs.writeShellScriptBin "reload-yubikey" ''
     ${pkgs.gnupg}/bin/gpg-connect-agent "scd serialno" "learn --force" /bye
   '';
-in
-{
+in {
   services.pcscd.enable = true;
-  services.udev.packages = with pkgs; [ yubikey-personalization ];
+  services.udev.packages = with pkgs; [yubikey-personalization];
 
   environment.systemPackages = with pkgs; [
     cryptsetup
@@ -108,7 +111,7 @@ in
       };
     };
 
-    security = { doas = enabled; };
+    security = {doas = enabled;};
 
     system = {
       fonts = enabled;

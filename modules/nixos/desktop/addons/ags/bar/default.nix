@@ -2,9 +2,10 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }: let
-  cfg = config.plusultra.desktop.addons.ags.bar;
+  cfg = config.${namespace}.desktop.addons.ags.bar;
 
   inherit (lib) mkEnableOption mkOption mkIf types getExe;
 
@@ -21,7 +22,7 @@
     rm -rf $out/styles/sass
   '';
 in {
-  options.plusultra.desktop.addons.ags.bar = {
+  options.${namespace}.desktop.addons.ags.bar = {
     enable = mkEnableOption "AGS Bar";
 
     package = mkOption {

@@ -3,13 +3,14 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.tools.misc;
+with lib.${namespace}; let
+  cfg = config.${namespace}.tools.misc;
 in {
-  options.plusultra.tools.misc = with types; {
+  options.${namespace}.tools.misc = with types; {
     enable = mkBoolOpt false "Whether or not to enable common utilities.";
   };
 

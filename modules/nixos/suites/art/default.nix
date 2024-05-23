@@ -3,13 +3,14 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.suites.art;
+with lib.${namespace}; let
+  cfg = config.${namespace}.suites.art;
 in {
-  options.plusultra.suites.art = with types; {
+  options.${namespace}.suites.art = with types; {
     enable = mkBoolOpt false "Whether or not to enable art configuration.";
   };
 

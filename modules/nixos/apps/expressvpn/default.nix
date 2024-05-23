@@ -1,27 +1,32 @@
-{ lib, config, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.apps.expressvpn;
-in
 {
-  options.plusultra.apps.expressvpn = {
+  lib,
+  config,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.apps.expressvpn;
+in {
+  options.${namespace}.apps.expressvpn = {
     enable = mkEnableOption "Express VPN";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      plusultra.expressvpn
-    ] ++ optionals config.plusultra.desktop.gnome.enable [
-      gnomeExtensions.evpn-shell-assistant
-    ];
+    environment.systemPackages = with pkgs;
+      [
+        plusultra.expressvpn
+      ]
+      ++ optionals config.${namespace}.desktop.gnome.enable [
+        gnomeExtensions.evpn-shell-assistant
+      ];
 
-    boot.kernelModules = [ "tun" ];
+    boot.kernelModules = ["tun"];
 
     systemd.services.expressvpn = {
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" "network-online.target" ];
+      wantedBy = ["multi-user.target"];
+      after = ["network.target" "network-online.target"];
 
       description = "ExpressVPN Daemon";
 

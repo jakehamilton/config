@@ -1,15 +1,19 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.suites.business;
-in
 {
-  options.plusultra.suites.business = with types; {
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.suites.business;
+in {
+  options.${namespace}.suites.business = with types; {
     enable = mkBoolOpt false "Whether or not to enable business configuration.";
   };
 
   config =
-    mkIf cfg.enable { plusultra = { apps = { frappe-books = enabled; }; }; };
+    mkIf cfg.enable {plusultra = {apps = {frappe-books = enabled;};};};
 }

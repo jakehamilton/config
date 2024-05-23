@@ -3,13 +3,14 @@
   config,
   pkgs,
   lib,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.nix;
+with lib.${namespace}; let
+  cfg = config.${namespace}.nix;
 in {
-  options.plusultra.nix = with types; {
+  options.${namespace}.nix = with types; {
     enable = mkBoolOpt true "Whether or not to manage nix configuration.";
     package = mkOpt package pkgs.nixUnstable "Which nix package to use.";
   };
@@ -23,7 +24,7 @@ in {
     ];
 
     nix = let
-      users = ["root" config.plusultra.user.name];
+      users = ["root" config.${namespace}.user.name];
     in {
       package = cfg.package;
 
@@ -51,7 +52,7 @@ in {
         extra-nix-path = "nixpkgs=flake:nixpkgs";
         build-users-group = "nixbld";
       };
-      #// (lib.optionalAttrs config.plusultra.tools.direnv.enable {
+      #// (lib.optionalAttrs config.${namespace}.tools.direnv.enable {
       #  keep-outputs = true;
       #  keep-derivations = true;
       #});
@@ -60,7 +61,7 @@ in {
         automatic = true;
         interval = {Day = 7;};
         options = "--delete-older-than 30d";
-        user = config.plusultra.user.name;
+        user = config.${namespace}.user.name;
       };
 
       # flake-utils-plus

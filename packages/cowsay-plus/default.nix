@@ -1,6 +1,9 @@
-{ pkgs, lib, ... }:
-
-let
+{
+  pkgs,
+  lib,
+  namespace,
+  ...
+}: let
   cowfiles = pkgs.fetchFromGitHub {
     owner = "paulkaefer";
     repo = "cowsay-files";
@@ -8,11 +11,12 @@ let
     sha256 = "1g7v7d2jfjw7hm5mqa40f1nqvis41zkr0nwwqs8hmjglz6kcv23x";
     name = "cowsay-files";
   };
-in pkgs.writeShellScriptBin "cowsay-plus" ''
-  COWS=(${cowfiles}/cows/*.cow)
-  TOTAL_COWS=$(ls ${cowfiles}/cows/*.cow | wc -l)
+in
+  pkgs.writeShellScriptBin "cowsay-plus" ''
+    COWS=(${cowfiles}/cows/*.cow)
+    TOTAL_COWS=$(ls ${cowfiles}/cows/*.cow | wc -l)
 
-  RAND_COW=$(($RANDOM % $TOTAL_COWS))
+    RAND_COW=$(($RANDOM % $TOTAL_COWS))
 
-  ${pkgs.cowsay}/bin/cowsay -f ''${COWS[$RAND_COW]} $@
-''
+    ${pkgs.cowsay}/bin/cowsay -f ''${COWS[$RAND_COW]} $@
+  ''

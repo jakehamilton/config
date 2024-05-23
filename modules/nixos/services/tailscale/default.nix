@@ -1,11 +1,15 @@
-{ lib, pkgs, config, ... }:
-
-with lib;
-with lib.plusultra;
-let cfg = config.plusultra.services.tailscale;
-in
 {
-  options.plusultra.services.tailscale = with types; {
+  lib,
+  pkgs,
+  config,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.services.tailscale;
+in {
+  options.${namespace}.services.tailscale = with types; {
     enable = mkBoolOpt false "Whether or not to configure Tailscale";
     autoconnect = {
       enable = mkBoolOpt false "Whether or not to enable automatic connection to Tailscale";
@@ -21,30 +25,30 @@ in
       }
     ];
 
-    environment.systemPackages = with pkgs; [ tailscale ];
+    environment.systemPackages = with pkgs; [tailscale];
 
     services.tailscale = enabled;
 
     networking = {
       firewall = {
-        trustedInterfaces = [ config.services.tailscale.interfaceName ];
+        trustedInterfaces = [config.services.tailscale.interfaceName];
 
-        allowedUDPPorts = [ config.services.tailscale.port ];
+        allowedUDPPorts = [config.services.tailscale.port];
 
         # Strict reverse path filtering breaks Tailscale exit node use and some subnet routing setups.
         checkReversePath = "loose";
       };
 
-      networkmanager.unmanaged = [ "tailscale0" ];
+      networkmanager.unmanaged = ["tailscale0"];
     };
 
     systemd.services.tailscale-autoconnect = mkIf cfg.autoconnect.enable {
       description = "Automatic connection to Tailscale";
 
       # Make sure tailscale is running before trying to connect to tailscale
-      after = [ "network-pre.target" "tailscale.service" ];
-      wants = [ "network-pre.target" "tailscale.service" ];
-      wantedBy = [ "multi-user.target" ];
+      after = ["network-pre.target" "tailscale.service"];
+      wants = ["network-pre.target" "tailscale.service"];
+      wantedBy = ["multi-user.target"];
 
       # Set this service as a oneshot job
       serviceConfig.Type = "oneshot";
@@ -63,7 +67,6 @@ in
         # Otherwise authenticate with tailscale
         ${tailscale}/bin/tailscale up -authkey "${cfg.autoconnect.key}"
       '';
-
     };
   };
 }

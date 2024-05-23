@@ -2,10 +2,11 @@
   lib,
   pkgs,
   config,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; {
+with lib.${namespace}; {
   imports = [./hardware.nix];
 
   plusultra = {

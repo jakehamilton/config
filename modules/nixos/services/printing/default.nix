@@ -1,13 +1,18 @@
-{ options, config, pkgs, lib, ... }:
-
-with lib;
-with lib.plusultra;
-let cfg = config.plusultra.services.printing;
-in
 {
-  options.plusultra.services.printing = with types; {
+  options,
+  config,
+  pkgs,
+  lib,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.services.printing;
+in {
+  options.${namespace}.services.printing = with types; {
     enable = mkBoolOpt false "Whether or not to configure printing support.";
   };
 
-  config = mkIf cfg.enable { services.printing.enable = true; };
+  config = mkIf cfg.enable {services.printing.enable = true;};
 }

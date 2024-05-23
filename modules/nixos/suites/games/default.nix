@@ -1,9 +1,14 @@
-{ options, config, lib, pkgs, ... }:
-
+{
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.suites.games;
+with lib.${namespace}; let
+  cfg = config.${namespace}.suites.games;
   apps = {
     steam = enabled;
     prismlauncher = enabled;
@@ -17,12 +22,11 @@ let
     wine = enabled;
     proton = enabled;
   };
-in
-{
-  options.plusultra.suites.games = with types; {
+in {
+  options.${namespace}.suites.games = with types; {
     enable =
       mkBoolOpt false "Whether or not to enable common games configuration.";
   };
 
-  config = mkIf cfg.enable { plusultra = { inherit apps cli-apps; }; };
+  config = mkIf cfg.enable {plusultra = {inherit apps cli-apps;};};
 }

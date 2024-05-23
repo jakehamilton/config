@@ -4,11 +4,12 @@
   pkgs,
   lib,
   inputs,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.nix;
+with lib.${namespace}; let
+  cfg = config.${namespace}.nix;
 
   substituters-submodule = types.submodule ({name, ...}: {
     options = with types; {
@@ -16,9 +17,9 @@ with lib.plusultra; let
     };
   });
 in {
-  options.plusultra.nix = with types; {
+  options.${namespace}.nix = with types; {
     enable = mkBoolOpt true "Whether or not to manage nix configuration.";
-    package = mkOpt package pkgs.nixUnstable "Which nix package to use.";
+    package = mkOpt package pkgs.nix "Which nix package to use.";
 
     default-substituter = {
       url = mkOpt str "https://cache.nixos.org" "The url for the substituter.";
@@ -53,7 +54,7 @@ in {
 
     nix = let
       users =
-        ["root" config.plusultra.user.name]
+        ["root" config.${namespace}.user.name]
         ++ optional config.services.hydra.enable "hydra";
     in {
       package = cfg.package;
@@ -76,7 +77,7 @@ in {
             [cfg.default-substituter.key]
             ++ (mapAttrsToList (name: value: value.key) cfg.extra-substituters);
         }
-        // (lib.optionalAttrs config.plusultra.tools.direnv.enable {
+        // (lib.optionalAttrs config.${namespace}.tools.direnv.enable {
           keep-outputs = true;
           keep-derivations = true;
         });

@@ -1,14 +1,18 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.suites.media;
-in
 {
-  options.plusultra.suites.media = with types; {
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.suites.media;
+in {
+  options.${namespace}.suites.media = with types; {
     enable = mkBoolOpt false "Whether or not to enable media configuration.";
   };
 
-  config = mkIf cfg.enable { plusultra = { apps = { freetube = enabled; }; }; };
+  config = mkIf cfg.enable {plusultra = {apps = {freetube = enabled;};};};
 }

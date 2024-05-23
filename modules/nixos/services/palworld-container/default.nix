@@ -2,11 +2,12 @@
   config,
   pkgs,
   lib,
+  namespace,
   ...
 }: let
-  cfg = config.plusultra.services.palworld-container;
+  cfg = config.${namespace}.services.palworld-container;
 in {
-  options.plusultra.services.palworld-container = {
+  options.${namespace}.services.palworld-container = {
     enable = lib.mkEnableOption "Palworld (Docker)";
 
     stateDir = lib.mkOption {

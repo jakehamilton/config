@@ -3,13 +3,14 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.cli-apps.mods;
+with lib.${namespace}; let
+  cfg = config.${namespace}.cli-apps.mods;
 in {
-  options.plusultra.cli-apps.mods = with types; {
+  options.${namespace}.cli-apps.mods = with types; {
     enable = mkBoolOpt false "Whether or not to enable mods.";
   };
 

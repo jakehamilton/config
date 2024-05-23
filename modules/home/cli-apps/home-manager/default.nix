@@ -1,13 +1,15 @@
-{ lib, config, ... }:
-
-let
-  inherit (lib) mkEnableOption mkIf;
-  inherit (lib.plusultra) enabled;
-
-  cfg = config.plusultra.cli-apps.home-manager;
-in
 {
-  options.plusultra.cli-apps.home-manager = {
+  lib,
+  config,
+  namespace,
+  ...
+}: let
+  inherit (lib) mkEnableOption mkIf;
+  inherit (lib.${namespace}) enabled;
+
+  cfg = config.${namespace}.cli-apps.home-manager;
+in {
+  options.${namespace}.cli-apps.home-manager = {
     enable = mkEnableOption "home-manager";
   };
 

@@ -1,12 +1,16 @@
-{ config, options, lib, pkgs, ... }:
-
-let
+{
+  config,
+  options,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}: let
   inherit (lib) types;
 
-  cfg = config.plusultra.services.minecraft;
-in
-{
-  options.plusultra.services.minecraft = {
+  cfg = config.${namespace}.services.minecraft;
+in {
+  options.${namespace}.services.minecraft = {
     enable = lib.mkEnableOption "Minecraft server";
 
     eula = lib.mkOption {
@@ -24,7 +28,7 @@ in
     };
 
     servers = lib.mkOption {
-      default = { };
+      default = {};
       description = "The Minecraft servers to run.";
       example = lib.literalExpression ''
         {
@@ -59,10 +63,14 @@ in
         }
       '';
 
-      type = types.attrsOf (types.submodule ({ config, name, ... }: {
+      type = types.attrsOf (types.submodule ({
+        config,
+        name,
+        ...
+      }: {
         options = {
           type = lib.mkOption {
-            type = types.enum [ "vanilla" "forge" ];
+            type = types.enum ["vanilla" "forge"];
             default = "vanilla";
             description = "The kind of Minecraft server to create.";
           };
@@ -70,10 +78,9 @@ in
           package = lib.mkOption {
             type = types.package;
             default =
-              if config.type == "vanilla" then
-                pkgs.minecraft-server
-              else
-                pkgs.plusultra.minecraft-forge;
+              if config.type == "vanilla"
+              then pkgs.minecraft-server
+              else pkgs.plusultra.minecraft-forge;
             defaultText = lib.literalExpression ''
               pkgs.minecraft-server
             '';
@@ -102,15 +109,16 @@ in
             type = types.separatedString " ";
             default = "-Xmx2048M -Xms2048M";
             # Example options from https://minecraft.gamepedia.com/Tutorials/Server_startup_script
-            example = "-Xms4092M -Xmx4092M -XX:+UseG1GC -XX:+CMSIncrementalPacing "
+            example =
+              "-Xms4092M -Xmx4092M -XX:+UseG1GC -XX:+CMSIncrementalPacing "
               + "-XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=2 "
               + "-XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10";
             description = lib.mdDoc "JVM options for the Minecraft server.";
           };
 
           serverProperties = lib.mkOption {
-            type = types.attrsOf (types.oneOf [ types.bool types.int types.str ]);
-            default = { };
+            type = types.attrsOf (types.oneOf [types.bool types.int types.str]);
+            default = {};
             example = lib.literalExpression ''
               {
                 server-port = 43000;
@@ -133,15 +141,16 @@ in
           };
 
           whitelist = lib.mkOption {
-            type =
-              let
-                minecraftUUID = lib.types.strMatching
-                  "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}" // {
+            type = let
+              minecraftUUID =
+                lib.types.strMatching
+                "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                // {
                   description = "Minecraft UUID";
                 };
-              in
+            in
               lib.types.attrsOf minecraftUUID;
-            default = { };
+            default = {};
             description = lib.mdDoc ''
               Whitelisted players, only has an effect when
               {option}`services.minecraft-server.declarative` is
@@ -182,7 +191,7 @@ in
 
           extraInfraredOptions = lib.mkOption {
             type = types.attrs;
-            default = { };
+            default = {};
 
             description = lib.mdDoc ''
               Extra options passed to Infrared (if enabled) when configuring this server.

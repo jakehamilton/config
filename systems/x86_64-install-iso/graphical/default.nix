@@ -1,12 +1,13 @@
 {
   pkgs,
   lib,
+  namespace,
   ...
 }: let
   tailscale-key = builtins.getEnv "TAILSCALE_AUTH_KEY";
 in
   with lib;
-  with lib.plusultra; {
+  with lib.${namespace}; {
     # `install-iso` adds wireless support that
     # is incompatible with networkmanager.
     networking.wireless.enable = mkForce false;

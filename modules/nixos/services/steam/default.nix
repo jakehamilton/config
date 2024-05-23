@@ -3,11 +3,12 @@
   config,
   pkgs,
   lib,
+  namespace,
   ...
 }: let
-  cfg = config.plusultra.services.steam;
+  cfg = config.${namespace}.services.steam;
 in {
-  options.plusultra.services.steam = {
+  options.${namespace}.services.steam = {
     enable = lib.mkEnableOption "Steam";
   };
 

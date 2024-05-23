@@ -1,15 +1,19 @@
-{ lib, config, pkgs, ... }:
-
+{
+  lib,
+  config,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.services.attic;
+with lib.${namespace}; let
+  cfg = config.${namespace}.services.attic;
 
-  toml-format = pkgs.formats.toml { };
+  toml-format = pkgs.formats.toml {};
 
   raw-server-toml = toml-format.generate "server.toml" cfg.settings;
 
-  server-toml = pkgs.runCommand "checked-server.toml" { config = raw-server-toml; } ''
+  server-toml = pkgs.runCommand "checked-server.toml" {config = raw-server-toml;} ''
     cat $config
 
     export ATTIC_SERVER_TOKEN_HS256_SECRET_BASE64="dGVzdCBzZWNyZXQ="
@@ -20,18 +24,16 @@ let
     cat < $config > $out
   '';
 
-  is-local-postgres =
-    let
-      url = cfg.settings.database.url or "";
-      local-db-strings = [ "localhost" "127.0.0.1" "/run/postgresql" ];
-      is-local-db-url = any (flip hasInfix url) local-db-strings;
-    in
+  is-local-postgres = let
+    url = cfg.settings.database.url or "";
+    local-db-strings = ["localhost" "127.0.0.1" "/run/postgresql"];
+    is-local-db-url = any (flip hasInfix url) local-db-strings;
+  in
     config.services.postgresql.enable
     && hasPrefix "postgresql://" url
     && is-local-db-url;
-in
-{
-  options.plusultra.services.attic = {
+in {
+  options.${namespace}.services.attic = {
     enable = mkEnableOption "Attic";
 
     package = mkOpt types.package pkgs.attic-server "The attic-server package to use.";
@@ -41,7 +43,7 @@ in
     user = mkOpt types.str "atticd" "The user under which attic runs.";
     group = mkOpt types.str "atticd" "The group under which attic runs.";
 
-    settings = mkOpt toml-format.type { } "Settings for the atticd config file.";
+    settings = mkOpt toml-format.type {} "Settings for the atticd config file.";
   };
 
   config = mkIf cfg.enable {
@@ -61,7 +63,7 @@ in
       };
 
       groups = optionalAttrs (cfg.group == "atticd") {
-        atticd = { };
+        atticd = {};
       };
     };
 
@@ -79,19 +81,22 @@ in
     };
 
     systemd.services.atticd = {
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ]
-        ++ optionals is-local-postgres [ "postgresql.service" "nss-lookup.target" ];
+      wantedBy = ["multi-user.target"];
+      after =
+        ["network.target"]
+        ++ optionals is-local-postgres ["postgresql.service" "nss-lookup.target"];
 
-      serviceConfig = {
-        ExecStart = "${cfg.package}/bin/atticd -f ${server-toml}";
-        StateDirectory = "atticd";
-        User = cfg.user;
-        Group = cfg.group;
-        DynamicUser = true;
-      } // optionalAttrs (cfg.credentials != null) {
-        EnvironmentFile = mkDefault cfg.credentials;
-      };
+      serviceConfig =
+        {
+          ExecStart = "${cfg.package}/bin/atticd -f ${server-toml}";
+          StateDirectory = "atticd";
+          User = cfg.user;
+          Group = cfg.group;
+          DynamicUser = true;
+        }
+        // optionalAttrs (cfg.credentials != null) {
+          EnvironmentFile = mkDefault cfg.credentials;
+        };
     };
   };
 }

@@ -1,12 +1,16 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.tools.bottom;
-in
 {
-  options.plusultra.tools.bottom = with types; {
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.tools.bottom;
+in {
+  options.${namespace}.tools.bottom = with types; {
     enable = mkBoolOpt false "Whether or not to enable Bottom.";
   };
 

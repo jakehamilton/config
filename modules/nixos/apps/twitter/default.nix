@@ -1,15 +1,19 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.apps.twitter;
-in
 {
-  options.plusultra.apps.twitter = with types; {
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.apps.twitter;
+in {
+  options.${namespace}.apps.twitter = with types; {
     enable = mkBoolOpt false "Whether or not to enable Twitter.";
   };
 
   config =
-    mkIf cfg.enable { environment.systemPackages = with pkgs.plusultra; [ twitter ]; };
+    mkIf cfg.enable {environment.systemPackages = with pkgs.plusultra; [twitter];};
 }

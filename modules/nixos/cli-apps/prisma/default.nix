@@ -2,13 +2,14 @@
   lib,
   pkgs,
   config,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.cli-apps.prisma;
+with lib.${namespace}; let
+  cfg = config.${namespace}.cli-apps.prisma;
 in {
-  options.plusultra.cli-apps.prisma = with types; {
+  options.${namespace}.cli-apps.prisma = with types; {
     enable = mkBoolOpt false "Whether or not to install Prisma";
     pkgs = {
       npm = mkOpt package pkgs.nodePackages.prisma "The NPM package to install";

@@ -3,11 +3,12 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.suites.development;
+with lib.${namespace}; let
+  cfg = config.${namespace}.suites.development;
   apps = {
     vscode = enabled;
     yubikey = enabled;
@@ -20,7 +21,7 @@ with lib.plusultra; let
     mods = enabled;
   };
 in {
-  options.plusultra.suites.development = with types; {
+  options.${namespace}.suites.development = with types; {
     enable =
       mkBoolOpt false
       "Whether or not to enable common development configuration.";

@@ -1,11 +1,15 @@
-{ options, config, lib, ... }:
-
-with lib;
-with lib.plusultra;
-let cfg = config.plusultra.system.xkb;
-in
 {
-  options.plusultra.system.xkb = with types; {
+  options,
+  config,
+  lib,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.system.xkb;
+in {
+  options.${namespace}.system.xkb = with types; {
     enable = mkBoolOpt false "Whether or not to configure xkb.";
   };
 

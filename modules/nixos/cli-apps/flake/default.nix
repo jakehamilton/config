@@ -1,12 +1,16 @@
-inputs@{ options, config, lib, pkgs, ... }:
-
+inputs @ {
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.cli-apps.flake;
-in
-{
-  options.plusultra.cli-apps.flake = with types; {
+with lib.${namespace}; let
+  cfg = config.${namespace}.cli-apps.flake;
+in {
+  options.${namespace}.cli-apps.flake = with types; {
     enable = mkBoolOpt false "Whether or not to enable flake.";
   };
 

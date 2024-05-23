@@ -7,6 +7,8 @@
   gnused,
   jq,
   lib,
+  namespace,
+  # ...
   ...
 }: let
   version = "23.10.1";

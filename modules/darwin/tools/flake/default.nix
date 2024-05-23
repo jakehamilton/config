@@ -1,12 +1,15 @@
-{ lib, config, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.tools.flake;
-in
 {
-  options.plusultra.tools.flake = {
+  lib,
+  config,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.tools.flake;
+in {
+  options.${namespace}.tools.flake = {
     enable = mkEnableOption "Flake";
   };
 

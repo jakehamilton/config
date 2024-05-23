@@ -1,6 +1,7 @@
 {
   runCommand,
   lib,
+  namespace,
   ...
 }: let
   defaultMinecraftVersion = "1.19.2";

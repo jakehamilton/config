@@ -1,14 +1,19 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let cfg = config.plusultra.apps.blender;
-in
 {
-  options.plusultra.apps.blender = with types; {
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.apps.blender;
+in {
+  options.${namespace}.apps.blender = with types; {
     enable = mkBoolOpt false "Whether or not to enable Blender.";
   };
 
   config =
-    mkIf cfg.enable { environment.systemPackages = with pkgs; [ blender ]; };
+    mkIf cfg.enable {environment.systemPackages = with pkgs; [blender];};
 }

@@ -1,12 +1,16 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.suites.video;
-in
 {
-  options.plusultra.suites.video = with types; {
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
+with lib;
+with lib.${namespace}; let
+  cfg = config.${namespace}.suites.video;
+in {
+  options.${namespace}.suites.video = with types; {
     enable = mkBoolOpt false "Whether or not to enable video configuration.";
   };
 

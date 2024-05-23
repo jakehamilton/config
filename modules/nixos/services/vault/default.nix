@@ -1,19 +1,27 @@
-{ lib, config, pkgs, ... }:
-
+{
+  lib,
+  config,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib;
-with lib.plusultra;
-let
-  cfg = config.plusultra.services.vault;
+with lib.${namespace}; let
+  cfg = config.${namespace}.services.vault;
 
-  package = if cfg.ui then pkgs.vault-bin else pkgs.vault;
+  package =
+    if cfg.ui
+    then pkgs.vault-bin
+    else pkgs.vault;
 
   has-policies = (builtins.length (builtins.attrNames cfg.policies)) != 0;
 
-  format-policy = name: file: pkgs.runCommandNoCC
+  format-policy = name: file:
+    pkgs.runCommandNoCC
     "formatted-vault-policy"
     {
       inherit file;
-      buildInputs = [ package ];
+      buildInputs = [package];
     }
     ''
       name="$(basename "$file")"
@@ -44,17 +52,17 @@ let
       mv "./$name" $out
     '';
 
-  policies = mapAttrs
-    (name: value:
-      if builtins.isPath value then
-        format-policy name value
-      else
-        format-policy name (pkgs.writeText "${name}.hcl" value)
+  policies =
+    mapAttrs
+    (
+      name: value:
+        if builtins.isPath value
+        then format-policy name value
+        else format-policy name (pkgs.writeText "${name}.hcl" value)
     )
     cfg.policies;
-in
-{
-  options.plusultra.services.vault = {
+in {
+  options.${namespace}.services.vault = {
     enable = mkEnableOption "Vault";
 
     ui = mkBoolOpt true "Whether the UI should be enabled.";
@@ -67,7 +75,7 @@ in
 
     mutable-policies = mkBoolOpt false "Whether policies not specified in Nix should be removed.";
 
-    policies = mkOpt (types.attrsOf (types.either types.str types.path)) { } "Policies to install when Vault runs.";
+    policies = mkOpt (types.attrsOf (types.either types.str types.path)) {} "Policies to install when Vault runs.";
 
     policy-agent = {
       user = mkOpt types.str "vault" "The user to run the Vault Agent as.";
@@ -86,18 +94,21 @@ in
       inherit package;
 
       extraConfig = ''
-        ui = ${if cfg.ui then "true" else "false"}
+        ui = ${
+          if cfg.ui
+          then "true"
+          else "false"
+        }
 
         ${cfg.settings}
       '';
-
     };
 
-    systemd.services.vault = { };
+    systemd.services.vault = {};
 
     systemd.services.vault-policies = mkIf (has-policies || !cfg.mutable-policies) {
-      wantedBy = [ "vault.service" ];
-      after = [ "vault.service" ];
+      wantedBy = ["vault.service"];
+      after = ["vault.service"];
 
       serviceConfig = {
         Type = "oneshot";
@@ -108,7 +119,7 @@ in
         RemainAfterExit = "yes";
       };
 
-      restartTriggers = (mapAttrsToList (name: value: "${name}=${value}") policies);
+      restartTriggers = mapAttrsToList (name: value: "${name}=${value}") policies;
 
       path = [
         package
@@ -120,83 +131,82 @@ in
         VAULT_ADDR = "http://${config.services.vault.address}";
       };
 
-      script =
-        let
-          write-policies-commands = mapAttrsToList
-            (name: policy:
-              ''
-                echo Writing policy '${name}': '${policy}'
-                vault policy write '${name}' '${policy}'
-              ''
-            )
-            policies;
-          write-policies = concatStringsSep "\n" write-policies-commands;
-
-          known-policies = mapAttrsToList (name: value: name) policies;
-
-          remove-unknown-policies = ''
-            current_policies=$(vault policy list -format=json | jq -r '.[]')
-            known_policies=(${concatStringsSep " " (builtins.map (policy: "\"${policy}\"") known-policies)})
-
-            while read current_policy; do
-              is_known=false
-
-              for known_policy in "''${known_policies[@]}"; do
-                if [ "$known_policy" = "$current_policy" ]; then
-                  is_known=true
-                  break
-                fi
-              done
-
-              if [ "$is_known" = "false" ] && [ "$current_policy" != "default" ] && [ "$current_policy" != "root" ]; then
-                echo "Removing policy: $current_policy"
-                vault policy delete "$current_policy"
-              else
-                echo "Keeping policy: $current_policy"
-              fi
-            done <<< "$current_policies"
-          '';
-        in
-        ''
-          if ! [ -f '${cfg.policy-agent.auth.roleIdFilePath}' ]; then
-            echo 'role-id file not found: ${cfg.policy-agent.auth.roleIdFilePath}'
-            exit 1
-          fi
-
-          if ! [ -f '${cfg.policy-agent.auth.secretIdFilePath}' ]; then
-            echo 'secret-id file not found: ${cfg.policy-agent.auth.secretIdFilePath}'
-            exit 1
-          fi
-
-          role_id="$(cat '${cfg.policy-agent.auth.roleIdFilePath}')"
-          secret_id="$(cat '${cfg.policy-agent.auth.secretIdFilePath}')"
-
-          seal_status=$(curl -s "$VAULT_ADDR/v1/sys/seal-status" | jq ".sealed")
-
-          echo "Seal Status: $seal_status"
-
-          if [ seal_status = "true" ]; then
-            echo "Vault is currently sealed, cannot install policies."
-            exit 1
-          fi
-
-          echo "Getting token..."
-
-          token=$(vault write -field=token auth/approle/login \
-            role_id="$role_id" \
-            secret_id="$secret_id" \
+      script = let
+        write-policies-commands =
+          mapAttrsToList
+          (
+            name: policy: ''
+              echo Writing policy '${name}': '${policy}'
+              vault policy write '${name}' '${policy}'
+            ''
           )
+          policies;
+        write-policies = concatStringsSep "\n" write-policies-commands;
 
-          echo "Logging in..."
+        known-policies = mapAttrsToList (name: value: name) policies;
 
-          export VAULT_TOKEN="$(vault login -method=token -token-only token="$token")"
+        remove-unknown-policies = ''
+          current_policies=$(vault policy list -format=json | jq -r '.[]')
+          known_policies=(${concatStringsSep " " (builtins.map (policy: "\"${policy}\"") known-policies)})
 
-          echo "Writing policies..."
+          while read current_policy; do
+            is_known=false
 
-          ${write-policies}
+            for known_policy in "''${known_policies[@]}"; do
+              if [ "$known_policy" = "$current_policy" ]; then
+                is_known=true
+                break
+              fi
+            done
 
-          ${optionalString (!cfg.mutable-policies) remove-unknown-policies}
+            if [ "$is_known" = "false" ] && [ "$current_policy" != "default" ] && [ "$current_policy" != "root" ]; then
+              echo "Removing policy: $current_policy"
+              vault policy delete "$current_policy"
+            else
+              echo "Keeping policy: $current_policy"
+            fi
+          done <<< "$current_policies"
         '';
+      in ''
+        if ! [ -f '${cfg.policy-agent.auth.roleIdFilePath}' ]; then
+          echo 'role-id file not found: ${cfg.policy-agent.auth.roleIdFilePath}'
+          exit 1
+        fi
+
+        if ! [ -f '${cfg.policy-agent.auth.secretIdFilePath}' ]; then
+          echo 'secret-id file not found: ${cfg.policy-agent.auth.secretIdFilePath}'
+          exit 1
+        fi
+
+        role_id="$(cat '${cfg.policy-agent.auth.roleIdFilePath}')"
+        secret_id="$(cat '${cfg.policy-agent.auth.secretIdFilePath}')"
+
+        seal_status=$(curl -s "$VAULT_ADDR/v1/sys/seal-status" | jq ".sealed")
+
+        echo "Seal Status: $seal_status"
+
+        if [ seal_status = "true" ]; then
+          echo "Vault is currently sealed, cannot install policies."
+          exit 1
+        fi
+
+        echo "Getting token..."
+
+        token=$(vault write -field=token auth/approle/login \
+          role_id="$role_id" \
+          secret_id="$secret_id" \
+        )
+
+        echo "Logging in..."
+
+        export VAULT_TOKEN="$(vault login -method=token -token-only token="$token")"
+
+        echo "Writing policies..."
+
+        ${write-policies}
+
+        ${optionalString (!cfg.mutable-policies) remove-unknown-policies}
+      '';
     };
   };
 }

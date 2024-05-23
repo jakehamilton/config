@@ -2,10 +2,11 @@
   pkgs,
   config,
   lib,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; {
+with lib.${namespace}; {
   imports = [./hardware.nix];
 
   services.minio = {
@@ -131,8 +132,8 @@ with lib.plusultra; {
             # For configuration options, see: man 5 smb.conf
             extra-config = {
               "create mask" = "0755";
-              "write list" = config.plusultra.user.name;
-              "read list" = config.plusultra.user.name;
+              "write list" = config.${namespace}.user.name;
+              "read list" = config.${namespace}.user.name;
             };
           };
           vault = {
@@ -140,8 +141,8 @@ with lib.plusultra; {
 
             extra-config = {
               "create mask" = "0755";
-              "write list" = config.plusultra.user.name;
-              "read list" = config.plusultra.user.name;
+              "write list" = config.${namespace}.user.name;
+              "read list" = config.${namespace}.user.name;
             };
           };
         };

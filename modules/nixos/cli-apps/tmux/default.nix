@@ -2,13 +2,14 @@
   lib,
   config,
   pkgs,
+  namespace,
   ...
 }:
 with lib;
-with lib.plusultra; let
-  cfg = config.plusultra.cli-apps.tmux;
+with lib.${namespace}; let
+  cfg = config.${namespace}.cli-apps.tmux;
 in {
-  options.plusultra.cli-apps.tmux = {
+  options.${namespace}.cli-apps.tmux = {
     enable = mkEnableOption "Tmux";
   };
 

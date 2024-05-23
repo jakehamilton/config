@@ -1,14 +1,19 @@
-{ config, options, lib, pkgs, ... }:
-
-let
+{
+  config,
+  options,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}: let
   inherit (builtins) toString;
   inherit (lib) types;
 
-  cfg = config.plusultra.services.infrared;
+  cfg = config.${namespace}.services.infrared;
 
-  format = pkgs.formats.json { };
+  format = pkgs.formats.json {};
 
-  serversType = (types.submodule ({ config, ... }: {
+  serversType = types.submodule ({config, ...}: {
     options = {
       domain = lib.mkOption {
         type = types.str;
@@ -33,7 +38,7 @@ let
       };
 
       settings = lib.mkOption {
-        default = { };
+        default = {};
         description = ''
           Infrared configuration (<filename>config.json</filename>). Refer to
           <link xlink:href="https://github.com/haveachin/infrared#proxy-config" />
@@ -63,10 +68,9 @@ let
         };
       };
     };
-  }));
-in
-{
-  options.plusultra.services.infrared = {
+  });
+in {
+  options.${namespace}.services.infrared = {
     enable = lib.mkEnableOption "Infrared";
 
     stateDir = lib.mkOption {
@@ -95,7 +99,7 @@ in
 
     servers = lib.mkOption {
       type = types.listOf serversType;
-      default = [ ];
+      default = [];
       description = "The servers to proxy.";
       example = lib.literalExpression ''
         [
@@ -118,19 +122,18 @@ in
     };
 
     systemd.tmpfiles.rules =
-      [ "d '${cfg.stateDir}' 0750 ${cfg.user} ${cfg.group} - -" ] ++
-      builtins.map
-        (server:
-          let
-            config = format.generate "${server.domain}.json" server.settings;
-          in
-          "L+ '${cfg.stateDir}/${server.domain}.json' - - - - ${config}"
-        )
-        cfg.servers;
+      ["d '${cfg.stateDir}' 0750 ${cfg.user} ${cfg.group} - -"]
+      ++ builtins.map
+      (
+        server: let
+          config = format.generate "${server.domain}.json" server.settings;
+        in "L+ '${cfg.stateDir}/${server.domain}.json' - - - - ${config}"
+      )
+      cfg.servers;
 
     systemd.services.infrared = {
-      after = [ "network.target" ];
-      wantedBy = [ "multi-user.target" ];
+      after = ["network.target"];
+      wantedBy = ["multi-user.target"];
 
       serviceConfig = {
         Type = "simple";
@@ -151,7 +154,7 @@ in
       };
 
       groups = lib.optionalAttrs (cfg.group == "infrared") {
-        infrared = { };
+        infrared = {};
       };
     };
   };

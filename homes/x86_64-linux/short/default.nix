@@ -4,9 +4,10 @@
   config,
   osConfig ? {},
   format ? "unknown",
+  namespace,
   ...
 }:
-with lib.plusultra; {
+with lib.${namespace}; {
   plusultra = {
     cli-apps = {
       zsh = enabled;

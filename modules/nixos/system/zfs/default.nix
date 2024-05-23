@@ -1,17 +1,19 @@
-{ config, lib, ... }:
-
-let
-  cfg = config.plusultra.system.zfs;
+{
+  config,
+  lib,
+  namespace,
+  ...
+}: let
+  cfg = config.${namespace}.system.zfs;
 
   inherit (lib) mkEnableOption mkIf mkDefault;
-  inherit (lib.plusultra) mkOpt enabled;
+  inherit (lib.${namespace}) mkOpt enabled;
   inherit (lib.types) listOf str;
-in
-{
-  options.plusultra.system.zfs = {
+in {
+  options.${namespace}.system.zfs = {
     enable = mkEnableOption "ZFS support";
 
-    pools = mkOpt (listOf str) [ "rpool" ] "The ZFS pools to manage.";
+    pools = mkOpt (listOf str) ["rpool"] "The ZFS pools to manage.";
 
     auto-snapshot = {
       enable = mkEnableOption "ZFS auto snapshotting";
