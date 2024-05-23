@@ -24,7 +24,7 @@
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Lib
-    snowfall-lib.url = "github:snowfallorg/lib";
+    snowfall-lib.url = "github:snowfallorg/lib?ref=v3.0.0";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
     # Avalanche
