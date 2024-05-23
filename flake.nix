@@ -24,8 +24,7 @@
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Lib
-    # snowfall-lib.url = "github:snowfallorg/lib/dev";
-    snowfall-lib.url = "path:/home/short/work/@snowfallorg/lib";
+    snowfall-lib.url = "github:snowfallorg/lib";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
     # Avalanche
@@ -37,11 +36,11 @@
     aux-website.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Flake
-    flake.url = "github:snowfallorg/flake?ref=v1.3.1";
+    flake.url = "github:snowfallorg/flake?ref=v1.4.0";
     flake.inputs.nixpkgs.follows = "unstable";
 
     # Snowfall Thaw
-    thaw.url = "github:snowfallorg/thaw?ref=v1.0.5";
+    thaw.url = "github:snowfallorg/thaw?ref=v1.0.6";
 
     # Snowfall Drift
     drift.url = "github:snowfallorg/drift";
