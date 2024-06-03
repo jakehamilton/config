@@ -1924,11 +1924,11 @@
         "unstable": "unstable_2"
       },
       "locked": {
-        "lastModified": 1716756544,
-        "narHash": "sha256-S/9x6zb87WGIMQXIXjLWrB+rDLIrrARu02tNRcqKD0g=",
+        "lastModified": 1717315115,
+        "narHash": "sha256-WADkDIvqyg16/PZqGdxWPaZbML6ftaSRsg01Rk1bjjY=",
         "owner": "jakehamilton",
         "repo": "nixpkgs.news",
-        "rev": "3c0516e1549e396c89a62115ede67fec72f64b1a",
+        "rev": "85574d008599aeb57af4c5c046f0e1e0343e8d8a",
         "type": "github"
       },
       "original": {
