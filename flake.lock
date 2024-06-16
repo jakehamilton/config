@@ -56,11 +56,11 @@
         "snowfall-lib": "snowfall-lib"
       },
       "locked": {
-        "lastModified": 1715460767,
-        "narHash": "sha256-SRWtm8HA/KDFiCmL7J6WcOqWMtXdBolAatfFt1jjI60=",
+        "lastModified": 1718552769,
+        "narHash": "sha256-YDQZmTysqYmbHpGncm8sy5dKkpvG55zkq29lsd2y34U=",
         "owner": "auxolotl",
         "repo": "website",
-        "rev": "49b5347903056007e65dee35a91edf2ab6b8cac5",
+        "rev": "364973d984bdd8bd1f19fab7608e2bef0f126041",
         "type": "github"
       },
       "original": {
@@ -1018,7 +1018,6 @@
       "original": {
         "owner": "gytis-ivaskevicius",
         "repo": "flake-utils-plus",
-        "rev": "3542fe9126dc492e53ddd252bb0260fe035f2c0f",
         "type": "github"
       }
     },
@@ -1924,11 +1923,11 @@
         "unstable": "unstable_2"
       },
       "locked": {
-        "lastModified": 1717391652,
-        "narHash": "sha256-0TzNEBW7omlpieMQqzjJpjTbiwr2jA1itDd266EqLMQ=",
+        "lastModified": 1717982450,
+        "narHash": "sha256-5CikIaU2epJA9IaMPnHU+mX+HDhpdnKY2ueNRgr+rIk=",
         "owner": "jakehamilton",
         "repo": "nixpkgs.news",
-        "rev": "0c2ffc21f28bf9692cab9a6382aa7ceddfdac13c",
+        "rev": "dc453bcad4155f8aa2e570392fdd4fab8aa6b7df",
         "type": "github"
       },
       "original": {
@@ -2604,14 +2603,18 @@
         ]
       },
       "locked": {
-        "lastModified": 1716511748,
-        "narHash": "sha256-7mXi1aAfiXmIUFHYshf5wSY8tAICQaO6bw2Z/ldxJSM=",
-        "path": "/home/short/work/@snowfallorg/lib",
-        "type": "path"
+        "lastModified": 1716433572,
+        "narHash": "sha256-JzUSwdANQyTVZiKkTpGVB9rTCu2y8kn3vbrp8kUsozE=",
+        "owner": "snowfallorg",
+        "repo": "lib",
+        "rev": "c58023878d6720c525446cb67d8fcbe7c3a5d84c",
+        "type": "github"
       },
       "original": {
-        "path": "/home/short/work/@snowfallorg/lib",
-        "type": "path"
+        "owner": "snowfallorg",
+        "ref": "v3.0.0",
+        "repo": "lib",
+        "type": "github"
       }
     },
     "snowfall-lib_19": {
