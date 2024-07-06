@@ -44,7 +44,7 @@ in {
         hosts = inputs.self.nixosConfigurations;
       })
       deploy-rs
-      nixfmt
+      nixfmt-rfc-style
       nix-index
       nix-prefetch-git
       nix-output-monitor

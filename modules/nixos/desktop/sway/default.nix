@@ -145,6 +145,7 @@ in {
     services.xserver.displayManager.defaultSession = "sway";
     services.xserver.displayManager.gdm.enable = true;
     services.xserver.displayManager.gdm.wayland = true;
-    services.xserver.libinput.enable = true;
+
+    services.libinput.enable = true;
   };
 }

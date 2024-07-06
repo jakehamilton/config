@@ -47,17 +47,13 @@ in {
       extraOptions = {
         programs.firefox = {
           enable = true;
-          package = pkgs.firefox.override {
-            cfg = {
-              enableBrowserpass = true;
-              enableGnomeExtensions = config.${namespace}.desktop.gnome.enable;
-            };
+          # package = pkgs.firefox;
 
-            extraNativeMessagingHosts =
-              optional
-              config.${namespace}.desktop.gnome.enable
-              pkgs.gnomeExtensions.gsconnect;
-          };
+          nativeMessagingHosts =
+            [pkgs.browserpass]
+            ++ optional
+            config.${namespace}.desktop.gnome.enable
+            pkgs.gnomeExtensions.gsconnect;
 
           profiles.${config.${namespace}.user.name} = {
             inherit (cfg) extraConfig userChrome settings;

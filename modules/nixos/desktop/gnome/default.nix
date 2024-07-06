@@ -128,10 +128,11 @@ in {
     # Required for app indicators
     services.udev.packages = with pkgs; [gnome3.gnome-settings-daemon];
 
+    services.libinput.enable = true;
+
     services.xserver = {
       enable = true;
 
-      libinput.enable = true;
       displayManager.gdm = {
         enable = true;
         wayland = cfg.wayland;

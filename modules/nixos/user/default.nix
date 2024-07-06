@@ -105,8 +105,9 @@ in {
           zsh = {
             enable = true;
             enableCompletion = true;
-            enableAutosuggestions = true;
             syntaxHighlighting.enable = true;
+
+            autosuggestion.enable = true;
 
             initExtra =
               ''

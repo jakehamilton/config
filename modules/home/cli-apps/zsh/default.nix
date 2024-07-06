@@ -39,9 +39,10 @@ in {
     programs = {
       zsh = {
         enable = true;
-        enableAutosuggestions = true;
         enableCompletion = true;
         syntaxHighlighting.enable = true;
+
+        autosuggestion.enable = true;
 
         initExtra = ''
           # Fix an issue with tmux.

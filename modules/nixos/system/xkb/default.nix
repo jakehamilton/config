@@ -15,9 +15,12 @@ in {
 
   config = mkIf cfg.enable {
     console.useXkbConfig = true;
+
     services.xserver = {
-      layout = "us";
-      xkbOptions = "caps:escape";
+      xkb = {
+        layout = "us";
+        options = "caps:escape";
+      };
     };
   };
 }
