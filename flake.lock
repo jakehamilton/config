@@ -78,11 +78,11 @@
         "snowfall-lib": "snowfall-lib_2"
       },
       "locked": {
-        "lastModified": 1716675369,
-        "narHash": "sha256-lUsMf4qIJBG6+LvUsespYMT7/w06gEZrkEQSLqydIJY=",
+        "lastModified": 1720232256,
+        "narHash": "sha256-al0rjjNfzG8Lei7/N/hbTgXqQr0yVblf1DY0A/BPQBc=",
         "owner": "snowfallorg",
         "repo": "avalanche",
-        "rev": "2333bdad22a3fc8f979a5a1812207e7519374086",
+        "rev": "ebee1d09e9ae874ffe869b0cc592cd7f6ef78c12",
         "type": "github"
       },
       "original": {
@@ -2672,16 +2672,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1716675292,
-        "narHash": "sha256-7TFvVE4HR/b65/0AAhewYHEJzUXxIEJn82ow5bCkrDo=",
+        "lastModified": 1718097323,
+        "narHash": "sha256-zCgs8Wp7rdt0tjNUHMUIvi6sIvDoprWIHwvTGq+LMK0=",
         "owner": "snowfallorg",
         "repo": "lib",
-        "rev": "5d6e9f235735393c28e1145bec919610b172a20f",
+        "rev": "aa19b02b63025263cec041fcb7a0857c3cb98859",
         "type": "github"
       },
       "original": {
         "owner": "snowfallorg",
-        "ref": "v3.0.2",
+        "ref": "v3.0.3",
         "repo": "lib",
         "type": "github"
       }
