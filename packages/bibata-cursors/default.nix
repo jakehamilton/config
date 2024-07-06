@@ -8,7 +8,7 @@
 bibata-cursors.overrideAttrs (oldAttrs: {
   version = "unstable-2023-03-03";
 
-  src = "${inputs.bibata-cursors}";
+  # src = "${inputs.bibata-cursors}";
 
   meta =
     oldAttrs.meta

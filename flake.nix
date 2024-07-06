@@ -2,17 +2,17 @@
   description = "Plus Ultra";
 
   inputs = {
-    # NixPkgs (nixos-23.11)
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    # NixPkgs
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
 
-    # NixPkgs Unstable (nixos-unstable)
+    # NixPkgs Unstable
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Home Manager (release-22.05)
-    home-manager.url = "github:nix-community/home-manager/release-23.11";
+    # Home Manager
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # macOS Support (master)
+    # macOS Support
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -208,6 +208,7 @@
         allowUnfree = true;
         permittedInsecurePackages = [
           "electron-25.9.0"
+          "electron-27.3.11"
         ];
       };
 
