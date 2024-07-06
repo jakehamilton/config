@@ -11,6 +11,10 @@ ${text_bold}USAGE${text_reset}
 
 ${text_bold}OPTIONS${text_reset}
 
+  --list, -l                Print all hosts
+  --pick, -p                Select a host
+  --debug                   Enable debug messages
+
   --help, -h                Show this help message
   --debug                   Show debug messages
 "
