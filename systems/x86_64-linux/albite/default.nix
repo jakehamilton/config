@@ -1,9 +1,8 @@
-{
-  lib,
-  pkgs,
-  modulesPath,
-  namespace,
-  ...
+{ lib
+, pkgs
+, modulesPath
+, namespace
+, ...
 }:
 with lib;
 with lib.${namespace}; {
@@ -22,12 +21,16 @@ with lib.${namespace}; {
     443
   ];
 
+  environment.systemPackages = with pkgs; [
+    neovim
+  ];
+
   plusultra = {
     nix = enabled;
 
     cli-apps = {
       tmux = enabled;
-      neovim = enabled;
+      # neovim = enabled;
     };
 
     tools = {

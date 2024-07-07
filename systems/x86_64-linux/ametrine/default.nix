@@ -1,10 +1,9 @@
-{
-  lib,
-  pkgs,
-  config,
-  modulesPath,
-  namespace,
-  ...
+{ lib
+, pkgs
+, config
+, modulesPath
+, namespace
+, ...
 }:
 with lib;
 with lib.${namespace}; {
@@ -21,6 +20,10 @@ with lib.${namespace}; {
   networking.firewall.allowedTCPPorts = [
     80
     443
+  ];
+
+  environment.systemPackages = with pkgs; [
+    neovim
   ];
 
   services = {
@@ -77,7 +80,7 @@ with lib.${namespace}; {
 
     cli-apps = {
       tmux = enabled;
-      neovim = enabled;
+      # neovim = enabled;
     };
 
     tools = {

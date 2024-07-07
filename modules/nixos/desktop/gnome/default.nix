@@ -1,10 +1,9 @@
-{
-  options,
-  config,
-  lib,
-  pkgs,
-  namespace,
-  ...
+{ options
+, config
+, lib
+, pkgs
+, namespace
+, ...
 }:
 with lib;
 with lib.${namespace}; let
@@ -15,7 +14,6 @@ with lib.${namespace}; let
     appindicator
     aylurs-widgets
     dash-to-dock
-    emoji-selector
     gsconnect
     gtile
     just-perfection
@@ -32,24 +30,26 @@ with lib.${namespace}; let
     # audio-output-switcher
     # big-avatar
     # clear-top-bar
+    # emoji-selector
   ];
 
   default-attrs = mapAttrs (key: mkDefault);
   nested-default-attrs = mapAttrs (key: default-attrs);
-in {
+in
+{
   options.${namespace}.desktop.gnome = with types; {
     enable =
       mkBoolOpt false "Whether or not to use Gnome as the desktop environment.";
     wallpaper = {
-      light = mkOpt (oneOf [str package]) pkgs.plusultra.wallpapers.nord-rainbow-light-nix "The light wallpaper to use.";
-      dark = mkOpt (oneOf [str package]) pkgs.plusultra.wallpapers.nord-rainbow-dark-nix "The dark wallpaper to use.";
+      light = mkOpt (oneOf [ str package ]) pkgs.plusultra.wallpapers.nord-rainbow-light-nix "The light wallpaper to use.";
+      dark = mkOpt (oneOf [ str package ]) pkgs.plusultra.wallpapers.nord-rainbow-dark-nix "The dark wallpaper to use.";
     };
-    color-scheme = mkOpt (enum ["light" "dark"]) "dark" "The color scheme to use.";
+    color-scheme = mkOpt (enum [ "light" "dark" ]) "dark" "The color scheme to use.";
     wayland = mkBoolOpt true "Whether or not to use Wayland.";
     suspend =
       mkBoolOpt true "Whether or not to suspend the machine after inactivity.";
     monitors = mkOpt (nullOr path) null "The monitors.xml file to create.";
-    extensions = mkOpt (listOf package) [] "Extra Gnome extensions to install.";
+    extensions = mkOpt (listOf package) [ ] "Extra Gnome extensions to install.";
   };
 
   config = mkIf cfg.enable {
@@ -91,8 +91,8 @@ in {
       );
 
     systemd.services.plusultra-user-icon = {
-      before = ["display-manager.service"];
-      wantedBy = ["display-manager.service"];
+      before = [ "display-manager.service" ];
+      wantedBy = [ "display-manager.service" ];
 
       serviceConfig = {
         Type = "simple";
@@ -126,7 +126,7 @@ in {
     };
 
     # Required for app indicators
-    services.udev.packages = with pkgs; [gnome3.gnome-settings-daemon];
+    services.udev.packages = with pkgs; [ gnome3.gnome-settings-daemon ];
 
     services.libinput.enable = true;
 
@@ -142,13 +142,14 @@ in {
     };
 
     plusultra.home.extraOptions = {
-      dconf.settings = let
-        user = config.users.users.${config.${namespace}.user.name};
-        get-wallpaper = wallpaper:
-          if lib.isDerivation wallpaper
-          then builtins.toString wallpaper
-          else wallpaper;
-      in
+      dconf.settings =
+        let
+          user = config.users.users.${config.${namespace}.user.name};
+          get-wallpaper = wallpaper:
+            if lib.isDerivation wallpaper
+            then builtins.toString wallpaper
+            else wallpaper;
+        in
         nested-default-attrs {
           "org/gnome/shell" = {
             disable-user-extensions = false;
@@ -160,7 +161,7 @@ in {
                 "user-theme@gnome-shell-extensions.gcampax.github.com"
               ];
             favorite-apps =
-              ["org.gnome.Nautilus.desktop"]
+              [ "org.gnome.Nautilus.desktop" ]
               ++ optional config.${namespace}.apps.firefox.enable "firefox.desktop"
               ++ optional config.${namespace}.apps.vscode.enable "code.desktop"
               ++ optional config.${namespace}.desktop.addons.foot.enable "foot.desktop"
@@ -201,40 +202,40 @@ in {
             resize-with-right-button = true;
           };
           "org/gnome/desktop/wm/keybindings" = {
-            switch-to-workspace-1 = ["<Super>1"];
-            switch-to-workspace-2 = ["<Super>2"];
-            switch-to-workspace-3 = ["<Super>3"];
-            switch-to-workspace-4 = ["<Super>4"];
-            switch-to-workspace-5 = ["<Super>5"];
-            switch-to-workspace-6 = ["<Super>6"];
-            switch-to-workspace-7 = ["<Super>7"];
-            switch-to-workspace-8 = ["<Super>8"];
-            switch-to-workspace-9 = ["<Super>9"];
-            switch-to-workspace-10 = ["<Super>0"];
+            switch-to-workspace-1 = [ "<Super>1" ];
+            switch-to-workspace-2 = [ "<Super>2" ];
+            switch-to-workspace-3 = [ "<Super>3" ];
+            switch-to-workspace-4 = [ "<Super>4" ];
+            switch-to-workspace-5 = [ "<Super>5" ];
+            switch-to-workspace-6 = [ "<Super>6" ];
+            switch-to-workspace-7 = [ "<Super>7" ];
+            switch-to-workspace-8 = [ "<Super>8" ];
+            switch-to-workspace-9 = [ "<Super>9" ];
+            switch-to-workspace-10 = [ "<Super>0" ];
 
-            move-to-workspace-1 = ["<Shift><Super>1"];
-            move-to-workspace-2 = ["<Shift><Super>2"];
-            move-to-workspace-3 = ["<Shift><Super>3"];
-            move-to-workspace-4 = ["<Shift><Super>4"];
-            move-to-workspace-5 = ["<Shift><Super>5"];
-            move-to-workspace-6 = ["<Shift><Super>6"];
-            move-to-workspace-7 = ["<Shift><Super>7"];
-            move-to-workspace-8 = ["<Shift><Super>8"];
-            move-to-workspace-9 = ["<Shift><Super>9"];
-            move-to-workspace-10 = ["<Shift><Super>0"];
+            move-to-workspace-1 = [ "<Shift><Super>1" ];
+            move-to-workspace-2 = [ "<Shift><Super>2" ];
+            move-to-workspace-3 = [ "<Shift><Super>3" ];
+            move-to-workspace-4 = [ "<Shift><Super>4" ];
+            move-to-workspace-5 = [ "<Shift><Super>5" ];
+            move-to-workspace-6 = [ "<Shift><Super>6" ];
+            move-to-workspace-7 = [ "<Shift><Super>7" ];
+            move-to-workspace-8 = [ "<Shift><Super>8" ];
+            move-to-workspace-9 = [ "<Shift><Super>9" ];
+            move-to-workspace-10 = [ "<Shift><Super>0" ];
           };
           "org/gnome/shell/keybindings" = {
             # Remove the default hotkeys for opening favorited applications.
-            switch-to-application-1 = [];
-            switch-to-application-2 = [];
-            switch-to-application-3 = [];
-            switch-to-application-4 = [];
-            switch-to-application-5 = [];
-            switch-to-application-6 = [];
-            switch-to-application-7 = [];
-            switch-to-application-8 = [];
-            switch-to-application-9 = [];
-            switch-to-application-10 = [];
+            switch-to-application-1 = [ ];
+            switch-to-application-2 = [ ];
+            switch-to-application-3 = [ ];
+            switch-to-application-4 = [ ];
+            switch-to-application-5 = [ ];
+            switch-to-application-6 = [ ];
+            switch-to-application-7 = [ ];
+            switch-to-application-8 = [ ];
+            switch-to-application-9 = [ ];
+            switch-to-application-10 = [ ];
           };
           "org/gnome/mutter" = {
             edge-tiling = false;
