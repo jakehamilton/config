@@ -1,8 +1,8 @@
-{ pkgs, namespace, ... }:
+{ pkgs, ... }:
 pkgs.fetchFromGitHub {
-  owner = "glasket";
+  owner = "EliverLara";
   repo = "firefox-nordic-theme";
-  rev = "8e5c529bc30072b0bebe4cbe540c8a4f2d4180a0";
-  sha256 = "1m5d804yqc17q3cnfb315gn518yik78xz47igr83p4c999w9078i";
+  rev = "287c6b4a94361a038d63f2fa7b62f9adfc08fe02";
+  sha256 = "1bh7jslgscfn84bblsjixrywvpb6bdmdqk5y8aaisvbclmj33iz9";
   name = "firefox-nordic-theme";
 }
