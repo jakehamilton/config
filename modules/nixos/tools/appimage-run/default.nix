@@ -7,9 +7,11 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.tools.appimage-run;
-in {
+in
+{
   options.${namespace}.tools.appimage-run = with types; {
     enable = mkBoolOpt false "Whether or not to enable appimage-run.";
   };
@@ -17,8 +19,6 @@ in {
   config = mkIf cfg.enable {
     plusultra.home.configFile."wgetrc".text = "";
 
-    environment.systemPackages = with pkgs; [
-      appimage-run
-    ];
+    environment.systemPackages = with pkgs; [ appimage-run ];
   };
 }

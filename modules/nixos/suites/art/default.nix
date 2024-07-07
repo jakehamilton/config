@@ -7,9 +7,11 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.suites.art;
-in {
+in
+{
   options.${namespace}.suites.art = with types; {
     enable = mkBoolOpt false "Whether or not to enable art configuration.";
   };
@@ -22,9 +24,7 @@ in {
         blender = enabled;
       };
 
-      system.fonts.fonts = with pkgs; [
-        google-fonts
-      ];
+      system.fonts.fonts = with pkgs; [ google-fonts ];
     };
   };
 }

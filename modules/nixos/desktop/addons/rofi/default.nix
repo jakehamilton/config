@@ -7,16 +7,17 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.desktop.addons.rofi;
-in {
+in
+{
   options.${namespace}.desktop.addons.rofi = with types; {
-    enable =
-      mkBoolOpt false "Whether to enable Rofi in the desktop environment.";
+    enable = mkBoolOpt false "Whether to enable Rofi in the desktop environment.";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [rofi];
+    environment.systemPackages = with pkgs; [ rofi ];
 
     plusultra.home.configFile."rofi/config.rasi".source = ./config.rasi;
   };

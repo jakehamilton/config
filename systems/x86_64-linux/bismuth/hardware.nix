@@ -5,9 +5,11 @@
   modulesPath,
   inputs,
   ...
-}: let
+}:
+let
   inherit (inputs) nixos-hardware;
-in {
+in
+{
   imports = with nixos-hardware.nixosModules; [
     (modulesPath + "/installer/scan/not-detected.nix")
     common-cpu-amd
@@ -20,10 +22,17 @@ in {
     kernelPackages = pkgs.linuxPackages_latest;
 
     initrd = {
-      availableKernelModules = ["nvme" "ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod"];
+      availableKernelModules = [
+        "nvme"
+        "ahci"
+        "xhci_pci"
+        "usbhid"
+        "usb_storage"
+        "sd_mod"
+      ];
     };
 
-    extraModulePackages = [];
+    extraModulePackages = [ ];
   };
 
   fileSystems."/" = {
@@ -39,10 +48,10 @@ in {
   fileSystems."/mnt/data" = {
     device = "/dev/sda1";
     fsType = "auto";
-    options = ["rw"];
+    options = [ "rw" ];
   };
 
-  swapDevices = [{device = "/dev/disk/by-label/swap";}];
+  swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
 
   # NOTE: NetworkManager will handle DHCP.
   networking.interfaces.enp39s0.useDHCP = false;
@@ -50,8 +59,7 @@ in {
 
   hardware.enableRedistributableFirmware = true;
 
-  hardware.cpu.amd.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   hardware.bluetooth.enable = true;
 }

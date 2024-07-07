@@ -7,12 +7,13 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.suites.emulation;
-in {
+in
+{
   options.${namespace}.suites.emulation = with types; {
-    enable =
-      mkBoolOpt false "Whether or not to enable emulation configuration.";
+    enable = mkBoolOpt false "Whether or not to enable emulation configuration.";
   };
 
   config = mkIf cfg.enable {

@@ -7,9 +7,11 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.apps.etcher;
-in {
+in
+{
   options.${namespace}.apps.etcher = with types; {
     enable = mkBoolOpt false "Whether or not to enable etcher.";
   };

@@ -4,9 +4,9 @@
   config,
   namespace,
   ...
-}: let
-  inherit
-    (lib)
+}:
+let
+  inherit (lib)
     mkIf
     mkEnableOption
     fetchFromGitHub
@@ -16,7 +16,8 @@
   inherit (lib.${namespace}) mkOpt;
 
   cfg = config.${namespace}.services.websites.lasersandfeelings;
-in {
+in
+{
   options.${namespace}.services.websites.lasersandfeelings = with lib.types; {
     enable = mkEnableOption "Lasers and Feelings";
     package = mkOpt package pkgs.lasersandfeelings "The package to use.";
@@ -41,14 +42,12 @@ in {
         };
       };
 
-      groups = optionalAttrs (cfg.group == "lasersandfeelings") {
-        lasersandfeelings = {};
-      };
+      groups = optionalAttrs (cfg.group == "lasersandfeelings") { lasersandfeelings = { }; };
     };
 
     systemd.services.lasersandfeelings = {
-      after = ["network.target"];
-      wantedBy = ["multi-user.target"];
+      after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
 
       serviceConfig = {
         Type = "simple";
@@ -58,8 +57,7 @@ in {
         RestartSec = 20;
         Environment = "NODE_PORT=${builtins.toString cfg.port}";
         ExecStart = "${cfg.package}/bin/lasersandfeelings";
-        AmbientCapabilities =
-          optionalString (cfg.port < 1024) "cap_net_bind_service";
+        AmbientCapabilities = optionalString (cfg.port < 1024) "cap_net_bind_service";
       };
     };
 

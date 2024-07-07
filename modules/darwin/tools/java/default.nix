@@ -7,16 +7,14 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.tools.java;
-in {
+in
+{
   options.${namespace}.tools.java = with types; {
     enable = mkBoolOpt false "Whether or not to enable Java.";
   };
 
-  config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      jdk
-    ];
-  };
+  config = mkIf cfg.enable { environment.systemPackages = with pkgs; [ jdk ]; };
 }

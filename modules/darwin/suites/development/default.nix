@@ -7,13 +7,13 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.suites.development;
-in {
+in
+{
   options.${namespace}.suites.development = with types; {
-    enable =
-      mkBoolOpt false
-      "Whether or not to enable common development configuration.";
+    enable = mkBoolOpt false "Whether or not to enable common development configuration.";
   };
 
   config = mkIf cfg.enable {

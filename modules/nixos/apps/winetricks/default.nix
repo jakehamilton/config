@@ -7,13 +7,14 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.apps.winetricks;
-in {
+in
+{
   options.${namespace}.apps.winetricks = with types; {
     enable = mkBoolOpt false "Whether or not to enable Winetricks.";
   };
 
-  config =
-    mkIf cfg.enable {environment.systemPackages = with pkgs; [winetricks];};
+  config = mkIf cfg.enable { environment.systemPackages = with pkgs; [ winetricks ]; };
 }

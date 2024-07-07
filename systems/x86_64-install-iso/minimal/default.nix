@@ -5,7 +5,8 @@
   ...
 }:
 with lib;
-with lib.${namespace}; {
+with lib.${namespace};
+{
   # `install-iso` adds wireless support that
   # is incompatible with networkmanager.
   networking.wireless.enable = mkForce false;

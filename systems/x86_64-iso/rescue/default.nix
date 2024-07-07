@@ -5,11 +5,14 @@
   ...
 }:
 with lib;
-with lib.${namespace}; {
+with lib.${namespace};
+{
   plusultra = {
     nix = enabled;
 
-    cli-apps = {neovim = enabled;};
+    cli-apps = {
+      neovim = enabled;
+    };
 
     tools = {
       misc = enabled;
@@ -17,9 +20,13 @@ with lib.${namespace}; {
       http = enabled;
     };
 
-    hardware = {networking = enabled;};
+    hardware = {
+      networking = enabled;
+    };
 
-    security = {doas = enabled;};
+    security = {
+      doas = enabled;
+    };
 
     system = {
       fonts = enabled;

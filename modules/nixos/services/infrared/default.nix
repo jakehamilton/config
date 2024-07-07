@@ -5,71 +5,76 @@
   pkgs,
   namespace,
   ...
-}: let
+}:
+let
   inherit (builtins) toString;
   inherit (lib) types;
 
   cfg = config.${namespace}.services.infrared;
 
-  format = pkgs.formats.json {};
+  format = pkgs.formats.json { };
 
-  serversType = types.submodule ({config, ...}: {
-    options = {
-      domain = lib.mkOption {
-        type = types.str;
-        default = "";
-        description = ''
-          The domain to proxy. Should be fully qualified domain name.
-          Note: Every string is accepted. So localhost is also valid.
-        '';
-        example = "minecraft.example.com";
-      };
+  serversType = types.submodule (
+    { config, ... }:
+    {
+      options = {
+        domain = lib.mkOption {
+          type = types.str;
+          default = "";
+          description = ''
+            The domain to proxy. Should be fully qualified domain name.
+            Note: Every string is accepted. So localhost is also valid.
+          '';
+          example = "minecraft.example.com";
+        };
 
-      host = lib.mkOption {
-        type = types.str;
-        default = "";
-        description = "The host where the Minecraft server is running. Defaults to local host.";
-      };
+        host = lib.mkOption {
+          type = types.str;
+          default = "";
+          description = "The host where the Minecraft server is running. Defaults to local host.";
+        };
 
-      port = lib.mkOption {
-        type = types.port;
-        default = 25566;
-        description = "The port where the Minecraft server is running.";
-      };
+        port = lib.mkOption {
+          type = types.port;
+          default = 25566;
+          description = "The port where the Minecraft server is running.";
+        };
 
-      settings = lib.mkOption {
-        default = {};
-        description = ''
-          Infrared configuration (<filename>config.json</filename>). Refer to
-          <link xlink:href="https://github.com/haveachin/infrared#proxy-config" />
-          for details.
-        '';
+        settings = lib.mkOption {
+          default = { };
+          description = ''
+            Infrared configuration (<filename>config.json</filename>). Refer to
+            <link xlink:href="https://github.com/haveachin/infrared#proxy-config" />
+            for details.
+          '';
 
-        type = types.submodule {
-          freeformType = format.type;
+          type = types.submodule {
+            freeformType = format.type;
 
-          options = {
-            domainName = lib.mkOption {
-              type = types.str;
-              default = config.domain;
-              defaultText = lib.literalExpression ''
-                ""
-              '';
-              description = "The domain to proxy.";
-            };
+            options = {
+              domainName = lib.mkOption {
+                type = types.str;
+                default = config.domain;
+                defaultText = lib.literalExpression ''
+                  ""
+                '';
+                description = "The domain to proxy.";
+              };
 
-            proxyTo = lib.mkOption {
-              type = types.str;
-              default = "${config.host}:${toString config.port}";
-              defaultText = ":25565";
-              description = "The address that the proxy should send incoming connections to.";
+              proxyTo = lib.mkOption {
+                type = types.str;
+                default = "${config.host}:${toString config.port}";
+                defaultText = ":25565";
+                description = "The address that the proxy should send incoming connections to.";
+              };
             };
           };
         };
       };
-    };
-  });
-in {
+    }
+  );
+in
+{
   options.${namespace}.services.infrared = {
     enable = lib.mkEnableOption "Infrared";
 
@@ -99,7 +104,7 @@ in {
 
     servers = lib.mkOption {
       type = types.listOf serversType;
-      default = [];
+      default = [ ];
       description = "The servers to proxy.";
       example = lib.literalExpression ''
         [
@@ -113,8 +118,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    assertions = [
-    ];
+    assertions = [ ];
 
     networking.firewall = lib.mkIf cfg.openFirewall {
       allowedUDPPorts = builtins.map (server: server.port) cfg.servers;
@@ -122,18 +126,18 @@ in {
     };
 
     systemd.tmpfiles.rules =
-      ["d '${cfg.stateDir}' 0750 ${cfg.user} ${cfg.group} - -"]
-      ++ builtins.map
-      (
-        server: let
+      [ "d '${cfg.stateDir}' 0750 ${cfg.user} ${cfg.group} - -" ]
+      ++ builtins.map (
+        server:
+        let
           config = format.generate "${server.domain}.json" server.settings;
-        in "L+ '${cfg.stateDir}/${server.domain}.json' - - - - ${config}"
-      )
-      cfg.servers;
+        in
+        "L+ '${cfg.stateDir}/${server.domain}.json' - - - - ${config}"
+      ) cfg.servers;
 
     systemd.services.infrared = {
-      after = ["network.target"];
-      wantedBy = ["multi-user.target"];
+      after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
 
       serviceConfig = {
         Type = "simple";
@@ -153,9 +157,7 @@ in {
         };
       };
 
-      groups = lib.optionalAttrs (cfg.group == "infrared") {
-        infrared = {};
-      };
+      groups = lib.optionalAttrs (cfg.group == "infrared") { infrared = { }; };
     };
   };
 }

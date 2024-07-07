@@ -7,9 +7,11 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.apps.virtualbox;
-in {
+in
+{
   options.${namespace}.apps.virtualbox = with types; {
     enable = mkBoolOpt false "Whether or not to enable Virtualbox.";
   };
@@ -20,6 +22,6 @@ in {
       enableExtensionPack = true;
     };
 
-    plusultra.user.extraGroups = ["vboxusers"];
+    plusultra.user.extraGroups = [ "vboxusers" ];
   };
 }

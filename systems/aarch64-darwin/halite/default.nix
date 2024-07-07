@@ -4,7 +4,8 @@
   namespace,
   ...
 }:
-with lib.${namespace}; {
+with lib.${namespace};
+{
   plusultra = {
     suites = {
       common = enabled;
@@ -14,9 +15,7 @@ with lib.${namespace}; {
     desktop.yabai = enabled;
   };
 
-  environment.systemPath = [
-    "/opt/homebrew/bin"
-  ];
+  environment.systemPath = [ "/opt/homebrew/bin" ];
 
   system.stateVersion = 4;
 }

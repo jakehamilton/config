@@ -7,7 +7,8 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.user;
   defaultIconFileName = "profile.png";
   defaultIcon = pkgs.stdenvNoCC.mkDerivation {
@@ -20,33 +21,36 @@ with lib.${namespace}; let
       cp $src $out
     '';
 
-    passthru = {fileName = defaultIconFileName;};
+    passthru = {
+      fileName = defaultIconFileName;
+    };
   };
   propagatedIcon =
     pkgs.runCommandNoCC "propagated-icon"
-    {passthru = {fileName = cfg.icon.fileName;};}
-    ''
-      local target="$out/share/plusultra-icons/user/${cfg.name}"
-      mkdir -p "$target"
+      {
+        passthru = {
+          fileName = cfg.icon.fileName;
+        };
+      }
+      ''
+        local target="$out/share/plusultra-icons/user/${cfg.name}"
+        mkdir -p "$target"
 
-      cp ${cfg.icon} "$target/${cfg.icon.fileName}"
-    '';
-in {
+        cp ${cfg.icon} "$target/${cfg.icon.fileName}"
+      '';
+in
+{
   options.${namespace}.user = with types; {
     name = mkOpt str "short" "The name to use for the user account.";
     fullName = mkOpt str "Jake Hamilton" "The full name of the user.";
     email = mkOpt str "jake.hamilton@hey.com" "The email of the user.";
     initialPassword =
       mkOpt str "password"
-      "The initial password to use when the user is first created.";
-    icon =
-      mkOpt (nullOr package) defaultIcon
-      "The profile picture to use for the user.";
+        "The initial password to use when the user is first created.";
+    icon = mkOpt (nullOr package) defaultIcon "The profile picture to use for the user.";
     prompt-init = mkBoolOpt true "Whether or not to show an initial message when opening a new shell.";
-    extraGroups = mkOpt (listOf str) [] "Groups for the user to be assigned.";
-    extraOptions =
-      mkOpt attrs {}
-      (mdDoc "Extra options passed to `users.users.<name>`.");
+    extraGroups = mkOpt (listOf str) [ ] "Groups for the user to be assigned.";
+    extraOptions = mkOpt attrs { } (mdDoc "Extra options passed to `users.users.<name>`.");
   };
 
   config = {
@@ -74,10 +78,7 @@ in {
         "Videos/.keep".text = "";
         "work/.keep".text = "";
         ".face".source = cfg.icon;
-        "Pictures/${
-          cfg.icon.fileName or (builtins.baseNameOf cfg.icon)
-        }".source =
-          cfg.icon;
+        "Pictures/${cfg.icon.fileName or (builtins.baseNameOf cfg.icon)}".source = cfg.icon;
       };
 
       extraOptions = {
@@ -145,26 +146,24 @@ in {
       };
     };
 
-    users.users.${cfg.name} =
-      {
-        isNormalUser = true;
+    users.users.${cfg.name} = {
+      isNormalUser = true;
 
-        inherit (cfg) name initialPassword;
+      inherit (cfg) name initialPassword;
 
-        home = "/home/${cfg.name}";
-        group = "users";
+      home = "/home/${cfg.name}";
+      group = "users";
 
-        shell = pkgs.zsh;
+      shell = pkgs.zsh;
 
-        # Arbitrary user ID to use for the user. Since I only
-        # have a single user on my machines this won't ever collide.
-        # However, if you add multiple users you'll need to change this
-        # so each user has their own unique uid (or leave it out for the
-        # system to select).
-        uid = 1000;
+      # Arbitrary user ID to use for the user. Since I only
+      # have a single user on my machines this won't ever collide.
+      # However, if you add multiple users you'll need to change this
+      # so each user has their own unique uid (or leave it out for the
+      # system to select).
+      uid = 1000;
 
-        extraGroups = ["steamcmd"] ++ cfg.extraGroups;
-      }
-      // cfg.extraOptions;
+      extraGroups = [ "steamcmd" ] ++ cfg.extraGroups;
+    } // cfg.extraOptions;
   };
 }

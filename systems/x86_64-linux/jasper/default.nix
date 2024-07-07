@@ -5,10 +5,11 @@
   ...
 }:
 with lib;
-with lib.${namespace}; {
-  imports = [./hardware.nix];
+with lib.${namespace};
+{
+  imports = [ ./hardware.nix ];
 
-  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   snowfallorg = {
     avalanche.desktop = {
@@ -32,8 +33,7 @@ with lib.${namespace}; {
     desktop.hyprland = enabled;
 
     desktop.gnome = {
-      enable =
-        mkForce false;
+      enable = mkForce false;
       monitors = ./monitors.xml;
     };
 

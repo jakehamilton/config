@@ -4,12 +4,14 @@
   config,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption fetchFromGitHub;
   inherit (lib.${namespace}) mkOpt;
 
   cfg = config.${namespace}.services.websites.snowfall-docs;
-in {
+in
+{
   options.${namespace}.services.websites.snowfall-docs = with lib.types; {
     enable = mkEnableOption "docs.snowfall.org Website";
     package = mkOpt package pkgs.snowfallorg.snowfall-docs "The site package to use.";

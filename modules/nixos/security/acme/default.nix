@@ -5,12 +5,14 @@
   virtual,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption optional;
   inherit (lib.${namespace}) mkOpt;
 
   cfg = config.${namespace}.security.acme;
-in {
+in
+{
   options.${namespace}.security.acme = with lib.types; {
     enable = mkEnableOption "default ACME configuration";
     email = mkOpt str config.${namespace}.user.email "The email to use.";

@@ -7,17 +7,23 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.system.env;
-in {
-  options.${namespace}.system.env = with types;
+in
+{
+  options.${namespace}.system.env =
+    with types;
     mkOption {
-      type = attrsOf (oneOf [str path (listOf (either str path))]);
-      apply = mapAttrs (n: v:
-        if isList v
-        then concatMapStringsSep ":" (x: toString x) v
-        else (toString v));
-      default = {};
+      type = attrsOf (oneOf [
+        str
+        path
+        (listOf (either str path))
+      ]);
+      apply = mapAttrs (
+        n: v: if isList v then concatMapStringsSep ":" (x: toString x) v else (toString v)
+      );
+      default = { };
       description = "A set of environment variables to set.";
     };
 
@@ -36,9 +42,7 @@ in {
         LESSHISTFILE = "$XDG_CACHE_HOME/less.history";
         WGETRC = "$XDG_CONFIG_HOME/wgetrc";
       };
-      extraInit =
-        concatStringsSep "\n"
-        (mapAttrsToList (n: v: ''export ${n}="${v}"'') cfg);
+      extraInit = concatStringsSep "\n" (mapAttrsToList (n: v: ''export ${n}="${v}"'') cfg);
     };
   };
 }

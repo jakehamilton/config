@@ -1,8 +1,9 @@
-{ lib
-, config
-, options
-, namespace
-, ...
+{
+  lib,
+  config,
+  options,
+  namespace,
+  ...
 }:
 let
   cfg = config.${namespace}.services.avahi;

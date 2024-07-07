@@ -7,9 +7,11 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.apps.obs;
-in {
+in
+{
   options.${namespace}.apps.obs = with types; {
     enable = mkBoolOpt false "Whether or not to enable support for OBS.";
   };

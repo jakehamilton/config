@@ -5,9 +5,11 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   cfg = config.${namespace}.services.steam;
-in {
+in
+{
   options.${namespace}.services.steam = {
     enable = lib.mkEnableOption "Steam";
   };
@@ -21,65 +23,67 @@ in {
       createHome = true;
     };
 
-    users.groups.steamcmd = {};
+    users.groups.steamcmd = { };
 
     systemd.services."steamcmd@" = {
-      after = ["network-online.target"];
-      wants = ["network-online.target"];
+      after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
       serviceConfig = {
         Type = "oneshot";
         RemainAfterExit = true;
-        ExecStart = "${pkgs.resholve.writeScript "steam" {
-            interpreter = "${pkgs.zsh}/bin/zsh";
-            inputs = with pkgs; [
-              patchelf
-              steamcmd
-              coreutils
-            ];
-            execer = [
-              "cannot:${pkgs.steamcmd}/bin/steamcmd"
-            ];
-          } ''
-            set -eux
+        ExecStart = "${
+          pkgs.resholve.writeScript "steam"
+            {
+              interpreter = "${pkgs.zsh}/bin/zsh";
+              inputs = with pkgs; [
+                patchelf
+                steamcmd
+                coreutils
+              ];
+              execer = [ "cannot:${pkgs.steamcmd}/bin/steamcmd" ];
+            }
+            ''
+              set -eux
 
-            instance=''${1:?Instance Missing}
-            eval 'args=(''${(@s:_:)instance})'
-            app=''${args[1]:?App ID missing}
-            beta=''${args[2]:-}
-            betapass=''${args[3]:-}
+              instance=''${1:?Instance Missing}
+              eval 'args=(''${(@s:_:)instance})'
+              app=''${args[1]:?App ID missing}
+              beta=''${args[2]:-}
+              betapass=''${args[3]:-}
 
-            dir=/var/lib/steamcmd/apps/$instance
+              dir=/var/lib/steamcmd/apps/$instance
 
-            cmds=(
-              +force_install_dir $dir
-              +login anonymous
-              +app_update $app validate
-            )
+              cmds=(
+                +force_install_dir $dir
+                +login anonymous
+                +app_update $app validate
+              )
 
-            if [[ $beta ]]; then
-              cmds+=(-beta $beta)
-              if [[ $betapass ]]; then
-                cmds+=(-betapassword $betapass)
-              fi
-            fi
-
-            cmds+=(+quit)
-
-            steamcmd $cmds
-
-            for f in $dir/*; do
-              set +e
-              chmod -R ugo+rwx $f
-              set -e
-
-              if ! [[ -f $f && -x $f ]]; then
-                continue
+              if [[ $beta ]]; then
+                cmds+=(-beta $beta)
+                if [[ $betapass ]]; then
+                  cmds+=(-betapassword $betapass)
+                fi
               fi
 
-              # Update the interpreter to the path on NixOS.
-              patchelf --set-interpreter ${pkgs.glibc}/lib/ld-linux-x86-64.so.2 $f || true
-            done
-          ''} %i";
+              cmds+=(+quit)
+
+              steamcmd $cmds
+
+              for f in $dir/*; do
+                set +e
+                chmod -R ugo+rwx $f
+                set -e
+
+                if ! [[ -f $f && -x $f ]]; then
+                  continue
+                fi
+
+                # Update the interpreter to the path on NixOS.
+                patchelf --set-interpreter ${pkgs.glibc}/lib/ld-linux-x86-64.so.2 $f || true
+              done
+            ''
+        } %i";
         PrivateTmp = true;
         Restart = "on-failure";
         StateDirectory = "steamcmd/apps/%i";
@@ -91,9 +95,12 @@ in {
 
     # Some games might depend on the Steamworks SDK redistributable, so download it.
     systemd.services.steamworks-sdk = {
-      wantedBy = ["multi-user.target"];
-      wants = ["steamcmd@1007.service" "steamworks-sdk.timer"];
-      after = ["steamcmd@1007.service"];
+      wantedBy = [ "multi-user.target" ];
+      wants = [
+        "steamcmd@1007.service"
+        "steamworks-sdk.timer"
+      ];
+      after = [ "steamcmd@1007.service" ];
 
       serviceConfig = {
         Type = "oneshot";
@@ -109,7 +116,7 @@ in {
 
     systemd.timers.steamworks-sdk = {
       description = "Updates Steamworks SDK daily.";
-      wantedBy = ["timers.target"];
+      wantedBy = [ "timers.target" ];
       timerConfig = {
         Unit = "steamworks-sdk.service";
         OnCalendar = "*-*-* 04:00:00";

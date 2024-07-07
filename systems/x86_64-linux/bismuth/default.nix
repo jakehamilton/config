@@ -7,8 +7,9 @@
   ...
 }:
 with lib;
-with lib.${namespace}; {
-  imports = [./hardware.nix];
+with lib.${namespace};
+{
+  imports = [ ./hardware.nix ];
 
   # Resolve an issue with Bismuth's wired connections failing sometimes due to weird
   # DHCP issues. I'm not quite sure why this is the case, but I have found that the
@@ -17,11 +18,11 @@ with lib.${namespace}; {
   # condition when the system is coming up that causes this.
   # networking.dhcpcd.enable = false;
 
-  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   # NOTE: This _may_ be required for openvpn to work. However, I have
   # not confirmed that...
-  boot.kernelModules = ["tun"];
+  boot.kernelModules = [ "tun" ];
 
   # Bismuth has had issues with FS corruption in the past and has now experienced
   # extremely strange errors when attempting to install NixOS. There may be some
@@ -29,8 +30,8 @@ with lib.${namespace}; {
   boot.loader.systemd-boot.memtest86.enable = true;
 
   networking.firewall = {
-    allowedUDPPorts = [28000];
-    allowedTCPPorts = [28000];
+    allowedUDPPorts = [ 28000 ];
+    allowedTCPPorts = [ 28000 ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -113,8 +114,11 @@ with lib.${namespace}; {
       # RX480 when in the bottom slot:
       # IOMMU Group 23 23:00.0 VGA compatible controller [0300]: Advanced Micro Devices, Inc. [AMD/ATI] Ellesmere [Radeon RX 470/480/570/570X/580/580X/590] [1002:67df] (rev c7)
       # IOMMU Group 23 23:00.1 Audio device [0403]: Advanced Micro Devices, Inc. [AMD/ATI] Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] [1002:aaf0]
-      vfioIds = ["1002:67df" "1002:aaf0"];
-      machineUnits = ["machine-qemu\\x2d1\\x2dwin10.scope"];
+      vfioIds = [
+        "1002:67df"
+        "1002:aaf0"
+      ];
+      machineUnits = [ "machine-qemu\\x2d1\\x2dwin10.scope" ];
     };
   };
 

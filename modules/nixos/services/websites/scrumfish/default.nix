@@ -4,12 +4,20 @@
   config,
   namespace,
   ...
-}: let
-  inherit (lib) mkIf mkEnableOption fetchFromGitHub optionalString optionalAttrs;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkEnableOption
+    fetchFromGitHub
+    optionalString
+    optionalAttrs
+    ;
   inherit (lib.${namespace}) mkOpt;
 
   cfg = config.${namespace}.services.websites.scrumfish;
-in {
+in
+{
   options.${namespace}.services.websites.scrumfish = with lib.types; {
     enable = mkEnableOption "Scrumfish";
     package = mkOpt package pkgs.scrumfish "The package to use.";
@@ -34,14 +42,12 @@ in {
         };
       };
 
-      groups = optionalAttrs (cfg.group == "scrumfish") {
-        scrumfish = {};
-      };
+      groups = optionalAttrs (cfg.group == "scrumfish") { scrumfish = { }; };
     };
 
     systemd.services.scrumfish = {
-      after = ["network.target"];
-      wantedBy = ["multi-user.target"];
+      after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
 
       serviceConfig = {
         Type = "simple";
@@ -51,8 +57,7 @@ in {
         RestartSec = 20;
         Environment = "NODE_PORT=${builtins.toString cfg.port}";
         ExecStart = "${cfg.package}/bin/scrumfish";
-        AmbientCapabilities =
-          optionalString (cfg.port < 1024) "cap_net_bind_service";
+        AmbientCapabilities = optionalString (cfg.port < 1024) "cap_net_bind_service";
       };
     };
 

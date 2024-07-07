@@ -6,16 +6,14 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.tools.attic;
-in {
+in
+{
   options.${namespace}.tools.attic = {
     enable = mkEnableOption "Attic";
   };
 
-  config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      attic
-    ];
-  };
+  config = mkIf cfg.enable { environment.systemPackages = with pkgs; [ attic ]; };
 }

@@ -7,12 +7,13 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.tools.k8s;
-in {
+in
+{
   options.${namespace}.tools.k8s = with types; {
-    enable =
-      mkBoolOpt false "Whether or not to enable common Kubernetes utilities.";
+    enable = mkBoolOpt false "Whether or not to enable common Kubernetes utilities.";
   };
 
   config = mkIf cfg.enable {

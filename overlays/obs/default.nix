@@ -2,6 +2,4 @@
 
 final: prev:
 
-{
-  inherit (channels.unstable) wrapOBS obs-studio obs-studio-plugins;
-}
+{ inherit (channels.unstable) wrapOBS obs-studio obs-studio-plugins; }

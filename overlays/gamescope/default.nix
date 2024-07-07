@@ -1,5 +1,3 @@
 { channels, ... }:
 
-final: prev: {
-  inherit (channels.unstable) gamescope;
-}
+final: prev: { inherit (channels.unstable) gamescope; }

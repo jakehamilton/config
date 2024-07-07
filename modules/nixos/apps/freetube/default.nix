@@ -7,13 +7,14 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.apps.freetube;
-in {
+in
+{
   options.${namespace}.apps.freetube = with types; {
     enable = mkBoolOpt false "Whether or not to enable FreeTube.";
   };
 
-  config =
-    mkIf cfg.enable {environment.systemPackages = with pkgs; [freetube];};
+  config = mkIf cfg.enable { environment.systemPackages = with pkgs; [ freetube ]; };
 }

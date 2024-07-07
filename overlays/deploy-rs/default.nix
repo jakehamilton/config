@@ -2,6 +2,4 @@
 
 final: prev:
 
-{
-  inherit (channels.unstable) deploy-rs;
-}
+{ inherit (channels.unstable) deploy-rs; }

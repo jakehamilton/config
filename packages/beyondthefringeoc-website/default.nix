@@ -4,7 +4,8 @@
   buildNpmPackage,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib.${namespace}) override-meta;
 
   src = fetchFromGitHub {
@@ -21,11 +22,12 @@
     '';
   };
 
-  new-meta = with lib;
+  new-meta =
+    with lib;
     src.meta
     // {
       description = "The website for beyondthefringeoc.com.";
-      maintainers = with maintainers; [jakehamilton];
+      maintainers = with maintainers; [ jakehamilton ];
     };
 in
-  override-meta new-meta src
+override-meta new-meta src

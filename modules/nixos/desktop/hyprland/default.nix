@@ -1,14 +1,22 @@
-{ options
-, config
-, lib
-, pkgs
-, namespace
-, ...
+{
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
 }:
 let
   cfg = config.${namespace}.desktop.hyprland;
 
-  inherit (lib) mkIf mkEnableOption mkOption mkMerge types optional;
+  inherit (lib)
+    mkIf
+    mkEnableOption
+    mkOption
+    mkMerge
+    types
+    optional
+    ;
   inherit (lib.${namespace}) enabled colors;
 
   pamixer = lib.getExe pkgs.pamixer;
@@ -38,7 +46,11 @@ in
     };
 
     wallpaper = mkOption {
-      type = types.oneOf [ types.package types.path types.str ];
+      type = types.oneOf [
+        types.package
+        types.path
+        types.str
+      ];
       default = pkgs.plusultra.wallpapers.nord-rainbow-dark-nix;
       description = "The wallpaper to use.";
     };
@@ -267,12 +279,9 @@ in
                   ", XF86AudioRaiseVolume, exec, volumectl up 5"
                 ];
 
-                windowrule = [
-                ];
+                windowrule = [ ];
 
-                layerrule = [
-                  "noanim, ^avalanche-"
-                ];
+                layerrule = [ "noanim, ^avalanche-" ];
 
                 # Programs to run on startup
                 exec-once =

@@ -7,9 +7,11 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.desktop.addons.foot;
-in {
+in
+{
   options.${namespace}.desktop.addons.foot = with types; {
     enable = mkBoolOpt false "Whether to enable the gnome file manager.";
   };

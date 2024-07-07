@@ -6,24 +6,26 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.services.homer;
 
-  yaml-format = pkgs.formats.yaml {};
+  yaml-format = pkgs.formats.yaml { };
   settings-yaml = yaml-format.generate "config.yml" cfg.settings;
 
   settings-path =
-    if cfg.settings-path != null
-    then cfg.settings-path
-    else builtins.toString settings-yaml;
-in {
+    if cfg.settings-path != null then cfg.settings-path else builtins.toString settings-yaml;
+in
+{
   options.${namespace}.services.homer = {
     enable = mkEnableOption "Homer";
 
     package = mkOpt types.package pkgs.plusultra.homer "The package of Homer assets to use.";
 
-    settings = mkOpt yaml-format.type {} "Configuration for Homer's config.yml file.";
-    settings-path = mkOpt (types.nullOr types.path) null "A replacement for the generated config.yml file.";
+    settings = mkOpt yaml-format.type { } "Configuration for Homer's config.yml file.";
+    settings-path =
+      mkOpt (types.nullOr types.path) null
+        "A replacement for the generated config.yml file.";
 
     host = mkOpt (types.nullOr types.str) null "The host to serve Homer on.";
 
@@ -51,7 +53,7 @@ in {
         message = "plusultra.services.homer.host must be set.";
       }
       {
-        assertion = cfg.settings-path != null -> cfg.settings == {};
+        assertion = cfg.settings-path != null -> cfg.settings == { };
         message = "plusultra.services.homer.settings and plusultra.services.homer.settings-path are mutually exclusive.";
       }
       {

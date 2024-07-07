@@ -7,7 +7,8 @@
   flakeSource ? "/home/short/work/config",
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib.${namespace}) override-meta;
 
   flake-compat = fetchFromGitHub {
@@ -21,20 +22,15 @@
   new-meta = with lib; {
     description = "A wrapper around nixos-option to work with a Flake-based configuration.";
     license = licenses.asl20;
-    maintainers = with maintainers; [jakehamilton];
+    maintainers = with maintainers; [ jakehamilton ];
   };
 
-  package =
-    runCommandNoCC "nixos-option"
-    {
-      buildInputs = [makeWrapper];
-    }
-    ''
-      makeWrapper ${nixos-option}/bin/nixos-option $out/bin/nixos-option \
-        --add-flags --config_expr \
-        --add-flags "\"${prefix}.config\"" \
-        --add-flags --options_expr \
-        --add-flags "\"${prefix}.options\""
-    '';
+  package = runCommandNoCC "nixos-option" { buildInputs = [ makeWrapper ]; } ''
+    makeWrapper ${nixos-option}/bin/nixos-option $out/bin/nixos-option \
+      --add-flags --config_expr \
+      --add-flags "\"${prefix}.config\"" \
+      --add-flags --options_expr \
+      --add-flags "\"${prefix}.options\""
+  '';
 in
-  override-meta new-meta package
+override-meta new-meta package

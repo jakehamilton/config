@@ -7,21 +7,16 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.tools.python;
-in {
+in
+{
   options.${namespace}.tools.python = with types; {
     enable = mkBoolOpt false "Whether or not to enable Python.";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      (
-        python311.withPackages (ps:
-          with ps; [
-            numpy
-          ])
-      )
-    ];
+    environment.systemPackages = with pkgs; [ (python311.withPackages (ps: with ps; [ numpy ])) ];
   };
 }

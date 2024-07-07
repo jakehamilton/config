@@ -4,9 +4,11 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   cfg = config.${namespace}.services.palworld-container;
-in {
+in
+{
   options.${namespace}.services.palworld-container = {
     enable = lib.mkEnableOption "Palworld (Docker)";
 
@@ -57,12 +59,10 @@ in {
         };
       };
 
-      groups = lib.optionalAttrs (cfg.group == "palworld") {palworld = {};};
+      groups = lib.optionalAttrs (cfg.group == "palworld") { palworld = { }; };
     };
 
-    systemd.tmpfiles.rules = [
-      "d ${cfg.stateDir} 0750 ${cfg.user} ${cfg.group} -"
-    ];
+    systemd.tmpfiles.rules = [ "d ${cfg.stateDir} 0750 ${cfg.user} ${cfg.group} -" ];
 
     virtualisation.oci-containers.containers.palworld = {
       image = "jammsen/palworld-dedicated-server:latest";
@@ -74,23 +74,16 @@ in {
         MAX_PLAYERS = builtins.toString cfg.players;
         MULTITHREAD_ENABLED = "true";
 
-        ALWAYS_UPDATE_ON_START =
-          if cfg.update
-          then "true"
-          else "false";
+        ALWAYS_UPDATE_ON_START = if cfg.update then "true" else "false";
 
         COMMUNITY_SERVER = "false";
         PUBLIC_IP = "";
         PUBLIC_PORT = "";
       };
 
-      ports = [
-        "${builtins.toString cfg.port}:${builtins.toString cfg.port}"
-      ];
+      ports = [ "${builtins.toString cfg.port}:${builtins.toString cfg.port}" ];
 
-      volumes = [
-        "${cfg.stateDir}:/palworld"
-      ];
+      volumes = [ "${cfg.stateDir}:/palworld" ];
     };
   };
 }

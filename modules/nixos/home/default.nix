@@ -8,17 +8,17 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.home;
-in {
+in
+{
   options.${namespace}.home = with types; {
-    file =
-      mkOpt attrs {}
-      (mdDoc "A set of files to be managed by home-manager's `home.file`.");
-    configFile =
-      mkOpt attrs {}
-      (mdDoc "A set of files to be managed by home-manager's `xdg.configFile`.");
-    extraOptions = mkOpt attrs {} "Options to pass directly to home-manager.";
+    file = mkOpt attrs { } (mdDoc "A set of files to be managed by home-manager's `home.file`.");
+    configFile = mkOpt attrs { } (
+      mdDoc "A set of files to be managed by home-manager's `xdg.configFile`."
+    );
+    extraOptions = mkOpt attrs { } "Options to pass directly to home-manager.";
   };
 
   config = {
@@ -29,7 +29,8 @@ in {
       xdg.configFile = mkAliasDefinitions options.${namespace}.home.configFile;
     };
 
-    snowfallorg.users.${config.${namespace}.user.name}.home.config = config.${namespace}.home.extraOptions;
+    snowfallorg.users.${config.${namespace}.user.name}.home.config =
+      config.${namespace}.home.extraOptions;
 
     home-manager = {
       useUserPackages = true;

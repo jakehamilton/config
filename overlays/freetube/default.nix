@@ -2,6 +2,4 @@
 
 final: prev:
 
-{
-  inherit (channels.unstable) freetube;
-}
+{ inherit (channels.unstable) freetube; }

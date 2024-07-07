@@ -5,36 +5,33 @@
   venvDir ? "$HOME/.proton-up-venv",
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib.${namespace}) override-meta;
 
-  nix-get-proton-up =
-    writeShellApplication
-    {
-      name = "nix-get-protonup";
-      checkPhase = "";
-      runtimeInputs = [
-        python311
-      ];
-      text = ''
-        venv="${venvDir}"
+  nix-get-proton-up = writeShellApplication {
+    name = "nix-get-protonup";
+    checkPhase = "";
+    runtimeInputs = [ python311 ];
+    text = ''
+      venv="${venvDir}"
 
-        python -m venv "$venv"
+      python -m venv "$venv"
 
-        source "$venv/bin/activate"
+      source "$venv/bin/activate"
 
-        python -m pip install --upgrade pip
+      python -m pip install --upgrade pip
 
-        pip install protonup-ng
+      pip install protonup-ng
 
-        protonup
-      '';
-    };
+      protonup
+    '';
+  };
 
   new-meta = with lib; {
     description = "A helper for installing protonup on NixOS.";
     license = licenses.asl20;
-    maintainers = with maintainers; [jakehamilton];
+    maintainers = with maintainers; [ jakehamilton ];
   };
 in
-  override-meta new-meta nix-get-proton-up
+override-meta new-meta nix-get-proton-up

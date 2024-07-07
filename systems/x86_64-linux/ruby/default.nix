@@ -6,8 +6,9 @@
   ...
 }:
 with lib;
-with lib.${namespace}; {
-  imports = [./hardware.nix];
+with lib.${namespace};
+{
+  imports = [ ./hardware.nix ];
 
   plusultra = {
     nix = enabled;
@@ -81,17 +82,18 @@ with lib.${namespace}; {
 
     clientMaxBodySize = "256m";
 
-    virtualHosts = let
-      shared-config = {
-        extra-config = {
-          forceSSL = true;
+    virtualHosts =
+      let
+        shared-config = {
+          extra-config = {
+            forceSSL = true;
 
-          sslCertificate = "${config.security.acme.certs."ruby.hamho.me".directory}/fullchain.pem";
-          sslCertificateKey = "${config.security.acme.certs."ruby.hamho.me".directory}/key.pem";
+            sslCertificate = "${config.security.acme.certs."ruby.hamho.me".directory}/fullchain.pem";
+            sslCertificateKey = "${config.security.acme.certs."ruby.hamho.me".directory}/key.pem";
+          };
         };
-      };
-    in {
-    };
+      in
+      { };
   };
 
   system.stateVersion = "22.05";

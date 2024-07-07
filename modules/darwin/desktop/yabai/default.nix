@@ -4,15 +4,19 @@
   config,
   namespace,
   ...
-}: let
+}:
+let
   cfg = config.${namespace}.desktop.yabai;
 
   inherit (lib) types mkEnableOption mkIf;
   inherit (lib.${namespace}) mkOpt enabled;
-in {
+in
+{
   options.${namespace}.desktop.yabai = {
     enable = mkEnableOption "Yabai";
-    enable-scripting-addition = mkOpt types.bool true "Whether to enable the scripting addition for Yabai. (Requires SIP to be disabled)";
+    enable-scripting-addition =
+      mkOpt types.bool true
+        "Whether to enable the scripting addition for Yabai. (Requires SIP to be disabled)";
   };
 
   config = mkIf cfg.enable {

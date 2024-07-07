@@ -8,11 +8,12 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   steam-pi-setup = pkgs.writeShellApplication {
     name = "steam-pi-setup";
     checkPhase = "";
-    runtimeInputs = with pkgs; [slides];
+    runtimeInputs = with pkgs; [ slides ];
     text = ''
       slides ${./slides.md}
     '';
@@ -31,7 +32,8 @@ with lib.${namespace}; let
       # gamescope -f -- steam -gamepadui
     '';
   };
-in {
+in
+{
   imports = with inputs.nixos-hardware.nixosModules; [
     (modulesPath + "/installer/scan/not-detected.nix")
     raspberry-pi-4
@@ -79,7 +81,7 @@ in {
     };
 
     hardware = {
-      audio.extra-packages = [];
+      audio.extra-packages = [ ];
     };
 
     services = {

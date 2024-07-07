@@ -5,26 +5,21 @@
   nodejs,
   namespace,
   ...
-}: let
-  raw-node-packages = pkgs.callPackage ./create-node-packages.nix {
-    inherit nodejs;
-  };
-  node-packages =
-    lib.mapAttrs
-    (key: value:
-      value.override {
-        dontNpmInstall = true;
-      })
-    raw-node-packages;
+}:
+let
+  raw-node-packages = pkgs.callPackage ./create-node-packages.nix { inherit nodejs; };
+  node-packages = lib.mapAttrs (
+    key: value: value.override { dontNpmInstall = true; }
+  ) raw-node-packages;
 in
-  runCommandNoCC "at"
+runCommandNoCC "at"
   {
     src = node-packages."@suchipi/at-js";
     meta = with lib; {
       mainProgram = "@";
       description = "@ - JavaScript stdio transformation tool.";
       homepage = "https://github.com/suchipi/at-js#readme";
-      maintainers = with maintainers; [jakehamilton];
+      maintainers = with maintainers; [ jakehamilton ];
       license = licenses.mit;
     };
   }

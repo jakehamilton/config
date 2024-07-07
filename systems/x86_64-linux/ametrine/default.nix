@@ -1,15 +1,15 @@
-{ lib
-, pkgs
-, config
-, modulesPath
-, namespace
-, ...
+{
+  lib,
+  pkgs,
+  config,
+  modulesPath,
+  namespace,
+  ...
 }:
 with lib;
-with lib.${namespace}; {
-  imports = [
-    (modulesPath + "/virtualisation/digital-ocean-config.nix")
-  ];
+with lib.${namespace};
+{
+  imports = [ (modulesPath + "/virtualisation/digital-ocean-config.nix") ];
 
   virtualisation.digitalOcean = {
     rebuildFromUserData = false;
@@ -22,9 +22,7 @@ with lib.${namespace}; {
     443
   ];
 
-  environment.systemPackages = with pkgs; [
-    neovim
-  ];
+  environment.systemPackages = with pkgs; [ neovim ];
 
   services = {
     discourse = {

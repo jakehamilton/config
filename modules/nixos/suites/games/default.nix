@@ -7,7 +7,8 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.suites.games;
   apps = {
     steam = enabled;
@@ -22,11 +23,15 @@ with lib.${namespace}; let
     wine = enabled;
     proton = enabled;
   };
-in {
+in
+{
   options.${namespace}.suites.games = with types; {
-    enable =
-      mkBoolOpt false "Whether or not to enable common games configuration.";
+    enable = mkBoolOpt false "Whether or not to enable common games configuration.";
   };
 
-  config = mkIf cfg.enable {plusultra = {inherit apps cli-apps;};};
+  config = mkIf cfg.enable {
+    plusultra = {
+      inherit apps cli-apps;
+    };
+  };
 }

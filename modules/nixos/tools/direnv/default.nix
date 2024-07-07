@@ -7,9 +7,11 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.tools.direnv;
-in {
+in
+{
   options.${namespace}.tools.direnv = with types; {
     enable = mkBoolOpt false "Whether or not to enable direnv.";
   };

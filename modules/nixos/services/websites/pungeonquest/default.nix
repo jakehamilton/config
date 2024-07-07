@@ -4,9 +4,9 @@
   config,
   namespace,
   ...
-}: let
-  inherit
-    (lib)
+}:
+let
+  inherit (lib)
     mkIf
     mkEnableOption
     fetchFromGitHub
@@ -16,7 +16,8 @@
   inherit (lib.${namespace}) mkOpt;
 
   cfg = config.${namespace}.services.websites.pungeonquest;
-in {
+in
+{
   options.${namespace}.services.websites.pungeonquest = with lib.types; {
     enable = mkEnableOption "Pungeonquest";
     package = mkOpt package pkgs.pungeonquest "The package to use.";
@@ -41,14 +42,12 @@ in {
         };
       };
 
-      groups = optionalAttrs (cfg.group == "pungeonquest") {
-        pungeonquest = {};
-      };
+      groups = optionalAttrs (cfg.group == "pungeonquest") { pungeonquest = { }; };
     };
 
     systemd.services.pungeonquest = {
-      after = ["network.target"];
-      wantedBy = ["multi-user.target"];
+      after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
 
       serviceConfig = {
         Type = "simple";
@@ -58,8 +57,7 @@ in {
         RestartSec = 20;
         Environment = "NODE_PORT=${builtins.toString cfg.port}";
         ExecStart = "${cfg.package}/bin/pungeonquest";
-        AmbientCapabilities =
-          optionalString (cfg.port < 1024) "cap_net_bind_service";
+        AmbientCapabilities = optionalString (cfg.port < 1024) "cap_net_bind_service";
       };
     };
 

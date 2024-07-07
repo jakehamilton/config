@@ -1,3 +1,1 @@
-{channels, ...}: final: prev: {
-  inherit (channels.unstable) yabai;
-}
+{ channels, ... }: final: prev: { inherit (channels.unstable) yabai; }

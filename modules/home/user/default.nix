@@ -3,10 +3,16 @@
   config,
   pkgs,
   namespace,
-  osConfig ? {},
+  osConfig ? { },
   ...
-}: let
-  inherit (lib) types mkIf mkDefault mkMerge;
+}:
+let
+  inherit (lib)
+    types
+    mkIf
+    mkDefault
+    mkMerge
+    ;
   inherit (lib.${namespace}) mkOpt;
 
   cfg = config.${namespace}.user;
@@ -15,12 +21,14 @@
   is-darwin = pkgs.stdenv.isDarwin;
 
   home-directory =
-    if cfg.name == null
-    then null
-    else if is-darwin
-    then "/Users/${cfg.name}"
-    else "/home/${cfg.name}";
-in {
+    if cfg.name == null then
+      null
+    else if is-darwin then
+      "/Users/${cfg.name}"
+    else
+      "/home/${cfg.name}";
+in
+{
   options.${namespace}.user = {
     enable = mkOpt types.bool true "Whether to configure the user account.";
     name = mkOpt (types.nullOr types.str) (config.snowfallorg.user.name or "short") "The user account.";

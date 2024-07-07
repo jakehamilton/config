@@ -4,12 +4,19 @@
   pkgs,
   namespace,
   ...
-}: let
+}:
+let
   cfg = config.${namespace}.desktop.addons.ags.bar;
 
-  inherit (lib) mkEnableOption mkOption mkIf types getExe;
+  inherit (lib)
+    mkEnableOption
+    mkOption
+    mkIf
+    types
+    getExe
+    ;
 
-  bar = pkgs.runCommandNoCC "plusultra-ags-bar" {} ''
+  bar = pkgs.runCommandNoCC "plusultra-ags-bar" { } ''
     mkdir -p $out
 
     cp -r ${./src}/* $out/
@@ -21,7 +28,8 @@
 
     rm -rf $out/styles/sass
   '';
-in {
+in
+{
   options.${namespace}.desktop.addons.ags.bar = {
     enable = mkEnableOption "AGS Bar";
 
@@ -35,7 +43,7 @@ in {
   config = mkIf cfg.enable {
     plusultra = {
       desktop.hyprland.settings = {
-        exec-once = ["${getExe cfg.package} --config ${bar}/config.js"];
+        exec-once = [ "${getExe cfg.package} --config ${bar}/config.js" ];
       };
     };
   };

@@ -7,7 +7,8 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.apps.doukutsu-rs;
   desktopItem = pkgs.makeDesktopItem {
     name = "doukutsu-rs";
@@ -16,10 +17,14 @@ with lib.${namespace}; let
     exec = "${pkgs.plusultra.doukutsu-rs}/bin/doukutsu-rs";
     icon = ./icon.png;
     type = "Application";
-    categories = ["Game" "AdventureGame"];
+    categories = [
+      "Game"
+      "AdventureGame"
+    ];
     terminal = false;
   };
-in {
+in
+{
   options.${namespace}.apps.doukutsu-rs = with types; {
     enable = mkBoolOpt false "Whether or not to enable doukutsu-rs.";
   };

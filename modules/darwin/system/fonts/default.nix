@@ -7,12 +7,14 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.system.fonts;
-in {
+in
+{
   options.${namespace}.system.fonts = with types; {
     enable = mkBoolOpt false "Whether or not to manage fonts.";
-    fonts = mkOpt (listOf package) [] "Custom font packages to install.";
+    fonts = mkOpt (listOf package) [ ] "Custom font packages to install.";
   };
 
   config = mkIf cfg.enable {
@@ -24,13 +26,14 @@ in {
     fonts = {
       fontDir = enabled;
 
-      fonts = with pkgs;
+      fonts =
+        with pkgs;
         [
           noto-fonts
           noto-fonts-cjk-sans
           noto-fonts-cjk-serif
           noto-fonts-emoji
-          (nerdfonts.override {fonts = ["Hack"];})
+          (nerdfonts.override { fonts = [ "Hack" ]; })
         ]
         ++ cfg.fonts;
     };

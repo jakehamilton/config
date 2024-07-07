@@ -7,12 +7,13 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.archetypes.workstation;
-in {
+in
+{
   options.${namespace}.archetypes.workstation = with types; {
-    enable =
-      mkBoolOpt false "Whether or not to enable the workstation archetype.";
+    enable = mkBoolOpt false "Whether or not to enable the workstation archetype.";
   };
 
   config = mkIf cfg.enable {

@@ -7,17 +7,19 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.apps.dolphin;
-in {
+in
+{
   options.${namespace}.apps.dolphin = with types; {
     enable = mkBoolOpt false "Whether or not to enable Dolphin.";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [dolphin-emu];
+    environment.systemPackages = with pkgs; [ dolphin-emu ];
 
     # Enable GameCube controller support.
-    services.udev.packages = [pkgs.dolphinEmu];
+    services.udev.packages = [ pkgs.dolphinEmu ];
   };
 }

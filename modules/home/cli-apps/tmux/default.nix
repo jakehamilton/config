@@ -6,16 +6,14 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.cli-apps.tmux;
-in {
+in
+{
   options.${namespace}.cli-apps.tmux = {
     enable = mkEnableOption "Tmux";
   };
 
-  config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      plusultra.tmux
-    ];
-  };
+  config = mkIf cfg.enable { home.packages = with pkgs; [ plusultra.tmux ]; };
 }

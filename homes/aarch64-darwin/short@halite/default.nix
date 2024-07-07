@@ -2,12 +2,13 @@
   lib,
   pkgs,
   config,
-  osConfig ? {},
+  osConfig ? { },
   format ? "unknown",
   namespace,
   ...
 }:
-with lib.${namespace}; {
+with lib.${namespace};
+{
   plusultra = {
     user = {
       enable = true;
@@ -27,9 +28,7 @@ with lib.${namespace}; {
     };
   };
 
-  home.sessionPath = [
-    "$HOME/bin"
-  ];
+  home.sessionPath = [ "$HOME/bin" ];
 
   home.stateVersion = "22.11";
 }

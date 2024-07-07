@@ -2,6 +2,4 @@
 
 final: prev:
 
-{
-  inherit (channels.unstable) nordic;
-}
+{ inherit (channels.unstable) nordic; }

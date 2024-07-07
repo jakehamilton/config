@@ -5,7 +5,8 @@
   ...
 }:
 with lib;
-with lib.${namespace}; {
+with lib.${namespace};
+{
   virtualisation.virtualbox.guest.enable = true;
 
   boot.loader.grub.enable = true;
@@ -24,7 +25,9 @@ with lib.${namespace}; {
       vscode = enabled;
     };
 
-    cli-apps = {neovim = enabled;};
+    cli-apps = {
+      neovim = enabled;
+    };
 
     desktop = {
       gnome = {
@@ -52,7 +55,9 @@ with lib.${namespace}; {
       networking = enabled;
     };
 
-    services = {printing = enabled;};
+    services = {
+      printing = enabled;
+    };
 
     security = {
       doas = enabled;

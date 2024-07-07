@@ -4,12 +4,14 @@
   config,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption fetchFromGitHub;
   inherit (lib.${namespace}) mkOpt;
 
   cfg = config.${namespace}.services.websites.dotbox;
-in {
+in
+{
   options.${namespace}.services.websites.dotbox = with lib.types; {
     enable = mkEnableOption "DotBox Website";
     package = mkOpt package pkgs.plusultra.dotbox-website "The site package to use.";

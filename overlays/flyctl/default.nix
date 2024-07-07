@@ -2,6 +2,4 @@
 
 final: prev:
 
-{
-  inherit (channels.unstable) flyctl;
-}
+{ inherit (channels.unstable) flyctl; }

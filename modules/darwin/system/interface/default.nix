@@ -7,9 +7,11 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.system.interface;
-in {
+in
+{
   options.${namespace}.system.interface = with types; {
     enable = mkEnableOption "macOS interface";
   };

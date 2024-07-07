@@ -4,12 +4,14 @@
   config,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption fetchFromGitHub;
   inherit (lib.${namespace}) mkOpt;
 
   cfg = config.${namespace}.services.websites.nixpkgs-news;
-in {
+in
+{
   options.${namespace}.services.websites.nixpkgs-news = with lib.types; {
     enable = mkEnableOption "nixpkgs.news Website";
     package = mkOpt package pkgs.plusultra.nixpkgs-news "The site package to use.";

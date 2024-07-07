@@ -7,14 +7,14 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.apps.rpcs3;
-in {
+in
+{
   options.${namespace}.apps.rpcs3 = with types; {
     enable = mkBoolOpt false "Whether or not to enable rpcs3.";
   };
 
-  config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [rpcs3];
-  };
+  config = mkIf cfg.enable { environment.systemPackages = with pkgs; [ rpcs3 ]; };
 }

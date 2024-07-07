@@ -4,31 +4,40 @@
   config,
   namespace,
   ...
-}: let
+}:
+let
   cfg = config.${namespace}.services.local-ai;
 
-  inherit (lib) mkEnableOption mkIf types optionalAttrs optionalString;
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    types
+    optionalAttrs
+    optionalString
+    ;
   inherit (lib.${namespace}) mkOpt;
 
   address = "${cfg.host}:${toString cfg.port}";
 
   prepare-models-directory =
-    if cfg.models == null
-    then ''
-      if [[ -L '${cfg.stateDir}/models' ]]; then
-        rm -rf '${cfg.stateDir}/models'
-      fi
+    if cfg.models == null then
+      ''
+        if [[ -L '${cfg.stateDir}/models' ]]; then
+          rm -rf '${cfg.stateDir}/models'
+        fi
 
-      mkdir -p '${cfg.stateDir}/models'
-    ''
-    else ''
-      if [[ -d '${cfg.stateDir}/models' ]]; then
-        rm -rf '${cfg.stateDir}/models'
-      fi
+        mkdir -p '${cfg.stateDir}/models'
+      ''
+    else
+      ''
+        if [[ -d '${cfg.stateDir}/models' ]]; then
+          rm -rf '${cfg.stateDir}/models'
+        fi
 
-      ln -s '${cfg.models}' '${cfg.stateDir}/models'
-    '';
-in {
+        ln -s '${cfg.models}' '${cfg.stateDir}/models'
+      '';
+in
+{
   options.${namespace}.services.local-ai = {
     enable = mkEnableOption "LocalAI";
 
@@ -38,7 +47,9 @@ in {
 
     group = mkOpt types.str "localai" "Group under which LocalAI is ran.";
 
-    stateDir = mkOpt types.path "/var/lib/local-ai" "The state directory where keys and data are stored.";
+    stateDir =
+      mkOpt types.path "/var/lib/local-ai"
+        "The state directory where keys and data are stored.";
 
     # The models directory should contain models as well as templates and configuration.
     # For example, to fetch a model:
@@ -57,7 +68,7 @@ in {
 
     cors = {
       enable = mkOpt types.bool false "Allow cross origin requests.";
-      allow = mkOpt (types.listOf types.str) ["*"] "The origin to allow.";
+      allow = mkOpt (types.listOf types.str) [ "*" ] "The origin to allow.";
     };
   };
 
@@ -71,25 +82,21 @@ in {
         };
       };
 
-      groups =
-        optionalAttrs (cfg.group == "localai") {localai = {};};
+      groups = optionalAttrs (cfg.group == "localai") { localai = { }; };
     };
 
-    systemd.tmpfiles.rules = [
-      "d '${cfg.stateDir}' 0750 ${cfg.user} ${cfg.group} -"
-    ];
+    systemd.tmpfiles.rules = [ "d '${cfg.stateDir}' 0750 ${cfg.user} ${cfg.group} -" ];
 
     systemd.services.local-ai = {
-      after = ["network.target"];
-      wantedBy = ["multi-user.target"];
+      after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
 
       environment =
-        {ADDRESS = address;}
+        {
+          ADDRESS = address;
+        }
         // optionalAttrs cfg.cors.enable {
-          CORS =
-            if cfg.cors.enable
-            then "true"
-            else "false";
+          CORS = if cfg.cors.enable then "true" else "false";
           CORS_ALLOW_ORIGINS = builtins.toString cfg.cors.allow;
         };
 

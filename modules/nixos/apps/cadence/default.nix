@@ -7,13 +7,14 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.apps.cadence;
-in {
+in
+{
   options.${namespace}.apps.cadence = with types; {
     enable = mkBoolOpt false "Whether or not to enable Cadence.";
   };
 
-  config =
-    mkIf cfg.enable {environment.systemPackages = with pkgs; [cadence];};
+  config = mkIf cfg.enable { environment.systemPackages = with pkgs; [ cadence ]; };
 }

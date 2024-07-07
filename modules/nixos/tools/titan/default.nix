@@ -7,9 +7,11 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.tools.titan;
-in {
+in
+{
   options.${namespace}.tools.titan = with types; {
     enable = mkBoolOpt false "Whether or not to install Titan.";
     pkg = mkOpt package pkgs.plusultra.titan "The package to install as Titan.";
@@ -22,8 +24,6 @@ in {
       git = enabled;
     };
 
-    environment.systemPackages = [
-      cfg.pkg
-    ];
+    environment.systemPackages = [ cfg.pkg ];
   };
 }

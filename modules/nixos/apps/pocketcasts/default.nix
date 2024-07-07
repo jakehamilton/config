@@ -7,14 +7,14 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.apps.pocketcasts;
-in {
+in
+{
   options.${namespace}.apps.pocketcasts = with types; {
     enable = mkBoolOpt false "Whether or not to enable Pocketcasts.";
   };
 
-  config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs.plusultra; [pocketcasts];
-  };
+  config = mkIf cfg.enable { environment.systemPackages = with pkgs.plusultra; [ pocketcasts ]; };
 }

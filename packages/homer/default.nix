@@ -10,7 +10,8 @@
   namespace,
   # ...
   ...
-}: let
+}:
+let
   version = "23.10.1";
 
   homer = yarn2nix-moretea.mkYarnPackage rec {
@@ -32,9 +33,7 @@
       description = "A very simple static homepage for your server.";
       homepage = "https://github.com/bastienwirtz/homer";
       license = licenses.asl20;
-      maintainers = with maintainers; [
-        jakehamilton
-      ];
+      maintainers = with maintainers; [ jakehamilton ];
     };
 
     doDist = false;
@@ -69,4 +68,4 @@
     };
   };
 in
-  homer
+homer

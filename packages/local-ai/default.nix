@@ -15,7 +15,8 @@
   makeWrapper,
   runCommand,
   buildType ? "",
-}: let
+}:
+let
   go-llama = fetchFromGitHub {
     owner = "go-skynet";
     repo = "go-llama.cpp";
@@ -40,7 +41,7 @@
     fetchSubmodules = true;
   };
 
-  llama_cpp' = runCommand "llama_cpp_src" {} ''
+  llama_cpp' = runCommand "llama_cpp_src" { } ''
     cp -r --no-preserve=mode,ownership ${llama_cpp} $out
     sed -i $out/CMakeLists.txt \
       -e 's;pkg_check_modules(DepBLAS REQUIRED openblas);pkg_check_modules(DepBLAS REQUIRED openblas64);'
@@ -110,27 +111,29 @@
     fetchSubmodules = true;
   };
 in
-  buildGoModule rec {
-    pname = "local-ai";
-    version = "2.6.1";
+buildGoModule rec {
+  pname = "local-ai";
+  version = "2.6.1";
 
-    src = fetchFromGitHub {
-      owner = "go-skynet";
-      repo = "LocalAI";
-      rev = "v${version}";
-      hash = "sha256-xGbrNbHQpl9Tdh5w+Csx7mhkMDBF8JgGtIVvgOu0XWs=";
-    };
+  src = fetchFromGitHub {
+    owner = "go-skynet";
+    repo = "LocalAI";
+    rev = "v${version}";
+    hash = "sha256-xGbrNbHQpl9Tdh5w+Csx7mhkMDBF8JgGtIVvgOu0XWs=";
+  };
 
-    vendorHash = "sha256-WUgDyRzShftJ15yumlvcSN0rUx8ytQPQGAO37AxMHeA=";
+  vendorHash = "sha256-WUgDyRzShftJ15yumlvcSN0rUx8ytQPQGAO37AxMHeA=";
 
-    # Workaround for
-    # `cc1plus: error: '-Wformat-security' ignored without '-Wformat' [-Werror=format-security]`
-    # when building jtreg
-    env.NIX_CFLAGS_COMPILE = "-Wformat";
+  # Workaround for
+  # `cc1plus: error: '-Wformat-security' ignored without '-Wformat' [-Werror=format-security]`
+  # when building jtreg
+  env.NIX_CFLAGS_COMPILE = "-Wformat";
 
-    postPatch = let
+  postPatch =
+    let
       cp = "cp -r --no-preserve=mode,ownership";
-    in ''
+    in
+    ''
       sed -i Makefile \
         -e 's;git clone.*go-llama$;${cp} ${go-llama} sources/go-llama;' \
         -e 's;git clone.*go-llama-ggml$;${cp} ${go-llama-ggml} sources/go-llama-ggml;' \
@@ -151,54 +154,54 @@ in
 
     '';
 
-    modBuildPhase = ''
-      mkdir sources
-      make prepare-sources
-      go mod tidy -v
+  modBuildPhase = ''
+    mkdir sources
+    make prepare-sources
+    go mod tidy -v
+  '';
+
+  proxyVendor = true;
+
+  buildPhase = ''
+    mkdir sources
+    make \
+      VERSION=v${version} \
+      BUILD_TYPE=${buildType} \
+      build
+  '';
+
+  installPhase = ''
+    install -Dt $out/bin ${pname}
+  '';
+
+  buildInputs =
+    [
+      abseil-cpp
+      protobuf
+      grpc
+      openssl
+    ]
+    ++ lib.optional (buildType == "cublas") cudaPackages.cudatoolkit
+    ++ lib.optional (buildType == "openblas") openblas.dev;
+
+  # patching rpath with patchelf doens't work. The execuable
+  # raises an segmentation fault
+  postFixup =
+    lib.optionalString (buildType == "cublas") ''
+      wrapProgram $out/bin/${pname} \
+        --prefix LD_LIBRARY_PATH : "${cudaPackages.libcublas}/lib:${cudaPackages.cuda_cudart}/lib:/run/opengl-driver/lib"
+    ''
+    + lib.optionalString (buildType == "openblas") ''
+      wrapProgram $out/bin/${pname} \
+        --prefix LD_LIBRARY_PATH : "${openblas}/lib"
     '';
 
-    proxyVendor = true;
-
-    buildPhase = ''
-      mkdir sources
-      make \
-        VERSION=v${version} \
-        BUILD_TYPE=${buildType} \
-        build
-    '';
-
-    installPhase = ''
-      install -Dt $out/bin ${pname}
-    '';
-
-    buildInputs =
-      [
-        abseil-cpp
-        protobuf
-        grpc
-        openssl
-      ]
-      ++ lib.optional (buildType == "cublas") cudaPackages.cudatoolkit
-      ++ lib.optional (buildType == "openblas") openblas.dev;
-
-    # patching rpath with patchelf doens't work. The execuable
-    # raises an segmentation fault
-    postFixup =
-      lib.optionalString (buildType == "cublas") ''
-        wrapProgram $out/bin/${pname} \
-          --prefix LD_LIBRARY_PATH : "${cudaPackages.libcublas}/lib:${cudaPackages.cuda_cudart}/lib:/run/opengl-driver/lib"
-      ''
-      + lib.optionalString (buildType == "openblas") ''
-        wrapProgram $out/bin/${pname} \
-          --prefix LD_LIBRARY_PATH : "${openblas}/lib"
-      '';
-
-    nativeBuildInputs =
-      [
-        ncurses
-        cmake
-        makeWrapper
-      ]
-      ++ lib.optional (buildType == "openblas") pkg-config
-      ++ lib.optional (buildType == "cublas") cudaPackages.cuda_nvcc;
-  }
+  nativeBuildInputs =
+    [
+      ncurses
+      cmake
+      makeWrapper
+    ]
+    ++ lib.optional (buildType == "openblas") pkg-config
+    ++ lib.optional (buildType == "cublas") cudaPackages.cuda_nvcc;
+}

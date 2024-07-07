@@ -7,12 +7,14 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.apps.vlc;
-in {
+in
+{
   options.${namespace}.apps.vlc = with types; {
     enable = mkBoolOpt false "Whether or not to enable vlc.";
   };
 
-  config = mkIf cfg.enable {environment.systemPackages = with pkgs; [vlc];};
+  config = mkIf cfg.enable { environment.systemPackages = with pkgs; [ vlc ]; };
 }

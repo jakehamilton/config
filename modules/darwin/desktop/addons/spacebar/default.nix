@@ -6,9 +6,11 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.desktop.addons.spacebar;
-in {
+in
+{
   options.${namespace}.desktop.addons.spacebar = {
     enable = mkEnableOption "Spacebar";
   };

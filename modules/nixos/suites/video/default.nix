@@ -7,9 +7,11 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.suites.video;
-in {
+in
+{
   options.${namespace}.suites.video = with types; {
     enable = mkBoolOpt false "Whether or not to enable video configuration.";
   };

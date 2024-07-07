@@ -7,9 +7,11 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.cli-apps.wine;
-in {
+in
+{
   options.${namespace}.cli-apps.wine = with types; {
     enable = mkBoolOpt false "Whether or not to enable Wine.";
   };

@@ -2,6 +2,4 @@
 
 final: prev:
 
-{
-  inherit (channels.unstable) prismlauncher;
-}
+{ inherit (channels.unstable) prismlauncher; }

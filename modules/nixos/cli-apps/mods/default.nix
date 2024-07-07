@@ -7,9 +7,11 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.cli-apps.mods;
-in {
+in
+{
   options.${namespace}.cli-apps.mods = with types; {
     enable = mkBoolOpt false "Whether or not to enable mods.";
   };
@@ -21,9 +23,7 @@ in {
       OPENAI_API_BASE = "http://ruby:8080";
     };
 
-    environment.systemPackages = with pkgs; [
-      mods
-    ];
+    environment.systemPackages = with pkgs; [ mods ];
 
     plusultra.home.configFile = {
       "mods/mods.yml".source = ./mods.yml;

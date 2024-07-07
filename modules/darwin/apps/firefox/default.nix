@@ -7,7 +7,8 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.apps.firefox;
   defaultSettings = {
     "browser.aboutwelcome.enabled" = false;
@@ -19,13 +20,12 @@ with lib.${namespace}; let
     "browser.aboutConfig.showWarning" = false;
     "browser.ssb.enabled" = true;
   };
-in {
+in
+{
   options.${namespace}.apps.firefox = with types; {
     enable = mkBoolOpt false "Whether or not to enable Firefox.";
-    extraConfig =
-      mkOpt str "" "Extra configuration for the user profile JS file.";
-    userChrome =
-      mkOpt str "" "Extra configuration for the user chrome CSS file.";
+    extraConfig = mkOpt str "" "Extra configuration for the user profile JS file.";
+    userChrome = mkOpt str "" "Extra configuration for the user chrome CSS file.";
     settings = mkOpt attrs defaultSettings "Settings to apply to the profile.";
   };
 

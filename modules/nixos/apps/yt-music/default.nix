@@ -7,13 +7,14 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.apps.yt-music;
-in {
+in
+{
   options.${namespace}.apps.yt-music = with types; {
     enable = mkBoolOpt false "Whether or not to enable YouTube Music.";
   };
 
-  config =
-    mkIf cfg.enable {environment.systemPackages = with pkgs.plusultra; [yt-music];};
+  config = mkIf cfg.enable { environment.systemPackages = with pkgs.plusultra; [ yt-music ]; };
 }

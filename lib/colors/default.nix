@@ -2,10 +2,10 @@
   lib,
   inputs,
   snowfall-inputs,
-}: rec {
+}:
+rec {
   colors = {
-    without-hash = color:
-      builtins.substring 1 (builtins.stringLength color) color;
+    without-hash = color: builtins.substring 1 (builtins.stringLength color) color;
 
     nord = {
       nord0 = "#2E3440";

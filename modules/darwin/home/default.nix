@@ -8,22 +8,22 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.home;
-in {
+in
+{
   # imports = with inputs; [
   #   home-manager.darwinModules.home-manager
   # ];
 
   options.${namespace}.home = with types; {
-    file =
-      mkOpt attrs {}
-      "A set of files to be managed by home-manager's <option>home.file</option>.";
+    file = mkOpt attrs { } "A set of files to be managed by home-manager's <option>home.file</option>.";
     configFile =
-      mkOpt attrs {}
-      "A set of files to be managed by home-manager's <option>xdg.configFile</option>.";
-    extraOptions = mkOpt attrs {} "Options to pass directly to home-manager.";
-    homeConfig = mkOpt attrs {} "Final config for home-manager.";
+      mkOpt attrs { }
+        "A set of files to be managed by home-manager's <option>xdg.configFile</option>.";
+    extraOptions = mkOpt attrs { } "Options to pass directly to home-manager.";
+    homeConfig = mkOpt attrs { } "Final config for home-manager.";
   };
 
   config = {
@@ -34,7 +34,9 @@ in {
       xdg.configFile = mkAliasDefinitions options.${namespace}.home.configFile;
     };
 
-    snowfallorg.user.${config.${namespace}.user.name}.home.config = mkAliasDefinitions options.${namespace}.home.extraOptions;
+    snowfallorg.user.${config.${namespace}.user.name}.home.config =
+      mkAliasDefinitions
+        options.${namespace}.home.extraOptions;
 
     home-manager = {
       useUserPackages = true;

@@ -7,21 +7,26 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.desktop.addons.mako;
-in {
+in
+{
   options.${namespace}.desktop.addons.mako = with types; {
     enable = mkBoolOpt false "Whether to enable Mako in Sway.";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [mako libnotify];
+    environment.systemPackages = with pkgs; [
+      mako
+      libnotify
+    ];
 
     systemd.user.services.mako = {
       description = "Mako notification daemon";
-      wantedBy = ["graphical-session.target"];
-      partOf = ["graphical-session.target"];
-      after = ["graphical-session.target"];
+      wantedBy = [ "graphical-session.target" ];
+      partOf = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
       serviceConfig = {
         Type = "dbus";
         BusName = "org.freedesktop.Notifications";

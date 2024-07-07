@@ -7,14 +7,14 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.apps.protontricks;
-in {
+in
+{
   options.${namespace}.apps.protontricks = with types; {
     enable = mkBoolOpt false "Whether or not to enable Protontricks.";
   };
 
-  config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [protontricks];
-  };
+  config = mkIf cfg.enable { environment.systemPackages = with pkgs; [ protontricks ]; };
 }

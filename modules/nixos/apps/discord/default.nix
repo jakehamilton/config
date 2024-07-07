@@ -8,7 +8,8 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.apps.discord;
   discord = lib.replugged.makeDiscordPlugged {
     inherit pkgs;
@@ -24,16 +25,13 @@ with lib.${namespace}; let
       inherit (inputs) discord-nord-theme;
     };
   };
-in {
+in
+{
   options.${namespace}.apps.discord = with types; {
     enable = mkBoolOpt false "Whether or not to enable Discord.";
     canary.enable = mkBoolOpt false "Whether or not to enable Discord Canary.";
-    chromium.enable =
-      mkBoolOpt false
-      "Whether or not to enable the Chromium version of Discord.";
-    firefox.enable =
-      mkBoolOpt false
-      "Whether or not to enable the Firefox version of Discord.";
+    chromium.enable = mkBoolOpt false "Whether or not to enable the Chromium version of Discord.";
+    firefox.enable = mkBoolOpt false "Whether or not to enable the Firefox version of Discord.";
     native.enable = mkBoolOpt false "Whether or not to enable the native version of Discord.";
   };
 

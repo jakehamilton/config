@@ -2,6 +2,4 @@
 
 final: prev:
 
-{
-  inherit (channels.unstable) gum;
-}
+{ inherit (channels.unstable) gum; }

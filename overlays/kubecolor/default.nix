@@ -2,6 +2,4 @@
 
 final: prev:
 
-{
-  inherit (channels.unstable) kubecolor;
-}
+{ inherit (channels.unstable) kubecolor; }

@@ -7,13 +7,14 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.apps.gimp;
-in {
+in
+{
   options.${namespace}.apps.gimp = with types; {
     enable = mkBoolOpt false "Whether or not to enable Gimp.";
   };
 
-  config =
-    mkIf cfg.enable {environment.systemPackages = with pkgs; [gimp];};
+  config = mkIf cfg.enable { environment.systemPackages = with pkgs; [ gimp ]; };
 }

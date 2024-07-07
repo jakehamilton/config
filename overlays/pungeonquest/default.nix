@@ -1,3 +1,1 @@
-{pungeonquest, ...}: final: prev: {
-  inherit (pungeonquest.packages.${prev.system}) pungeonquest;
-}
+{ pungeonquest, ... }: final: prev: { inherit (pungeonquest.packages.${prev.system}) pungeonquest; }

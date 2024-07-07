@@ -6,21 +6,21 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.cli-apps.prisma;
-in {
+in
+{
   options.${namespace}.cli-apps.prisma = with types; {
     enable = mkBoolOpt false "Whether or not to install Prisma";
     pkgs = {
       npm = mkOpt package pkgs.nodePackages.prisma "The NPM package to install";
-      engines =
-        mkOpt package pkgs.prisma-engines
-        "The package to get prisma engines from";
+      engines = mkOpt package pkgs.prisma-engines "The package to get prisma engines from";
     };
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [cfg.pkgs.npm];
+    environment.systemPackages = [ cfg.pkgs.npm ];
 
     plusultra.home.extraOptions = {
       programs.zsh.initExtra = ''

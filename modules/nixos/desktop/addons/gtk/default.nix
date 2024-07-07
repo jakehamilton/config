@@ -1,12 +1,14 @@
-{ options
-, config
-, lib
-, pkgs
-, namespace
-, ...
+{
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.desktop.addons.gtk;
   gdmCfg = config.services.xserver.displayManager.gdm;
 in
@@ -14,21 +16,15 @@ in
   options.${namespace}.desktop.addons.gtk = with types; {
     enable = mkBoolOpt false "Whether to customize GTK and apply themes.";
     theme = {
-      name =
-        mkOpt str "Nordic-darker"
-          "The name of the GTK theme to apply.";
+      name = mkOpt str "Nordic-darker" "The name of the GTK theme to apply.";
       pkg = mkOpt package pkgs.nordic "The package to use for the theme.";
     };
     cursor = {
-      name =
-        mkOpt str "Bibata-Modern-Ice"
-          "The name of the cursor theme to apply.";
+      name = mkOpt str "Bibata-Modern-Ice" "The name of the cursor theme to apply.";
       pkg = mkOpt package pkgs.plusultra.bibata-cursors "The package to use for the cursor theme.";
     };
     icon = {
-      name =
-        mkOpt str "Papirus"
-          "The name of the icon theme to apply.";
+      name = mkOpt str "Papirus" "The name of the icon theme to apply.";
       pkg = mkOpt package pkgs.papirus-icon-theme "The package to use for the icon theme.";
     };
   };

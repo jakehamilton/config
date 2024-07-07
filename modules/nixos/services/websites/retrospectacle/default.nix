@@ -4,9 +4,9 @@
   config,
   namespace,
   ...
-}: let
-  inherit
-    (lib)
+}:
+let
+  inherit (lib)
     mkIf
     mkEnableOption
     fetchFromGitHub
@@ -16,7 +16,8 @@
   inherit (lib.${namespace}) mkOpt;
 
   cfg = config.${namespace}.services.websites.retrospectacle;
-in {
+in
+{
   options.${namespace}.services.websites.retrospectacle = with lib.types; {
     enable = mkEnableOption "Retrospectacle";
     package = mkOpt package pkgs.retrospectacle "The package to use.";
@@ -41,14 +42,12 @@ in {
         };
       };
 
-      groups = optionalAttrs (cfg.group == "retrospectacle") {
-        retrospectacle = {};
-      };
+      groups = optionalAttrs (cfg.group == "retrospectacle") { retrospectacle = { }; };
     };
 
     systemd.services.retrospectacle = {
-      after = ["network.target"];
-      wantedBy = ["multi-user.target"];
+      after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
 
       serviceConfig = {
         Type = "simple";
@@ -58,8 +57,7 @@ in {
         RestartSec = 20;
         Environment = "NODE_PORT=${builtins.toString cfg.port}";
         ExecStart = "${cfg.package}/bin/retrospectacle";
-        AmbientCapabilities =
-          optionalString (cfg.port < 1024) "cap_net_bind_service";
+        AmbientCapabilities = optionalString (cfg.port < 1024) "cap_net_bind_service";
       };
     };
 

@@ -7,19 +7,20 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.desktop.addons.electron-support;
-in {
+in
+{
   options.${namespace}.desktop.addons.electron-support = with types; {
-    enable =
-      mkBoolOpt false
-      "Whether to enable electron support in the desktop environment.";
+    enable = mkBoolOpt false "Whether to enable electron support in the desktop environment.";
   };
 
   config = mkIf cfg.enable {
-    plusultra.home.configFile."electron-flags.conf".source =
-      ./electron-flags.conf;
+    plusultra.home.configFile."electron-flags.conf".source = ./electron-flags.conf;
 
-    environment.sessionVariables = {NIXOS_OZONE_WL = "1";};
+    environment.sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+    };
   };
 }

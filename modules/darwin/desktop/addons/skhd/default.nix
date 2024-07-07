@@ -6,10 +6,12 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.desktop.addons.skhd;
 
-  mkScript = name: file:
+  mkScript =
+    name: file:
     pkgs.writeShellApplication {
       inherit name;
       checkPhase = "";
@@ -17,7 +19,8 @@ with lib.${namespace}; let
     };
 
   open-iterm2 = mkScript "open-iterm2" ./scripts/open-iterm2.sh;
-in {
+in
+{
   options.${namespace}.desktop.addons.skhd = {
     enable = mkEnableOption "skhd";
   };

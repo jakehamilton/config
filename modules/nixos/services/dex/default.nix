@@ -4,63 +4,52 @@
   pkgs,
   namespace,
   ...
-}: let
+}:
+let
   inherit (builtins) map removeAttrs;
-  inherit (lib) mapAttrs flatten concatMap concatMapStringsSep;
+  inherit (lib)
+    mapAttrs
+    flatten
+    concatMap
+    concatMapStringsSep
+    ;
 
   cfg = config.${namespace}.services.dex;
 
-  process-client-settings = client:
-    if client ? secretFile
-    then
-      (removeAttrs client ["secretFile"])
-      // {secret = client.secretFile;}
-    else client;
+  process-client-settings =
+    client:
+    if client ? secretFile then
+      (removeAttrs client [ "secretFile" ]) // { secret = client.secretFile; }
+    else
+      client;
 
   settings =
-    mapAttrs
-    (
-      name: value:
-        if name == "staticClients"
-        then map process-client-settings value
-        else value
-    )
-    (cfg.settings
-      // {
-        storage =
-          (cfg.settings.storage or {})
-          // {
+    mapAttrs (name: value: if name == "staticClients" then map process-client-settings value else value)
+      (
+        cfg.settings
+        // {
+          storage = (cfg.settings.storage or { }) // {
             type = cfg.settings.storage.type or "sqlite3";
-            config =
-              cfg.settings.storage.config
-              or {
-                file = "${cfg.stateDir}/dex.db";
-              };
+            config = cfg.settings.storage.config or { file = "${cfg.stateDir}/dex.db"; };
           };
-      });
+        }
+      );
 
-  secret-files =
-    concatMap
-    (
-      client:
-        if client ? secretFile
-        then [client.secretFile]
-        else []
-    )
-    (settings.staticClients or []);
+  secret-files = concatMap (client: if client ? secretFile then [ client.secretFile ] else [ ]) (
+    settings.staticClients or [ ]
+  );
 
-  format = pkgs.formats.yaml {};
+  format = pkgs.formats.yaml { };
 
   configYaml = format.generate "config.yaml" settings;
 
-  replace-config-secrets =
-    pkgs.writeShellScript "replace-config-secrets"
-    (
-      concatMapStringsSep "\n"
-      (file: "${pkgs.replace-secret}/bin/replace-secret '${file}' '${file}' ${cfg.stateDir}/config.yaml")
-      secret-files
-    );
-in {
+  replace-config-secrets = pkgs.writeShellScript "replace-config-secrets" (
+    concatMapStringsSep "\n" (
+      file: "${pkgs.replace-secret}/bin/replace-secret '${file}' '${file}' ${cfg.stateDir}/config.yaml"
+    ) secret-files
+  );
+in
+{
   options.${namespace}.services.dex = {
     enable = lib.mkEnableOption "Dex, the OpenID Connect and OAuth 2 identity provider";
 
@@ -84,7 +73,7 @@ in {
 
     settings = lib.mkOption {
       type = format.type;
-      default = {};
+      default = { };
       example = lib.literalExpression ''
         {
           # External url
@@ -126,21 +115,17 @@ in {
         };
       };
 
-      groups = lib.optionalAttrs (cfg.group == "dex") {
-        dex = {};
-      };
+      groups = lib.optionalAttrs (cfg.group == "dex") { dex = { }; };
     };
 
     systemd = {
-      tmpfiles.rules = [
-        "d '${cfg.stateDir}' 0750 ${cfg.user} ${cfg.group}"
-      ];
+      tmpfiles.rules = [ "d '${cfg.stateDir}' 0750 ${cfg.user} ${cfg.group}" ];
 
       services = {
         dex = {
           description = "dex identity provider";
-          wantedBy = ["multi-user.target"];
-          after = ["networking.target"];
+          wantedBy = [ "multi-user.target" ];
+          after = [ "networking.target" ];
 
           preStart = ''
             cp --remove-destination ${configYaml} ${cfg.stateDir}/config.yaml
@@ -166,7 +151,9 @@ in {
               "-/etc/localtime"
               "-/etc/dex"
             ];
-            BindPaths = [cfg.stateDir] ++ lib.optional (settings.storage.type == "postgres") "/var/run/postgresql";
+            BindPaths = [
+              cfg.stateDir
+            ] ++ lib.optional (settings.storage.type == "postgres") "/var/run/postgresql";
             CapabilityBoundingSet = "CAP_NET_BIND_SERVICE";
             ## ProtectClock= adds DeviceAllow=char-rtc r
             #DeviceAllow = "";

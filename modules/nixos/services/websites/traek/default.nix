@@ -4,12 +4,14 @@
   config,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption fetchFromGitHub;
   inherit (lib.${namespace}) mkOpt;
 
   cfg = config.${namespace}.services.websites.traek;
-in {
+in
+{
   options.${namespace}.services.websites.traek = with lib.types; {
     enable = mkEnableOption "traek.app Website";
     package = mkOpt package pkgs.plusultra.traek-website "The site package to use.";

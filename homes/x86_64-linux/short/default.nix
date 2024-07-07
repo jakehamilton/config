@@ -2,12 +2,13 @@
   lib,
   pkgs,
   config,
-  osConfig ? {},
+  osConfig ? { },
   format ? "unknown",
   namespace,
   ...
 }:
-with lib.${namespace}; {
+with lib.${namespace};
+{
   plusultra = {
     cli-apps = {
       zsh = enabled;

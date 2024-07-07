@@ -7,13 +7,14 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.system.time;
-in {
+in
+{
   options.${namespace}.system.time = with types; {
-    enable =
-      mkBoolOpt false "Whether or not to configure timezone information.";
+    enable = mkBoolOpt false "Whether or not to configure timezone information.";
   };
 
-  config = mkIf cfg.enable {time.timeZone = "America/Los_Angeles";};
+  config = mkIf cfg.enable { time.timeZone = "America/Los_Angeles"; };
 }

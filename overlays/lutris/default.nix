@@ -2,6 +2,4 @@
 
 final: prev:
 
-{
-  inherit (channels.unstable) lutris;
-}
+{ inherit (channels.unstable) lutris; }

@@ -7,25 +7,23 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.hardware.networking;
-in {
+in
+{
   options.${namespace}.hardware.networking = with types; {
     enable = mkBoolOpt false "Whether or not to enable networking support";
-    hosts =
-      mkOpt attrs {}
-      (mdDoc "An attribute set to merge with `networking.hosts`");
+    hosts = mkOpt attrs { } (mdDoc "An attribute set to merge with `networking.hosts`");
   };
 
   config = mkIf cfg.enable {
-    plusultra.user.extraGroups = ["networkmanager"];
+    plusultra.user.extraGroups = [ "networkmanager" ];
 
     networking = {
-      hosts =
-        {
-          "127.0.0.1" = ["local.test"] ++ (cfg.hosts."127.0.0.1" or []);
-        }
-        // cfg.hosts;
+      hosts = {
+        "127.0.0.1" = [ "local.test" ] ++ (cfg.hosts."127.0.0.1" or [ ]);
+      } // cfg.hosts;
 
       networkmanager = {
         enable = true;

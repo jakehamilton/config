@@ -1,12 +1,14 @@
-{ options
-, config
-, lib
-, pkgs
-, namespace
-, ...
+{
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.desktop.gnome;
   gdmHome = config.users.users.gdm.home;
 
@@ -38,16 +40,23 @@ with lib.${namespace}; let
 in
 {
   options.${namespace}.desktop.gnome = with types; {
-    enable =
-      mkBoolOpt false "Whether or not to use Gnome as the desktop environment.";
+    enable = mkBoolOpt false "Whether or not to use Gnome as the desktop environment.";
     wallpaper = {
-      light = mkOpt (oneOf [ str package ]) pkgs.plusultra.wallpapers.nord-rainbow-light-nix "The light wallpaper to use.";
-      dark = mkOpt (oneOf [ str package ]) pkgs.plusultra.wallpapers.nord-rainbow-dark-nix "The dark wallpaper to use.";
+      light = mkOpt (oneOf [
+        str
+        package
+      ]) pkgs.plusultra.wallpapers.nord-rainbow-light-nix "The light wallpaper to use.";
+      dark = mkOpt (oneOf [
+        str
+        package
+      ]) pkgs.plusultra.wallpapers.nord-rainbow-dark-nix "The dark wallpaper to use.";
     };
-    color-scheme = mkOpt (enum [ "light" "dark" ]) "dark" "The color scheme to use.";
+    color-scheme = mkOpt (enum [
+      "light"
+      "dark"
+    ]) "dark" "The color scheme to use.";
     wayland = mkBoolOpt true "Whether or not to use Wayland.";
-    suspend =
-      mkBoolOpt true "Whether or not to suspend the machine after inactivity.";
+    suspend = mkBoolOpt true "Whether or not to suspend the machine after inactivity.";
     monitors = mkOpt (nullOr path) null "The monitors.xml file to create.";
     extensions = mkOpt (listOf package) [ ] "Extra Gnome extensions to install.";
   };
@@ -61,7 +70,8 @@ in
       foot = enabled;
     };
 
-    environment.systemPackages = with pkgs;
+    environment.systemPackages =
+      with pkgs;
       [
         (hiPrio plusultra.xdg-open-with-portal)
         wl-clipboard
@@ -81,9 +91,7 @@ in
     ];
 
     systemd.tmpfiles.rules =
-      [
-        "d ${gdmHome}/.config 0711 gdm gdm"
-      ]
+      [ "d ${gdmHome}/.config 0711 gdm gdm" ]
       ++ (
         # "./monitors.xml" comes from ~/.config/monitors.xml when GNOME
         # display information is updated.
@@ -102,7 +110,9 @@ in
 
       script = ''
         config_file=/var/lib/AccountsService/users/${config.${namespace}.user.name}
-        icon_file=/run/current-system/sw/share/plusultra-icons/user/${config.${namespace}.user.name}/${config.${namespace}.user.icon.fileName}
+        icon_file=/run/current-system/sw/share/plusultra-icons/user/${config.${namespace}.user.name}/${
+          config.${namespace}.user.icon.fileName
+        }
 
         if ! [ -d "$(dirname "$config_file")"]; then
           mkdir -p "$(dirname "$config_file")"
@@ -145,10 +155,8 @@ in
       dconf.settings =
         let
           user = config.users.users.${config.${namespace}.user.name};
-          get-wallpaper = wallpaper:
-            if lib.isDerivation wallpaper
-            then builtins.toString wallpaper
-            else wallpaper;
+          get-wallpaper =
+            wallpaper: if lib.isDerivation wallpaper then builtins.toString wallpaper else wallpaper;
         in
         nested-default-attrs {
           "org/gnome/shell" = {
@@ -180,10 +188,7 @@ in
             picture-uri-dark = get-wallpaper cfg.wallpaper.dark;
           };
           "org/gnome/desktop/interface" = {
-            color-scheme =
-              if cfg.color-scheme == "light"
-              then "default"
-              else "prefer-dark";
+            color-scheme = if cfg.color-scheme == "light" then "default" else "prefer-dark";
             enable-hot-corners = false;
           };
           "org/gnome/desktop/peripherals/mouse" = {
@@ -267,9 +272,10 @@ in
             menu-button-icon-image = 23;
 
             menu-button-terminal =
-              if config.${namespace}.desktop.addons.term.enable
-              then lib.getExe config.${namespace}.desktop.addons.term.pkg
-              else lib.getExe pkgs.gnome.gnome-terminal;
+              if config.${namespace}.desktop.addons.term.enable then
+                lib.getExe config.${namespace}.desktop.addons.term.pkg
+              else
+                lib.getExe pkgs.gnome.gnome-terminal;
           };
 
           "org/gnome/shell/extensions/aylurs-widgets" = {
@@ -300,9 +306,7 @@ in
               "appMenu"
             ];
 
-            center-box-order = [
-              "Space Bar"
-            ];
+            center-box-order = [ "Space Bar" ];
 
             right-box-order = [
               "keyboard"

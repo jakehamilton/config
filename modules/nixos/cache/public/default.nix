@@ -5,9 +5,11 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.cache.public;
-in {
+in
+{
   options.${namespace}.cache.public = {
     enable = mkEnableOption "Plus Ultra public cache";
   };

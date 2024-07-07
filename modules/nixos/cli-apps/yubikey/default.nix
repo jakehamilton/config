@@ -7,15 +7,17 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.cli-apps.yubikey;
-in {
+in
+{
   options.${namespace}.cli-apps.yubikey = with types; {
     enable = mkBoolOpt false "Whether or not to enable Yubikey.";
   };
 
   config = mkIf cfg.enable {
     services.yubikey-agent.enable = true;
-    environment.systemPackages = with pkgs; [yubikey-manager];
+    environment.systemPackages = with pkgs; [ yubikey-manager ];
   };
 }

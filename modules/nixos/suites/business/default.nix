@@ -7,13 +7,20 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.suites.business;
-in {
+in
+{
   options.${namespace}.suites.business = with types; {
     enable = mkBoolOpt false "Whether or not to enable business configuration.";
   };
 
-  config =
-    mkIf cfg.enable {plusultra = {apps = {frappe-books = enabled;};};};
+  config = mkIf cfg.enable {
+    plusultra = {
+      apps = {
+        frappe-books = enabled;
+      };
+    };
+  };
 }

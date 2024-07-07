@@ -4,13 +4,14 @@
   gitHostCommitUrl ? "https://github.com/jakehamilton/config/commit",
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib.${namespace}) override-meta;
 
   new-meta = with lib; {
     description = "A helper show the current git revision of the system configuration.";
     license = licenses.asl20;
-    maintainers = with maintainers; [jakehamilton];
+    maintainers = with maintainers; [ jakehamilton ];
   };
 
   package = pkgs.writeShellScriptBin "nixos-revision" ''
@@ -69,4 +70,4 @@
     fi
   '';
 in
-  override-meta new-meta package
+override-meta new-meta package

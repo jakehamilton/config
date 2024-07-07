@@ -7,12 +7,13 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.suites.desktop;
-in {
+in
+{
   options.${namespace}.suites.desktop = with types; {
-    enable =
-      mkBoolOpt false "Whether or not to enable common desktop configuration.";
+    enable = mkBoolOpt false "Whether or not to enable common desktop configuration.";
   };
 
   config = mkIf cfg.enable {
@@ -20,7 +21,9 @@ in {
       desktop = {
         gnome = enabled;
 
-        addons = {wallpapers = enabled;};
+        addons = {
+          wallpapers = enabled;
+        };
       };
 
       apps = {

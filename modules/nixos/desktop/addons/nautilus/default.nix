@@ -7,9 +7,11 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.desktop.addons.nautilus;
-in {
+in
+{
   options.${namespace}.desktop.addons.nautilus = with types; {
     enable = mkBoolOpt false "Whether to enable the gnome file manager.";
   };
@@ -19,6 +21,6 @@ in {
     services.gvfs.enable = true;
     networking.firewall.extraCommands = "iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns";
 
-    environment.systemPackages = with pkgs; [nautilus];
+    environment.systemPackages = with pkgs; [ nautilus ];
   };
 }

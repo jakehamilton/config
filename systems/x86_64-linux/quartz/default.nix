@@ -6,15 +6,16 @@
   ...
 }:
 with lib;
-with lib.${namespace}; {
-  imports = [./hardware.nix];
+with lib.${namespace};
+{
+  imports = [ ./hardware.nix ];
 
   services.minio = {
     enable = true;
 
     region = "us-west-1";
 
-    dataDir = ["/persist/apps/minio/data"];
+    dataDir = [ "/persist/apps/minio/data" ];
     configDir = "/persist/apps/minio/config";
 
     rootCredentialsFile = "/persist/apps/minio/credentials";
@@ -82,20 +83,15 @@ with lib.${namespace}; {
 
         policies =
           builtins.foldl'
-          (policies: file:
-            policies
-            // {
-              "${snowfall.path.get-file-name-without-extension file}" = file;
-            })
-          {}
-          (builtins.filter (snowfall.path.has-file-extension "hcl")
-            (builtins.map
-              (
-                path:
-                  ./vault/policies
-                  + "/${builtins.baseNameOf (builtins.unsafeDiscardStringContext path)}"
+            (policies: file: policies // { "${snowfall.path.get-file-name-without-extension file}" = file; })
+            { }
+            (
+              builtins.filter (snowfall.path.has-file-extension "hcl") (
+                builtins.map (
+                  path: ./vault/policies + "/${builtins.baseNameOf (builtins.unsafeDiscardStringContext path)}"
+                ) (snowfall.fs.get-files ./vault/policies)
               )
-              (snowfall.fs.get-files ./vault/policies)));
+            );
       };
 
       samba = {
@@ -152,7 +148,7 @@ with lib.${namespace}; {
         enable = true;
         host = "hamho.me";
 
-        package = pkgs.plusultra.homer-catppuccin.override {favicon = "light";};
+        package = pkgs.plusultra.homer-catppuccin.override { favicon = "light"; };
 
         settings = {
           title = "Dashboard";
@@ -302,48 +298,52 @@ with lib.${namespace}; {
     enable = true;
     recommendedProxySettings = true;
 
-    virtualHosts = let
-      shared-config = {
-        extra-config = {
-          forceSSL = true;
+    virtualHosts =
+      let
+        shared-config = {
+          extra-config = {
+            forceSSL = true;
 
-          sslCertificate = "${config.security.acme.certs."quartz.hamho.me".directory}/fullchain.pem";
-          sslCertificateKey = "${config.security.acme.certs."quartz.hamho.me".directory}/key.pem";
+            sslCertificate = "${config.security.acme.certs."quartz.hamho.me".directory}/fullchain.pem";
+            sslCertificateKey = "${config.security.acme.certs."quartz.hamho.me".directory}/key.pem";
+          };
         };
+      in
+      {
+        "hamho.me" = {
+          forceSSL = mkForce true;
+
+          sslCertificate = "${config.security.acme.certs."hamho.me".directory}/fullchain.pem";
+          sslCertificateKey = "${config.security.acme.certs."hamho.me".directory}/key.pem";
+        };
+
+        "minio.quartz.hamho.me" = network.create-proxy (
+          (network.get-address-parts config.services.minio.consoleAddress) // shared-config
+        );
+
+        "jellyfin.quartz.hamho.me" = network.create-proxy (
+          {
+            # https://jellyfin.org/docs/general/networking/index.html#static-ports
+            port = 8096;
+
+            # This is required to support sync play.
+            proxy-web-sockets = true;
+          }
+          // shared-config
+        );
+
+        "navidrome.quartz.hamho.me" = network.create-proxy (
+          {
+            # https://www.navidrome.org/docs/usage/configuration-options/#available-options
+            port = 4533;
+          }
+          // shared-config
+        );
+
+        "vault.quartz.hamho.me" = network.create-proxy (
+          (network.get-address-parts config.services.vault.address) // shared-config
+        );
       };
-    in {
-      "hamho.me" = {
-        forceSSL = mkForce true;
-
-        sslCertificate = "${config.security.acme.certs."hamho.me".directory}/fullchain.pem";
-        sslCertificateKey = "${config.security.acme.certs."hamho.me".directory}/key.pem";
-      };
-
-      "minio.quartz.hamho.me" =
-        network.create-proxy
-        ((network.get-address-parts config.services.minio.consoleAddress)
-          // shared-config);
-
-      "jellyfin.quartz.hamho.me" = network.create-proxy ({
-          # https://jellyfin.org/docs/general/networking/index.html#static-ports
-          port = 8096;
-
-          # This is required to support sync play.
-          proxy-web-sockets = true;
-        }
-        // shared-config);
-
-      "navidrome.quartz.hamho.me" = network.create-proxy ({
-          # https://www.navidrome.org/docs/usage/configuration-options/#available-options
-          port = 4533;
-        }
-        // shared-config);
-
-      "vault.quartz.hamho.me" =
-        network.create-proxy
-        ((network.get-address-parts config.services.vault.address)
-          // shared-config);
-    };
   };
 
   system.stateVersion = "21.11";

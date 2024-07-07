@@ -1,4 +1,4 @@
-inputs @ {
+inputs@{
   options,
   config,
   lib,
@@ -7,9 +7,11 @@ inputs @ {
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.cli-apps.neovim;
-in {
+in
+{
   options.${namespace}.cli-apps.neovim = with types; {
     enable = mkBoolOpt false "Whether or not to enable neovim.";
   };

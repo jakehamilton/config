@@ -7,12 +7,20 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.suites.media;
-in {
+in
+{
   options.${namespace}.suites.media = with types; {
     enable = mkBoolOpt false "Whether or not to enable media configuration.";
   };
 
-  config = mkIf cfg.enable {plusultra = {apps = {freetube = enabled;};};};
+  config = mkIf cfg.enable {
+    plusultra = {
+      apps = {
+        freetube = enabled;
+      };
+    };
+  };
 }

@@ -7,9 +7,11 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.desktop.addons.keyring;
-in {
+in
+{
   options.${namespace}.desktop.addons.keyring = with types; {
     enable = mkBoolOpt false "Whether to enable the gnome keyring.";
   };
@@ -17,6 +19,6 @@ in {
   config = mkIf cfg.enable {
     services.gnome.gnome-keyring.enable = true;
 
-    environment.systemPackages = with pkgs; [gnome.seahorse];
+    environment.systemPackages = with pkgs; [ gnome.seahorse ];
   };
 }

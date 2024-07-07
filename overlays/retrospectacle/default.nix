@@ -1,5 +1,3 @@
 { retrospectacle, ... }:
 
-final: prev: {
-  retrospectacle = retrospectacle.packages.${prev.system}.retrospectacle-backend;
-}
+final: prev: { retrospectacle = retrospectacle.packages.${prev.system}.retrospectacle-backend; }

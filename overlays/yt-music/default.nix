@@ -6,11 +6,14 @@ final: prev: {
       name = "YT Music";
       desktopName = "YT Music";
       genericName = "Music, from YouTube.";
-      exec = ''
-        ${final.firefox}/bin/firefox "https://music.youtube.com/?plusultra.app=true"'';
+      exec = ''${final.firefox}/bin/firefox "https://music.youtube.com/?plusultra.app=true"'';
       icon = ./icon.svg;
       type = "Application";
-      categories = [ "AudioVideo" "Audio" "Player" ];
+      categories = [
+        "AudioVideo"
+        "Audio"
+        "Player"
+      ];
       terminal = false;
     };
   };

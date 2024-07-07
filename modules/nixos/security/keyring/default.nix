@@ -7,9 +7,11 @@
   ...
 }:
 with lib;
-with lib.${namespace}; let
+with lib.${namespace};
+let
   cfg = config.${namespace}.security.keyring;
-in {
+in
+{
   options.${namespace}.security.keyring = with types; {
     enable = mkBoolOpt false "Whether to enable gnome keyring.";
   };
