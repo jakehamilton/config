@@ -1973,11 +1973,11 @@
         "unstable": "unstable_2"
       },
       "locked": {
-        "lastModified": 1719803967,
-        "narHash": "sha256-AyonukEkaZB52hXJdmtNnKJVl+hWpI3161dEYDMUC+A=",
+        "lastModified": 1720392766,
+        "narHash": "sha256-bYdRzwP7vfsp2KkM6BRKFDExv4QauG4tLW6Rtq1+jGg=",
         "owner": "jakehamilton",
         "repo": "nixpkgs.news",
-        "rev": "9e39a8e40969157fa9c9c80c79a9b1f9b240c2ba",
+        "rev": "3fec97853390312e45ee2316e981b6d037019ef5",
         "type": "github"
       },
       "original": {
