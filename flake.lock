@@ -56,17 +56,17 @@
         "snowfall-lib": "snowfall-lib"
       },
       "locked": {
-        "lastModified": 1718552769,
-        "narHash": "sha256-YDQZmTysqYmbHpGncm8sy5dKkpvG55zkq29lsd2y34U=",
-        "owner": "auxolotl",
-        "repo": "website",
-        "rev": "364973d984bdd8bd1f19fab7608e2bef0f126041",
-        "type": "github"
+        "lastModified": 1719954639,
+        "narHash": "sha256-ArI/s3l9KtyJOyzU6NvpWJCj42KNJeblk4hP/efTmMg=",
+        "ref": "refs/heads/main",
+        "rev": "131d0d01b566d0c3bdb7afe3b6e8fdfaadb4007d",
+        "revCount": 53,
+        "type": "git",
+        "url": "ssh://forgejo@git.auxolotl.org/auxolotl/website.git"
       },
       "original": {
-        "owner": "auxolotl",
-        "repo": "website",
-        "type": "github"
+        "type": "git",
+        "url": "ssh://forgejo@git.auxolotl.org/auxolotl/website.git"
       }
     },
     "avalanche": {

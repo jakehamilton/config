@@ -33,7 +33,7 @@
     # avalanche.url = "path:/home/short/work/@snowfallorg/avalanche";
     avalanche.inputs.nixpkgs.follows = "unstable";
 
-    aux-website.url = "github:auxolotl/website";
+    aux-website.url = "git+ssh://forgejo@git.auxolotl.org/auxolotl/website.git";
     aux-website.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Flake
