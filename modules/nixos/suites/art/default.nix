@@ -22,6 +22,7 @@ in
         gimp = enabled;
         inkscape = enabled;
         blender = enabled;
+				aseprite = enabled;
       };
 
       system.fonts.fonts = with pkgs; [ google-fonts ];
