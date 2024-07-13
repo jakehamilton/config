@@ -13,7 +13,7 @@ with lib.${namespace};
 
   snowfallorg = {
     avalanche.desktop = {
-      enable = true;
+      enable = false;
     };
   };
 
@@ -30,10 +30,9 @@ with lib.${namespace};
       zfs = enabled;
     };
 
-    desktop.hyprland = enabled;
+    # desktop.hyprland = enabled;
 
     desktop.gnome = {
-      enable = mkForce false;
       monitors = ./monitors.xml;
     };
 
@@ -61,13 +60,13 @@ with lib.${namespace};
     #     panel-size = 60;
     #   };
     # };
-    snowfallorg.avalanche.desktop.monitors = {
-      default.wallpaper = pkgs.snowfallorg.avalanche-wallpapers.nord-rainbow-dark-nix;
-
-      eDP-1 = {
-        clamshell = true;
-      };
-    };
+    # snowfallorg.avalanche.desktop.monitors = {
+    #   default.wallpaper = pkgs.snowfallorg.avalanche-wallpapers.nord-rainbow-dark-nix;
+    #
+    #   eDP-1 = {
+    #     clamshell = true;
+    #   };
+    # };
   };
 
   # This value determines the NixOS release from which the default
