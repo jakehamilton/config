@@ -1,10 +1,9 @@
-{
-  pkgs,
-  config,
-  lib,
-  channel,
-  namespace,
-  ...
+{ pkgs
+, config
+, lib
+, channel
+, namespace
+, ...
 }:
 with lib;
 with lib.${namespace};
@@ -32,6 +31,11 @@ with lib.${namespace};
   networking.firewall = {
     allowedUDPPorts = [ 28000 ];
     allowedTCPPorts = [ 28000 ];
+  };
+
+  services.ollama = {
+    enable = true;
+    acceleration = "rocm";
   };
 
   environment.systemPackages = with pkgs; [
