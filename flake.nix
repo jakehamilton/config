@@ -8,6 +8,12 @@
     # NixPkgs Unstable
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # Lix
+    lix = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Home Manager
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -205,53 +211,58 @@
         };
       };
     in
-    lib.mkFlake {
-      channels-config = {
-        allowUnfree = true;
-        permittedInsecurePackages = [
-          "electron-25.9.0"
-          "electron-27.3.11"
+    lib.mkFlake
+      {
+        channels-config = {
+          allowUnfree = true;
+          permittedInsecurePackages = [
+            "electron-25.9.0"
+            "electron-27.3.11"
+          ];
+        };
+
+        overlays = with inputs; [
+          avalanche.overlays.default
+          aux-website.overlays.default
+          neovim.overlays.default
+          tmux.overlay
+          flake.overlays.default
+          thaw.overlays.default
+          drift.overlays.default
+          cowsay.overlays.default
+          icehouse.overlays.default
+          rf.overlays.default
+          attic.overlays.default
+          snowfall-docs.overlays.default
+          nixpkgs-news.overlays.default
+          lix.overlays.default
         ];
-      };
 
-      overlays = with inputs; [
-        avalanche.overlays.default
-        aux-website.overlays.default
-        neovim.overlays.default
-        tmux.overlay
-        flake.overlays.default
-        thaw.overlays.default
-        drift.overlays.default
-        cowsay.overlays.default
-        icehouse.overlays.default
-        rf.overlays.default
-        attic.overlays.default
-        snowfall-docs.overlays.default
-        nixpkgs-news.overlays.default
-      ];
+        systems.modules.nixos = with inputs; [
+          avalanche.nixosModules."avalanche/desktop"
+          home-manager.nixosModules.home-manager
+          nix-ld.nixosModules.nix-ld
+          vault-service.nixosModules.nixos-vault-service
+          # lix.nixosModules.default
+          # TODO: Replace plusultra.services.attic now that vault-agent
+          # exists and can force override environment files.
+          # attic.nixosModules.atticd
+        ];
 
-      systems.modules.nixos = with inputs; [
-        avalanche.nixosModules."avalanche/desktop"
-        home-manager.nixosModules.home-manager
-        nix-ld.nixosModules.nix-ld
-        vault-service.nixosModules.nixos-vault-service
-        # TODO: Replace plusultra.services.attic now that vault-agent
-        # exists and can force override environment files.
-        # attic.nixosModules.atticd
-      ];
+        systems.hosts.jasper.modules = with inputs; [
+          nixos-hardware.nixosModules.framework-11th-gen-intel
+        ];
 
-      systems.hosts.jasper.modules = with inputs; [
-        nixos-hardware.nixosModules.framework-11th-gen-intel
-      ];
+        deploy = lib.mkDeploy { inherit (inputs) self; };
 
-      deploy = lib.mkDeploy { inherit (inputs) self; };
+        checks = builtins.mapAttrs
+          (
+            system: deploy-lib: deploy-lib.deployChecks inputs.self.deploy
+          )
+          inputs.deploy-rs.lib;
 
-      checks = builtins.mapAttrs (
-        system: deploy-lib: deploy-lib.deployChecks inputs.self.deploy
-      ) inputs.deploy-rs.lib;
-
-      outputs-builder = channels: { formatter = channels.nixpkgs.nixfmt-rfc-style; };
-    }
+        outputs-builder = channels: { formatter = channels.nixpkgs.nixfmt-rfc-style; };
+      }
     // {
       self = inputs.self;
     };
