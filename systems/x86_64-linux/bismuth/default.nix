@@ -72,6 +72,7 @@ with lib.${namespace};
       ubports-installer = enabled;
       steamtinkerlaunch = enabled;
       r2modman = enabled;
+      thunderbird = enabled;
     };
 
     services = {
