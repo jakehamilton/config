@@ -1897,11 +1897,11 @@
         "unstable": "unstable_2"
       },
       "locked": {
-        "lastModified": 1727205472,
-        "narHash": "sha256-HJTi3vfLcWb0FCDOktooI7n+k76R/CM0/Ff3D2wt6tE=",
+        "lastModified": 1727239304,
+        "narHash": "sha256-3nYjZrhMBAlR7IredkQtYBJ2bHqGsqRLX/7zDBL20Ro=",
         "owner": "jakehamilton",
         "repo": "neovim",
-        "rev": "39e80115145176739ad335ad4b591bf85e99c99f",
+        "rev": "34002797f2239cf8f764e41a41ec34389c395afd",
         "type": "github"
       },
       "original": {
