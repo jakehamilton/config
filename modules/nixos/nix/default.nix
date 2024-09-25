@@ -1,11 +1,10 @@
-{
-  options,
-  config,
-  pkgs,
-  lib,
-  inputs,
-  namespace,
-  ...
+{ options
+, config
+, pkgs
+, lib
+, inputs
+, namespace
+, ...
 }:
 with lib;
 with lib.${namespace};
@@ -37,10 +36,12 @@ in
   };
 
   config = mkIf cfg.enable {
-    assertions = mapAttrsToList (name: value: {
-      assertion = value.key != null;
-      message = "plusultra.nix.extra-substituters.${name}.key must be set";
-    }) cfg.extra-substituters;
+    assertions = mapAttrsToList
+      (name: value: {
+        assertion = value.key != null;
+        message = "plusultra.nix.extra-substituters.${name}.key must be set";
+      })
+      cfg.extra-substituters;
 
     environment.systemPackages = with pkgs; [
       plusultra.nixos-revision
@@ -50,7 +51,6 @@ in
       nix-index
       nix-prefetch-git
       nix-output-monitor
-      flake-checker
       snowfallorg.drift
     ];
 

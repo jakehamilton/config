@@ -92,12 +92,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Flake Hygiene
-    flake-checker = {
-      url = "github:DeterminateSystems/flake-checker";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Discord Replugged
     replugged.url = "github:LunNova/replugged-nix-flake";
     replugged.inputs.nixpkgs.follows = "unstable";
