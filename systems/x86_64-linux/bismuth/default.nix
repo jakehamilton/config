@@ -66,7 +66,23 @@ with lib.${namespace};
     motherboard = "amd";
   };
 
+	services.postgresql = {
+		enable = true;
+	};
+
   plusultra = {
+    services.plane = {
+      enable = true;
+
+      domain = "local.test";
+
+      database.local = true;
+      storage.local = true;
+      cache.local = true;
+
+      acme.enable = true;
+    };
+
     apps = {
       rpcs3 = enabled;
       ubports-installer = enabled;
@@ -74,6 +90,13 @@ with lib.${namespace};
       r2modman = enabled;
       thunderbird = enabled;
     };
+
+		security = {
+			acme = {
+				enable = true;
+				staging = true;
+			};
+		};
 
     services = {
       avahi = enabled;
