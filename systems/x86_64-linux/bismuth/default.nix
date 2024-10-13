@@ -3,12 +3,20 @@
 , lib
 , channel
 , namespace
+, inputs
 , ...
 }:
 with lib;
 with lib.${namespace};
 {
-  imports = [ ./hardware.nix ];
+  imports = [
+		./hardware.nix
+		"${inputs.unstable}/nixos/modules/services/misc/ollama.nix"
+	];
+
+	disabledModules = [
+		"${inputs.nixpkgs}/nixos/modules/services/misc/ollama.nix"
+	];
 
   # Resolve an issue with Bismuth's wired connections failing sometimes due to weird
   # DHCP issues. I'm not quite sure why this is the case, but I have found that the
@@ -36,6 +44,7 @@ with lib.${namespace};
   services.ollama = {
     enable = true;
     acceleration = "rocm";
+    rocmOverrideGfx = "10.1.0";
   };
 
   environment.systemPackages = with pkgs; [
@@ -66,22 +75,33 @@ with lib.${namespace};
     motherboard = "amd";
   };
 
-	services.postgresql = {
-		enable = true;
-	};
+  services.postgresql = {
+    enable = true;
+  };
+
+  # services.plane = {
+  # 	enable = true;
+  #
+  # 	domain = "local.test";
+  #
+  # 	secretKeyFile = "/var/lib/secrets/plane-secret-key";
+  #
+  # 	database = {
+  # 		local = true;
+  # 		passwordFile = "/var/lib/secrets/plane-db-password";
+  # 	};
+  #
+  # 	storage = {
+  # 		local = true;
+  # 		credentialsFile = "/var/lib/secrets/minio-root-credentials";
+  # 	};
+  #
+  # 	cache.local = true;
+  #
+  # 	acme.enable = true;
+  # };
 
   plusultra = {
-    services.plane = {
-      enable = true;
-
-      domain = "local.test";
-
-      database.local = true;
-      storage.local = true;
-      cache.local = true;
-
-      acme.enable = true;
-    };
 
     apps = {
       rpcs3 = enabled;
@@ -91,12 +111,12 @@ with lib.${namespace};
       thunderbird = enabled;
     };
 
-		security = {
-			acme = {
-				enable = true;
-				staging = true;
-			};
-		};
+    security = {
+      acme = {
+        enable = true;
+        staging = true;
+      };
+    };
 
     services = {
       avahi = enabled;

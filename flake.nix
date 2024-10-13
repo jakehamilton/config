@@ -143,11 +143,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-		plane = {
-			url = "path:/home/short/work/@jakehamilton/plane";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
-
     # Hosted Sites
     lasersandfeelings = {
       url = "github:jakehamilton/lasersandfeelings";
@@ -235,7 +230,6 @@
           snowfall-docs.overlays.default
           nixpkgs-news.overlays.default
           lix.overlays.default
-					plane.overlays.default
         ];
 
         systems.modules.nixos = with inputs; [

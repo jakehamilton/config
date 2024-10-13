@@ -26,7 +26,7 @@ let
     AWS_S3_BUCKET_NAME = cfg.storage.bucket;
 
     APP_BASE_URL = "${url}/api";
-    ADMIN_BASE_URL = "${url}/god-mode";
+    ADMIN_BASE_URL = "${url}/admin";
     SPACE_BASE_URL = "${url}/space";
 
     NEXT_PUBLIC_API_BASE_URL = "${url}/api";
@@ -462,7 +462,7 @@ in
               proxyWebsockets = true;
             };
 
-            "/god-mode/" = {
+            "/admin/" = {
               proxyPass = "http://127.0.0.1:${builtins.toString cfg.admin.port}";
               proxyWebsockets = true;
             };
