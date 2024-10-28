@@ -10,13 +10,13 @@ with lib;
 with lib.${namespace};
 {
   imports = [
-		./hardware.nix
-		"${inputs.unstable}/nixos/modules/services/misc/ollama.nix"
-	];
+    ./hardware.nix
+    "${inputs.unstable}/nixos/modules/services/misc/ollama.nix"
+  ];
 
-	disabledModules = [
-		"${inputs.nixpkgs}/nixos/modules/services/misc/ollama.nix"
-	];
+  disabledModules = [
+    "${inputs.nixpkgs}/nixos/modules/services/misc/ollama.nix"
+  ];
 
   # Resolve an issue with Bismuth's wired connections failing sometimes due to weird
   # DHCP issues. I'm not quite sure why this is the case, but I have found that the
@@ -45,6 +45,11 @@ with lib.${namespace};
     enable = true;
     acceleration = "rocm";
     rocmOverrideGfx = "10.1.0";
+  };
+
+  systemd.services.ollama.environment = {
+    OLLAMA_NUM_THREADS = "8";
+    OLLAMA_MAX_LOADED = "1";
   };
 
   environment.systemPackages = with pkgs; [

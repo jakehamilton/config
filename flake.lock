@@ -1801,20 +1801,18 @@
     },
     "neovim": {
       "inputs": {
-        "nixpkgs": [
-          "unstable"
-        ],
+        "nixpkgs": "nixpkgs_2",
         "nixvim": "nixvim",
         "pre-commit-hooks": "pre-commit-hooks",
         "snowfall-lib": "snowfall-lib_10",
         "unstable": "unstable_2"
       },
       "locked": {
-        "lastModified": 1727239872,
-        "narHash": "sha256-4aJjcWmeP+ZIz4ewetTleZ8gbZM/HHau93Z4CO6DdRc=",
+        "lastModified": 1729034208,
+        "narHash": "sha256-cmzmMam0QDlEnCsvr8FrMmSbNTgXAE1rfNptEajRmhY=",
         "owner": "jakehamilton",
         "repo": "neovim",
-        "rev": "8ab49453f340988c22ebe4fb4362a05646d5f851",
+        "rev": "ec946eaf61058af80c39551c958c027242e04367",
         "type": "github"
       },
       "original": {
@@ -1973,6 +1971,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1720031269,
+        "narHash": "sha256-rwz8NJZV+387rnWpTYcXaRNvzUSnnF9aHONoJIYmiUQ=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "9f4128e00b0ae8ec65918efeba59db998750ead6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1726969270,
         "narHash": "sha256-8fnFlXBgM/uSvBlLWjZ0Z0sOdRBesyNdH0+esxqizGc=",
         "owner": "nixos",
@@ -1987,7 +2001,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1700794826,
         "narHash": "sha256-RyJTnTNKhO0yqRpDISk03I/4A67/dp96YRxc86YOPgU=",
@@ -2234,7 +2248,7 @@
         "nix-ld": "nix-ld",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "nixpkgs-news": "nixpkgs-news",
         "noop-ai-website": "noop-ai-website",
         "pungeonquest": "pungeonquest",
@@ -2971,7 +2985,7 @@
     },
     "thaw": {
       "inputs": {
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "snowfall-lib": "snowfall-lib_19"
       },
       "locked": {
@@ -3101,11 +3115,11 @@
     },
     "unstable_5": {
       "locked": {
-        "lastModified": 1726937504,
-        "narHash": "sha256-bvGoiQBvponpZh8ClUcmJ6QnsNKw0EMrCQJARK3bI1c=",
+        "lastModified": 1728492678,
+        "narHash": "sha256-9UTxR8eukdg+XZeHgxW5hQA9fIKHsKCdOIUycTryeVw=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "9357f4f23713673f310988025d9dc261c20e70c6",
+        "rev": "5633bcff0c6162b9e4b5f1264264611e950c8ec7",
         "type": "github"
       },
       "original": {

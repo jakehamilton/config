@@ -83,8 +83,8 @@ in
             ] ++ (mapAttrsToList (name: value: value.key) cfg.extra-substituters);
           }
           // (lib.optionalAttrs config.${namespace}.tools.direnv.enable {
-            keep-outputs = true;
-            keep-derivations = true;
+            # keep-outputs = true;
+            # keep-derivations = true;
           });
 
         gc = {
