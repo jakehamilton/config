@@ -52,6 +52,7 @@ in
       nix-prefetch-git
       nix-output-monitor
       snowfallorg.drift
+      nilla
     ];
 
     nix =

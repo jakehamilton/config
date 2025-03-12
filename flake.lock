@@ -1821,6 +1821,21 @@
         "type": "github"
       }
     },
+    "nilla-cli": {
+      "locked": {
+        "lastModified": 1741758964,
+        "narHash": "sha256-/+r2sdHLCSuxgXEtYlU6/N6Wol+lQaYPOcKYl24LxFo=",
+        "owner": "nilla-nix",
+        "repo": "cli",
+        "rev": "8895e5d8f03e52441ae5c112d41943246225d5ea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nilla-nix",
+        "repo": "cli",
+        "type": "github"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -2245,6 +2260,7 @@
         "lasersandfeelings": "lasersandfeelings",
         "lix": "lix",
         "neovim": "neovim",
+        "nilla-cli": "nilla-cli",
         "nix-ld": "nix-ld",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",

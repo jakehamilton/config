@@ -186,6 +186,8 @@
       url = "github:jakehamilton/nixpkgs.news";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nilla-cli.url = "github:nilla-nix/cli";
   };
 
   outputs =
