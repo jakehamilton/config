@@ -1,0 +1,189 @@
+{
+  "pins": {
+    "aux-website": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "git+ssh://forgejo@git.auxolotl.org/auxolotl/website.git"
+      },
+      "branch": "main",
+      "revision": "131d0d01b566d0c3bdb7afe3b6e8fdfaadb4007d",
+      "url": null,
+      "hash": "1j4qsgkzskw8jgjyc9cdcbis742qx7dyim1c7f4xqakxg6rkzch2"
+    },
+    "comma": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "comma"
+      },
+      "branch": "master",
+      "revision": "17fb129e3741ea4e4f53a9b6e172800b5bffd507",
+      "url": "https://github.com/nix-community/comma/archive/17fb129e3741ea4e4f53a9b6e172800b5bffd507.tar.gz",
+      "hash": "13wljlkypd7cjg0mh2lmpy1vlrlgv260454bvrjaql861k4w866k"
+    },
+    "gpg-base-conf": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "drduh",
+        "repo": "config"
+      },
+      "branch": "main",
+      "revision": "b471b1c4524beff63ddf708a051135b9f0a50c9f",
+      "url": "https://github.com/drduh/config/archive/b471b1c4524beff63ddf708a051135b9f0a50c9f.tar.gz",
+      "hash": "06db5gvsrh3gdg34zpx9s2c2cmny4l7izpbz9r10h0mcr2nmdjzp"
+    },
+    "home-manager": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "home-manager"
+      },
+      "branch": "master",
+      "revision": "144f13f535be35c906241043f6bfcf21c1c419a0",
+      "url": "https://github.com/nix-community/home-manager/archive/144f13f535be35c906241043f6bfcf21c1c419a0.tar.gz",
+      "hash": "042is5b1hyywdn963sh78a048l31qchkxwq14pafjxf05sh4plfw"
+    },
+    "icehouse": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "snowfallorg",
+        "repo": "icehouse"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v1.1.1",
+      "revision": "c88554b6775fc01a0672664ded340571e83f0baf",
+      "url": "https://api.github.com/repos/snowfallorg/icehouse/tarball/v1.1.1",
+      "hash": "1i9kyw0j95lxwwrac770yzwj4nldl2y244xpj617qv5v8zpil329"
+    },
+    "lix": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "Git",
+        "url": "https://git.lix.systems/lix-project/nixos-module.git"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "2.92.0",
+      "revision": "b90bf629bbd835e61f1317b99e12f8c831017006",
+      "url": null,
+      "hash": "1gzrpdv2p74is4mjmi4kkmm4ycf74mpsm6ppmxwk9laz39qfphk0"
+    },
+    "neovim": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "jakehamilton",
+        "repo": "neovim"
+      },
+      "branch": "main",
+      "revision": "286fe18b639a2626d558e0202c3ba1e3278d372f",
+      "url": "https://github.com/jakehamilton/neovim/archive/286fe18b639a2626d558e0202c3ba1e3278d372f.tar.gz",
+      "hash": "06l5ab8rq5d5w1zp1mhz8ls9s6s76mlli2jz77bd98gidwmylikb"
+    },
+    "nilla": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nilla-nix",
+        "repo": "nilla"
+      },
+      "branch": "main",
+      "revision": "55b9008bce4fe8f0a5b48d6553e990aad11538f1",
+      "url": "https://github.com/nilla-nix/nilla/archive/55b9008bce4fe8f0a5b48d6553e990aad11538f1.tar.gz",
+      "hash": "08kwdw5whbc2nrdygsj9z48mjabqx3biw87mrrdajyya85q1zx34"
+    },
+    "nilla-cli": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nilla-nix",
+        "repo": "cli"
+      },
+      "branch": "main",
+      "revision": "a42c555b98d239ada21691fe4d63bb550fb44bf7",
+      "url": "https://github.com/nilla-nix/cli/archive/a42c555b98d239ada21691fe4d63bb550fb44bf7.tar.gz",
+      "hash": "1jbfk8icvhjswa7nb12dann0g3mbaa6v14vpcbg7afss0n6swr83"
+    },
+    "nixos-generators": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "nixos-generators"
+      },
+      "branch": "master",
+      "revision": "507911df8c35939050ae324caccc7cf4ffb76565",
+      "url": "https://github.com/nix-community/nixos-generators/archive/507911df8c35939050ae324caccc7cf4ffb76565.tar.gz",
+      "hash": "1mj9f2hf60svp2gjckvvknylsmhinccs6wzfkd7ajrcj7l0a938a"
+    },
+    "nixos-hardware": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixos-hardware"
+      },
+      "branch": "master",
+      "revision": "b48cc4dab0f9711af296fc367b6108cf7b8ccb16",
+      "url": "https://github.com/nixos/nixos-hardware/archive/b48cc4dab0f9711af296fc367b6108cf7b8ccb16.tar.gz",
+      "hash": "0nlfz0sq3fyav21y9wlhmxdws6imc9xvprxbygw4zsjrqx7ish25"
+    },
+    "nixpkgs": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-24.11",
+      "revision": "ebe2788eafd539477f83775ef93c3c7e244421d3",
+      "url": "https://github.com/nixos/nixpkgs/archive/ebe2788eafd539477f83775ef93c3c7e244421d3.tar.gz",
+      "hash": "19lbbpqcgjzvcwx8y6wknhh7xrdskh6f61ckbvlwww27r3lz5w69"
+    },
+    "nixpkgs-unstable": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-unstable",
+      "revision": "e3e32b642a31e6714ec1b712de8c91a3352ce7e1",
+      "url": "https://github.com/nixos/nixpkgs/archive/e3e32b642a31e6714ec1b712de8c91a3352ce7e1.tar.gz",
+      "hash": "0aa89pl1xs0kri9ixxg488n7riqi5n9ys89xqc0immyqshqc1d7f"
+    },
+    "tmux": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "jakehamilton",
+        "repo": "tmux"
+      },
+      "branch": "main",
+      "revision": "7c353d3831231f4e358c3692a8cac76924381c05",
+      "url": "https://github.com/jakehamilton/tmux/archive/7c353d3831231f4e358c3692a8cac76924381c05.tar.gz",
+      "hash": "0yr3gf7n65p5in8bkmfc4004sm5fa0bvx9dnhp9155rzbwchi1ir"
+    },
+    "yubikey-guide": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "drduh",
+        "repo": "yubikey-guide"
+      },
+      "branch": "master",
+      "revision": "3ab143b4c1309baa115f958dc99d0211c37c64dd",
+      "url": "https://github.com/drduh/yubikey-guide/archive/3ab143b4c1309baa115f958dc99d0211c37c64dd.tar.gz",
+      "hash": "05xmz7w4wm3hv38kfxgicj1sl55lmr4d2v4pggr0wrjxxfvcxmka"
+    }
+  },
+  "version": 3
+}

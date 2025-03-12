@@ -1,0 +1,7 @@
+{
+  includes = [
+    ./lib
+    ./packages
+    ./systems
+  ];
+}

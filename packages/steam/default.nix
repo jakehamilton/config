@@ -1,13 +1,9 @@
-{
-  lib,
-  makeDesktopItem,
-  symlinkJoin,
-  namespace,
-  ...
+{ lib
+, makeDesktopItem
+, symlinkJoin
+, ...
 }:
 let
-  inherit (lib.${namespace}) override-meta;
-
   steam-pipewire = makeDesktopItem {
     name = "Steam (Pipewire)";
     desktopName = "Steam (Pipewire)";
@@ -37,12 +33,6 @@ let
     terminal = false;
   };
 
-  new-meta = with lib; {
-    description = "Extra desktop items for running Steam in different modes.";
-    license = licenses.asl20;
-    maintainers = with maintainers; [ jakehamilton ];
-  };
-
   package = symlinkJoin {
     name = "steam-desktop-items";
     paths = [
@@ -51,4 +41,4 @@ let
     ];
   };
 in
-override-meta new-meta package
+package

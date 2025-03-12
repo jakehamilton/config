@@ -1,0 +1,22 @@
+{
+  imports = [
+    ./_1password.nix
+    ./ardour.nix
+    ./aseprite.nix
+    ./blender.nix
+    ./bottles.nix
+    ./discord.nix
+    ./dolphin.nix
+    ./firefox.nix
+    ./gparted.nix
+    ./inkscape.nix
+    ./obs.nix
+    ./prismlauncher.nix
+    ./steam.nix
+    ./steamtinkerlaunch.nix
+    ./virtualbox.nix
+    ./vlc.nix
+    ./vscode.nix
+    ./yubikey.nix
+  ];
+}
