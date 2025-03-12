@@ -53,6 +53,7 @@ in
       nix-output-monitor
       snowfallorg.drift
       nilla
+      npins
     ];
 
     nix =
