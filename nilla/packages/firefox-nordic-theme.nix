@@ -6,8 +6,8 @@
       fetchFromGitHub {
         owner = "EliverLara";
         repo = "firefox-nordic-theme";
-        rev = "287c6b4a94361a038d63f2fa7b62f9adfc08fe02";
-        sha256 = "1bh7jslgscfn84bblsjixrywvpb6bdmdqk5y8aaisvbclmj33iz9";
+        rev = "21b79cca716af87b8a2b9e420c0e1d3d08b67414";
+        sha256 = "0pgxrjqqsabnhsq21cgnzdwyfwc4ah06qk0igzwwsf56f2sgs4yv";
         name = "firefox-nordic-theme";
       };
   };
