@@ -12,7 +12,7 @@ in
     modules = [
       ./configuration.nix
       ../modules
-      config.inputs.home-manager.loaded.nixos
+      config.inputs.home-manager.loaded.nixosModules.home-manager
     ];
   };
 }

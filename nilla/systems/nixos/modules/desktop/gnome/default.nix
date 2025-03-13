@@ -211,7 +211,7 @@ in
             disable-while-typing = false;
           };
           "org/gnome/desktop/peripherals/keyboard" = {
-            # delay = project.lib.home-manager.hm.gvariant.mkUint32 200;
+            delay = project.inputs.home-manager.loaded.lib.hm.gvariant.mkUint32 200;
           };
           "org/gnome/desktop/wm/preferences" = {
             num-workspaces = 10;

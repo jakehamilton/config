@@ -1,3 +1,4 @@
+{ host ? builtins.throw "No host name provided...", ... }:
 {
   imports = [
     ./boot.nix
@@ -8,4 +9,8 @@
     ./xkb.nix
     ./zfs.nix
   ];
+
+  config = {
+    networking.hostName = host;
+  };
 }

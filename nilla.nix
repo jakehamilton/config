@@ -9,7 +9,7 @@ let
     nixpkgs = "legacy";
     nixpkgs-unstable = loaders.nixpkgs;
 
-    home-manager = "legacy";
+    home-manager = "flake";
   };
 
   settings = {
@@ -23,12 +23,6 @@ let
     };
 
     nixpkgs-unstable = settings.nixpkgs;
-
-    home-manager = {
-      args = {
-        pkgs = config.inputs.nixpkgs.loaded;
-      };
-    };
   };
 in
 {

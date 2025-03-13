@@ -28,6 +28,7 @@ in
         nix-prefetch-git
         nix-output-monitor
         npins
+        colmena
       ]);
 
     nix =
