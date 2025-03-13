@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 let
   cfg = config.plusultra.system.zfs;
 in
@@ -16,7 +16,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+    boot.kernelPackages = pkgs.linuxPackages_6_6;
 
     services.zfs = {
       autoScrub = {

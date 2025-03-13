@@ -4,13 +4,18 @@
     ./nixos-hosts
     ./titan
     ./wallpapers
+    ./beyondthefringeoc-website.nix
     ./discord-chromium.nix
+    ./dotbox-website.nix
     ./firefox-nordic-theme.nix
+    ./homer-catppuccin.nix
     ./list-iommu.nix
     ./neovim.nix
     ./nix-update-index.nix
     ./nixos-revision.nix
+    ./sokoban-website.nix
     ./steam.nix
     ./tmux.nix
+    ./traek-website.nix
   ];
 }

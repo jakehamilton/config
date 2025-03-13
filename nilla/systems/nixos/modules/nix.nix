@@ -13,6 +13,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    documentation.nixos.enable = false;
+
     environment.systemPackages =
       [
         project.packages.nixos-revision.build.${pkgs.system}

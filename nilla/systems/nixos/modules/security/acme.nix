@@ -9,13 +9,13 @@ in
     email = lib.mkOption {
       description = "The email to use.";
       type = lib.types.str;
-      value = config.plusultra.user.email;
+      default = config.plusultra.user.email;
     };
 
     staging = lib.mkOption {
       description = "Whether to use the staging server or not.";
       type = lib.types.bool;
-      value = false;
+      default = false;
     };
   };
 

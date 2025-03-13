@@ -1,16 +1,5 @@
 {
   "pins": {
-    "aux-website": {
-      "type": "Git",
-      "repository": {
-        "type": "Git",
-        "url": "git+ssh://forgejo@git.auxolotl.org/auxolotl/website.git"
-      },
-      "branch": "main",
-      "revision": "131d0d01b566d0c3bdb7afe3b6e8fdfaadb4007d",
-      "url": null,
-      "hash": "1j4qsgkzskw8jgjyc9cdcbis742qx7dyim1c7f4xqakxg6rkzch2"
-    },
     "comma": {
       "type": "Git",
       "repository": {
@@ -22,6 +11,18 @@
       "revision": "17fb129e3741ea4e4f53a9b6e172800b5bffd507",
       "url": "https://github.com/nix-community/comma/archive/17fb129e3741ea4e4f53a9b6e172800b5bffd507.tar.gz",
       "hash": "13wljlkypd7cjg0mh2lmpy1vlrlgv260454bvrjaql861k4w866k"
+    },
+    "cowsay": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "snowfallorg",
+        "repo": "cowsay"
+      },
+      "branch": "main",
+      "revision": "77461aa6579ecbaf9ce848cf917b88bafe63374b",
+      "url": "https://github.com/snowfallorg/cowsay/archive/77461aa6579ecbaf9ce848cf917b88bafe63374b.tar.gz",
+      "hash": "0mykzjm9hhkn6x5p1hwajvsgwflbv8vcg0fsqvbgrfg7nlikfq8z"
     },
     "gpg-base-conf": {
       "type": "Git",
@@ -61,6 +62,30 @@
       "revision": "c88554b6775fc01a0672664ded340571e83f0baf",
       "url": "https://api.github.com/repos/snowfallorg/icehouse/tarball/v1.1.1",
       "hash": "1i9kyw0j95lxwwrac770yzwj4nldl2y244xpj617qv5v8zpil329"
+    },
+    "jakehamilton-website": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "jakehamilton",
+        "repo": "jakehamilton.dev"
+      },
+      "branch": "main",
+      "revision": "1497844d37bf0aa0078e70ec26b067de092cdbd5",
+      "url": "https://github.com/jakehamilton/jakehamilton.dev/archive/1497844d37bf0aa0078e70ec26b067de092cdbd5.tar.gz",
+      "hash": "1x1bkzmpgdygbwplr105c73ij1pmqka5904pr8gnkqp5wgs1ij9j"
+    },
+    "lasersandfeelings-website": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "jakehamilton",
+        "repo": "lasersandfeelings"
+      },
+      "branch": "main",
+      "revision": "888c201a41de59a5def9f85018979e040783f48b",
+      "url": "https://github.com/jakehamilton/lasersandfeelings/archive/888c201a41de59a5def9f85018979e040783f48b.tar.gz",
+      "hash": "017gfwxyb5qqxszbhiracil6pz6d5pz8pa3b78q64f3h3lh7g5nr"
     },
     "lix": {
       "type": "GitRelease",
@@ -148,6 +173,18 @@
       "url": "https://github.com/nixos/nixpkgs/archive/ebe2788eafd539477f83775ef93c3c7e244421d3.tar.gz",
       "hash": "19lbbpqcgjzvcwx8y6wknhh7xrdskh6f61ckbvlwww27r3lz5w69"
     },
+    "nixpkgs-news-website": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "jakehamilton",
+        "repo": "nixpkgs.news"
+      },
+      "branch": "main",
+      "revision": "3fec97853390312e45ee2316e981b6d037019ef5",
+      "url": "https://github.com/jakehamilton/nixpkgs.news/archive/3fec97853390312e45ee2316e981b6d037019ef5.tar.gz",
+      "hash": "0s4cgsnvd4bf5lnnxf0shjzk2c8l98afh359v0lzpggv0g7m31vd"
+    },
     "nixpkgs-unstable": {
       "type": "Git",
       "repository": {
@@ -159,6 +196,66 @@
       "revision": "e3e32b642a31e6714ec1b712de8c91a3352ce7e1",
       "url": "https://github.com/nixos/nixpkgs/archive/e3e32b642a31e6714ec1b712de8c91a3352ce7e1.tar.gz",
       "hash": "0aa89pl1xs0kri9ixxg488n7riqi5n9ys89xqc0immyqshqc1d7f"
+    },
+    "noop-ai-website": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "noopai",
+        "repo": "noop.ai"
+      },
+      "branch": "main",
+      "revision": "38dae9e9a9f4ff653156f72ccc267d9e76c07491",
+      "url": "https://github.com/noopai/noop.ai/archive/38dae9e9a9f4ff653156f72ccc267d9e76c07491.tar.gz",
+      "hash": "12d4x671lc67ldh4nqh61f31w30n17y4hw6iwdckx145iv33l0r1"
+    },
+    "pungeonquest-website": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "jakehamilton",
+        "repo": "pungeonquest"
+      },
+      "branch": "main",
+      "revision": "2d930a7d60d19b218fe441036f5401b78f6241fd",
+      "url": "https://github.com/jakehamilton/pungeonquest/archive/2d930a7d60d19b218fe441036f5401b78f6241fd.tar.gz",
+      "hash": "1g4w3ln9chc96i0xizg1jikzl0s70sfmmwqkfq15cimzd66m8kr1"
+    },
+    "retrospectacle-website": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "jakehamilton",
+        "repo": "retrospectacle.app"
+      },
+      "branch": "main",
+      "revision": "8ce8f6f43948c6ca40a882c9d851c503f643642c",
+      "url": "https://github.com/jakehamilton/retrospectacle.app/archive/8ce8f6f43948c6ca40a882c9d851c503f643642c.tar.gz",
+      "hash": "070bbca3x0bxj3p4rg4bfz6wydpf5h10d3ijw7rkvr1swkgkar38"
+    },
+    "scrumfish-website": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "jakehamilton",
+        "repo": "scrumfi.sh"
+      },
+      "branch": "main",
+      "revision": "f214ed8149da87f245f315873b0a7176884f2562",
+      "url": "https://github.com/jakehamilton/scrumfi.sh/archive/f214ed8149da87f245f315873b0a7176884f2562.tar.gz",
+      "hash": "02jg18gxmcan4018v8azj5naqan4pxcgjm3yid0zcadlvyar4qrx"
+    },
+    "snowfall-website": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "snowfallorg",
+        "repo": "docs"
+      },
+      "branch": "main",
+      "revision": "f4abf0d6f2795daba4ddd26bea85dea6532c9355",
+      "url": "https://github.com/snowfallorg/docs/archive/f4abf0d6f2795daba4ddd26bea85dea6532c9355.tar.gz",
+      "hash": "1g167gj0y7lhc361q70xii6mg2qgj0jlhwbjll5fl9yq0bcd1gfh"
     },
     "tmux": {
       "type": "Git",

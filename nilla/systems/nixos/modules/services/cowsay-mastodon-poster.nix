@@ -2,7 +2,7 @@
 let
   cfg = config.plusultra.services.cowsay-mastodon-poster;
 
-  cow2img = project.inputs.cowsay.packages.${pkgs.system}.cow2img;
+  cow2img = project.inputs.cowsay.loaded.packages.${pkgs.system}.cow2img;
 
   script = ''
     if [ ! -f ~/.config/toot/config.json ]; then
@@ -35,7 +35,7 @@ in
     short = lib.mkOption {
       description = "Whether to use short fortunes.";
       type = lib.types.bool;
-      value = false;
+      default = false;
     };
 
     user = lib.mkOption {

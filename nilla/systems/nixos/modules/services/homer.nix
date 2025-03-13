@@ -36,7 +36,7 @@ in
       default = null;
     };
 
-    nginx.forceSSL = {
+    nginx.forceSSL = lib.mkOption {
       description = "Whether or not to force the use of SSL.";
       type = lib.types.bool;
       default = false;
