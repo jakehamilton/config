@@ -6,19 +6,13 @@ in
 nilla.create ({ config }:
 let
   loaders = {
-    nixpkgs = "legacy";
-    nixpkgs-unstable = loaders.nixpkgs;
-
     home-manager = "flake";
   };
 
   settings = {
     nixpkgs = {
-      args = {
-        system = "x86_64-linux";
-        config = {
-          allowUnfree = true;
-        };
+      configuration = {
+        allowUnfree = true;
       };
     };
 

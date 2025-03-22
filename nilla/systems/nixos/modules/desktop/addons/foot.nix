@@ -19,7 +19,8 @@ in
 
     plusultra.home.configFile."foot/foot.ini".text = ''
       [main]
-      font=Hack Nerd Font Mono:size=13,Noto Color Emoji:size=12
+      font=Hack Nerd Font Mono:size=13
+      #,Noto Color Emoji:size=12
       line-height=14
       underline-offset=2
       pad=2x2 center

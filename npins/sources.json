@@ -109,9 +109,9 @@
         "repo": "neovim"
       },
       "branch": "main",
-      "revision": "286fe18b639a2626d558e0202c3ba1e3278d372f",
-      "url": "https://github.com/jakehamilton/neovim/archive/286fe18b639a2626d558e0202c3ba1e3278d372f.tar.gz",
-      "hash": "06l5ab8rq5d5w1zp1mhz8ls9s6s76mlli2jz77bd98gidwmylikb"
+      "revision": "ad1da0d6be9b6aa9987c5b239e30a599674cec39",
+      "url": "https://github.com/jakehamilton/neovim/archive/ad1da0d6be9b6aa9987c5b239e30a599674cec39.tar.gz",
+      "hash": "02711pkhmdmwg9hjd37b9s27hgclmahy5fm7i8g18lmy5a84i3gr"
     },
     "nilla": {
       "type": "Git",
@@ -121,9 +121,9 @@
         "repo": "nilla"
       },
       "branch": "main",
-      "revision": "55b9008bce4fe8f0a5b48d6553e990aad11538f1",
-      "url": "https://github.com/nilla-nix/nilla/archive/55b9008bce4fe8f0a5b48d6553e990aad11538f1.tar.gz",
-      "hash": "08kwdw5whbc2nrdygsj9z48mjabqx3biw87mrrdajyya85q1zx34"
+      "revision": "2ea5fb2bedbc188fc486149893c25a616325c930",
+      "url": "https://github.com/nilla-nix/nilla/archive/2ea5fb2bedbc188fc486149893c25a616325c930.tar.gz",
+      "hash": "00g6v11fwpc01jiwmn0y7gr82m6zyw0p2gymiywjp5dr6m3nszdv"
     },
     "nilla-cli": {
       "type": "Git",
