@@ -5,7 +5,7 @@
 
     package = { lib, system, fetchFromGitHub, runCommandNoCC, unzip, favicon ? "light" }:
       let
-        homer = config.packages.homer.build.${system};
+        homer = config.packages.homer.result.${system};
 
         is-valid-favicon = favicon == "light" || favicon == "dark";
 

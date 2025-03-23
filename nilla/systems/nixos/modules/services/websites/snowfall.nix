@@ -9,7 +9,7 @@ in
     package = lib.mkOption {
       description = "The site package to use.";
       type = lib.types.package;
-      default = project.inputs.snowfall-website.loaded.packages.${pkgs.system}.default;
+      default = project.inputs.snowfall-website.result.packages.${pkgs.system}.default;
     };
 
     domain = lib.mkOption {

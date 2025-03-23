@@ -13,7 +13,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ project.packages.list-iommu.build.${pkgs.system} ];
+    environment.systemPackages = [ project.packages.list-iommu.result.${pkgs.system} ];
 
     plusultra = {
       nix.enable = true;

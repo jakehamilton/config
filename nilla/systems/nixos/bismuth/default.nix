@@ -4,7 +4,7 @@ let
 in
 {
   config.systems.nixos.bismuth = {
-    pkgs = lib.packages.withSystem config.inputs.nixpkgs.loaded "x86_64-linux";
+    pkgs = lib.packages.withSystem config.inputs.nixpkgs.result "x86_64-linux";
     args = {
       project = config;
       host = "bismuth";
@@ -12,7 +12,7 @@ in
     modules = [
       ./configuration.nix
       ../modules
-      config.inputs.home-manager.loaded.nixosModules.home-manager
+      config.inputs.home-manager.result.nixosModules.home-manager
     ];
   };
 }

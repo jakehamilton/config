@@ -9,7 +9,7 @@ in
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [
-      project.inputs.icehouse.loaded.packages.${pkgs.system}.icehouse
+      project.inputs.icehouse.result.packages.${pkgs.system}.icehouse
     ];
   };
 }

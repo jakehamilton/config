@@ -13,6 +13,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ project.packages.tmux.build.${pkgs.system} ];
+    environment.systemPackages = [ project.packages.tmux.result.${pkgs.system} ];
   };
 }

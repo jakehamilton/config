@@ -10,7 +10,7 @@ in
   config = lib.mkIf cfg.enable {
     home = {
       packages = [
-        project.inputs.neovim.loaded.packages.${pkgs.system}.neovim
+        project.inputs.neovim.result.packages.${pkgs.system}.neovim
       ] ++ (with pkgs; [
         less
       ]);

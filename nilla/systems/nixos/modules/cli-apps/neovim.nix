@@ -17,7 +17,7 @@ in
       # FIXME: As of today (2022-12-09), `page` no longer works with my Neovim
       # configuration. Either something in my configuration is breaking it or `page` is busted.
       # page
-      project.packages.neovim.build.${pkgs.system}
+      project.packages.neovim.result.${pkgs.system}
     ];
 
     environment.variables = {

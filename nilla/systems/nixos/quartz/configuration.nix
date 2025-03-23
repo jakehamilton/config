@@ -1,6 +1,6 @@
 { lib, config, pkgs, project, ... }:
 let
-  homer-catppuccin = project.packages.homer-catppuccin.build.${pkgs.system};
+  homer-catppuccin = project.packages.homer-catppuccin.result.${pkgs.system};
 in
 {
   imports = [ ./hardware.nix ];

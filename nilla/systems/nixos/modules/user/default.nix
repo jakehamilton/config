@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, project, ... }:
 let
   cfg = config.plusultra.user;
 
@@ -32,6 +32,8 @@ let
 
         cp ${cfg.icon} "$target/${cfg.icon.fileName}"
       '';
+
+  nilla-cli = project.inputs.nilla-cli.result.packages.nilla-cli.result.${pkgs.system};
 in
 {
   options.plusultra.user = {
@@ -151,6 +153,8 @@ in
 
                 # Improved vim bindings.
                 source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
+                eval "$(${nilla-cli}/bin/nilla completions --shell zsh)"
               ''
               + lib.optionalString cfg.prompt-init ''
                 ${pkgs.toilet}/bin/toilet -f future "Plus Ultra" --gay

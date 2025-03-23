@@ -17,9 +17,9 @@ in
 
     environment.systemPackages =
       [
-        project.packages.nixos-revision.build.${pkgs.system}
-        (project.packages.nixos-hosts.build.${pkgs.system}.override { hosts = project.systems.nixos; })
-        (project.inputs.nilla-cli.loaded.packages.nilla.build.${pkgs.system})
+        project.packages.nixos-revision.result.${pkgs.system}
+        (project.packages.nixos-hosts.result.${pkgs.system}.override { hosts = project.systems.nixos; })
+        (project.inputs.nilla-cli.result.packages.nilla-cli.result.${pkgs.system})
       ]
       ++ (with pkgs; [
         deploy-rs
@@ -51,6 +51,7 @@ in
             auto-optimise-store = true;
             trusted-users = users;
             allowed-users = users;
+            accept-flake-config = false;
           }
           // (lib.optionalAttrs config.plusultra.tools.direnv.enable {
             keep-outputs = true;

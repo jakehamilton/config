@@ -15,7 +15,7 @@ in
     package = lib.mkOption {
       description = "The package of Homer assets to use.";
       type = lib.types.package;
-      default = project.packages.homer.build.${pkgs.system};
+      default = project.packages.homer.result.${pkgs.system};
     };
 
     settings = lib.mkOption {

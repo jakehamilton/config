@@ -9,7 +9,7 @@ in
     package = lib.mkOption {
       description = "The site package to use.";
       type = lib.types.package;
-      default = project.packages.traek-website.build.${pkgs.system};
+      default = project.packages.traek-website.result.${pkgs.system};
     };
 
     domain = lib.mkOption {

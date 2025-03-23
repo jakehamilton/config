@@ -18,6 +18,6 @@ in
     environment.systemPackages =
       lib.optional cfg.enable pkgs.discord
       ++ lib.optional cfg.canary pkgs.discord-canary
-      ++ lib.optional cfg.chromium project.packages.discord-chromium.build.${pkgs.system};
+      ++ lib.optional cfg.chromium project.packages.discord-chromium.result.${pkgs.system};
   };
 }

@@ -2,40 +2,70 @@ let
   project = import ./nilla.nix;
 
   systems = builtins.mapAttrs
-    (name: value: value.build)
-    project.config.systems.nixos;
+    (name: value: value.result)
+    project.systems.nixos;
 
   nodes = builtins.mapAttrs
     (name: value: {
       imports = value._module.args.modules ++ (
-        if custom ? name then [ custom.${name} ] else [ ]
+        if custom ? ${name} then [ custom.${name} ] else [ ]
       );
     })
     systems;
 
   custom = {
     bismuth = {
-      deployment.tags = [ "workstation" "gaming" "desktop" "home" ];
+      deployment = {
+        targetUser = "short";
+        privilegeEscalationCommand = [ "doas" ];
+
+        tags = [ "workstation" "gaming" "desktop" "home" ];
+      };
     };
 
     jasper = {
-      deployment.tags = [ "workstation" "laptop" "mobile" ];
+      deployment = {
+        targetUser = "short";
+        privilegeEscalationCommand = [ "doas" ];
+
+        tags = [ "workstation" "laptop" "mobile" ];
+      };
     };
 
     quartz = {
-      deployment.tags = [ "server" "nas" "desktop" "home" ];
+      deployment = {
+        targetUser = "short";
+        privilegeEscalationCommand = [ "doas" ];
+
+        tags = [ "server" "nas" "desktop" "home" ];
+      };
     };
 
     adamite = {
-      deployment.tags = [ "server" "cloud" "digitalocean" ];
+      deployment = {
+        targetUser = "short";
+        privilegeEscalationCommand = [ "doas" ];
+
+        tags = [ "server" "cloud" "digitalocean" ];
+      };
     };
 
     agate = {
-      deployment.tags = [ "server" "cloud" "digitalocean" ];
+      deployment = {
+        targetUser = "short";
+        privilegeEscalationCommand = [ "doas" ];
+
+        tags = [ "server" "cloud" "digitalocean" ];
+      };
     };
 
     albite = {
-      deployment.tags = [ "server" "cloud" "digitalocean" ];
+      deployment = {
+        targetUser = "short";
+        privilegeEscalationCommand = [ "doas" ];
+
+        tags = [ "server" "cloud" "digitalocean" ];
+      };
     };
   };
 in
@@ -43,7 +73,7 @@ in
   meta = {
     description = "Deployment configuration for the Plus Ultra repository.";
 
-    nixpkgs = project.config.inputs.nixpkgs.loaded;
+    nixpkgs = project.inputs.nixpkgs.result;
 
     nodeNixpkgs = builtins.mapAttrs
       (name: value: value.pkgs)

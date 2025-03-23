@@ -13,7 +13,7 @@ let
 
   other-hosts = lib.filterAttrs
     (
-      key: host: key != name && (host.build.config.plusultra.user.name or null) != null
+      key: host: key != name && (host.result.config.plusultra.user.name or null) != null
     )
     ((project.systems.nixos or { }) // (project.systems.macos or { }));
 
@@ -21,7 +21,7 @@ let
     (
       name:
       let
-        remote = other-hosts.${name}.build;
+        remote = other-hosts.${name}.result;
         remote-user-name = remote.config.plusultra.user.name;
         remote-user-id = builtins.toString remote.config.users.users.${remote-user-name}.uid;
 

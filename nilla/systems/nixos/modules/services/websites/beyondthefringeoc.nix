@@ -9,7 +9,7 @@ in
     package = lib.mkOption {
       description = "The site package to use.";
       type = lib.types.package;
-      default = project.packages.beyondthefringeoc-website.build.${pkgs.system};
+      default = project.packages.beyondthefringeoc-website.result.${pkgs.system};
     };
 
     domains = lib.mkOption {

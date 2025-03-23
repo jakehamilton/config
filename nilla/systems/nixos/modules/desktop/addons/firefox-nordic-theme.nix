@@ -7,7 +7,7 @@
 let
   cfg = config.plusultra.desktop.addons.firefox-nordic-theme;
 
-  package = project.packages.firefox-nordic-theme.build.${pkgs.system};
+  package = project.packages.firefox-nordic-theme.result.${pkgs.system};
 in
 {
   options.plusultra.desktop.addons.firefox-nordic-theme = {

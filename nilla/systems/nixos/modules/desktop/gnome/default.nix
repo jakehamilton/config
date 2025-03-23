@@ -36,7 +36,7 @@ in
           lib.types.str
           lib.types.package
         ];
-        default = project.packages.wallpapers.build.${pkgs.system}.nord-rainbow-light-nix;
+        default = project.packages.wallpapers.result.${pkgs.system}.nord-rainbow-light-nix;
       };
 
       dark = lib.mkOption {
@@ -45,7 +45,7 @@ in
           lib.types.str
           lib.types.package
         ];
-        default = project.packages.wallpapers.build.${pkgs.system}.nord-rainbow-dark-nix;
+        default = project.packages.wallpapers.result.${pkgs.system}.nord-rainbow-dark-nix;
       };
     };
 
@@ -211,7 +211,7 @@ in
             disable-while-typing = false;
           };
           "org/gnome/desktop/peripherals/keyboard" = {
-            delay = project.inputs.home-manager.loaded.lib.hm.gvariant.mkUint32 200;
+            delay = project.inputs.home-manager.result.lib.hm.gvariant.mkUint32 200;
           };
           "org/gnome/desktop/wm/preferences" = {
             num-workspaces = 10;

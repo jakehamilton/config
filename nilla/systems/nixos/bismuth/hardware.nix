@@ -1,13 +1,12 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  project,
-  ...
+{ config
+, lib
+, pkgs
+, modulesPath
+, project
+, ...
 }:
 let
-  nixos-hardware = project.inputs.nixos-hardware.loaded;
+  nixos-hardware = project.inputs.nixos-hardware.result;
 in
 {
   imports = with nixos-hardware.nixosModules; [
@@ -51,7 +50,7 @@ in
     options = [ "rw" ];
   };
 
-  swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
+  swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
 
   # NOTE: NetworkManager will handle DHCP.
   networking.interfaces.enp39s0.useDHCP = false;

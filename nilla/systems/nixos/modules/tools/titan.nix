@@ -9,7 +9,7 @@ in
     package = lib.mkOption {
       description = "The package to use.";
       type = lib.types.package;
-      default = project.packages.titan.build.${pkgs.system};
+      default = project.packages.titan.result.${pkgs.system};
     };
   };
 

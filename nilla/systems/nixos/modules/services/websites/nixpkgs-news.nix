@@ -9,7 +9,7 @@ in
     package = lib.mkOption {
       description = "The site package to use.";
       type = lib.types.package;
-      default = project.inputs.nixpkgs-news-website.loaded.packages.${pkgs.system}.default;
+      default = project.inputs.nixpkgs-news-website.result.packages.${pkgs.system}.default;
     };
 
     domain = lib.mkOption {

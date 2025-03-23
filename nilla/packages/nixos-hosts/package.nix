@@ -11,7 +11,7 @@ let
 
   substitute = args: builtins.readFile (substituteAll args);
 
-  formatted-hosts = mapAttrsToList (name: host: "${name},${host.build.pkgs.system}") hosts;
+  formatted-hosts = mapAttrsToList (name: host: "${name},${host.result.pkgs.system}") hosts;
 
   hosts-csv = writeText "hosts.csv" ''
     Name,System

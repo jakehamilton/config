@@ -1,4 +1,4 @@
 { config }:
 {
-  # config.lib.home-manager = config.inputs.home-manager.loaded.lib;
+  # config.lib.home-manager = config.inputs.home-manager.result.lib;
 }

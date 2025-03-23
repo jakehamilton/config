@@ -9,7 +9,7 @@ in
     package = lib.mkOption {
       description = "The site package to use.";
       type = lib.types.package;
-      default = project.packages.dotbox-website.build.${pkgs.system};
+      default = project.packages.dotbox-website.result.${pkgs.system};
     };
 
     domain = lib.mkOption {

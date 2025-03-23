@@ -9,7 +9,7 @@ in
     package = lib.mkOption {
       description = "The site package to use.";
       type = lib.types.package;
-      default = project.inputs.jakehamilton-website.loaded.packages.${pkgs.system}.default;
+      default = project.inputs.jakehamilton-website.result.packages.${pkgs.system}.default;
     };
 
     domains = lib.mkOption {

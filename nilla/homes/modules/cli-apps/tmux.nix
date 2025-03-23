@@ -9,7 +9,7 @@ in
 
   config = lib.mkIf cfg.enable {
     home.packages = [
-      project.inputs.tmux.loaded.packages.${pkgs.system}.tmux
+      project.inputs.tmux.result.packages.${pkgs.system}.tmux
     ];
   };
 }

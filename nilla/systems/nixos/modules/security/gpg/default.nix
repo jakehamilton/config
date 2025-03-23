@@ -7,7 +7,7 @@
 let
   cfg = config.plusultra.security.gpg;
 
-  gpgConf = "${project.inputs.gpg-base-conf.loaded}/gpg.conf";
+  gpgConf = "${project.inputs.gpg-base-conf.result}/gpg.conf";
 
   gpgAgentConf = ''
     enable-ssh-support
@@ -16,7 +16,7 @@ let
     pinentry-program ${pkgs.pinentry-gnome3}/bin/pinentry-gnome3
   '';
 
-  guide = "${project.inputs.yubikey-guide.loaded}/README.md";
+  guide = "${project.inputs.yubikey-guide.result}/README.md";
 
   theme = pkgs.fetchFromGitHub {
     owner = "jez";

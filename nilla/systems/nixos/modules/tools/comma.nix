@@ -9,7 +9,7 @@ in
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages =
-      [ project.packages.nix-update-index.build.${pkgs.system} ]
+      [ project.packages.nix-update-index.result.${pkgs.system} ]
       ++ (with pkgs; [
         comma
       ]);

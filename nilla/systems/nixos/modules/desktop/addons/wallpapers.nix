@@ -7,7 +7,7 @@
 let
   cfg = config.plusultra.desktop.addons.wallpapers;
 
-  wallpapers = project.packages.wallpapers.build.${pkgs.system};
+  wallpapers = project.packages.wallpapers.result.${pkgs.system};
 in
 {
   options.plusultra.desktop.addons.wallpapers = {

@@ -2,7 +2,7 @@
 let
   cfg = config.plusultra.services.cowsay-mastodon-poster;
 
-  cow2img = project.inputs.cowsay.loaded.packages.${pkgs.system}.cow2img;
+  cow2img = project.inputs.cowsay.result.packages.${pkgs.system}.cow2img;
 
   script = ''
     if [ ! -f ~/.config/toot/config.json ]; then
