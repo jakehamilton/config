@@ -4,7 +4,7 @@ let
 in
 {
   config.systems.nixos.quartz = {
-    pkgs = lib.packages.withSystem config.inputs.nixpkgs.result "x86_64-linux";
+    pkgs = config.inputs.nixpkgs.result.x86_64-linux;
     args = {
       project = config;
       host = "quartz";
