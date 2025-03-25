@@ -13,61 +13,7 @@ let
     })
     systems;
 
-  custom = {
-    bismuth = {
-      deployment = {
-        targetUser = "short";
-        privilegeEscalationCommand = [ "doas" ];
-
-        tags = [ "workstation" "gaming" "desktop" "home" ];
-      };
-    };
-
-    jasper = {
-      deployment = {
-        targetUser = "short";
-        privilegeEscalationCommand = [ "doas" ];
-
-        tags = [ "workstation" "laptop" "mobile" ];
-      };
-    };
-
-    quartz = {
-      deployment = {
-        targetUser = "short";
-        privilegeEscalationCommand = [ "doas" ];
-
-        tags = [ "server" "nas" "desktop" "home" ];
-      };
-    };
-
-    adamite = {
-      deployment = {
-        targetUser = "short";
-        privilegeEscalationCommand = [ "doas" ];
-
-        tags = [ "server" "cloud" "digitalocean" ];
-      };
-    };
-
-    agate = {
-      deployment = {
-        targetUser = "short";
-        privilegeEscalationCommand = [ "doas" ];
-
-        tags = [ "server" "cloud" "digitalocean" ];
-      };
-    };
-
-    albite = {
-      deployment = {
-        targetUser = "short";
-        privilegeEscalationCommand = [ "doas" ];
-
-        tags = [ "server" "cloud" "digitalocean" ];
-      };
-    };
-  };
+  custom = project.colmena.nodes;
 in
 {
   meta = {

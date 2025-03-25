@@ -1,0 +1,5 @@
+{
+  includes = [
+    ./nodes.nix
+  ];
+}

@@ -133,9 +133,9 @@
         "repo": "cli"
       },
       "branch": "main",
-      "revision": "5927d96aa761f34f57249d93bf9ade6145d72839",
-      "url": "https://github.com/nilla-nix/cli/archive/5927d96aa761f34f57249d93bf9ade6145d72839.tar.gz",
-      "hash": "0lcrpcb2dkgsmrpaa6gz0jrmrd80is4dg1ikji2y6nyv3sjpcaw7"
+      "revision": "771629df1096ac90d90c0eb658e690d95f6b401e",
+      "url": "https://github.com/nilla-nix/cli/archive/771629df1096ac90d90c0eb658e690d95f6b401e.tar.gz",
+      "hash": "0zxfva9ff0cxn1zz4wd92p5h8sd4llqwqxhgcr2a7w6jwymbr6kr"
     },
     "nixos-generators": {
       "type": "Git",
