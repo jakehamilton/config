@@ -23,6 +23,7 @@ in
         ./configuration.nix
         ../modules
         config.inputs.home-manager.result.nixosModules.home-manager
+        config.inputs.lix.result.nixosModules.default
       ];
     };
   };

@@ -121,9 +121,9 @@
         "repo": "nilla"
       },
       "branch": "main",
-      "revision": "d1fd70a9721be77bd052fd41f16075c8d0c24455",
-      "url": "https://github.com/nilla-nix/nilla/archive/d1fd70a9721be77bd052fd41f16075c8d0c24455.tar.gz",
-      "hash": "0nw5paffqwvz6iplz9sg7v6w0infadh3jgyzqqbnsxvi4zrwsgfa"
+      "revision": "e8ced4234abd7bd556d2dc40b62c014a860a5081",
+      "url": "https://github.com/nilla-nix/nilla/archive/e8ced4234abd7bd556d2dc40b62c014a860a5081.tar.gz",
+      "hash": "0qildn3qciz4w4fdwi2whqq2l2qhjj9zxdfznnayh1m5cg5db251"
     },
     "nilla-cli": {
       "type": "Git",
@@ -133,9 +133,9 @@
         "repo": "cli"
       },
       "branch": "main",
-      "revision": "8b363fe1c2ee7e09cb66e363eb2be2e492d22f70",
-      "url": "https://github.com/nilla-nix/cli/archive/8b363fe1c2ee7e09cb66e363eb2be2e492d22f70.tar.gz",
-      "hash": "07fpxhwx9xz01p5ngx8hsvclqybpcnrxgziwqgsr3ylmgj04w7ry"
+      "revision": "b6272224a4045913b4fb15285b5175298c9b2cf1",
+      "url": "https://github.com/nilla-nix/cli/archive/b6272224a4045913b4fb15285b5175298c9b2cf1.tar.gz",
+      "hash": "0gvy0ypmbyphrcxqmavy488nc299s4zb43sj0nz0qzcgcrw1b1az"
     },
     "nixos-generators": {
       "type": "Git",
