@@ -19,7 +19,7 @@
               privilegeEscalationCommand = lib.options.create {
                 description = "The command to use for privilege escalation.";
                 default.value = [ "doas" ];
-                type = lib.types.list lib.types.string;
+                type = lib.types.list.of lib.types.string;
               };
 
               tags = lib.options.create {

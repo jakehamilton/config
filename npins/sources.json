@@ -71,9 +71,9 @@
         "repo": "jakehamilton.dev"
       },
       "branch": "main",
-      "revision": "1497844d37bf0aa0078e70ec26b067de092cdbd5",
-      "url": "https://github.com/jakehamilton/jakehamilton.dev/archive/1497844d37bf0aa0078e70ec26b067de092cdbd5.tar.gz",
-      "hash": "1x1bkzmpgdygbwplr105c73ij1pmqka5904pr8gnkqp5wgs1ij9j"
+      "revision": "a86e6ef3310ee37c28f0057d53eff4bdfebbe173",
+      "url": "https://github.com/jakehamilton/jakehamilton.dev/archive/a86e6ef3310ee37c28f0057d53eff4bdfebbe173.tar.gz",
+      "hash": "0iqq2zhm6rdknvr8df57k7jdbjwnkv2rmv4nv973jdih0bf6rdqb"
     },
     "lasersandfeelings-website": {
       "type": "Git",
@@ -133,9 +133,9 @@
         "repo": "cli"
       },
       "branch": "main",
-      "revision": "1339b1be455f8702b1a4d37668c7971b5bc9379f",
-      "url": "https://github.com/nilla-nix/cli/archive/1339b1be455f8702b1a4d37668c7971b5bc9379f.tar.gz",
-      "hash": "0kgqfqn8qlqjkssi0y4vlxvdr4hm7kpv6046i9xpfaxis0wyam8y"
+      "revision": "b3f93f9eafe2d320f633019df1ebbf69a03aa4d6",
+      "url": "https://github.com/nilla-nix/cli/archive/b3f93f9eafe2d320f633019df1ebbf69a03aa4d6.tar.gz",
+      "hash": "00ndbg66hg9wpb1n1wzxnn46ks26vaihyz5smv4z6zki3s56zy4b"
     },
     "nilla-nixos": {
       "type": "Git",
@@ -145,9 +145,9 @@
         "repo": "nixos"
       },
       "branch": "main",
-      "revision": "d7f55f6d4b562310e8ac97309ef725b9d47376d4",
-      "url": "https://github.com/nilla-nix/nixos/archive/d7f55f6d4b562310e8ac97309ef725b9d47376d4.tar.gz",
-      "hash": "0xsb6yhprlkd788gcrcval43yjy3az31m4mhrlfh27l3gs7a5q0w"
+      "revision": "6cae769c56625507c1757a8601d9c68c05d026ac",
+      "url": "https://github.com/nilla-nix/nixos/archive/6cae769c56625507c1757a8601d9c68c05d026ac.tar.gz",
+      "hash": "02zs3mcxkcxsa6zvy95p51mxb4z3qsam8lxh0fxv7xbipi748d55"
     },
     "nixos-generators": {
       "type": "Git",
