@@ -20,6 +20,7 @@ in
         project.packages.nixos-revision.result.${pkgs.system}
         (project.packages.nixos-hosts.result.${pkgs.system}.override { hosts = project.systems.nixos; })
         (project.inputs.nilla-cli.result.packages.nilla-cli.result.${pkgs.system})
+        (project.inputs.nilla-nixos.result.packages.nilla-nixos.result.${pkgs.system})
       ]
       ++ (with pkgs; [
         deploy-rs

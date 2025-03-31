@@ -20,6 +20,12 @@ let
   };
 in
 {
+  includes = [
+    ./nilla
+
+    "${pins.nilla-nixos}/modules/nixos.nix"
+  ];
+
   config = {
     inputs = builtins.mapAttrs
       (name: pin: {
@@ -30,8 +36,4 @@ in
       })
       pins;
   };
-
-  includes = [
-    ./nilla
-  ];
 })
