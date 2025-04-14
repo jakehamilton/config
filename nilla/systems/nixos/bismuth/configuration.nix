@@ -11,6 +11,12 @@
       kernelModules = [ "tun" ];
     };
 
+    services.ollama = {
+      enable = true;
+      acceleration = "rocm";
+      rocmOverrideGfx = "10.1.0";
+    };
+
     plusultra = {
       archetypes = {
         gaming.enable = true;
