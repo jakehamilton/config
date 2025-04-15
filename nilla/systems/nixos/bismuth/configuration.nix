@@ -17,6 +17,12 @@
       rocmOverrideGfx = "10.1.0";
     };
 
+    services.nextjs-ollama-llm-ui = {
+      enable = true;
+      ollamaUrl = "http://127.0.0.1:11434";
+      port = 5950;
+    };
+
     plusultra = {
       archetypes = {
         gaming.enable = true;

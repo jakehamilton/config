@@ -23,7 +23,7 @@ in
       wireplumber.enable = true;
     };
 
-    hardware.pulseaudio.enable = lib.mkForce false;
+    services.pulseaudio.enable = lib.mkForce false;
 
     environment.systemPackages = with pkgs; [
       pulsemixer

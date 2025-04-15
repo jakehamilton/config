@@ -7,6 +7,9 @@ nilla.create ({ config }:
 let
   loaders = {
     home-manager = "flake";
+
+    lix = "raw";
+    lix-src = "raw";
   };
 
   settings = {

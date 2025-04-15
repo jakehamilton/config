@@ -88,18 +88,26 @@
       "hash": "017gfwxyb5qqxszbhiracil6pz6d5pz8pa3b78q64f3h3lh7g5nr"
     },
     "lix": {
-      "type": "GitRelease",
+      "type": "Git",
       "repository": {
         "type": "Git",
         "url": "https://git.lix.systems/lix-project/nixos-module.git"
       },
-      "pre_releases": false,
-      "version_upper_bound": null,
-      "release_prefix": null,
-      "version": "2.92.0",
-      "revision": "b90bf629bbd835e61f1317b99e12f8c831017006",
+      "branch": "main",
+      "revision": "fa69ae26cc32dda178117b46487c2165c0e08316",
       "url": null,
-      "hash": "1gzrpdv2p74is4mjmi4kkmm4ycf74mpsm6ppmxwk9laz39qfphk0"
+      "hash": "13x2dca4s049m8fa2y4b45kgqnpk3cf26j0j0yascah32zzxn7rh"
+    },
+    "lix-src": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "https://git.lix.systems/lix-project/lix"
+      },
+      "branch": "main",
+      "revision": "81d476984901d1f00fdcac36a0a8f06cb54048f6",
+      "url": null,
+      "hash": "1ck26h6qnya432cbnwrvjmgwps8j7si42s4m0vcv5mnrzxqix520"
     },
     "neovim": {
       "type": "Git",
@@ -180,10 +188,10 @@
         "owner": "nixos",
         "repo": "nixpkgs"
       },
-      "branch": "nixos-24.11",
-      "revision": "ebe2788eafd539477f83775ef93c3c7e244421d3",
-      "url": "https://github.com/nixos/nixpkgs/archive/ebe2788eafd539477f83775ef93c3c7e244421d3.tar.gz",
-      "hash": "19lbbpqcgjzvcwx8y6wknhh7xrdskh6f61ckbvlwww27r3lz5w69"
+      "branch": "nixos-unstable",
+      "revision": "2631b0b7abcea6e640ce31cd78ea58910d31e650",
+      "url": "https://github.com/nixos/nixpkgs/archive/2631b0b7abcea6e640ce31cd78ea58910d31e650.tar.gz",
+      "hash": "0crx0vfmvxxzj8viqpky4k8k7f744dsqnn1ki5qj270bx2w9ssid"
     },
     "nixpkgs-news-website": {
       "type": "Git",

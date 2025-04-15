@@ -1,3 +1,7 @@
+{ config }:
+let
+  inherit (config) lib;
+in
 {
   includes = [
     ./adamite
@@ -155,6 +159,12 @@
       home = ./modules/home.nix;
 
       nix = ./modules/nix.nix;
+
+      lix = (import "${config.inputs.lix.result}/module.nix" {
+        lix = (lib.paths.into.drv config.inputs.lix-src.result) // {
+          rev = "latest";
+        };
+      });
     };
   };
 }
