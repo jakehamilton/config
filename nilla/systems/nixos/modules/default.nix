@@ -1,3 +1,4 @@
+{ project, ... }:
 {
   imports = [
     ./apps
@@ -14,5 +15,8 @@
     ./virtualisation
     ./home.nix
     ./nix.nix
+
+    # project.inputs.home-manager.result.nixosModules.home-manager
+    # project.modules.nixos.lix
   ];
 }

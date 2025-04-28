@@ -18,8 +18,14 @@
         zfs.enable = true;
       };
 
-      desktop.gnome = {
-        monitors = ./monitors.xml;
+      desktop = {
+        gnome = {
+          monitors = ./monitors.xml;
+        };
+
+        fht = {
+          enable = true;
+        };
       };
     };
 

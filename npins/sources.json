@@ -8,6 +8,7 @@
         "repo": "comma"
       },
       "branch": "master",
+      "submodules": false,
       "revision": "17fb129e3741ea4e4f53a9b6e172800b5bffd507",
       "url": "https://github.com/nix-community/comma/archive/17fb129e3741ea4e4f53a9b6e172800b5bffd507.tar.gz",
       "hash": "13wljlkypd7cjg0mh2lmpy1vlrlgv260454bvrjaql861k4w866k"
@@ -20,9 +21,23 @@
         "repo": "cowsay"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "77461aa6579ecbaf9ce848cf917b88bafe63374b",
       "url": "https://github.com/snowfallorg/cowsay/archive/77461aa6579ecbaf9ce848cf917b88bafe63374b.tar.gz",
       "hash": "0mykzjm9hhkn6x5p1hwajvsgwflbv8vcg0fsqvbgrfg7nlikfq8z"
+    },
+    "fht-compositor": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nferhat",
+        "repo": "fht-compositor"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "4266a61a80d15dba5afe3511db228bc4818ba129",
+      "url": "https://github.com/nferhat/fht-compositor/archive/4266a61a80d15dba5afe3511db228bc4818ba129.tar.gz",
+      "hash": "15r0askjg3w64v9rg6lbl1g6l3yjfsf7jn5bqzi0zjbhwqyq2cdl"
     },
     "gpg-base-conf": {
       "type": "Git",
@@ -32,6 +47,7 @@
         "repo": "config"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "b471b1c4524beff63ddf708a051135b9f0a50c9f",
       "url": "https://github.com/drduh/config/archive/b471b1c4524beff63ddf708a051135b9f0a50c9f.tar.gz",
       "hash": "06db5gvsrh3gdg34zpx9s2c2cmny4l7izpbz9r10h0mcr2nmdjzp"
@@ -44,6 +60,7 @@
         "repo": "home-manager"
       },
       "branch": "master",
+      "submodules": false,
       "revision": "144f13f535be35c906241043f6bfcf21c1c419a0",
       "url": "https://github.com/nix-community/home-manager/archive/144f13f535be35c906241043f6bfcf21c1c419a0.tar.gz",
       "hash": "042is5b1hyywdn963sh78a048l31qchkxwq14pafjxf05sh4plfw"
@@ -58,6 +75,7 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
+      "submodules": false,
       "version": "v1.1.1",
       "revision": "c88554b6775fc01a0672664ded340571e83f0baf",
       "url": "https://api.github.com/repos/snowfallorg/icehouse/tarball/v1.1.1",
@@ -71,6 +89,7 @@
         "repo": "jakehamilton.dev"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "a86e6ef3310ee37c28f0057d53eff4bdfebbe173",
       "url": "https://github.com/jakehamilton/jakehamilton.dev/archive/a86e6ef3310ee37c28f0057d53eff4bdfebbe173.tar.gz",
       "hash": "0iqq2zhm6rdknvr8df57k7jdbjwnkv2rmv4nv973jdih0bf6rdqb"
@@ -83,6 +102,7 @@
         "repo": "lasersandfeelings"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "888c201a41de59a5def9f85018979e040783f48b",
       "url": "https://github.com/jakehamilton/lasersandfeelings/archive/888c201a41de59a5def9f85018979e040783f48b.tar.gz",
       "hash": "017gfwxyb5qqxszbhiracil6pz6d5pz8pa3b78q64f3h3lh7g5nr"
@@ -94,6 +114,7 @@
         "url": "https://git.lix.systems/lix-project/nixos-module.git"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "fa69ae26cc32dda178117b46487c2165c0e08316",
       "url": null,
       "hash": "13x2dca4s049m8fa2y4b45kgqnpk3cf26j0j0yascah32zzxn7rh"
@@ -105,6 +126,7 @@
         "url": "https://git.lix.systems/lix-project/lix"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "81d476984901d1f00fdcac36a0a8f06cb54048f6",
       "url": null,
       "hash": "1ck26h6qnya432cbnwrvjmgwps8j7si42s4m0vcv5mnrzxqix520"
@@ -117,9 +139,10 @@
         "repo": "neovim"
       },
       "branch": "main",
-      "revision": "ad1da0d6be9b6aa9987c5b239e30a599674cec39",
-      "url": "https://github.com/jakehamilton/neovim/archive/ad1da0d6be9b6aa9987c5b239e30a599674cec39.tar.gz",
-      "hash": "02711pkhmdmwg9hjd37b9s27hgclmahy5fm7i8g18lmy5a84i3gr"
+      "submodules": false,
+      "revision": "6e61cd1e489523ea7b553443a83a67c120593a4b",
+      "url": "https://github.com/jakehamilton/neovim/archive/6e61cd1e489523ea7b553443a83a67c120593a4b.tar.gz",
+      "hash": "1jmvb6f3zxairyp4ylk0yqqihh59c7xvxphsqzpmwn48z51f6a5y"
     },
     "nilla": {
       "type": "Git",
@@ -129,6 +152,7 @@
         "repo": "nilla"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "6747fe62879d7d15c96808bc370a52941287772c",
       "url": "https://github.com/nilla-nix/nilla/archive/6747fe62879d7d15c96808bc370a52941287772c.tar.gz",
       "hash": "0sg9chk7y8h8sh8647vi0d2liqxa0vnidpd3acs763p6alxnf23y"
@@ -141,6 +165,7 @@
         "repo": "cli"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "3cf22075a47bfadd408725037390249826e42080",
       "url": "https://github.com/nilla-nix/cli/archive/3cf22075a47bfadd408725037390249826e42080.tar.gz",
       "hash": "0ppb01lf1zf7yl1kw3558ij6dcxmvla7iaixk6l94ds1h0h5bvn1"
@@ -153,6 +178,7 @@
         "repo": "nixos"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "6cae769c56625507c1757a8601d9c68c05d026ac",
       "url": "https://github.com/nilla-nix/nixos/archive/6cae769c56625507c1757a8601d9c68c05d026ac.tar.gz",
       "hash": "02zs3mcxkcxsa6zvy95p51mxb4z3qsam8lxh0fxv7xbipi748d55"
@@ -165,6 +191,7 @@
         "repo": "nixos-generators"
       },
       "branch": "master",
+      "submodules": false,
       "revision": "507911df8c35939050ae324caccc7cf4ffb76565",
       "url": "https://github.com/nix-community/nixos-generators/archive/507911df8c35939050ae324caccc7cf4ffb76565.tar.gz",
       "hash": "1mj9f2hf60svp2gjckvvknylsmhinccs6wzfkd7ajrcj7l0a938a"
@@ -177,6 +204,7 @@
         "repo": "nixos-hardware"
       },
       "branch": "master",
+      "submodules": false,
       "revision": "b48cc4dab0f9711af296fc367b6108cf7b8ccb16",
       "url": "https://github.com/nixos/nixos-hardware/archive/b48cc4dab0f9711af296fc367b6108cf7b8ccb16.tar.gz",
       "hash": "0nlfz0sq3fyav21y9wlhmxdws6imc9xvprxbygw4zsjrqx7ish25"
@@ -189,6 +217,7 @@
         "repo": "nixpkgs"
       },
       "branch": "nixos-unstable",
+      "submodules": false,
       "revision": "2631b0b7abcea6e640ce31cd78ea58910d31e650",
       "url": "https://github.com/nixos/nixpkgs/archive/2631b0b7abcea6e640ce31cd78ea58910d31e650.tar.gz",
       "hash": "0crx0vfmvxxzj8viqpky4k8k7f744dsqnn1ki5qj270bx2w9ssid"
@@ -201,6 +230,7 @@
         "repo": "nixpkgs.news"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "3fec97853390312e45ee2316e981b6d037019ef5",
       "url": "https://github.com/jakehamilton/nixpkgs.news/archive/3fec97853390312e45ee2316e981b6d037019ef5.tar.gz",
       "hash": "0s4cgsnvd4bf5lnnxf0shjzk2c8l98afh359v0lzpggv0g7m31vd"
@@ -213,6 +243,7 @@
         "repo": "nixpkgs"
       },
       "branch": "nixos-unstable",
+      "submodules": false,
       "revision": "e3e32b642a31e6714ec1b712de8c91a3352ce7e1",
       "url": "https://github.com/nixos/nixpkgs/archive/e3e32b642a31e6714ec1b712de8c91a3352ce7e1.tar.gz",
       "hash": "0aa89pl1xs0kri9ixxg488n7riqi5n9ys89xqc0immyqshqc1d7f"
@@ -225,6 +256,7 @@
         "repo": "noop.ai"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "38dae9e9a9f4ff653156f72ccc267d9e76c07491",
       "url": "https://github.com/noopai/noop.ai/archive/38dae9e9a9f4ff653156f72ccc267d9e76c07491.tar.gz",
       "hash": "12d4x671lc67ldh4nqh61f31w30n17y4hw6iwdckx145iv33l0r1"
@@ -237,6 +269,7 @@
         "repo": "pungeonquest"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "2d930a7d60d19b218fe441036f5401b78f6241fd",
       "url": "https://github.com/jakehamilton/pungeonquest/archive/2d930a7d60d19b218fe441036f5401b78f6241fd.tar.gz",
       "hash": "1g4w3ln9chc96i0xizg1jikzl0s70sfmmwqkfq15cimzd66m8kr1"
@@ -249,6 +282,7 @@
         "repo": "retrospectacle.app"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "8ce8f6f43948c6ca40a882c9d851c503f643642c",
       "url": "https://github.com/jakehamilton/retrospectacle.app/archive/8ce8f6f43948c6ca40a882c9d851c503f643642c.tar.gz",
       "hash": "070bbca3x0bxj3p4rg4bfz6wydpf5h10d3ijw7rkvr1swkgkar38"
@@ -261,6 +295,7 @@
         "repo": "scrumfi.sh"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "f214ed8149da87f245f315873b0a7176884f2562",
       "url": "https://github.com/jakehamilton/scrumfi.sh/archive/f214ed8149da87f245f315873b0a7176884f2562.tar.gz",
       "hash": "02jg18gxmcan4018v8azj5naqan4pxcgjm3yid0zcadlvyar4qrx"
@@ -273,6 +308,7 @@
         "repo": "docs"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "f4abf0d6f2795daba4ddd26bea85dea6532c9355",
       "url": "https://github.com/snowfallorg/docs/archive/f4abf0d6f2795daba4ddd26bea85dea6532c9355.tar.gz",
       "hash": "1g167gj0y7lhc361q70xii6mg2qgj0jlhwbjll5fl9yq0bcd1gfh"
@@ -285,6 +321,7 @@
         "repo": "tmux"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "7c353d3831231f4e358c3692a8cac76924381c05",
       "url": "https://github.com/jakehamilton/tmux/archive/7c353d3831231f4e358c3692a8cac76924381c05.tar.gz",
       "hash": "0yr3gf7n65p5in8bkmfc4004sm5fa0bvx9dnhp9155rzbwchi1ir"
@@ -297,10 +334,11 @@
         "repo": "yubikey-guide"
       },
       "branch": "master",
+      "submodules": false,
       "revision": "3ab143b4c1309baa115f958dc99d0211c37c64dd",
       "url": "https://github.com/drduh/yubikey-guide/archive/3ab143b4c1309baa115f958dc99d0211c37c64dd.tar.gz",
       "hash": "05xmz7w4wm3hv38kfxgicj1sl55lmr4d2v4pggr0wrjxxfvcxmka"
     }
   },
-  "version": 3
+  "version": 5
 }
