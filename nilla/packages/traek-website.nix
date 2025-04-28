@@ -2,7 +2,7 @@
   config.packages.traek-website = {
     systems = [ "x86_64-linux" ];
 
-    package = { fetchFromGitHub, buildNpmPackage }:
+    package = { fetchFromGitHub, buildNpmPackage, nodejs_20 }:
       let
         src = fetchFromGitHub {
           owner = "jakehamilton";
@@ -18,6 +18,10 @@
         inherit src;
 
         npmDepsHash = "sha256-VLvqA+a/VmEt2oF1DK4LyUNeUwgGklc1Aeh+sV7DA1k";
+
+        # FIXME: Traek needs to have its build & dependencies updated
+        # to work on newer NodeJS versions.
+        nodejs = nodejs_20;
 
         npmFlags = [ "--legacy-peer-deps" ];
         NODE_OPTIONS = "--openssl-legacy-provider";
