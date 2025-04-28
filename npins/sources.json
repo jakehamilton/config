@@ -179,9 +179,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "6cae769c56625507c1757a8601d9c68c05d026ac",
-      "url": "https://github.com/nilla-nix/nixos/archive/6cae769c56625507c1757a8601d9c68c05d026ac.tar.gz",
-      "hash": "02zs3mcxkcxsa6zvy95p51mxb4z3qsam8lxh0fxv7xbipi748d55"
+      "revision": "6e13605fbc1cbfd3ee4b474c01d93a7f2942c61d",
+      "url": "https://github.com/nilla-nix/nixos/archive/6e13605fbc1cbfd3ee4b474c01d93a7f2942c61d.tar.gz",
+      "hash": "1dwkilaz8324rp3kcxnx5r2jjsx0lavm7xhg5xwrklawlyvk5r7q"
     },
     "nixos-generators": {
       "type": "Git",
