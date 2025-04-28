@@ -23,9 +23,9 @@
           monitors = ./monitors.xml;
         };
 
-        # fht = {
-        #   enable = true;
-        # };
+        fht = {
+          enable = true;
+        };
       };
     };
 

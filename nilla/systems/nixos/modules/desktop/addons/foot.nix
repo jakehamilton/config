@@ -29,9 +29,6 @@ in
       [scrollback]
       lines=2000
 
-      [url]
-      protocols=http,https,ftp,ftps,file,mailto
-
       [cursor]
       blink=yes
 
