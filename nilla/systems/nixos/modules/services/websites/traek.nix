@@ -15,7 +15,7 @@ in
     domain = lib.mkOption {
       description = "The domain to serve the website on.";
       type = lib.types.str;
-      default = "dotbox.traek.app";
+      default = "traek.app";
     };
 
     acme.enable = lib.mkOption {

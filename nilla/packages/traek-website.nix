@@ -12,7 +12,7 @@
         };
       in
       buildNpmPackage {
-        name = "dotbox-website";
+        name = "traek-website";
         verison = "unstable-2022-01-12";
 
         inherit src;
