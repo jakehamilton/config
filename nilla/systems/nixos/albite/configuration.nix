@@ -41,6 +41,7 @@
 
         websites = {
           pungeonquest.enable = true;
+          nilla-dev.enable = true;
           nixpkgs-news.enable = true;
         };
       };

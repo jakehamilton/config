@@ -4,6 +4,7 @@
     ./dotbox.nix
     ./jakehamilton.nix
     ./lasersandfeelings.nix
+    ./nilla-dev.nix
     ./nixpkgs-news.nix
     ./noop-ai.nix
     ./pungeonquest.nix
