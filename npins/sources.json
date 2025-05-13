@@ -35,9 +35,25 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "4266a61a80d15dba5afe3511db228bc4818ba129",
-      "url": "https://github.com/nferhat/fht-compositor/archive/4266a61a80d15dba5afe3511db228bc4818ba129.tar.gz",
-      "hash": "15r0askjg3w64v9rg6lbl1g6l3yjfsf7jn5bqzi0zjbhwqyq2cdl"
+      "revision": "e0be7fcc4894fe852f68c1aaf3ffe5d8ef2b56ac",
+      "url": "https://github.com/nferhat/fht-compositor/archive/e0be7fcc4894fe852f68c1aaf3ffe5d8ef2b56ac.tar.gz",
+      "hash": "1gm9rvnkkr5ygh8dlms10dh1np07zd0g6wpm5fky39n4ii51i1m2"
+    },
+    "flake-compat": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nilla-nix",
+        "repo": "flake-compat"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v0.0.2",
+      "revision": "2653659fb5d86f2853caae1b6475e63e8c23439c",
+      "url": "https://api.github.com/repos/nilla-nix/flake-compat/tarball/v0.0.2",
+      "hash": "165xl96d5f2xaawyiaj3cl8ccisrjvx5b1db8nfh18swaxyzdckn"
     },
     "gpg-base-conf": {
       "type": "Git",
@@ -153,9 +169,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "6747fe62879d7d15c96808bc370a52941287772c",
-      "url": "https://github.com/nilla-nix/nilla/archive/6747fe62879d7d15c96808bc370a52941287772c.tar.gz",
-      "hash": "0sg9chk7y8h8sh8647vi0d2liqxa0vnidpd3acs763p6alxnf23y"
+      "revision": "0303b02a113b76a64dda267a5b4d79f22f10cfad",
+      "url": "https://github.com/nilla-nix/nilla/archive/0303b02a113b76a64dda267a5b4d79f22f10cfad.tar.gz",
+      "hash": "0y70c9p4ln0jd673k2ifi28s92pgphjdykgar71s20bv2qzg8naz"
     },
     "nilla-cli": {
       "type": "Git",
@@ -166,9 +182,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "3cf22075a47bfadd408725037390249826e42080",
-      "url": "https://github.com/nilla-nix/cli/archive/3cf22075a47bfadd408725037390249826e42080.tar.gz",
-      "hash": "0ppb01lf1zf7yl1kw3558ij6dcxmvla7iaixk6l94ds1h0h5bvn1"
+      "revision": "43f118601e03afe31b9b3c2912df2e362428ae50",
+      "url": "https://github.com/nilla-nix/cli/archive/43f118601e03afe31b9b3c2912df2e362428ae50.tar.gz",
+      "hash": "195k13324wnxgxf5465jxzdfk0m8j4icijic6bfji9112k52xh4y"
     },
     "nilla-nixos": {
       "type": "Git",

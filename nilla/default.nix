@@ -5,6 +5,8 @@
     ./lib
     ./packages
     ./systems
+
+    ./inputs.nix
   ];
 
   config.modules.nilla = {
