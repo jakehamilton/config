@@ -21,7 +21,12 @@ in
     # Enable GameCube controller support.
     services.udev.packages = with pkgs; [ dolphin-emu ];
 
-    environment.systemPackages = [ project.packages.steam.result.${pkgs.system} ];
+    environment.systemPackages = [
+      project.packages.steam.result.${pkgs.system}
+
+      # Fixes an issue regarding Steam requiring user namespaces.
+      pkgs.bubblewrap
+    ];
 
     environment.sessionVariables = {
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$HOME/.steam/root/compatibilitytools.d";
