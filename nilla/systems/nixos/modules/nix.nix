@@ -40,7 +40,9 @@ in
         ];
       in
       {
-        package = pkgs.lix;
+        package = pkgs.lix.override {
+          aws-sdk-cpp = null;
+        };
 
         settings =
           {

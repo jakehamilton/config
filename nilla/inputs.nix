@@ -63,10 +63,10 @@ let
     };
 
     neovim = {
-      inputs = {
-        nixpkgs = nixpkgs-unstable-flake;
-        unstable = nixpkgs-unstable-flake;
-      };
+      # inputs = {
+      #   nixpkgs = nixpkgs-unstable-flake;
+      #   unstable = nixpkgs-unstable-flake;
+      # };
     };
 
     nixos-generators = {
