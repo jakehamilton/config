@@ -11,7 +11,7 @@
       "submodules": false,
       "revision": "17fb129e3741ea4e4f53a9b6e172800b5bffd507",
       "url": "https://github.com/nix-community/comma/archive/17fb129e3741ea4e4f53a9b6e172800b5bffd507.tar.gz",
-      "hash": "13wljlkypd7cjg0mh2lmpy1vlrlgv260454bvrjaql861k4w866k"
+      "hash": "sha256-0xjEyQwGUaxk3osUAozYj2a6g7+VCljBk+y06yeVlI8="
     },
     "cowsay": {
       "type": "Git",
@@ -24,7 +24,7 @@
       "submodules": false,
       "revision": "77461aa6579ecbaf9ce848cf917b88bafe63374b",
       "url": "https://github.com/snowfallorg/cowsay/archive/77461aa6579ecbaf9ce848cf917b88bafe63374b.tar.gz",
-      "hash": "0mykzjm9hhkn6x5p1hwajvsgwflbv8vcg0fsqvbgrfg7nlikfq8z"
+      "hash": "sha256-H2E3I7XnufzWxtqBxzbaizr+9JaKw3BLN3ZCmKr801c="
     },
     "fht-compositor": {
       "type": "Git",
@@ -37,7 +37,7 @@
       "submodules": false,
       "revision": "e0be7fcc4894fe852f68c1aaf3ffe5d8ef2b56ac",
       "url": "https://github.com/nferhat/fht-compositor/archive/e0be7fcc4894fe852f68c1aaf3ffe5d8ef2b56ac.tar.gz",
-      "hash": "1gm9rvnkkr5ygh8dlms10dh1np07zd0g6wpm5fky39n4ii51i1m2"
+      "hash": "sha256-ooYYSozEpuGnK/Vy80D7B1wbYANBV9oQfL7kOe3Oqb4="
     },
     "flake-compat": {
       "type": "GitRelease",
@@ -53,7 +53,7 @@
       "version": "v0.0.2",
       "revision": "2653659fb5d86f2853caae1b6475e63e8c23439c",
       "url": "https://api.github.com/repos/nilla-nix/flake-compat/tarball/v0.0.2",
-      "hash": "165xl96d5f2xaawyiaj3cl8ccisrjvx5b1db8nfh18swaxyzdckn"
+      "hash": "sha256-drL2fVdcowCdRauFVfqWWUfGEGVDqui5Ul240kyivZg="
     },
     "gpg-base-conf": {
       "type": "Git",
@@ -66,7 +66,7 @@
       "submodules": false,
       "revision": "b471b1c4524beff63ddf708a051135b9f0a50c9f",
       "url": "https://github.com/drduh/config/archive/b471b1c4524beff63ddf708a051135b9f0a50c9f.tar.gz",
-      "hash": "06db5gvsrh3gdg34zpx9s2c2cmny4l7izpbz9r10h0mcr2nmdjzp"
+      "hash": "sha256-98tWrcisAghCTn/dHw8l3lYmmNCp30/Ga2/ArPcrqxk="
     },
     "home-manager": {
       "type": "Git",
@@ -79,7 +79,7 @@
       "submodules": false,
       "revision": "144f13f535be35c906241043f6bfcf21c1c419a0",
       "url": "https://github.com/nix-community/home-manager/archive/144f13f535be35c906241043f6bfcf21c1c419a0.tar.gz",
-      "hash": "042is5b1hyywdn963sh78a048l31qchkxwq14pafjxf05sh4plfw"
+      "hash": "sha256-3NFLoC7AdenUJQHzPiHDYVBEgEIH6mGSbdx7GFbRURA="
     },
     "icehouse": {
       "type": "GitRelease",
@@ -95,7 +95,7 @@
       "version": "v1.1.1",
       "revision": "c88554b6775fc01a0672664ded340571e83f0baf",
       "url": "https://api.github.com/repos/snowfallorg/icehouse/tarball/v1.1.1",
-      "hash": "1i9kyw0j95lxwwrac770yzwj4nldl2y244xpj617qv5v8zpil329"
+      "hash": "sha256-SQwa70e7bHyCkbcTIrygjVoi+ffgHKYy552WJAH3M8U="
     },
     "jakehamilton-website": {
       "type": "Git",
@@ -108,7 +108,7 @@
       "submodules": false,
       "revision": "a86e6ef3310ee37c28f0057d53eff4bdfebbe173",
       "url": "https://github.com/jakehamilton/jakehamilton.dev/archive/a86e6ef3310ee37c28f0057d53eff4bdfebbe173.tar.gz",
-      "hash": "0iqq2zhm6rdknvr8df57k7jdbjwnkv2rmv4nv973jdih0bf6rdqb"
+      "hash": "sha256-C7ds3AIwNjlO2pbsmsWelsvV5JmnuIbytrNlU+EXGEc="
     },
     "lasersandfeelings-website": {
       "type": "Git",
@@ -121,7 +121,7 @@
       "submodules": false,
       "revision": "888c201a41de59a5def9f85018979e040783f48b",
       "url": "https://github.com/jakehamilton/lasersandfeelings/archive/888c201a41de59a5def9f85018979e040783f48b.tar.gz",
-      "hash": "017gfwxyb5qqxszbhiracil6pz6d5pz8pa3b78q64f3h3lh7g5nr"
+      "hash": "sha256-2ZZ3IB1wOGIwOmuoi/4tzfxraGQqR7i+7hiX5Tt37wQ="
     },
     "lix": {
       "type": "Git",
@@ -133,7 +133,7 @@
       "submodules": false,
       "revision": "3c23c6ae2aecc1f76ae7993efe1a78b5316f0700",
       "url": null,
-      "hash": "1yv1d45jgfzjxcg23m2qwis5rxx2v45vfid8b0lm1sl6p66h4hpc"
+      "hash": "sha256-7EICjbmG6lApWKhFtwvZovdcdORY1CEe6/K7JwtpYfs="
     },
     "lix-src": {
       "type": "Git",
@@ -145,7 +145,7 @@
       "submodules": false,
       "revision": "0c2ced0224bd419b7b792b3935846177fe76b251",
       "url": null,
-      "hash": "0nj2114m1x6gxm68iz4ggj31abmj4xb7mqjcfc173nhxc2azqpbm"
+      "hash": "sha256-dV38lWAd2nECc0zielYnsi4VhnyP/IhM7c/0UEkIQlo="
     },
     "neovim": {
       "type": "Git",
@@ -158,7 +158,7 @@
       "submodules": false,
       "revision": "6e61cd1e489523ea7b553443a83a67c120593a4b",
       "url": "https://github.com/jakehamilton/neovim/archive/6e61cd1e489523ea7b553443a83a67c120593a4b.tar.gz",
-      "hash": "1jmvb6f3zxairyp4ylk0yqqihh59c7xvxphsqzpmwn48z51f6a5y"
+      "hash": "sha256-vijjQvmIWF7vxxrevvthqUAYMfZgUk+uz1H1P5xZu8o="
     },
     "nilla": {
       "type": "Git",
@@ -171,7 +171,7 @@
       "submodules": false,
       "revision": "0303b02a113b76a64dda267a5b4d79f22f10cfad",
       "url": "https://github.com/nilla-nix/nilla/archive/0303b02a113b76a64dda267a5b4d79f22f10cfad.tar.gz",
-      "hash": "0y70c9p4ln0jd673k2ifi28s92pgphjdykgar71s20bv2qzg8naz"
+      "hash": "sha256-X1n0PhZ7AaHDyepN3yS874qkkYguijmOaRJYSm5i4Hg="
     },
     "nilla-cli": {
       "type": "Git",
@@ -184,7 +184,7 @@
       "submodules": false,
       "revision": "43f118601e03afe31b9b3c2912df2e362428ae50",
       "url": "https://github.com/nilla-nix/cli/archive/43f118601e03afe31b9b3c2912df2e362428ae50.tar.gz",
-      "hash": "195k13324wnxgxf5465jxzdfk0m8j4icijic6bfji9112k52xh4y"
+      "hash": "sha256-nsAuyhQhpCjdMizKyCKRqILp2u+yGFJcf91yIsYIs6Q="
     },
     "nilla-dev": {
       "type": "Git",
@@ -197,7 +197,7 @@
       "submodules": false,
       "revision": "372d10ce828b2a9c2ebe3a6e83f1cfc853929d3b",
       "url": "https://github.com/nilla-nix/nilla.dev/archive/372d10ce828b2a9c2ebe3a6e83f1cfc853929d3b.tar.gz",
-      "hash": "0mm02b1j7di9y29k1j6xmbhqnbpzyq39mb20fdfavlpww49cf5zs"
+      "hash": "sha256-+hfHEuH80q1cc0Csmgb2/y6L4ardyDCT8Cm2I8MSoFY="
     },
     "nilla-nixos": {
       "type": "Git",
@@ -210,13 +210,13 @@
       "submodules": false,
       "revision": "6e13605fbc1cbfd3ee4b474c01d93a7f2942c61d",
       "url": "https://github.com/nilla-nix/nixos/archive/6e13605fbc1cbfd3ee4b474c01d93a7f2942c61d.tar.gz",
-      "hash": "1dwkilaz8324rp3kcxnx5r2jjsx0lavm7xhg5xwrklawlyvk5r7q"
+      "hash": "sha256-+OQyt6dc0Zl5Lw/2U7eioGspRS7ddjbHzUQM9BWNk7c="
     },
     "nixos-25.05": {
       "type": "Channel",
       "name": "nixos-25.05",
       "url": "https://releases.nixos.org/nixos/25.05/nixos-25.05.802746.7282cb574e06/nixexprs.tar.xz",
-      "hash": "1wzh6wsfn3zhk8rzjzy36hj7nzgz4qmampplask77jm9zsbv3fzr"
+      "hash": "sha256-+buxl/6pynOmVvTeqiom/317JDTDf/kzmvAP6zQ38PM="
     },
     "nixos-generators": {
       "type": "Git",
@@ -229,7 +229,7 @@
       "submodules": false,
       "revision": "507911df8c35939050ae324caccc7cf4ffb76565",
       "url": "https://github.com/nix-community/nixos-generators/archive/507911df8c35939050ae324caccc7cf4ffb76565.tar.gz",
-      "hash": "1mj9f2hf60svp2gjckvvknylsmhinccs6wzfkd7ajrcj7l0a938a"
+      "hash": "sha256-Co2kAD2SZalOm+5zoxmzEVZNvZ17TyafuFsD46BwSdY="
     },
     "nixos-hardware": {
       "type": "Git",
@@ -242,7 +242,7 @@
       "submodules": false,
       "revision": "b48cc4dab0f9711af296fc367b6108cf7b8ccb16",
       "url": "https://github.com/nixos/nixos-hardware/archive/b48cc4dab0f9711af296fc367b6108cf7b8ccb16.tar.gz",
-      "hash": "0nlfz0sq3fyav21y9wlhmxdws6imc9xvprxbygw4zsjrqx7ish25"
+      "hash": "sha256-RUAdT8dZ6k/486vnu3tiNRrNW6+Q8uSD2Mq7gTX4jlo="
     },
     "nixpkgs": {
       "type": "Git",
@@ -255,7 +255,7 @@
       "submodules": false,
       "revision": "7282cb574e0607e65224d33be8241eae7cfe0979",
       "url": "https://github.com/nixos/nixpkgs/archive/7282cb574e0607e65224d33be8241eae7cfe0979.tar.gz",
-      "hash": "0klkpy7ah033y3cwj51a0l96lwmkqqvwgfv3kid4z9x5g2rqr0l5"
+      "hash": "sha256-hYKMs3ilp09anGO7xzfGs3JqEgUqFMnZ8GMAqI6/k04="
     },
     "nixpkgs-news-website": {
       "type": "Git",
@@ -268,7 +268,7 @@
       "submodules": false,
       "revision": "3fec97853390312e45ee2316e981b6d037019ef5",
       "url": "https://github.com/jakehamilton/nixpkgs.news/archive/3fec97853390312e45ee2316e981b6d037019ef5.tar.gz",
-      "hash": "0s4cgsnvd4bf5lnnxf0shjzk2c8l98afh359v0lzpggv0g7m31vd"
+      "hash": "sha256-bYdRzwP7vfsp2KkM6BRKFDExv4QauG4tLW6Rtq1+jGg="
     },
     "nixpkgs-unstable": {
       "type": "Git",
@@ -281,7 +281,7 @@
       "submodules": false,
       "revision": "96ec055edbe5ee227f28cdbc3f1ddf1df5965102",
       "url": "https://github.com/nixos/nixpkgs/archive/96ec055edbe5ee227f28cdbc3f1ddf1df5965102.tar.gz",
-      "hash": "064q32jmj54iwgh4lcdg2aii75cr5lvb683ym5pmj2kkj340pnpd"
+      "hash": "sha256-7doLyJBzCllvqX4gszYtmZUToxKvMUrg45EUWaUYmBg="
     },
     "noop-ai-website": {
       "type": "Git",
@@ -294,7 +294,20 @@
       "submodules": false,
       "revision": "38dae9e9a9f4ff653156f72ccc267d9e76c07491",
       "url": "https://github.com/noopai/noop.ai/archive/38dae9e9a9f4ff653156f72ccc267d9e76c07491.tar.gz",
-      "hash": "12d4x671lc67ldh4nqh61f31w30n17y4hw6iwdckx145iv33l0r1"
+      "hash": "sha256-IQM6xo6FhD5Z49FwSPwJFgwehgsGYktgo8cwGo7ppIk="
+    },
+    "npins": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "andir",
+        "repo": "npins"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "eed27459effed464376369c9ab7e2972889fb821",
+      "url": "https://github.com/andir/npins/archive/eed27459effed464376369c9ab7e2972889fb821.tar.gz",
+      "hash": "sha256-WQxAZYj7wFA46X2L0IuA3syzr8CopmoXA8eePyhnE0o="
     },
     "pungeonquest-website": {
       "type": "Git",
@@ -307,7 +320,7 @@
       "submodules": false,
       "revision": "2d930a7d60d19b218fe441036f5401b78f6241fd",
       "url": "https://github.com/jakehamilton/pungeonquest/archive/2d930a7d60d19b218fe441036f5401b78f6241fd.tar.gz",
-      "hash": "1g4w3ln9chc96i0xizg1jikzl0s70sfmmwqkfq15cimzd66m8kr1"
+      "hash": "sha256-IU9UjWm/RlYCdhPzWp0GRwP6Z5Th/dhBNIlBliwdnLw="
     },
     "retrospectacle-website": {
       "type": "Git",
@@ -320,7 +333,7 @@
       "submodules": false,
       "revision": "8ce8f6f43948c6ca40a882c9d851c503f643642c",
       "url": "https://github.com/jakehamilton/retrospectacle.app/archive/8ce8f6f43948c6ca40a882c9d851c503f643642c.tar.gz",
-      "hash": "070bbca3x0bxj3p4rg4bfz6wydpf5h10d3ijw7rkvr1swkgkar38"
+      "hash": "sha256-aGQ13+Q65D3z4TKOBgIs7jbPzXeLvEzukH2BPhRbCxw="
     },
     "scrumfish-website": {
       "type": "Git",
@@ -333,7 +346,7 @@
       "submodules": false,
       "revision": "f214ed8149da87f245f315873b0a7176884f2562",
       "url": "https://github.com/jakehamilton/scrumfi.sh/archive/f214ed8149da87f245f315873b0a7176884f2562.tar.gz",
-      "hash": "02jg18gxmcan4018v8azj5naqan4pxcgjm3yid0zcadlvyar4qrx"
+      "hash": "sha256-PWOSld+0KfZBi35U+Vi/xCqsbJFfoY0CIFax2h8KTwo="
     },
     "snowfall-website": {
       "type": "Git",
@@ -346,7 +359,7 @@
       "submodules": false,
       "revision": "f4abf0d6f2795daba4ddd26bea85dea6532c9355",
       "url": "https://github.com/snowfallorg/docs/archive/f4abf0d6f2795daba4ddd26bea85dea6532c9355.tar.gz",
-      "hash": "1g167gj0y7lhc361q70xii6mg2qgj0jlhwbjll5fl9yq0bcd1gfh"
+      "hash": "sha256-0L3Q2ALYJ+oKpXJxSCWQD4tXTYwdHBzMYJAeD+Q7Jrw="
     },
     "tmux": {
       "type": "Git",
@@ -359,7 +372,7 @@
       "submodules": false,
       "revision": "7c353d3831231f4e358c3692a8cac76924381c05",
       "url": "https://github.com/jakehamilton/tmux/archive/7c353d3831231f4e358c3692a8cac76924381c05.tar.gz",
-      "hash": "0yr3gf7n65p5in8bkmfc4004sm5fa0bvx9dnhp9155rzbwchi1ir"
+      "hash": "sha256-OYYIGV8/lxLShbalvhdQrlRNACDM1bmQjeUWY497I3s="
     },
     "yubikey-guide": {
       "type": "Git",
@@ -372,8 +385,8 @@
       "submodules": false,
       "revision": "3ab143b4c1309baa115f958dc99d0211c37c64dd",
       "url": "https://github.com/drduh/yubikey-guide/archive/3ab143b4c1309baa115f958dc99d0211c37c64dd.tar.gz",
-      "hash": "05xmz7w4wm3hv38kfxgicj1sl55lmr4d2v4pggr0wrjxxfvcxmka"
+      "hash": "sha256-atbOtutdZg7ye5ds0UiutBSqg2TxdTfR2HBUTvj5tRc="
     }
   },
-  "version": 5
+  "version": 6
 }

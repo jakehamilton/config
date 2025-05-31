@@ -14,7 +14,6 @@ let
     home-manager = "flake";
 
     lix = "raw";
-    lix-src = "raw";
   };
 
   settings = {
@@ -25,6 +24,12 @@ let
     };
 
     nixpkgs-unstable = settings.nixpkgs;
+
+    npins = {
+      args = {
+        pkgs = config.inputs.nixpkgs.result.x86_64-linux;
+      };
+    };
 
     comma = {
       inputs = {

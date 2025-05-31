@@ -161,7 +161,7 @@ in
       nix = ./modules/nix.nix;
 
       lix = (import "${config.inputs.lix.result}/module.nix" {
-        lix = (lib.paths.into.drv config.inputs.lix-src.result) // {
+        lix = (lib.paths.into.drv config.inputs.lix-src.src) // {
           rev = "latest";
         };
       });

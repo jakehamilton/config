@@ -21,6 +21,9 @@ in
         (project.packages.nixos-hosts.result.${pkgs.system}.override { hosts = project.systems.nixos; })
         (project.inputs.nilla-cli.result.packages.nilla-cli.result.${pkgs.system})
         (project.inputs.nilla-nixos.result.packages.nilla-nixos.result.${pkgs.system})
+        (import project.inputs.npins.src {
+          inherit pkgs;
+        })
       ]
       ++ (with pkgs; [
         deploy-rs
@@ -28,7 +31,6 @@ in
         nix-index
         nix-prefetch-git
         nix-output-monitor
-        npins
         colmena
       ]);
 
@@ -40,10 +42,6 @@ in
         ];
       in
       {
-        package = pkgs.lix.override {
-          aws-sdk-cpp = null;
-        };
-
         settings =
           {
             experimental-features = "nix-command flakes";
