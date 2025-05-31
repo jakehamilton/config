@@ -292,6 +292,14 @@ in
             }
             // shared-config
           );
+
+          "ollama.quartz.hamho.me" = project.lib.network.create-proxy (
+            {
+              port = 5950;
+              host = "100.67.10.15";
+            }
+            // shared-config
+          );
         };
     };
 

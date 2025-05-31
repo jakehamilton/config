@@ -21,6 +21,7 @@
       enable = true;
       ollamaUrl = "http://127.0.0.1:11434";
       port = 5950;
+      hostname = "0.0.0.0";
     };
 
     plusultra = {
