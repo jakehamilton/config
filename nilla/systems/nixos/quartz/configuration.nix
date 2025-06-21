@@ -32,6 +32,10 @@ in
       7359
     ];
 
+    users.users.janine = {
+      isNormalUser = true;
+    };
+
     plusultra = {
       nix.enable = true;
 

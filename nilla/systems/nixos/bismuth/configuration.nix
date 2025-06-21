@@ -13,6 +13,8 @@
 
     services.ollama = {
       enable = true;
+      host = "0.0.0.0";
+      openFirewall = true;
       acceleration = "rocm";
       rocmOverrideGfx = "10.1.0";
     };
