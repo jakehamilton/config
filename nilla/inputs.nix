@@ -49,6 +49,12 @@ let
       };
     };
 
+    framework-fan-control = {
+      inputs = {
+        nixpkgs = nixpkgs-flake;
+      };
+    };
+
     home-manager = {
       inputs = {
         nixpkgs = nixpkgs-unstable-flake;

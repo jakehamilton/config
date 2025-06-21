@@ -55,6 +55,19 @@
       "url": "https://api.github.com/repos/nilla-nix/flake-compat/tarball/v0.0.2",
       "hash": "sha256-drL2fVdcowCdRauFVfqWWUfGEGVDqui5Ul240kyivZg="
     },
+    "framework-fan-control": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "TamtamHero",
+        "repo": "fw-fanctrl"
+      },
+      "branch": "packaging/nix",
+      "submodules": false,
+      "revision": "473575cd1753cb4ec429ea085975e48d32970894",
+      "url": "https://github.com/TamtamHero/fw-fanctrl/archive/473575cd1753cb4ec429ea085975e48d32970894.tar.gz",
+      "hash": "1rcs2lpj8nmlqqc0if6ykagdg4c6v5g757prvhjgxyynsq2psb35"
+    },
     "gpg-base-conf": {
       "type": "Git",
       "repository": {

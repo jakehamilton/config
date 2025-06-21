@@ -5,6 +5,10 @@
   config = {
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
+    programs.fw-fanctrl = {
+      enable = true;
+    };
+
     plusultra = {
       archetypes = {
         workstation.enable = true;

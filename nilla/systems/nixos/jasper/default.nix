@@ -24,6 +24,7 @@ in
         ../modules
         config.inputs.home-manager.result.nixosModules.home-manager
         config.modules.nixos.lix
+        config.inputs.framework-fan-control.result.nixosModules.default
       ];
     };
   };
