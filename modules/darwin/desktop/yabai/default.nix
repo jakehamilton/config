@@ -55,8 +55,10 @@ in
         # normal_window_border_color = "0x002e3440";
         # active_window_border_color = "0xff5e81ac";
 
-        # external_bar = "all:${builtins.toString config.services.spacebar.config.height}:0";
+        # As of macOS Sequoia the menu bar already has reserved space at the top, resulting in extra padding
+        # if the menu bar is set to automatically hide. Instead, now we just set some extra height.
         external_bar = "all:8:0";
+        # external_bar = "all:${builtins.toString config.services.spacebar.config.height}:0";
 
         # mouse_modifier = "alt";
         mouse_modifier = "cmd";
