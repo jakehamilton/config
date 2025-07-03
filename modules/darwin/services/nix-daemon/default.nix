@@ -15,5 +15,7 @@ in
     enable = mkOpt types.bool true "Whether to enable the Nix daemon.";
   };
 
-  config = mkIf cfg.enable { services.nix-daemon = enabled; };
+  config = mkIf cfg.enable {
+    # services.nix-daemon = enabled;
+  };
 }

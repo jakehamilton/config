@@ -1,8 +1,8 @@
-{
-  lib,
-  pkgs,
-  namespace,
-  ...
+{ lib
+, pkgs
+, namespace
+, inputs
+, ...
 }:
 with lib.${namespace};
 {
@@ -15,7 +15,9 @@ with lib.${namespace};
     desktop.yabai = enabled;
   };
 
+  documentation.enable = false;
+
   environment.systemPath = [ "/opt/homebrew/bin" ];
 
-  system.stateVersion = 4;
+  system.stateVersion = 5;
 }

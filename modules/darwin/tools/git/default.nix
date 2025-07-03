@@ -47,7 +47,7 @@ in
             whitespace = "trailing-space,space-before-tab";
           };
           safe = {
-            directory = "${config.users.users.${user.name}.home}/work/config";
+            directory = lib.mkForce "${config.users.users.${user.name}.home}/work/config";
           };
         };
       };

@@ -1,9 +1,8 @@
-{
-  lib,
-  pkgs,
-  config,
-  namespace,
-  ...
+{ lib
+, pkgs
+, config
+, namespace
+, ...
 }:
 let
   cfg = config.${namespace}.desktop.yabai;
@@ -56,7 +55,8 @@ in
         # normal_window_border_color = "0x002e3440";
         # active_window_border_color = "0xff5e81ac";
 
-        external_bar = "all:${builtins.toString config.services.spacebar.config.height}:0";
+        # external_bar = "all:${builtins.toString config.services.spacebar.config.height}:0";
+        external_bar = "all:8:0";
 
         # mouse_modifier = "alt";
         mouse_modifier = "cmd";

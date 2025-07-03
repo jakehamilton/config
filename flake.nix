@@ -3,7 +3,7 @@
 
   inputs = {
     # NixPkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # NixPkgs Unstable
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -15,12 +15,15 @@
     };
 
     # Home Manager
-    home-manager.url = "github:nix-community/home-manager/release-24.05";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # macOS Support
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    ghostty.url = "github:ghostty-org/ghostty";
+    ghostty.inputs.nixpkgs.follows = "nixpkgs";
 
     # Hardware Configuration
     nixos-hardware.url = "github:nixos/nixos-hardware";
@@ -39,8 +42,8 @@
     # avalanche.url = "path:/home/short/work/@snowfallorg/avalanche";
     avalanche.inputs.nixpkgs.follows = "unstable";
 
-    aux-website.url = "git+ssh://forgejo@git.auxolotl.org/auxolotl/website.git";
-    aux-website.inputs.nixpkgs.follows = "nixpkgs";
+    # aux-website.url = "git+ssh://forgejo@git.auxolotl.org/auxolotl/website.git";
+    # aux-website.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Flake
     flake.url = "github:snowfallorg/flake?ref=v1.4.1";
@@ -102,7 +105,7 @@
       flake = false;
     };
     discord-nord-theme = {
-      url = "github:DapperCore/NordCord";
+      url = "github:HybridFNBR/NordCord";
       flake = false;
     };
 
@@ -187,7 +190,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nilla-cli.url = "github:nilla-nix/cli";
+    # nilla-cli.url = "github:nilla-nix/cli";
   };
 
   outputs =
@@ -219,7 +222,7 @@
 
         overlays = with inputs; [
           avalanche.overlays.default
-          aux-website.overlays.default
+          # aux-website.overlays.default
           neovim.overlays.default
           tmux.overlay
           flake.overlays.default
@@ -231,7 +234,7 @@
           attic.overlays.default
           snowfall-docs.overlays.default
           nixpkgs-news.overlays.default
-          lix.overlays.default
+          # lix.overlays.default
         ];
 
         systems.modules.nixos = with inputs; [
