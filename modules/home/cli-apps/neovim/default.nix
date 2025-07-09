@@ -1,9 +1,8 @@
-{
-  lib,
-  config,
-  pkgs,
-  namespace,
-  ...
+{ lib
+, config
+, pkgs
+, namespace
+, ...
 }:
 let
   inherit (lib) mkEnableOption mkIf;
