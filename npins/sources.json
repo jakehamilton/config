@@ -266,9 +266,9 @@
       },
       "branch": "nixos-25.05",
       "submodules": false,
-      "revision": "7282cb574e0607e65224d33be8241eae7cfe0979",
-      "url": "https://github.com/nixos/nixpkgs/archive/7282cb574e0607e65224d33be8241eae7cfe0979.tar.gz",
-      "hash": "sha256-hYKMs3ilp09anGO7xzfGs3JqEgUqFMnZ8GMAqI6/k04="
+      "revision": "b2485d56967598da068b5a6946dadda8bfcbcd37",
+      "url": "https://github.com/nixos/nixpkgs/archive/b2485d56967598da068b5a6946dadda8bfcbcd37.tar.gz",
+      "hash": "sha256-3vkjFnxCOP6vm5Pm13wC/Zy6/VYgei/I/2DWgW4RFeA="
     },
     "nixpkgs-news-website": {
       "type": "Git",
@@ -292,9 +292,9 @@
       },
       "branch": "nixos-unstable",
       "submodules": false,
-      "revision": "96ec055edbe5ee227f28cdbc3f1ddf1df5965102",
-      "url": "https://github.com/nixos/nixpkgs/archive/96ec055edbe5ee227f28cdbc3f1ddf1df5965102.tar.gz",
-      "hash": "sha256-7doLyJBzCllvqX4gszYtmZUToxKvMUrg45EUWaUYmBg="
+      "revision": "08f22084e6085d19bcfb4be30d1ca76ecb96fe54",
+      "url": "https://github.com/nixos/nixpkgs/archive/08f22084e6085d19bcfb4be30d1ca76ecb96fe54.tar.gz",
+      "hash": "sha256-XE/lFNhz5lsriMm/yjXkvSZz5DfvKJLUjsS6pP8EC50="
     },
     "noop-ai-website": {
       "type": "Git",
