@@ -54,6 +54,10 @@ with lib.${namespace};
       		'';
   };
 
+  # programs.zsh.shellAliases.docker = "podman";
+  # programs.zsh.shellAliases.docker-compose = "podman-compose";
+
+
   home.packages = [
     pkgs.plusultra.note
   ];

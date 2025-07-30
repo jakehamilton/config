@@ -4,6 +4,7 @@
 , inputs
 , ...
 }:
+
 with lib.${namespace};
 {
   plusultra = {
@@ -13,6 +14,26 @@ with lib.${namespace};
     };
 
     desktop.yabai = enabled;
+
+		home.extraOptions = {
+			programs.zsh.initExtra = ''
+						if [[ -f $HOME/.env ]]; then
+							source $HOME/.env
+						fi
+					'';
+		};
+  };
+
+  environment.systemPackages = [
+    pkgs.charmbracelet.crush
+    # pkgs.podman
+    # pkgs.podman-compose
+    # pkgs.${namespace}.docker-shim
+  ];
+
+
+  services.openssh = {
+    enable = true;
   };
 
   documentation.enable = false;

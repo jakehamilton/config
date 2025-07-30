@@ -86,6 +86,26 @@
         "type": "github"
       }
     },
+    "charmbracelet": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1753892961,
+        "narHash": "sha256-0qljOrI5gh8wSEqgIcceO3N7lI9KM6523KckNFdsl44=",
+        "owner": "charmbracelet",
+        "repo": "nur",
+        "rev": "9cc0f62d630b355465fe4c7ef98fb67851abf32a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "charmbracelet",
+        "repo": "nur",
+        "type": "github"
+      }
+    },
     "comma": {
       "inputs": {
         "flake-compat": "flake-compat_3",
@@ -1915,6 +1935,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-2411": {
+      "locked": {
+        "lastModified": 1751274312,
+        "narHash": "sha256-/bVBlRpECLVzjV19t5KMdMFWSwKLtb5RyXdjz3LJT+g=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "50ab793786d9de88ee30ec4e4c24fb4236fc2674",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-24.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-news": {
       "inputs": {
         "nixpkgs": [
@@ -2213,6 +2249,7 @@
         "attic": "attic",
         "avalanche": "avalanche",
         "bibata-cursors": "bibata-cursors",
+        "charmbracelet": "charmbracelet",
         "comma": "comma",
         "cowsay": "cowsay",
         "darwin": "darwin",
@@ -2233,6 +2270,7 @@
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
+        "nixpkgs-2411": "nixpkgs-2411",
         "nixpkgs-news": "nixpkgs-news",
         "noop-ai-website": "noop-ai-website",
         "pungeonquest": "pungeonquest",
