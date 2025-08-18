@@ -1,10 +1,9 @@
-{
-  options,
-  config,
-  pkgs,
-  lib,
-  namespace,
-  ...
+{ options
+, config
+, pkgs
+, lib
+, namespace
+, ...
 }:
 with lib;
 with lib.${namespace};
@@ -23,19 +22,19 @@ in
       LOG_ICONS = "true";
     };
 
-#    fonts = {
-#      fontDir = enabled;
-# 
-#      fonts =
-#        with pkgs;
-#        [
-#          noto-fonts
-#          noto-fonts-cjk-sans
-#          noto-fonts-cjk-serif
-#          noto-fonts-emoji
-#          (nerdfonts.override { fonts = [ "Hack" ]; })
-#        ]
-#        ++ cfg.fonts;
-#    };
+    #    fonts = {
+    #      fontDir = enabled;
+    #
+    #      fonts =
+    #        with pkgs;
+    #        [
+    #          noto-fonts
+    #          noto-fonts-cjk-sans
+    #          noto-fonts-cjk-serif
+    #          noto-fonts-emoji
+    #          (nerdfonts.override { fonts = [ "Hack" ]; })
+    #        ]
+    #        ++ cfg.fonts;
+    #    };
   };
 }

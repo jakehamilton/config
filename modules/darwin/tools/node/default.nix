@@ -15,7 +15,7 @@ in
 {
   options.${namespace}.tools.node = with types; {
     enable = mkBoolOpt false "Whether or not to install and configure git";
-    pkg = mkOpt package node18 "The NodeJS package to use";
+    pkg = mkOpt package pkgs.nodejs "The NodeJS package to use";
     prettier = {
       enable = mkBoolOpt true "Whether or not to install Prettier";
       pkg = mkOpt package pkgs.nodePackages.prettier "The NodeJS package to use";
@@ -40,7 +40,7 @@ in
       [ cfg.pkg ]
       ++ (lib.optional cfg.prettier.enable cfg.prettier.pkg)
       ++ (lib.optional cfg.yarn.enable (cfg.yarn.pkg.override {
-        nodejs = node18;
+        nodejs = cfg.pkg;
       }))
       ++ (lib.optional cfg.pnpm.enable cfg.pnpm.pkg)
       ++ (lib.optional cfg.flyctl.enable cfg.flyctl.pkg);
