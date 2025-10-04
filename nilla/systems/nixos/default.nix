@@ -10,6 +10,7 @@ in
     ./bismuth
     ./jasper
     ./quartz
+    ./warden
   ];
 
   config.modules = {

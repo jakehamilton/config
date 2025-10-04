@@ -208,9 +208,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "372d10ce828b2a9c2ebe3a6e83f1cfc853929d3b",
-      "url": "https://github.com/nilla-nix/nilla.dev/archive/372d10ce828b2a9c2ebe3a6e83f1cfc853929d3b.tar.gz",
-      "hash": "sha256-+hfHEuH80q1cc0Csmgb2/y6L4ardyDCT8Cm2I8MSoFY="
+      "revision": "b7821b1ab4db626725f313ea607a23ac0c75b79d",
+      "url": "https://github.com/nilla-nix/nilla.dev/archive/b7821b1ab4db626725f313ea607a23ac0c75b79d.tar.gz",
+      "hash": "sha256-XsF/V5zYUHQylSw7Hd4P4PKIr0WB/rZl2Erp3/CKBGo="
     },
     "nilla-nixos": {
       "type": "Git",
@@ -321,6 +321,19 @@
       "revision": "eed27459effed464376369c9ab7e2972889fb821",
       "url": "https://github.com/andir/npins/archive/eed27459effed464376369c9ab7e2972889fb821.tar.gz",
       "hash": "sha256-WQxAZYj7wFA46X2L0IuA3syzr8CopmoXA8eePyhnE0o="
+    },
+    "openfrontio": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "jakehamilton",
+        "repo": "openfrontio"
+      },
+      "branch": "terminalconflict",
+      "submodules": false,
+      "revision": "6d9c48b26fd4e899d790003535879022a55e1f8b",
+      "url": "https://github.com/jakehamilton/openfrontio/archive/6d9c48b26fd4e899d790003535879022a55e1f8b.tar.gz",
+      "hash": "sha256-/aLOkffkEZr7gQC1omhmRCEdwa6UFXz5bN6w4zUt4Mk="
     },
     "pungeonquest-website": {
       "type": "Git",

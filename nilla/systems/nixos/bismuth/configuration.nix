@@ -58,6 +58,7 @@
       };
 
       desktop.gnome = {
+        suspend = false;
         wallpaper = {
           # light = pkgs.plusultra.wallpapers.nord-rainbow-light-nix-ultrawide;
           # dark = pkgs.plusultra.wallpapers.nord-rainbow-dark-nix-ultrawide;
