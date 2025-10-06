@@ -21,10 +21,14 @@ with lib.${namespace};
 
     home.extraOptions = {
       programs.zsh.initExtra = ''
-        						if [[ -f $HOME/.env ]]; then
-        							source $HOME/.env
-        						fi
-        					'';
+				if [[ -f $HOME/.env ]]; then
+					source $HOME/.env
+				fi
+			'';
+
+			home.sessionPath = [
+				"$HOME/.npm-global/bin/"
+			];
     };
   };
 
