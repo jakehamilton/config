@@ -54,7 +54,7 @@
 
     # Snowfall Flake
     flake.url = "github:snowfallorg/flake?ref=v1.4.1";
-    flake.inputs.nixpkgs.follows = "unstable";
+    # flake.inputs.nixpkgs.follows = "unstable";
 
     # Snowfall Thaw
     thaw.url = "github:snowfallorg/thaw?ref=v1.0.7";

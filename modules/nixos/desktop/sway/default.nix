@@ -11,8 +11,7 @@ with lib.${namespace};
 let
   cfg = config.${namespace}.desktop.sway;
   term = config.${namespace}.desktop.addons.term;
-  substitutedConfig = pkgs.substituteAll {
-    src = ./config;
+  substitutedConfig = pkgs.replaceVars ./config {
     term = term.pkg.pname or term.pkg.name;
   };
 in
