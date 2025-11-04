@@ -315,6 +315,22 @@
         "type": "github"
       }
     },
+    "editor": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1762228095,
+        "narHash": "sha256-w4kThdLDuJrcwsdx5P//cp49gd94nxwaI2AsAocaZ5c=",
+        "owner": "jakehamilton",
+        "repo": "editor",
+        "rev": "3dc83e5a371bacf2c0f6225ba61b2d337625528a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jakehamilton",
+        "repo": "editor",
+        "type": "github"
+      }
+    },
     "flake": {
       "inputs": {
         "flake-compat": "flake-compat_8",
@@ -2271,6 +2287,7 @@
         "discord-nord-theme": "discord-nord-theme",
         "discord-tweaks": "discord-tweaks",
         "drift": "drift",
+        "editor": "editor",
         "flake": "flake",
         "ghostty": "ghostty",
         "gpg-base-conf": "gpg-base-conf",

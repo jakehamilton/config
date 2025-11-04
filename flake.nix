@@ -79,6 +79,9 @@
     neovim.url = "github:jakehamilton/neovim";
     # neovim.inputs.nixpkgs.follows = "unstable";
 
+    editor.url = "github:jakehamilton/editor";
+    editor.flake = false;
+
     # Tmux
     tmux.url = "github:jakehamilton/tmux";
     tmux.inputs = {
@@ -230,7 +233,7 @@
         overlays = with inputs; [
           avalanche.overlays.default
           # aux-website.overlays.default
-          neovim.overlays.default
+          # neovim.overlays.default
           tmux.overlay
           flake.overlays.default
           thaw.overlays.default

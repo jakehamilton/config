@@ -1,10 +1,9 @@
-inputs@{
-  options,
-  config,
-  lib,
-  pkgs,
-  namespace,
-  ...
+inputs@{ options
+, config
+, lib
+, pkgs
+, namespace
+, ...
 }:
 with lib;
 with lib.${namespace};
