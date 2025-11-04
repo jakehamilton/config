@@ -318,11 +318,11 @@
     "editor": {
       "flake": false,
       "locked": {
-        "lastModified": 1762228095,
-        "narHash": "sha256-w4kThdLDuJrcwsdx5P//cp49gd94nxwaI2AsAocaZ5c=",
+        "lastModified": 1762228419,
+        "narHash": "sha256-oi235VOvPBdj1nBptcF11xQvY0v8wAr/egIgmvdZYD8=",
         "owner": "jakehamilton",
         "repo": "editor",
-        "rev": "3dc83e5a371bacf2c0f6225ba61b2d337625528a",
+        "rev": "dc8b2b2d70aa4450da5da5f2c6af12589c3d74de",
         "type": "github"
       },
       "original": {
