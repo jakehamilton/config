@@ -1,10 +1,11 @@
-{ lib
-, pkgs
-, config
-, osConfig ? { }
-, format ? "unknown"
-, namespace
-, ...
+{
+  lib,
+  pkgs,
+  config,
+  osConfig ? { },
+  format ? "unknown",
+  namespace,
+  ...
 }:
 with lib.${namespace};
 {
@@ -29,34 +30,50 @@ with lib.${namespace};
 
   xdg.configFile = {
     "ghostty/config".text = ''
-      			background = #2e3440
-      			foreground = #d8dee9
-      			selection-background = #3f4758
-      			selection-foreground = #d8dee9
-      			cursor-color = #d8dee9
-      			cursor-text = #2e3440
-      			palette = 0=#3b4252
-      			palette = 1=#bf616a
-      			palette = 2=#a3be8c
-      			palette = 3=#ebcb8b
-      			palette = 4=#81a1c1
-      			palette = 5=#b48ead
-      			palette = 6=#88c0d0
-      			palette = 7=#e5e9f0
-      			palette = 8=#4c566a
-      			palette = 9=#bf616a
-      			palette = 10=#a3be8c
-      			palette = 11=#ebcb8b
-      			palette = 12=#81a1c1
-      			palette = 13=#b48ead
-      			palette = 14=#8fbcbb
-      			palette = 15=#eceff4
-      		'';
+      background = #1E1A24
+      foreground = #EEEAF1
+      selection-background = #2E2B3D
+      selection-foreground = #EEEAF1
+      cursor-color = #EEEAF1
+      cursor-text = #14111B
+
+      # Colors (regular, bold)
+      # Black
+      palette = 0=#181520
+      palette = 8=#181520
+
+      # Red
+      palette = 1=#E598B8
+      palette = 9=#E598B8
+
+      # Green
+      palette = 2=#91D5C7
+      palette = 10=#91D5C7
+
+      # Yellow
+      palette = 3=#E8B0A0
+      palette = 11=#E8B0A0
+
+      # Blue
+      palette = 4=#A8C9E7
+      palette = 12=#A8C9E7
+
+      # Purple
+      palette = 5=#CE98BD
+      palette = 13=#CE98BD
+
+      # Aqua
+      palette = 6=#B4EFE3
+      palette = 14=#B4EFE3
+
+      # White
+      palette = 7=#EEEAF1
+      palette = 15=#EEEAF1
+    '';
   };
 
   # programs.zsh.shellAliases.docker = "podman";
   # programs.zsh.shellAliases.docker-compose = "podman-compose";
-
 
   home.packages = [
     pkgs.plusultra.note

@@ -1,9 +1,9 @@
 { inputs, ... }:
 let
-	project = import "${inputs.editor}/nilla.nix";
+  project = import "${inputs.editor}/nilla.nix";
 in
-final: prev: {
-	plusultra = (prev.plusultra or {}) // {
-		neovim = project.packages.default.result.${prev.system};
-	};
+_final: prev: {
+  plusultra = (prev.plusultra or { }) // {
+    neovim = project.packages.default.result.${prev.system};
+  };
 }
