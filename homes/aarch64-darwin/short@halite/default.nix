@@ -42,33 +42,33 @@ with lib.${namespace};
       palette = 0=#181520
       palette = 8=#181520
 
-      # Red
+      # Red (Sakura)
       palette = 1=#E598B8
-      palette = 9=#E598B8
+      palette = 9=#F6B7D1
 
-      # Green
+      # Green (Mint)
       palette = 2=#91D5C7
-      palette = 10=#91D5C7
+      palette = 10=#B4EFE3
 
-      # Yellow
+      # Yellow (Peach)
       palette = 3=#E8B0A0
-      palette = 11=#E8B0A0
+      palette = 11=#F4C8BD
 
-      # Blue
+      # Blue (Sky)
       palette = 4=#A8C9E7
-      palette = 12=#A8C9E7
+      palette = 12=#D1E4F3
 
-      # Purple
+      # Purple (Berry)
       palette = 5=#CE98BD
-      palette = 13=#CE98BD
+      palette = 13=#E8BADA
 
-      # Aqua
-      palette = 6=#B4EFE3
+      # Aqua (Mint... again)
+      palette = 6=#91D5C7
       palette = 14=#B4EFE3
 
       # White
       palette = 7=#EEEAF1
-      palette = 15=#EEEAF1
+      palette = 15=#FEFEFE
     '';
   };
 
