@@ -40,7 +40,7 @@ with lib.${namespace};
       # Colors (regular, bold)
       # Black
       palette = 0=#181520
-      palette = 8=#181520
+      palette = 8=#827889
 
       # Red (Sakura)
       palette = 1=#E598B8
