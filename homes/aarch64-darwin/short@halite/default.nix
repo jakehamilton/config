@@ -75,6 +75,14 @@ with lib.${namespace};
   # programs.zsh.shellAliases.docker = "podman";
   # programs.zsh.shellAliases.docker-compose = "podman-compose";
 
+  programs.zsh.shellAliases = {
+    k = "kubecolor";
+    kubectl = "kubecolor";
+    kc = "kubectx";
+    kn = "kubens";
+    ks = "kubeseal";
+  };
+
   home.packages = [
     pkgs.plusultra.note
   ];

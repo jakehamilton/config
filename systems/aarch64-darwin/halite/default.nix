@@ -1,8 +1,9 @@
-{ lib
-, pkgs
-, namespace
-, inputs
-, ...
+{
+  lib,
+  pkgs,
+  namespace,
+  inputs,
+  ...
 }:
 
 let
@@ -21,14 +22,14 @@ with lib.${namespace};
 
     home.extraOptions = {
       programs.zsh.initExtra = ''
-				if [[ -f $HOME/.env ]]; then
-					source $HOME/.env
-				fi
-			'';
+        if [[ -f $HOME/.env ]]; then
+          source $HOME/.env
+        fi
+      '';
 
-			home.sessionPath = [
-				"$HOME/.npm-global/bin/"
-			];
+      home.sessionPath = [
+        "$HOME/.npm-global/bin/"
+      ];
     };
   };
 
@@ -48,8 +49,26 @@ with lib.${namespace};
     # pkgs.podman
     # pkgs.podman-compose
     # pkgs.${namespace}.docker-shim
-  ];
 
+    pkgs.kubectl
+    pkgs.kubecolor
+    pkgs.kubeseal
+    pkgs.kubespy
+    pkgs.kubectx
+    pkgs.kubevpn
+    pkgs.k3d
+
+    (pkgs.wrapHelm pkgs.kubernetes-helm {
+      plugins = with pkgs.kubernetes-helmPlugins; [
+        helm-diff
+        helm-git
+        helm-s3
+        helm-secrets
+        helm-unittest
+        helm-mapkubeapis
+      ];
+    })
+  ];
 
   services.openssh = {
     enable = true;
