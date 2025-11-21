@@ -69,6 +69,9 @@ with lib.${namespace};
       # White
       palette = 7=#EEEAF1
       palette = 15=#FEFEFE
+
+      # Custom shader
+      custom-shader = ${./ghostty/smear.glsl}
     '';
   };
 
