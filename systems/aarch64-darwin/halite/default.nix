@@ -38,6 +38,9 @@ with lib.${namespace};
   };
 
   environment.systemPackages = [
+    pkgs.bun
+    pkgs.mariadb
+
     pkgs.charmbracelet.crush
     pkgs.gopls
     pkgs.typescript-language-server
