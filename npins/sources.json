@@ -266,9 +266,9 @@
       },
       "branch": "nixos-25.05",
       "submodules": false,
-      "revision": "b2485d56967598da068b5a6946dadda8bfcbcd37",
-      "url": "https://github.com/nixos/nixpkgs/archive/b2485d56967598da068b5a6946dadda8bfcbcd37.tar.gz",
-      "hash": "sha256-3vkjFnxCOP6vm5Pm13wC/Zy6/VYgei/I/2DWgW4RFeA="
+      "revision": "ac62194c3917d5f474c1a844b6fd6da2db95077d",
+      "url": "https://github.com/nixos/nixpkgs/archive/ac62194c3917d5f474c1a844b6fd6da2db95077d.tar.gz",
+      "hash": "sha256-16KkgfdYqjaeRGBaYsNrhPRRENs0qzkQVUooNHtoy2w="
     },
     "nixpkgs-news-website": {
       "type": "Git",

@@ -4,6 +4,7 @@
     ./avahi.nix
     ./cowsay-mastodon-poster.nix
     ./homer.nix
+    ./minecraft.nix
     ./openfront.nix
     ./openssh.nix
     ./printing.nix
