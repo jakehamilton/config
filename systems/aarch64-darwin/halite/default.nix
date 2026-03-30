@@ -28,7 +28,9 @@ with lib.${namespace};
       '';
 
       home.sessionPath = [
+        "$HOME/.local/bin"
         "$HOME/.npm-global/bin/"
+        "$HOME/.bun/bin/"
       ];
     };
   };
@@ -38,7 +40,6 @@ with lib.${namespace};
   };
 
   environment.systemPackages = [
-    pkgs.bun
     pkgs.mariadb
 
     pkgs.charmbracelet.crush
