@@ -62,7 +62,6 @@ in
 
         qemu = {
           package = pkgs.qemu_kvm;
-          ovmf.enable = true;
           swtpm.enable = true;
           verbatimConfig = ''
             namespaces = []

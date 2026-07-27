@@ -1,4 +1,13 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  project,
+  ...
+}:
+
+let
+  ollama-unstable = project.inputs.nixpkgs-unstable.result.${pkgs.system}.ollama;
+in
 {
   imports = [ ./hardware.nix ];
 
@@ -13,6 +22,7 @@
 
     services.ollama = {
       enable = true;
+      package = ollama-unstable;
       host = "0.0.0.0";
       openFirewall = true;
       acceleration = "rocm";

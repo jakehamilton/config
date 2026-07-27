@@ -49,7 +49,7 @@ in
           ".mozilla/native-messaging-hosts/com.dannyvankooten.browserpass.json".source = "${pkgs.browserpass}/lib/mozilla/native-messaging-hosts/com.dannyvankooten.browserpass.json";
         }
         (lib.mkIf config.plusultra.desktop.gnome.enable {
-          ".mozilla/native-messaging-hosts/org.gnome.chrome_gnome_shell.json".source = "${pkgs.chrome-gnome-shell}/lib/mozilla/native-messaging-hosts/org.gnome.chrome_gnome_shell.json";
+          ".mozilla/native-messaging-hosts/org.gnome.browser_connector.json".source = "${pkgs.gnome-browser-connector}/lib/mozilla/native-messaging-hosts/org.gnome.browser_connector.json";
         })
       ];
 

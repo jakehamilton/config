@@ -1,7 +1,7 @@
 { lib
 , writeText
 , writeShellApplication
-, substituteAll
+, replaceVars
 , gum
 , hosts ? { }
 , ...
@@ -9,7 +9,7 @@
 let
   inherit (lib) mapAttrsToList concatStringsSep;
 
-  substitute = args: builtins.readFile (substituteAll args);
+  substitute = args: builtins.readFile (replaceVars args.src (builtins.removeAttrs args [ "src" ]));
 
   formatted-hosts = mapAttrsToList (name: host: "${name},${host.result.pkgs.system}") hosts;
 
