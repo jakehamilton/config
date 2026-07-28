@@ -12,6 +12,7 @@ let
 
   loaders = {
     home-manager = "flake";
+    stylix = "flake";
 
     lix = "raw";
   };
@@ -122,11 +123,17 @@ let
       };
     };
 
-    tmux = {
+    stylix = {
       inputs = {
-        nixpkgs = nixpkgs-unstable-flake;
-        unstable = nixpkgs-unstable-flake;
+        nixpkgs = nixpkgs-flake;
       };
+    };
+
+    tmux = {
+      # inputs = {
+      #   nixpkgs = nixpkgs-unstable-flake;
+      #   unstable = nixpkgs-unstable-flake;
+      # };
     };
 
     yubikey-guide = {
@@ -138,13 +145,11 @@ let
 in
 {
   config = {
-    inputs = builtins.mapAttrs
-      (name: pin: {
-        src = pin;
+    inputs = builtins.mapAttrs (name: pin: {
+      src = pin;
 
-        loader = loaders.${name} or (config.lib.modules.never { });
-        settings = settings.${name} or (config.lib.modules.never { });
-      })
-      pins;
+      loader = loaders.${name} or (config.lib.modules.never { });
+      settings = settings.${name} or (config.lib.modules.never { });
+    }) pins;
   };
 }

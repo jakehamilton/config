@@ -1,4 +1,10 @@
-{ lib, config, pkgs, project, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
+}:
 let
   cfg = config.plusultra.user;
 
@@ -87,13 +93,14 @@ in
   };
 
   config = {
-    environment.systemPackages =
-      [ propagatedIcon ]
-      ++ (with pkgs; [
-        cowsay
-        fortune
-        lolcat
-      ]);
+    environment.systemPackages = [
+      propagatedIcon
+    ]
+    ++ (with pkgs; [
+      cowsay
+      fortune
+      lolcat
+    ]);
 
     programs.zsh = {
       enable = true;
@@ -143,22 +150,21 @@ in
 
             autosuggestion.enable = true;
 
-            initExtra =
-              ''
-                # Fix an issue with tmux.
-                export KEYTIMEOUT=1
+            initContent = ''
+              # Fix an issue with tmux.
+              export KEYTIMEOUT=1
 
-                # Use vim bindings.
-                set -o vi
+              # Use vim bindings.
+              set -o vi
 
-                # Improved vim bindings.
-                source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+              # Improved vim bindings.
+              source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
-                eval "$(${nilla-cli}/bin/nilla completions --shell zsh)"
-              ''
-              + lib.optionalString cfg.prompt-init ''
-                ${pkgs.toilet}/bin/toilet -f future "Plus Ultra" --gay
-              '';
+              eval "$(${nilla-cli}/bin/nilla completions --shell zsh)"
+            ''
+            + lib.optionalString cfg.prompt-init ''
+              ${pkgs.toilet}/bin/toilet -f future "Plus Ultra" --gay
+            '';
 
             shellAliases = {
               say = "${pkgs.toilet}/bin/toilet -f pagga";
@@ -199,6 +205,7 @@ in
       uid = 1000;
 
       extraGroups = [ "steamcmd" ] ++ cfg.extraGroups;
-    } // cfg.extraOptions;
+    }
+    // cfg.extraOptions;
   };
 }

@@ -1,7 +1,8 @@
-{ lib
-, config
-, pkgs
-, ...
+{
+  lib,
+  config,
+  pkgs,
+  ...
 }:
 let
   cfg = config.plusultra.apps.firefox;
@@ -39,30 +40,43 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    plusultra.desktop.addons.firefox-nordic-theme.enable = true;
+    # plusultra.desktop.addons.firefox-nordic-theme.enable = true;
 
     services.gnome.gnome-browser-connector.enable = config.plusultra.desktop.gnome.enable;
 
     plusultra.home = {
       file = lib.mkMerge [
         {
-          ".mozilla/native-messaging-hosts/com.dannyvankooten.browserpass.json".source = "${pkgs.browserpass}/lib/mozilla/native-messaging-hosts/com.dannyvankooten.browserpass.json";
+          ".mozilla/native-messaging-hosts/com.dannyvankooten.browserpass.json".source =
+            "${pkgs.browserpass}/lib/mozilla/native-messaging-hosts/com.dannyvankooten.browserpass.json";
         }
         (lib.mkIf config.plusultra.desktop.gnome.enable {
-          ".mozilla/native-messaging-hosts/org.gnome.browser_connector.json".source = "${pkgs.gnome-browser-connector}/lib/mozilla/native-messaging-hosts/org.gnome.browser_connector.json";
+          ".mozilla/native-messaging-hosts/org.gnome.browser_connector.json".source =
+            "${pkgs.gnome-browser-connector}/lib/mozilla/native-messaging-hosts/org.gnome.browser_connector.json";
         })
       ];
 
       extraOptions = {
+        stylix.targets.firefox = {
+          # colorTheme.enable = true;
+          firefoxGnomeTheme.enable = true;
+
+          profileNames = [
+            config.plusultra.user.name
+          ];
+        };
+
         programs.firefox = {
           enable = true;
 
           nativeMessagingHosts = [
             pkgs.browserpass
-          ] ++ lib.optional config.plusultra.desktop.gnome.enable pkgs.gnomeExtensions.gsconnect;
+          ]
+          ++ lib.optional config.plusultra.desktop.gnome.enable pkgs.gnomeExtensions.gsconnect;
 
           profiles.${config.plusultra.user.name} = {
-            inherit (cfg) extraConfig userChrome settings;
+            # inheri (cfg) extraConfig userChrome settings;
+            inherit (cfg) settings;
             id = 0;
             name = config.plusultra.user.name;
           };

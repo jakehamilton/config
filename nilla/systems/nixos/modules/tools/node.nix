@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   cfg = config.plusultra.tools.node;
 in
@@ -11,9 +16,9 @@ in
     environment.systemPackages = with pkgs; [
       nodejs
       bun
-      nodePackages.prettier
-      nodePackages.yarn
-      nodePackages.pnpm
+      prettier
+      yarn
+      pnpm
     ];
   };
 }

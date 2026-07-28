@@ -9,7 +9,12 @@ in
         targetUser = "short";
         privilegeEscalationCommand = [ "doas" ];
 
-        tags = [ "server" "nas" "desktop" "home" ];
+        tags = [
+          "server"
+          "nas"
+          "desktop"
+          "home"
+        ];
       };
     };
 
@@ -22,8 +27,6 @@ in
       modules = [
         ./configuration.nix
         ../modules
-        config.inputs.home-manager.result.nixosModules.home-manager
-        config.modules.nixos.lix
       ];
     };
   };

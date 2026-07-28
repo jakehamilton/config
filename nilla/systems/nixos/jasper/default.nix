@@ -9,7 +9,11 @@ in
         targetUser = "short";
         privilegeEscalationCommand = [ "doas" ];
 
-        tags = [ "workstation" "laptop" "mobile" ];
+        tags = [
+          "workstation"
+          "laptop"
+          "mobile"
+        ];
       };
     };
 
@@ -22,8 +26,6 @@ in
       modules = [
         ./configuration.nix
         ../modules
-        config.inputs.home-manager.result.nixosModules.home-manager
-        config.modules.nixos.lix
         config.inputs.framework-fan-control.result.nixosModules.default
       ];
     };

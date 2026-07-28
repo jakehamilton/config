@@ -1,7 +1,8 @@
-{ lib
-, config
-, pkgs
-, ...
+{
+  lib,
+  config,
+  pkgs,
+  ...
 }:
 let
   cfg = config.plusultra.desktop.addons.gtk;
@@ -10,19 +11,19 @@ in
   options.plusultra.desktop.addons.gtk = {
     enable = lib.mkEnableOption "GTK theming";
 
-    theme = {
-      name = lib.mkOption {
-        description = "The name of the GTK theme to apply.";
-        type = lib.types.str;
-        default = "Nordic-darker";
-      };
-
-      package = lib.mkOption {
-        description = "The package to use for the theme.";
-        type = lib.types.package;
-        default = pkgs.nordic;
-      };
-    };
+    # theme = {
+    #   name = lib.mkOption {
+    #     description = "The name of the GTK theme to apply.";
+    #     type = lib.types.str;
+    #     default = "Nordic-darker";
+    #   };
+    #
+    #   package = lib.mkOption {
+    #     description = "The package to use for the theme.";
+    #     type = lib.types.package;
+    #     default = pkgs.nordic;
+    #   };
+    # };
 
     cursor = {
       name = lib.mkOption {
@@ -67,10 +68,10 @@ in
       gtk = {
         enable = true;
 
-        theme = {
-          name = cfg.theme.name;
-          package = cfg.theme.package;
-        };
+        # theme = {
+        #   name = cfg.theme.name;
+        #   package = cfg.theme.package;
+        # };
 
         cursorTheme = {
           name = cfg.cursor.name;

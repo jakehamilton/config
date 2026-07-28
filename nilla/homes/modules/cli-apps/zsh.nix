@@ -1,25 +1,30 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   cfg = config.plusultra.cli-apps.zsh;
 
   tty-color-support = with lib.plusultra.colors; ''
     if [ "$TERM" = "linux" ]; then
-      echo -ne "\e]P0${without-hash nord.nord0}" # black
-      echo -ne "\e]P8${without-hash nord.nord3}" # darkgrey
-      echo -ne "\e]P1${without-hash nord.nord11}" # darkred
-      echo -ne "\e]P9${without-hash nord.nord11}" # red
-      echo -ne "\e]P2${without-hash nord.nord14}" # darkgreen
-      echo -ne "\e]PA${without-hash nord.nord14}" # green
-      echo -ne "\e]P3${without-hash nord.nord12}" # brown
-      echo -ne "\e]PB${without-hash nord.nord13}" # yellow
-      echo -ne "\e]P4${without-hash nord.nord10}" # darkblue
-      echo -ne "\e]PC${without-hash nord.nord10}" # blue
-      echo -ne "\e]P5${without-hash nord.nord15}" # darkmagenta
-      echo -ne "\e]PD${without-hash nord.nord15}" # magenta
-      echo -ne "\e]P6${without-hash nord.nord8}" # darkcyan
-      echo -ne "\e]PE${without-hash nord.nord8}" # cyan
-      echo -ne "\e]P7${without-hash nord.nord5}" # lightgrey
-      echo -ne "\e]PF${without-hash nord.nord6}" # white
+      echo -ne "\e]P0${without-hash palette.black}" # black
+      echo -ne "\e]P1${without-hash palette.red-dim}" # darkred
+      echo -ne "\e]P9${without-hash palette.red}" # red
+      echo -ne "\e]P2${without-hash palette.green-dim}" # darkgreen
+      echo -ne "\e]PA${without-hash palette.green}" # green
+      echo -ne "\e]P3${without-hash palette.yellow-dim}" # darkyellow
+      echo -ne "\e]PB${without-hash palette.yellow}" # yellow
+      echo -ne "\e]P4${without-hash palette.blue-dim}" # darkblue
+      echo -ne "\e]PC${without-hash palette.blue}" # blue
+      echo -ne "\e]P5${without-hash palette.magenta-dim}" # darkmagenta
+      echo -ne "\e]PD${without-hash palette.magenta}" # magenta
+      echo -ne "\e]P6${without-hash palette.cyan-dim}" # darkcyan
+      echo -ne "\e]PE${without-hash palette.cyan}" # cyan
+      echo -ne "\e]P7${without-hash palette.white-dim}" # lightgrey
+      echo -ne "\e]P8${without-hash palette.black-bright}" # darkgrey
+      echo -ne "\e]PF${without-hash palette.white}" # white
       clear
     fi
   '';
@@ -38,7 +43,7 @@ in
 
         autosuggestion.enable = true;
 
-        initExtra = ''
+        initContent = ''
           # Fix an issue with tmux.
           export KEYTIMEOUT=1
 

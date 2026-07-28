@@ -1,12 +1,18 @@
-{ lib
-, config
-, options
-, ...
+{
+  lib,
+  config,
+  options,
+  project,
+  ...
 }:
 let
   cfg = config.plusultra.home;
 in
 {
+  imports = [
+    project.inputs.home-manager.result.nixosModules.home-manager
+  ];
+
   options.plusultra.home = {
     file = lib.mkOption {
       description = "A set of files to be managed by homemanager's `home.file`.";
@@ -40,10 +46,16 @@ in
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
+      backupFileExtension = ".backup";
 
       users.${config.plusultra.user.name} = lib.mkAliasDefinitions options.plusultra.home.extraOptions;
 
+      extraSpecialArgs = {
+        inherit project;
+      };
+
       sharedModules = [
+        project.inputs.stylix.result.homeModules.stylix
         ../../../homes/modules
       ];
     };

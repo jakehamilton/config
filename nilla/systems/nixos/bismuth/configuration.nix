@@ -5,9 +5,6 @@
   ...
 }:
 
-let
-  ollama-unstable = project.inputs.nixpkgs-unstable.result.${pkgs.system}.ollama;
-in
 {
   imports = [ ./hardware.nix ];
 
@@ -21,11 +18,10 @@ in
     };
 
     services.ollama = {
-      enable = true;
-      package = ollama-unstable;
+      enable = false;
+      package = pkgs.ollama-rocm;
       host = "0.0.0.0";
       openFirewall = true;
-      acceleration = "rocm";
       rocmOverrideGfx = "10.1.0";
     };
 

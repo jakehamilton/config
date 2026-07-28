@@ -15,6 +15,7 @@
     ./virtualisation
     ./home.nix
     ./nix.nix
+    ./theme.nix
 
     # project.inputs.home-manager.result.nixosModules.home-manager
     # project.modules.nixos.lix

@@ -4,6 +4,7 @@
     ./electron.nix
     ./firefox-nordic-theme.nix
     ./foot.nix
+    ./ghostty.nix
     ./gtk.nix
     ./keyring.nix
     ./term.nix

@@ -9,7 +9,11 @@ in
         targetUser = "short";
         privilegeEscalationCommand = [ "doas" ];
 
-        tags = [ "server" "cloud" "digitalocean" ];
+        tags = [
+          "server"
+          "cloud"
+          "digitalocean"
+        ];
       };
     };
 
@@ -22,8 +26,6 @@ in
       modules = [
         ./configuration.nix
         ../modules
-        config.inputs.home-manager.result.nixosModules.home-manager
-        config.modules.nixos.lix
       ];
     };
   };

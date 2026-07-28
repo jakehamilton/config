@@ -1,8 +1,9 @@
-{ lib
-, config
-, pkgs
-, project
-, ...
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
 }:
 let
   cfg = config.plusultra.desktop.gnome;
@@ -17,6 +18,7 @@ let
     just-perfection
     logo-menu
     no-overview
+    rounded-window-corners-reborn
     space-bar
     top-bar-organizer
     wireless-hid
@@ -24,6 +26,8 @@ let
 
   default-attrs = lib.mapAttrs (name: lib.mkDefault);
   nested-default-attrs = lib.mapAttrs (name: default-attrs);
+
+  inherit (project.inputs.home-manager.result.lib.hm) gvariant;
 in
 {
   options.plusultra.desktop.gnome = {
@@ -84,7 +88,7 @@ in
       gtk.enable = true;
       wallpapers.enable = true;
       electron.enable = true;
-      foot.enable = true;
+      ghostty.enable = true;
     };
 
     environment.systemPackages =
@@ -93,25 +97,29 @@ in
       ++ (with pkgs; [
         gnome-tweaks
         nautilus-python
+        dconf-editor
       ]);
 
-    environment.gnome.excludePackages =
-      (with pkgs; [
+    environment.gnome.excludePackages = (
+      with pkgs;
+      [
         gnome-tour
         epiphany
         geary
         gnome-font-viewer
         gnome-system-monitor
         gnome-maps
-      ]);
+      ]
+    );
 
-    systemd.tmpfiles.rules =
-      [ "d ${gdmHome}/.config 0711 gdm gdm" ]
-      ++ (
-        # "./monitors.xml" comes from ~/.config/monitors.xml when GNOME
-        # display information is updated.
-        lib.optional (cfg.monitors != null) "L+ ${gdmHome}/.config/monitors.xml - - - - ${cfg.monitors}"
-      );
+    systemd.tmpfiles.rules = [
+      "d ${gdmHome}/.config 0711 gdm gdm"
+    ]
+    ++ (
+      # "./monitors.xml" comes from ~/.config/monitors.xml when GNOME
+      # display information is updated.
+      lib.optional (cfg.monitors != null) "L+ ${gdmHome}/.config/monitors.xml - - - - ${cfg.monitors}"
+    );
 
     systemd.services.plusultra-user-icon = {
       before = [ "display-manager.service" ];
@@ -158,7 +166,6 @@ in
 
       displayManager.gdm = {
         enable = true;
-        wayland = true;
         autoSuspend = cfg.suspend;
       };
       desktopManager.gnome.enable = true;
@@ -181,13 +188,15 @@ in
                 "drive-menu@gnome-shell-extensions.gcampax.github.com"
                 "user-theme@gnome-shell-extensions.gcampax.github.com"
               ];
-            favorite-apps =
-              [ "org.gnome.Nautilus.desktop" ]
-              ++ lib.optional config.plusultra.apps.firefox.enable "firefox.desktop"
-              ++ lib.optional config.plusultra.apps.vscode.enable "code.desktop"
-              ++ lib.optional config.plusultra.desktop.addons.foot.enable "foot.desktop"
-              ++ lib.optional config.plusultra.apps.discord.enable "discord.desktop"
-              ++ lib.optional config.plusultra.apps.steam.enable "steam.desktop";
+            favorite-apps = [
+              "org.gnome.Nautilus.desktop"
+            ]
+            ++ lib.optional config.plusultra.apps.firefox.enable "firefox.desktop"
+            ++ lib.optional config.plusultra.apps.vscode.enable "code.desktop"
+            ++ lib.optional config.plusultra.desktop.addons.foot.enable "foot.desktop"
+            ++ lib.optional config.plusultra.desktop.addons.ghostty.enable "ghostty.desktop"
+            ++ lib.optional config.plusultra.apps.discord.enable "discord.desktop"
+            ++ lib.optional config.plusultra.apps.steam.enable "steam.desktop";
           };
 
           "org/gnome/desktop/background" = {
@@ -211,7 +220,7 @@ in
             disable-while-typing = false;
           };
           "org/gnome/desktop/peripherals/keyboard" = {
-            delay = project.inputs.home-manager.result.lib.hm.gvariant.mkUint32 200;
+            delay = gvariant.mkUint32 200;
           };
           "org/gnome/desktop/wm/preferences" = {
             num-workspaces = 10;
@@ -252,6 +261,18 @@ in
             switch-to-application-8 = [ ];
             switch-to-application-9 = [ ];
             switch-to-application-10 = [ ];
+
+            # Remove the default hotkeys for opening new windows of favorited applications.
+            open-new-window-application-1 = [ ];
+            open-new-window-application-2 = [ ];
+            open-new-window-application-3 = [ ];
+            open-new-window-application-4 = [ ];
+            open-new-window-application-5 = [ ];
+            open-new-window-application-6 = [ ];
+            open-new-window-application-7 = [ ];
+            open-new-window-application-8 = [ ];
+            open-new-window-application-9 = [ ];
+            open-new-window-application-10 = [ ];
           };
           "org/gnome/mutter" = {
             edge-tiling = false;
@@ -269,8 +290,9 @@ in
           };
 
           "org/gnome/shell/extensions/just-perfection" = {
-            panel-size = 48;
+            panel-size = 36;
             activities-button = false;
+            theme = true;
           };
 
           "org/gnome/shell/extensions/Logo-menu" = {
@@ -281,6 +303,8 @@ in
 
             # Use the NixOS logo.
             menu-button-icon-image = 23;
+
+            menu-button-icon-size = 18;
 
             menu-button-terminal =
               if config.plusultra.desktop.addons.term.enable then
@@ -311,23 +335,26 @@ in
 
           "org/gnome/shell/extensions/top-bar-organizer" = {
             left-box-order = [
+              "LogoMenu"
               "menuButton"
               "activities"
-              "dateMenu"
+              "Space Bar"
               "appMenu"
             ];
 
-            center-box-order = [ "Space Bar" ];
+            center-box-order = [
+              "dateMenu"
+            ];
 
             right-box-order = [
               "keyboard"
               "EmojisMenu"
               "wireless-hid"
-              "drive-menu"
               "vitalsMenu"
+              "drive-menu"
+              "dwellClick"
               "screenRecording"
               "screenSharing"
-              "dwellClick"
               "a11y"
               "quickSettings"
             ];
@@ -343,6 +370,53 @@ in
           "org/gnome/shell/extensions/gtile" = {
             show-icon = false;
             grid-sizes = "8x2,4x2,2x2";
+          };
+
+          "org/gnome/shell/extensions/rounded-window-corners-reborn" = {
+            skip-libadwaita-app = false;
+            border-width = 0;
+            global-rounded-corner-settings = gvariant.mkDictionaryEntry [
+              "padding"
+              (gvariant.mkDictionaryEntry [
+                "left"
+                (gvariant.mkUint32 0)
+
+                "right"
+                (gvariant.mkUint32 0)
+
+                "top"
+                (gvariant.mkUint32 0)
+
+                "bottom"
+                (gvariant.mkUint32 0)
+              ])
+
+              "keepRoundedCorners"
+              (gvariant.mkDictionaryEntry [
+                "maximized"
+                (gvariant.mkBoolean false)
+
+                "fullscreen"
+                (gvariant.mkBoolean false)
+              ])
+
+              "borderRadius"
+              (gvariant.mkUint32 12)
+
+              "smoothing"
+              (gvariant.mkUint32 0.0)
+
+              "borderColor"
+              (gvariant.mkTuple [
+                0.5
+                0.5
+                0.5
+                1.0
+              ])
+
+              "enabled"
+              (gvariant.mkBoolean true)
+            ];
           };
         };
     };
