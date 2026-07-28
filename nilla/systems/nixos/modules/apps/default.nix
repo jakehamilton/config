@@ -1,5 +1,6 @@
 {
   imports = [
+    ./inkscape
     ./_1password.nix
     ./ardour.nix
     ./aseprite.nix
@@ -9,7 +10,6 @@
     ./dolphin.nix
     ./firefox.nix
     ./gparted.nix
-    ./inkscape.nix
     ./obs.nix
     ./prismlauncher.nix
     ./steam.nix

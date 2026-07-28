@@ -40,7 +40,7 @@ in
           lib.types.str
           lib.types.package
         ];
-        default = project.packages.wallpapers.result.${pkgs.system}.nord-rainbow-light-nix;
+        default = project.packages.wallpapers.result.${pkgs.system}.bun-ultrawide;
       };
 
       dark = lib.mkOption {
@@ -49,7 +49,7 @@ in
           lib.types.str
           lib.types.package
         ];
-        default = project.packages.wallpapers.result.${pkgs.system}.nord-rainbow-dark-nix;
+        default = project.packages.wallpapers.result.${pkgs.system}.bun-ultrawide;
       };
     };
 
@@ -375,48 +375,48 @@ in
           "org/gnome/shell/extensions/rounded-window-corners-reborn" = {
             skip-libadwaita-app = false;
             border-width = 0;
-            global-rounded-corner-settings = gvariant.mkDictionaryEntry [
-              "padding"
-              (gvariant.mkDictionaryEntry [
-                "left"
-                (gvariant.mkUint32 0)
-
-                "right"
-                (gvariant.mkUint32 0)
-
-                "top"
-                (gvariant.mkUint32 0)
-
-                "bottom"
-                (gvariant.mkUint32 0)
-              ])
-
-              "keepRoundedCorners"
-              (gvariant.mkDictionaryEntry [
-                "maximized"
-                (gvariant.mkBoolean false)
-
-                "fullscreen"
-                (gvariant.mkBoolean false)
-              ])
-
-              "borderRadius"
-              (gvariant.mkUint32 12)
-
-              "smoothing"
-              (gvariant.mkUint32 0.0)
-
-              "borderColor"
-              (gvariant.mkTuple [
-                0.5
-                0.5
-                0.5
-                1.0
-              ])
-
-              "enabled"
-              (gvariant.mkBoolean true)
-            ];
+            # global-rounded-corner-settings = gvariant.mkDictionaryEntry [
+            #   "padding"
+            #   (gvariant.mkDictionaryEntry [
+            #     "left"
+            #     (gvariant.mkUint32 0)
+            #
+            #     "right"
+            #     (gvariant.mkUint32 0)
+            #
+            #     "top"
+            #     (gvariant.mkUint32 0)
+            #
+            #     "bottom"
+            #     (gvariant.mkUint32 0)
+            #   ])
+            #
+            #   "keepRoundedCorners"
+            #   (gvariant.mkDictionaryEntry [
+            #     "maximized"
+            #     (gvariant.mkBoolean false)
+            #
+            #     "fullscreen"
+            #     (gvariant.mkBoolean false)
+            #   ])
+            #
+            #   "borderRadius"
+            #   (gvariant.mkUint32 12)
+            #
+            #   "smoothing"
+            #   (gvariant.mkUint32 0.0)
+            #
+            #   "borderColor"
+            #   (gvariant.mkTuple [
+            #     0.5
+            #     0.5
+            #     0.5
+            #     1.0
+            #   ])
+            #
+            #   "enabled"
+            #   (gvariant.mkBoolean true)
+            # ];
           };
         };
     };

@@ -1,7 +1,8 @@
-{ lib
-, config
-, pkgs
-, ...
+{
+  lib,
+  config,
+  pkgs,
+  ...
 }:
 let
   cfg = config.plusultra.apps.inkscape;
@@ -16,5 +17,10 @@ in
       inkscape-with-extensions
       google-fonts
     ];
+
+    plusultra.home.configFile = {
+      "inkscape/templates/default.svg".source = ./default.svg;
+      "inkscape/palettes/bliss.gpl".source = ./bliss.gpl;
+    };
   };
 }
