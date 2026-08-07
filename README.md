@@ -10,9 +10,9 @@ declarative code I manage my laptops, desktops, and servers with. Originally, th
 to more machines and needed to grow the configuration in a maintainable way. At the time, Nix Flakes seemed like the
 solution, but there were still issues. One issue was boilerplate, some of which libraries like `flake-utils` and
 `flake-utils-plus`. I wanted something more "automatic" and didn't personally like the direction that `flake-parts`
-was going (though I do think it is a good project), so I build out Snowfall Lib to solve this problem. Snowfall Lib
-was used for my projects for quite some time, saving me headaches by letting me avoid all the normal wiring that one
-needs to do for complex Nix projects. However, over time
+was going (though I do think it is a good project), so I build out [Snowfall Lib](https://snowfall.org) to solve this
+problem. Snowfall Lib was used for my projects for quite some time, saving me headaches by letting me avoid all the
+normal wiring that one needs to do for complex Nix projects. However, over time
 [Nix Flakes' troubles became more and more clear to me](https://kilo.bytesize.xyz/flakes-have-failed). Thanks to
 another project completing, Aux Lib gave me the opportunity to try to build a new, standalone solution for Nix
 projects. At the time of writing, this new solution is still in early development and should not be considered stable.
