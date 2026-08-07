@@ -14,6 +14,7 @@ let
     enable-ssh-support
     default-cache-ttl 60
     max-cache-ttl 120
+    pinentry-program ${lib.getExe pkgs.pinentry_mac}
   '';
 
   guide = "${project.inputs.yubikey-guide.src}/README.md";
