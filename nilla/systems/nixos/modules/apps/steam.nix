@@ -1,8 +1,9 @@
-{ lib
-, config
-, pkgs
-, project
-, ...
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
 }:
 let
   cfg = config.plusultra.apps.steam;
@@ -22,7 +23,7 @@ in
     services.udev.packages = with pkgs; [ dolphin-emu ];
 
     environment.systemPackages = [
-      project.packages.steam.result.${pkgs.system}
+      project.packages.steam.result.${pkgs.stdenv.hostPlatform.system}
 
       # Fixes an issue regarding Steam requiring user namespaces.
       pkgs.bubblewrap

@@ -1,0 +1,7 @@
+{
+  includes = [
+    ./halite
+
+    ./module.nix
+  ];
+}

@@ -1,4 +1,10 @@
-{ lib, config, pkgs, project, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
+}:
 let
   cfg = config.plusultra.services.websites.beyondthefringeoc;
 in
@@ -9,7 +15,7 @@ in
     package = lib.mkOption {
       description = "The site package to use.";
       type = lib.types.package;
-      default = project.packages.beyondthefringeoc-website.result.${pkgs.system};
+      default = project.packages.beyondthefringeoc-website.result.${pkgs.stdenv.hostPlatform.system};
     };
 
     domains = lib.mkOption {
@@ -32,23 +38,20 @@ in
     services.nginx = {
       enable = true;
 
-      virtualHosts = lib.foldl
-        (
-          hosts: domain:
-            hosts
-            // {
-              "${domain}" = {
-                enableACME = cfg.acme.enable;
-                forceSSL = cfg.acme.enable;
+      virtualHosts = lib.foldl (
+        hosts: domain:
+        hosts
+        // {
+          "${domain}" = {
+            enableACME = cfg.acme.enable;
+            forceSSL = cfg.acme.enable;
 
-                locations."/" = {
-                  root = cfg.package;
-                };
-              };
-            }
-        )
-        { }
-        cfg.domains;
+            locations."/" = {
+              root = cfg.package;
+            };
+          };
+        }
+      ) { } cfg.domains;
     };
   };
 }

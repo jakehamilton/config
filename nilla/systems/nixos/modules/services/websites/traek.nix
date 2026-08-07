@@ -1,4 +1,10 @@
-{ lib, config, pkgs, project, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
+}:
 let
   cfg = config.plusultra.services.websites.traek;
 in
@@ -9,7 +15,7 @@ in
     package = lib.mkOption {
       description = "The site package to use.";
       type = lib.types.package;
-      default = project.packages.traek-website.result.${pkgs.system};
+      default = project.packages.traek-website.result.${pkgs.stdenv.hostPlatform.system};
     };
 
     domain = lib.mkOption {

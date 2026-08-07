@@ -40,7 +40,7 @@ in
           lib.types.str
           lib.types.package
         ];
-        default = project.packages.wallpapers.result.${pkgs.system}.bun-ultrawide;
+        default = project.packages.wallpapers.result.${pkgs.stdenv.hostPlatform.system}.bun-ultrawide;
       };
 
       dark = lib.mkOption {
@@ -49,7 +49,7 @@ in
           lib.types.str
           lib.types.package
         ];
-        default = project.packages.wallpapers.result.${pkgs.system}.bun-ultrawide;
+        default = project.packages.wallpapers.result.${pkgs.stdenv.hostPlatform.system}.bun-ultrawide;
       };
     };
 

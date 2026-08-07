@@ -1,4 +1,10 @@
-{ lib, config, pkgs, project, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
+}:
 let
   cfg = config.plusultra.services.homer;
 
@@ -15,7 +21,7 @@ in
     package = lib.mkOption {
       description = "The package of Homer assets to use.";
       type = lib.types.package;
-      default = project.packages.homer.result.${pkgs.system};
+      default = project.packages.homer.result.${pkgs.stdenv.hostPlatform.system};
     };
 
     settings = lib.mkOption {

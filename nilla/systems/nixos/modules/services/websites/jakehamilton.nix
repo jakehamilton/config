@@ -1,4 +1,10 @@
-{ lib, config, pkgs, project, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
+}:
 let
   cfg = config.plusultra.services.websites.jakehamilton;
 in
@@ -9,7 +15,8 @@ in
     package = lib.mkOption {
       description = "The site package to use.";
       type = lib.types.package;
-      default = project.inputs.jakehamilton-website.result.packages.${pkgs.system}.default;
+      default =
+        project.inputs.jakehamilton-website.result.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
 
     domains = lib.mkOption {
@@ -37,23 +44,20 @@ in
         }
       '';
 
-      virtualHosts = lib.foldl
-        (
-          hosts: domain:
-            hosts
-            // {
-              "${domain}" = {
-                enableACME = cfg.acme.enable;
-                forceSSL = cfg.acme.enable;
+      virtualHosts = lib.foldl (
+        hosts: domain:
+        hosts
+        // {
+          "${domain}" = {
+            enableACME = cfg.acme.enable;
+            forceSSL = cfg.acme.enable;
 
-                locations."/" = {
-                  root = cfg.package;
-                };
-              };
-            }
-        )
-        { }
-        cfg.domains;
+            locations."/" = {
+              root = cfg.package;
+            };
+          };
+        }
+      ) { } cfg.domains;
     };
   };
 }

@@ -1,13 +1,14 @@
-{ lib
-, config
-, pkgs
-, project
-, ...
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
 }:
 let
   cfg = config.plusultra.desktop.addons.wallpapers;
 
-  wallpapers = project.packages.wallpapers.result.${pkgs.system};
+  wallpapers = project.packages.wallpapers.result.${pkgs.stdenv.hostPlatform.system};
 in
 {
   options.plusultra.desktop.addons.wallpapers = {
@@ -15,15 +16,12 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    plusultra.home.file = lib.foldl
-      (
-        acc: name:
-          let
-            wallpaper = wallpapers.${name};
-          in
-          acc // { "Pictures/wallpapers/${wallpaper.fileName}".source = wallpaper; }
-      )
-      { }
-      (wallpapers.names);
+    plusultra.home.file = lib.foldl (
+      acc: name:
+      let
+        wallpaper = wallpapers.${name};
+      in
+      acc // { "Pictures/wallpapers/${wallpaper.fileName}".source = wallpaper; }
+    ) { } (wallpapers.names);
   };
 }

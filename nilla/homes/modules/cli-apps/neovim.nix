@@ -1,4 +1,10 @@
-{ lib, config, pkgs, project, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
+}:
 let
   cfg = config.plusultra.cli-apps.neovim;
 in
@@ -10,8 +16,9 @@ in
   config = lib.mkIf cfg.enable {
     home = {
       packages = [
-        project.inputs.neovim.result.packages.${pkgs.system}.neovim
-      ] ++ (with pkgs; [
+        project.inputs.neovim.result.packages.${pkgs.stdenv.hostPlatform.system}.neovim
+      ]
+      ++ (with pkgs; [
         less
       ]);
 

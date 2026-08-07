@@ -1,8 +1,9 @@
-{ lib
-, config
-, pkgs
-, project
-, ...
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
 }:
 let
   cfg = config.plusultra.suites.common;
@@ -13,7 +14,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ project.packages.list-iommu.result.${pkgs.system} ];
+    environment.systemPackages = [
+      project.packages.list-iommu.result.${pkgs.stdenv.hostPlatform.system}
+    ];
 
     plusultra = {
       nix.enable = true;

@@ -1,34 +1,44 @@
-{ lib, config, pkgs, project, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
+}:
 let
   cfg = config.plusultra.desktop.fht;
   term = config.plusultra.desktop.addons.term;
 
-  package = project.inputs.fht-compositor.result.packages.${pkgs.system}.fht-compositor.override {
-    inherit (pkgs)
-      lib
-      libGL
-      libdisplay-info
-      libinput
-      seatd
-      libxkbcommon
-      mesa
-      libgbm
-      pipewire
-      dbus
-      wayland
-      pkg-config
-      rustPlatform
-      installShellFiles;
-  };
+  package =
+    project.inputs.fht-compositor.result.packages.${pkgs.stdenv.hostPlatform.system}.fht-compositor.override
+      {
+        inherit (pkgs)
+          lib
+          libGL
+          libdisplay-info
+          libinput
+          seatd
+          libxkbcommon
+          mesa
+          libgbm
+          pipewire
+          dbus
+          wayland
+          pkg-config
+          rustPlatform
+          installShellFiles
+          ;
+      };
 
   toml = pkgs.formats.toml { };
 
   format = {
     inherit (toml) type;
-    generate = name: value:
+    generate =
+      name: value:
       let
         result = toml.generate name value;
-        checked = pkgs.runCommandNoCC "fht-compositor-checked-config" { } ''
+        checked = pkgs.runCommand "fht-compositor-checked-config" { } ''
           ${lib.getExe package} --config-path '${result}' check-configuration > ./message
 
           if [ $? -ne 0 ]; then

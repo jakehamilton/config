@@ -1,4 +1,10 @@
-{ lib, config, pkgs, project, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
+}:
 let
   cfg = config.plusultra.services.websites.nilla-dev;
 in
@@ -9,7 +15,8 @@ in
     package = lib.mkOption {
       description = "The site package to use.";
       type = lib.types.package;
-      default = project.inputs.nilla-dev.result.packages.nilla-dev.result.${pkgs.system};
+      default =
+        project.inputs.nilla-dev.result.packages.nilla-dev.result.${pkgs.stdenv.hostPlatform.system};
     };
 
     domain = lib.mkOption {

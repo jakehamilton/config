@@ -1,19 +1,18 @@
-{ lib
-, pkgs
-, runCommandNoCC
-, nodejs
-, ...
+{
+  lib,
+  pkgs,
+  runCommand,
+  nodejs,
+  ...
 }:
 let
   raw-node-packages = pkgs.callPackage ./create-node-packages.nix { inherit nodejs; };
 
-  node-packages = lib.mapAttrs
-    (
-      key: value: value.override { dontNpmInstall = true; }
-    )
-    raw-node-packages;
+  node-packages = lib.mapAttrs (
+    key: value: value.override { dontNpmInstall = true; }
+  ) raw-node-packages;
 
-  package = runCommandNoCC "titan" { src = node-packages."@jakehamilton/titan"; } ''
+  package = runCommand "titan" { src = node-packages."@jakehamilton/titan"; } ''
     rstrip() {
       # Usage: rstrip "string" "pattern"
       printf '%s\n' "''${1%%$2}"

@@ -1,4 +1,10 @@
-{ lib, config, pkgs, project, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
+}:
 let
   cfg = config.plusultra.services.websites.nixpkgs-news;
 in
@@ -9,7 +15,8 @@ in
     package = lib.mkOption {
       description = "The site package to use.";
       type = lib.types.package;
-      default = project.inputs.nixpkgs-news-website.result.packages.${pkgs.system}.default;
+      default =
+        project.inputs.nixpkgs-news-website.result.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
 
     domain = lib.mkOption {

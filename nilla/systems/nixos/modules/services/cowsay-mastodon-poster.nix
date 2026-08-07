@@ -1,8 +1,14 @@
-{ lib, config, pkgs, project, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
+}:
 let
   cfg = config.plusultra.services.cowsay-mastodon-poster;
 
-  cow2img = project.inputs.cowsay.result.packages.${pkgs.system}.cow2img;
+  cow2img = project.inputs.cowsay.result.packages.${pkgs.stdenv.hostPlatform.system}.cow2img;
 
   script = ''
     if [ ! -f ~/.config/toot/config.json ]; then

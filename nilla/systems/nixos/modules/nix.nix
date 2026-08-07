@@ -21,17 +21,19 @@ in
     documentation.nixos.enable = false;
 
     environment.systemPackages = [
-      project.packages.nixos-revision.result.${pkgs.system}
-      (project.packages.nixos-hosts.result.${pkgs.system}.override { hosts = project.systems.nixos; })
-      (project.inputs.nilla-cli.result.packages.nilla-cli.result.${pkgs.system})
-      (project.inputs.nilla-nixos.result.packages.nilla-nixos.result.${pkgs.system})
+      project.packages.nixos-revision.result.${pkgs.stdenv.hostPlatform.system}
+      (project.packages.nixos-hosts.result.${pkgs.stdenv.hostPlatform.system}.override {
+        hosts = project.systems.nixos;
+      })
+      (project.inputs.nilla-cli.result.packages.nilla-cli.result.${pkgs.stdenv.hostPlatform.system})
+      (project.inputs.nilla-nixos.result.packages.nilla-nixos.result.${pkgs.stdenv.hostPlatform.system})
       (import project.inputs.npins.src {
         inherit pkgs;
       })
     ]
     ++ (with pkgs; [
       deploy-rs
-      nixfmt-rfc-style
+      nixfmt
       nix-index
       nix-prefetch-git
       nix-output-monitor

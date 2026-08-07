@@ -26,7 +26,7 @@ let
   };
 
   propagatedIcon =
-    pkgs.runCommandNoCC "propagated-icon"
+    pkgs.runCommand "propagated-icon"
       {
         passthru = {
           fileName = cfg.icon.fileName;
@@ -39,7 +39,8 @@ let
         cp ${cfg.icon} "$target/${cfg.icon.fileName}"
       '';
 
-  nilla-cli = project.inputs.nilla-cli.result.packages.nilla-cli.result.${pkgs.system};
+  nilla-cli =
+    project.inputs.nilla-cli.result.packages.nilla-cli.result.${pkgs.stdenv.hostPlatform.system};
 in
 {
   options.plusultra.user = {

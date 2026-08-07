@@ -2,9 +2,6 @@
 
 > ✨ Go even farther beyond.
 
-- [Screenshots](#screenshots)
-- [Overlays](#overlays)
-
 ## Screenshots
 
 ![clean](./assets/clean.png)

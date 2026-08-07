@@ -1,8 +1,9 @@
-{ lib
-, config
-, pkgs
-, project
-, ...
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
 }:
 let
   cfg = config.plusultra.cli-apps.tmux;
@@ -13,6 +14,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ project.packages.tmux.result.${pkgs.system} ];
+    environment.systemPackages = [ project.packages.tmux.result.${pkgs.stdenv.hostPlatform.system} ];
   };
 }

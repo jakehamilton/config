@@ -1,17 +1,20 @@
-{ lib
-, writeText
-, writeShellApplication
-, replaceVars
-, gum
-, hosts ? { }
-, ...
+{
+  lib,
+  writeText,
+  writeShellApplication,
+  replaceVars,
+  gum,
+  hosts ? { },
+  ...
 }:
 let
   inherit (lib) mapAttrsToList concatStringsSep;
 
   substitute = args: builtins.readFile (replaceVars args.src (builtins.removeAttrs args [ "src" ]));
 
-  formatted-hosts = mapAttrsToList (name: host: "${name},${host.result.pkgs.system}") hosts;
+  formatted-hosts = mapAttrsToList (
+    name: host: "${name},${host.result.pkgs.stdenv.hostPlatform.system}"
+  ) hosts;
 
   hosts-csv = writeText "hosts.csv" ''
     Name,System

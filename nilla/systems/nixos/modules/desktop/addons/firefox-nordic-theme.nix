@@ -1,13 +1,14 @@
-{ lib
-, config
-, pkgs
-, project
-, ...
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
 }:
 let
   cfg = config.plusultra.desktop.addons.firefox-nordic-theme;
 
-  package = project.packages.firefox-nordic-theme.result.${pkgs.system};
+  package = project.packages.firefox-nordic-theme.result.${pkgs.stdenv.hostPlatform.system};
 in
 {
   options.plusultra.desktop.addons.firefox-nordic-theme = {

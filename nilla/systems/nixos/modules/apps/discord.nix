@@ -1,8 +1,9 @@
-{ lib
-, config
-, pkgs
-, project
-, ...
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
 }:
 let
   cfg = config.plusultra.apps.discord;
@@ -18,6 +19,8 @@ in
     environment.systemPackages =
       lib.optional cfg.enable pkgs.discord
       ++ lib.optional cfg.canary pkgs.discord-canary
-      ++ lib.optional cfg.chromium project.packages.discord-chromium.result.${pkgs.system};
+      ++
+        lib.optional cfg.chromium
+          project.packages.discord-chromium.result.${pkgs.stdenv.hostPlatform.system};
   };
 }

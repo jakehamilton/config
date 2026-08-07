@@ -1,4 +1,10 @@
-{ lib, config, pkgs, project, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
+}:
 
 let
   cfg = config.plusultra.services.openfront;
@@ -9,7 +15,8 @@ in
 
     package = lib.mkOption {
       type = lib.types.package;
-      default = project.inputs.openfrontio.result.packages.openfront.result.${pkgs.system};
+      default =
+        project.inputs.openfrontio.result.packages.openfront.result.${pkgs.stdenv.hostPlatform.system};
       description = "The package to use for the OpenFront server.";
     };
 
@@ -305,7 +312,6 @@ in
 
             '';
           };
-
 
           "~* \\.(bin|dat|exe|dll|so|dylib)$" = {
             proxyPass = "http://127.0.0.1:${builtins.toString cfg.port}";

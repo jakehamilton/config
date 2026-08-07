@@ -225,9 +225,23 @@
       "url": "https://github.com/nilla-nix/nixos/archive/52c623ae89fe77de669a981c7e92b1504cd99eac.tar.gz",
       "hash": "sha256-7tadYU5GzOUAxo8XLC18+dk0Rj+QSORUO5cFdpqfSy4="
     },
+    "nix-darwin": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-darwin",
+        "repo": "nix-darwin"
+      },
+      "branch": "nix-darwin-26.05",
+      "submodules": false,
+      "revision": "c3e90c89649b07d1a96e4b9dd6cd0d6e44b91a74",
+      "url": "https://github.com/nix-darwin/nix-darwin/archive/c3e90c89649b07d1a96e4b9dd6cd0d6e44b91a74.tar.gz",
+      "hash": "sha256-2cp6N3rrwnGYLTx9l6N+NI+kwrCWxvJUbj5WJhvB29A="
+    },
     "nixos-25.05": {
       "type": "Channel",
       "name": "nixos-25.05",
+      "artifact": "nixexprs.tar.xz",
       "url": "https://releases.nixos.org/nixos/25.05/nixos-25.05.802746.7282cb574e06/nixexprs.tar.xz",
       "hash": "sha256-+buxl/6pynOmVvTeqiom/317JDTDf/kzmvAP6zQ38PM="
     },
@@ -427,5 +441,5 @@
       "hash": "sha256-atbOtutdZg7ye5ds0UiutBSqg2TxdTfR2HBUTvj5tRc="
     }
   },
-  "version": 7
+  "version": 8
 }

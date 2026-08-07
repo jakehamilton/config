@@ -1,6 +1,12 @@
-{ lib, config, pkgs, project, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
+}:
 let
-  homer-catppuccin = project.packages.homer-catppuccin.result.${pkgs.system};
+  homer-catppuccin = project.packages.homer-catppuccin.result.${pkgs.stdenv.hostPlatform.system};
 in
 {
   imports = [ ./hardware.nix ];
@@ -86,7 +92,7 @@ in
             };
             homes = {
               path = "/persist/share/homes/%S";
-              browseable = false;
+              browsable = false;
               public = false;
 
               extra-config = {

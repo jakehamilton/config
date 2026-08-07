@@ -3,7 +3,15 @@
   config.packages.homer-catppuccin = {
     systems = [ "x86_64-linux" ];
 
-    package = { lib, system, fetchFromGitHub, runCommandNoCC, unzip, favicon ? "light" }:
+    package =
+      {
+        lib,
+        system,
+        fetchFromGitHub,
+        runCommand,
+        unzip,
+        favicon ? "light",
+      }:
       let
         homer = config.packages.homer.result.${system};
 
@@ -26,7 +34,7 @@
         };
 
         catppuccin =
-          runCommandNoCC "catpuccin"
+          runCommand "catpuccin"
             {
               src = catppuccin-raw;
               buildInputs = [ unzip ];
@@ -60,12 +68,9 @@
           inherit catppuccin;
 
           passthru = (prevAttrs.passthru or { }) // {
-            stylesheets = builtins.foldl'
-              (
-                stylesheets: flavor: stylesheets // { ${flavor} = stylesheet flavor; }
-              )
-              { }
-              flavors;
+            stylesheets = builtins.foldl' (
+              stylesheets: flavor: stylesheets // { ${flavor} = stylesheet flavor; }
+            ) { } flavors;
 
             logos = {
               dark = "assets/logos/dark_circle.png";

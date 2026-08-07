@@ -1,4 +1,10 @@
-{ lib, config, pkgs, project, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  project,
+  ...
+}:
 let
   cfg = config.plusultra.tools.icehouse;
 in
@@ -9,7 +15,7 @@ in
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [
-      project.inputs.icehouse.result.packages.${pkgs.system}.icehouse
+      project.inputs.icehouse.result.packages.${pkgs.stdenv.hostPlatform.system}.icehouse
     ];
   };
 }
