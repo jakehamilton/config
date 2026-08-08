@@ -1,0 +1,27 @@
+GIMP Palette
+Name: bliss.gpl
+#
+  0   0   0 BLACK
+ 20  17  27 Surface Darker
+ 24  21  32 Surface Dark
+ 30  26  36 Surface
+ 35  32  43 Surface Light
+ 40  38  54 Surface Lighter
+ 46  43  61 Surface Lightest
+130 120 137 Text Dark
+238 234 241 Text
+196 119 147 Sakura Dark
+229 152 184 Sakura
+246 183 209 Sakura Light
+180 239 227 Mint Light
+145 213 199 Mint
+119 176 164 Mint Dark
+244 200 189 Peach Light
+232 176 160 Peach
+199 146 133 Peach Dark
+209 228 243 Sky Light
+168 201 231 Sky
+136 176 216 Sky Dark
+232 186 218 Berry Light
+206 152 189 Berry
+166 115 150 Berry Dark

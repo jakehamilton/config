@@ -12,6 +12,7 @@
 
   plusultra = {
     suites = {
+      art.enable = true;
       common.enable = true;
       development.enable = true;
     };
