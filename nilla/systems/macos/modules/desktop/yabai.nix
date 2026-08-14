@@ -57,6 +57,7 @@ in
         yabai -m rule --add label="mpv" app="^mpv$" manage=off
         yabai -m rule --add label="Software Update" title="Software Update" manage=off
         yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
+        yabai -m rule --add label="Streamlabs Desktop" app="^Streamlabs Desktop$" manage=off
 
         yabai -m signal --add app='^Ghostty$' event=window_created action='yabai -m space --layout bsp'
         yabai -m signal --add app='^Ghostty$' event=window_destroyed action='yabai -m space --layout bsp'

@@ -77,6 +77,7 @@ in
         #   yabai -m window --toggle float; \
         #   yabai -m window --toggle border
         shift + cmd - space : yabai -m window --toggle float
+        shift + lctrl + alt - v : yabai -m window --resize abs:1920:1080
 
         # Fullscreen
         alt - f : yabai -m window --toggle zoom-fullscreen
@@ -93,6 +94,12 @@ in
           /usr/bin/env osascript <<< \
             "display notification \"Restarting Spacebar\" with title \"Spacebar\""; \
           launchctl kickstart -k "gui/$UID/org.nixos.spacebar"
+
+        # Restart SKHD
+        shift + lctrl + alt - f : \
+          /usr/bin/env osascript <<< \
+            "display notification \"Restarting SKHD\" with title \"SKHD\""; \
+          launchctl kickstart -k "gui/$UID/org.nixos.skhd"
       '';
     };
   };
