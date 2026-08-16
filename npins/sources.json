@@ -169,9 +169,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "4ec216faf0ea718129f09e68ae74cf4e2c81e977",
-      "url": "https://github.com/jakehamilton/editor/archive/4ec216faf0ea718129f09e68ae74cf4e2c81e977.tar.gz",
-      "hash": "sha256-/1/v7QT6mShPGqCfdNiGCVIc037P0/q+YQBIEEtAa6o="
+      "revision": "4fc6e82176d1e744445167e6dec3a2ff88c4f47c",
+      "url": "https://github.com/jakehamilton/editor/archive/4fc6e82176d1e744445167e6dec3a2ff88c4f47c.tar.gz",
+      "hash": "sha256-N7yBdOd2lroYS7KI0kAJgpfffihh0873Zb8+yRgppt8="
     },
     "nilla": {
       "type": "Git",
