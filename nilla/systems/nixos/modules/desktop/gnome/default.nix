@@ -19,6 +19,7 @@ let
     logo-menu
     no-overview
     rounded-window-corners-reborn
+    open-bar
     space-bar
     top-bar-organizer
     wireless-hid
